@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAISE | Turn Your Pitch Deck Into Term Sheets</title>
+  <meta name="description" content="RAISE helps founders get investor-ready. Slide-by-slide deck rebuilds, narrative positioning, and investor targeting that convert meetings into checks.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" aria-label="RAISE Home">
+        <span class="logo-text">Raise<span class="logo-period">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
+        <a href="#problem" class="nav-link">Why Us</a>
+        <a href="#services" class="nav-link">What We Fix</a>
+        <a href="#breakdown" class="nav-link">Deck Teardown</a>
+        <a href="#results" class="nav-link">Results</a>
+        <a href="#about" class="nav-link">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="get-started.html" class="btn btn-lime btn-sm" id="nav-cta-btn">
+          Get Started
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        
+        <!-- Category Pill -->
+        <div class="pill-badge reveal-item">
+          <span class="pill-pulse"></span>
+          <span class="pill-text">THE FOUNDER'S PATH TO GETTING FUNDED</span>
+        </div>
+
+        <!-- Hero Headline -->
+        <h1 class="hero-title reveal-item">
+          Great Product.<br>
+          <span class="highlight-line">Still No Term Sheet.</span>
+        </h1>
+
+        <!-- Hero Subtitle -->
+        <p class="hero-subtitle reveal-item">
+          You've built something real, but investors keep passing after the first call. 
+          The problem isn't your startup, it's how you're presenting it. 
+          <strong>RAISE</strong> diagnoses and fixes the exact blind spots costing you checks.
+        </p>
+
+        <!-- CTA Group -->
+        <div class="hero-cta-group reveal-item">
+          <button class="btn btn-lime btn-lg open-modal-btn pulse-hover" data-modal="contact" id="hero-primary-cta">
+            <span>Fix My Deck</span>
+            <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <a href="#services" class="btn btn-ghost btn-lg">
+            See What We Fix
+          </a>
+        </div>
+
+        <!-- Social Proof Trust Line -->
+        <div class="hero-trust-line reveal-item">
+          <div class="avatar-stack">
+            <img src="assets/mouad-dliaa.png" alt="Mouad Dliaa" class="avatar-img">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Founder avatar" class="avatar-img">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Founder avatar" class="avatar-img">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80" alt="Founder avatar" class="avatar-img">
+          </div>
+          <div class="trust-text">
+            <div class="stars">
+              ★★★★★
+            </div>
+            <span>Join <strong>70+ founders</strong> who raised with RAISE</span>
+          </div>
+        </div>
+
+        <!-- Accelerator Logos -->
+        <div class="accelerator-strip reveal-item">
+          <p class="strip-label">Founders backed by world-class ecosystems</p>
+          <div class="logos-row">
+            
+            <!-- Y Combinator -->
+            <div class="logo-item" title="Y Combinator">
+              <span class="logo-badge yc-badge">Y</span>
+              <span class="logo-name">Combinator</span>
+            </div>
+
+            <!-- Techstars -->
+            <div class="logo-item" title="Techstars">
+              <svg class="logo-svg" viewBox="0 0 160 36" fill="currentColor">
+                <text x="0" y="26" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="24" letter-spacing="-0.03em">techstars_</text>
+              </svg>
+            </div>
+
+            <!-- Antler -->
+            <div class="logo-item" title="Antler">
+              <svg class="logo-svg" viewBox="0 0 120 36" fill="currentColor">
+                <text x="0" y="25" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="22" letter-spacing="0.12em">ANTLER</text>
+              </svg>
+            </div>
+
+            <!-- Entrepreneur First -->
+            <div class="logo-item" title="Entrepreneur First">
+              <svg class="logo-svg" viewBox="0 0 180 36" fill="currentColor">
+                <text x="0" y="25" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="19" letter-spacing="-0.01em">Entrepreneur First</text>
+              </svg>
+            </div>
+
+            <!-- Seedcamp -->
+            <div class="logo-item" title="Seedcamp">
+              <svg class="logo-svg" viewBox="0 0 140 36" fill="currentColor">
+                <text x="0" y="25" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="22" letter-spacing="-0.02em">seedcamp</text>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Problem / Positioning Section -->
+    <section class="section problem-section" id="problem">
+      <div class="container">
+        
+        <div class="section-header text-center reveal-item">
+          <span class="section-tag">THE RAISE DIFFERENCE</span>
+          <h2 class="section-title">Not a Course. Not a Template. Not Generic Advice.</h2>
+          <p class="section-desc">
+            We don’t give fundraising theory or generic 10-slide templates. We deliver surgical, slide-by-slide fixes your deck needs to convert polite rejections into wire transfers.
+          </p>
+        </div>
+
+        <!-- 2x2 Grid of Cards -->
+        <div class="grid-2x2">
+          
+          <div class="feature-card reveal-item">
+            <div class="card-icon-wrap">
+              <span class="card-num">01</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-label-badge">Hands-On Execution</div>
+              <h3 class="card-title">NOT A COURSE</h3>
+              <p class="card-text">
+                We don’t assign you 40 hours of pre-recorded video lectures on "how VCs think". We roll up our sleeves and rebuild your narrative with you directly.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card reveal-item">
+            <div class="card-icon-wrap">
+              <span class="card-num">02</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-label-badge">Bespoke Framing</div>
+              <h3 class="card-title">NOT A TEMPLATE</h3>
+              <p class="card-text">
+                Your business model, defensibility, and traction are unique. Cookie-cutter templates make you look like every other failed deck in a partner’s inbox.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card reveal-item">
+            <div class="card-icon-wrap">
+              <span class="card-num">03</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-label-badge">Context-Aware Precision</div>
+              <h3 class="card-title">NOT GENERIC ADVICE</h3>
+              <p class="card-text">
+                Pre-seed B2B SaaS is judged completely differently than Series A Consumer FinTech. Our feedback is hyper-calibrated to your specific stage, round size, and geo.
+              </p>
+            </div>
+          </div>
+
+          <div class="feature-card reveal-item">
+            <div class="card-icon-wrap lime-card-icon">
+              <span class="card-num">04</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <div class="card-content">
+              <div class="card-label-badge lime-tag">Real-Market Tested</div>
+              <h3 class="card-title">PROVEN FRAMEWORK</h3>
+              <p class="card-text">
+                Engineered from 200+ actual deck teardowns and tens of millions in closed rounds. We know every unspoken objection partners write on their internal deal memos.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Lime Highlight Banner -->
+    <section class="lime-banner-section">
+      <div class="lime-banner-container">
+        <div class="lime-banner-inner">
+          <div class="banner-left">
+            <span class="banner-tag">HIGH CONVICTION FUNDRAISING</span>
+            <h2 class="banner-title">Stop sending a deck that costs you checks.</h2>
+          </div>
+          <div class="banner-right">
+            <button class="btn btn-dark btn-lg open-modal-btn" data-modal="contact" id="banner-cta">
+              Book a Call
+              <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section ("What We Fix") -->
+    <section class="section services-section" id="services">
+      <div class="container">
+        
+        <div class="section-header text-center reveal-item">
+          <span class="section-tag">CORE METHODOLOGY</span>
+          <h2 class="section-title">What We Fix</h2>
+          <p class="section-desc">
+            We eliminate ambiguity, elevate your narrative friction points, and equip you with an airtight fundraising machine.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          
+          <!-- Service Card 1 -->
+          <div class="service-card reveal-item">
+            <div class="service-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <span class="service-number">01</span>
+            </div>
+            
+            <h3 class="service-title">DECK RESTRUCTURE</h3>
+            <p class="service-summary">
+              Slide-by-slide rebuild. Clear visual hierarchy. Relentless investor narrative.
+            </p>
+
+            <ul class="service-points">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Rewriting headlines into standalone narrative claims</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Restructuring market size & TAM logic to withstand partner scrutiny</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Condensing cognitive load so VCs grasp the thesis in 90 seconds</span>
+              </li>
+            </ul>
+
+            <div class="service-badge">Full Overhaul</div>
+          </div>
+
+          <!-- Service Card 2 (Featured) -->
+          <div class="service-card featured-service reveal-item">
+            <div class="featured-banner">MOST CRITICAL</div>
+            <div class="service-top">
+              <div class="service-icon-box lime-bg">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <span class="service-number">02</span>
+            </div>
+            
+            <h3 class="service-title">NARRATIVE POSITIONING</h3>
+            <p class="service-summary">
+              Your story, framed the way top venture capitalists need to hear it.
+            </p>
+
+            <ul class="service-points">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Reframing feature lists into undeniable category-defining moat</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Crafting an authentic "Why Now?" catalyst that drives FOMO</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Sharpening founder-market fit into an unfair distribution advantage</span>
+              </li>
+            </ul>
+
+            <div class="service-badge lime-badge">High Conversion</div>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="service-card reveal-item">
+            <div class="service-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+              </div>
+              <span class="service-number">03</span>
+            </div>
+            
+            <h3 class="service-title">INVESTOR TARGETING</h3>
+            <p class="service-summary">
+              The right investors for your specific stage, not spamming 500 blind inboxes.
+            </p>
+
+            <ul class="service-points">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Building a tiered list of active, thesis-aligned angels and seed funds</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Warm intro orchestration strategy to maximize partner response rate</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Pre-meeting objection prep to command the room from minute zero</span>
+              </li>
+            </ul>
+
+            <div class="service-badge">Precision Outreach</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- High-Conviction Teardown Breakdown Section -->
+    <section class="section breakdown-section" id="breakdown">
+      <div class="container">
+        
+        <div class="section-header text-center reveal-item">
+          <span class="section-tag">WHY PARTNERS PASS IN 90 SECONDS</span>
+          <h2 class="section-title">The Fatal Flaws Killing Your Round</h2>
+          <p class="section-desc">
+            VCs review 1,000+ decks a year. They don't read them looking for reasons to invest. They scan them to find any weak point to pass. Here is how we engineer undeniable investor conviction.
+          </p>
+        </div>
+
+        <div class="teardown-grid">
+          
+          <!-- Card 1 -->
+          <div class="teardown-card reveal-item">
+            <div class="teardown-header">
+              <div class="slide-badge">SLIDE FOCUS: THE PROBLEM & WHY NOW</div>
+              <h3 class="teardown-title">Creating Urgency vs. Describing an Inconvenience</h3>
+            </div>
+            
+            <div class="comparison-row">
+              <div class="comparison-col before-col">
+                <div class="comp-badge bad-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  How Most Founders Pitch
+                </div>
+                <p class="comp-text">
+                  "The current market is fragmented and existing legacy tools are clunky and slow."
+                </p>
+                <span class="comp-verdict">VC Reaction: "Nice-to-have vitamin. Not urgent. Easy pass."</span>
+              </div>
+
+              <div class="comparison-col after-col">
+                <div class="comp-badge good-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  The RAISE Rebuilt Narrative
+                </div>
+                <p class="comp-text">
+                  Frames the exact macro, technological, or regulatory shift that makes existing workflows legally or financially unviable today.
+                </p>
+                <span class="comp-verdict good-verdict">VC Reaction: "Bleeding-neck problem with massive tailwinds."</span>
+              </div>
+            </div>
+
+            <div class="teardown-footer">
+              <span class="teardown-metric"><strong>Result:</strong> Eliminates the "Stay in touch as you grow" pass</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="teardown-card reveal-item">
+            <div class="teardown-header">
+              <div class="slide-badge">SLIDE FOCUS: TRACTION & PROOF</div>
+              <h3 class="teardown-title">Compounding Pull vs. Vanity Metrics</h3>
+            </div>
+            
+            <div class="comparison-row">
+              <div class="comparison-col before-col">
+                <div class="comp-badge bad-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  How Most Founders Pitch
+                </div>
+                <p class="comp-text">
+                  Showing cumulative user signups or unpaid pilots with no cohort retention or sales cycle velocity.
+                </p>
+                <span class="comp-verdict">VC Reaction: "Looks like paid acquisition churn. Too early."</span>
+              </div>
+
+              <div class="comparison-col after-col">
+                <div class="comp-badge good-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  The RAISE Rebuilt Narrative
+                </div>
+                <p class="comp-text">
+                  Highlights expansion revenue, organic referral loops, and decreasing CAC payback that mathematically prove true market demand.
+                </p>
+                <span class="comp-verdict good-verdict">VC Reaction: "Exceptional unit economics. Must take call #2."</span>
+              </div>
+            </div>
+
+            <div class="teardown-footer">
+              <span class="teardown-metric"><strong>Result:</strong> 3x increase in second-meeting conversion</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="teardown-card reveal-item">
+            <div class="teardown-header">
+              <div class="slide-badge">SLIDE FOCUS: THE MOAT & DEFENSIBILITY</div>
+              <h3 class="teardown-title">Structural Moat vs. Feature Checklists</h3>
+            </div>
+            
+            <div class="comparison-row">
+              <div class="comparison-col before-col">
+                <div class="comp-badge bad-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  How Most Founders Pitch
+                </div>
+                <p class="comp-text">
+                  A 2x2 matrix claiming you have 6 features that Google, Salesforce, or OpenAI don't have.
+                </p>
+                <span class="comp-verdict">VC Reaction: "Incumbents will copy this in one quarter."</span>
+              </div>
+
+              <div class="comparison-col after-col">
+                <div class="comp-badge good-badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  The RAISE Rebuilt Narrative
+                </div>
+                <p class="comp-text">
+                  Articulates unfair distribution channels, proprietary data flywheels, and switching costs that compound with scale.
+                </p>
+                <span class="comp-verdict good-verdict">VC Reaction: "High-barrier category winner in the making."</span>
+              </div>
+            </div>
+
+            <div class="teardown-footer">
+              <span class="teardown-metric"><strong>Result:</strong> Drives multi-firm partner competition</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Results Section (Dark Background with Lime Accents) -->
+    <section class="section results-section" id="results">
+      <div class="container">
+        
+        <div class="section-header text-center reveal-item">
+          <span class="section-tag tag-dark">TRACTION & IMPACT</span>
+          <h2 class="section-title text-white">Real Results. Real Raises.</h2>
+          <p class="section-desc text-muted-light">
+            We measure our success by one metric: founders signing term sheets that preserve equity and accelerate trajectory.
+          </p>
+        </div>
+
+        <div class="stats-row">
+          
+          <div class="stat-card reveal-item">
+            <div class="stat-glow"></div>
+            <div class="stat-number-wrap">
+              <span class="stat-number">200<span class="stat-accent">+</span></span>
+            </div>
+            <h3 class="stat-label">Decks Reviewed</h3>
+            <p class="stat-detail">Across B2B SaaS, FinTech, AI infra, and Climate tech globally.</p>
+          </div>
+
+          <div class="stat-card featured-stat reveal-item">
+            <div class="stat-glow featured-glow"></div>
+            <div class="stat-number-wrap">
+              <span class="stat-number text-lime">£12M<span class="stat-accent">+</span></span>
+            </div>
+            <h3 class="stat-label">Raised by Founders</h3>
+            <p class="stat-detail">Capital unlocked from Tier 1 VCs, angels, and family offices.</p>
+          </div>
+
+          <div class="stat-card reveal-item">
+            <div class="stat-glow"></div>
+            <div class="stat-number-wrap">
+              <span class="stat-number">3 <span class="stat-unit">Weeks</span></span>
+            </div>
+            <h3 class="stat-label">Average to First Term Sheet</h3>
+            <p class="stat-detail">From deck finalization to receiving firm investment terms.</p>
+          </div>
+
+        </div>
+
+        <!-- Metric Callout Strip -->
+        <div class="results-callout reveal-item">
+          <div class="callout-content">
+            <span class="callout-icon">⚡</span>
+            <span><strong>94%</strong> of founders who work with RAISE report a 3x increase in second-meeting conversion rates.</span>
+          </div>
+          <button class="btn btn-lime btn-sm open-modal-btn" data-modal="contact">
+            Get Investor Ready
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          
+          <div class="about-image-column reveal-item">
+            <div class="about-card-visual">
+              <div class="founder-badge">
+                <span class="founder-role">FOUNDER & LEAD ADVISOR</span>
+                <h3 class="founder-full-name">Mouad Dliaa</h3>
+              </div>
+              <div class="about-photo-frame">
+                <img src="assets/mouad-dliaa.png" alt="Mouad Dliaa - Founder of RAISE" class="about-img">
+                <div class="verified-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="#B9FF66"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"/></svg>
+                  50+ Decks Audited
+                </div>
+              </div>
+              <div class="card-mini-quote">
+                "The biggest difference between an ignored startup and an oversubscribed round is 4 structural deck pivots."
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text-column reveal-item">
+            <span class="section-tag">THE PERSON BEHIND RAISE</span>
+            <h2 class="section-title">Built by a founder who learned the hard way.</h2>
+            
+            <div class="about-body">
+              <p>
+                A few years ago, I sat in back-to-back partner meetings pitching what I thought was an obvious, game-changing product. The product was great. The traction was real. 
+              </p>
+              <p>
+                Yet every meeting ended with the same polite non-answers: <em>"A bit too early for us,"</em> or <em>"Let’s stay in touch as you grow."</em>
+              </p>
+              <p>
+                It wasn't until I dissected dozens of successful pitch decks alongside active venture partners that the truth hit me: <strong>VCs don't read decks to find reasons to invest. They scan them to find reasons to say no.</strong>
+              </p>
+              <p>
+                I founded <strong>RAISE</strong> to give early-stage founders an unfair advantage. No agency fluff, no vanity slides. Just brutal, unvarnished insight and tactical deck engineering that turns conversations into term sheets.
+              </p>
+            </div>
+
+            <div class="about-creds">
+              <div class="cred-item">
+                <strong>50+</strong>
+                <span>Deck Teardowns</span>
+              </div>
+              <div class="cred-item">
+                <strong>Top 1%</strong>
+                <span>Narrative Precision</span>
+              </div>
+              <div class="cred-item">
+                <strong>Direct</strong>
+                <span>1-on-1 Founder Work</span>
+              </div>
+            </div>
+
+            <div class="about-cta-wrap">
+              <button class="btn btn-lime open-modal-btn" data-modal="contact">
+                Work Directly With Mouad
+                <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="section final-cta-section" id="final-cta">
+      <div class="container">
+        <div class="final-cta-box reveal-item">
+          <div class="cta-inner">
+            
+            <span class="pill-badge pill-dark">
+              <span class="pill-pulse pulse-lime"></span>
+              <span class="pill-text">LIMITED FOUNDER SLOTS EACH MONTH</span>
+            </span>
+
+            <h2 class="final-cta-title">
+              Ready to raise?
+            </h2>
+
+            <p class="final-cta-subtext">
+              Send me your deck. I’ll personally review it and tell you exactly what’s costing you checks before you step into your next VC partner meeting.
+            </p>
+
+            <div class="final-cta-actions">
+              <button class="btn btn-lime btn-xl open-modal-btn pulse-hover" data-modal="contact" id="final-cta-button">
+                <span>DM Me RAISE</span>
+                <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <p class="cta-guarantee-text">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Free deck review. No commitment. 100% confidential.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-top">
+        <div class="footer-brand-column">
+          <a href="#" class="brand-logo footer-logo">
+            <span class="logo-text text-white">Raise<span class="logo-period">.</span></span>
+          </a>
+          
+          <p class="footer-desc">
+            Helping ambitious founders eliminate deck blind spots and close oversubscribed rounds with top-tier investors.
+          </p>
+
+          <button class="btn btn-lime btn-sm open-modal-btn" data-modal="contact">
+            Submit Your Deck
+          </button>
+        </div>
+
+        <div class="footer-links-grid">
+          
+          <div class="footer-col">
+            <h5 class="footer-heading">Programs</h5>
+            <ul class="footer-nav">
+              <li><a href="#services">Full Deck Rebuild</a></li>
+              <li><a href="#services">Narrative Sprint</a></li>
+              <li><a href="#services">VC Targeting Matrix</a></li>
+              <li><a href="#services">Pitch Dry-Run Sessions</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Resources</h5>
+            <ul class="footer-nav">
+              <li><a href="#problem">Deck Checklist 2026</a></li>
+              <li><a href="#problem">Seed Round Benchmarks</a></li>
+              <li><a href="#problem">Pitch Deck Mistakes</a></li>
+              <li><a href="#results">Case Studies</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Company</h5>
+            <ul class="footer-nav">
+              <li><a href="#about">About Mouad</a></li>
+              <li><a href="#testimonials">Founder Results</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="mailto:mouad@raiseready.io">Press & Speaking</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Legal</h5>
+            <ul class="footer-nav">
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">NDA & Confidentiality</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">
+          © <span id="current-year">2026</span> RAISE (raiseready.io). All rights reserved.
+        </p>
+
+        <div class="social-links">
+          <a href="https://x.com/anti_everyth" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X / Twitter" title="X / Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/rise0/posts/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Substack" title="Substack">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive Deck Review / Contact Modal -->
+  <div class="modal-overlay" id="contact-modal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <span class="pill-badge modal-badge">
+          <span class="pill-pulse pulse-lime"></span>
+          <span>FREE 15-MIN CONFIDENTIAL AUDIT</span>
+        </span>
+        <h3 class="modal-title" id="modal-title">Send Your Deck For Review</h3>
+        <p class="modal-desc">
+          Get a direct video or written breakdown of what’s holding your deck back from term sheets.
+        </p>
+      </div>
+
+      <form class="modal-form" id="deck-review-form" onsubmit="event.preventDefault(); window.handleFormSubmit();">
+        <div class="form-group">
+          <label for="founder-name">Your Name</label>
+          <input type="text" id="founder-name" placeholder="Mouad Dliaa" required>
+        </div>
+
+        <div class="form-group">
+          <label for="founder-email">Work Email</label>
+          <input type="email" id="founder-email" placeholder="mouad@startup.com" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fundraise-stage">Round Stage</label>
+            <select id="fundraise-stage" required>
+              <option value="pre-seed">Pre-Seed (£250k - £1M)</option>
+              <option value="seed" selected>Seed (£1M - £3.5M)</option>
+              <option value="series-a">Series A (£4M - £10M)</option>
+              <option value="bridge">Bridge / Extension</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="startup-sector">Sector</label>
+            <input type="text" id="startup-sector" placeholder="AI / B2B SaaS / FinTech" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="deck-link">Pitch Deck Link (DocSend / Notion / Drive)</label>
+          <input type="url" id="deck-link" placeholder="https://docsend.com/view/..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="deck-notes">Current Main Challenge (Optional)</label>
+          <textarea id="deck-notes" rows="2" placeholder="e.g. Getting passes after meeting #1, valuation pushback, struggling with TAM..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-lime btn-full" id="submit-form-btn">
+          Request Confidential Deck Audit →
+        </button>
+
+        <p class="form-disclaimer">
+          🔒 Strict NDA protected. We never share your deck or metrics with anyone.
+        </p>
+      </form>
+
+      <!-- Form Success State -->
+      <div class="form-success-state" id="form-success-state" style="display: none;">
+        <div class="success-icon">✓</div>
+        <h4>Deck Received!</h4>
+        <p>Thank you. Mouad will personally review your deck and get back to you within 24–48 hours with actionable teardown notes.</p>
+        <button class="btn btn-dark btn-sm" id="close-success-btn">Back to Website</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
