@@ -123,7 +123,43 @@
       .cat-name { width:110px; font-size:12px; }
       .cta-box { padding:36px 24px; }
     }
-  </style>
+
+    /* Price tag in lock overlay */
+    .price-tag { font-size:42px; font-weight:900; color:white; letter-spacing:-2px; margin-bottom:8px; }
+    .price-tag span { font-size:18px; font-weight:500; color:rgba(255,255,255,.5); letter-spacing:0; }
+    .lock-perks { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+    .lock-perks span { font-size:12px; font-weight:600; color:rgba(0,0,0,.55); }
+    .unlock-btn { border:none; cursor:pointer; }
+
+    /* CTA box price pill */
+    .cta-price-pill { display:inline-block; background:rgba(0,0,0,.12); color:var(--dark); font-size:13px; font-weight:800; letter-spacing:.04em; padding:4px 14px; border-radius:100px; margin-bottom:16px; }
+    .cta-sub-note { margin-top:14px; font-size:13px; color:rgba(0,0,0,.5); font-weight:500; }
+    .cta-btn-dark { border:none; cursor:pointer; }
+
+    /* Payment Modal */
+    .pay-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+    .pay-modal-backdrop.open { display:flex; }
+    .pay-modal { background:white; border-radius:24px; padding:40px 36px; max-width:440px; width:100%; position:relative; box-shadow:0 24px 80px rgba(0,0,0,.2); animation:slideUp .3s cubic-bezier(.4,0,.2,1); }
+    @keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    .pay-modal-close { position:absolute; top:16px; right:16px; background:var(--bg); border:none; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; color:var(--muted); transition:background .2s; }
+    .pay-modal-close:hover { background:var(--border); }
+    .pay-modal-badge { display:inline-flex; align-items:center; gap:6px; background:var(--lime); color:var(--dark); font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:4px 12px; border-radius:100px; margin-bottom:20px; }
+    .pay-modal h3 { font-size:24px; font-weight:900; letter-spacing:-.5px; margin-bottom:8px; }
+    .pay-modal-price { font-size:48px; font-weight:900; letter-spacing:-2px; margin:16px 0 4px; }
+    .pay-modal-price span { font-size:18px; font-weight:500; color:var(--muted); letter-spacing:0; }
+    .pay-modal-desc { font-size:14px; color:var(--muted); margin-bottom:24px; line-height:1.5; }
+    .pay-modal-features { list-style:none; margin-bottom:28px; display:flex; flex-direction:column; gap:10px; }
+    .pay-modal-features li { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:500; }
+    .feat-check { width:20px; height:20px; background:var(--lime); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0; }
+    .pay-modal-btn { width:100%; background:var(--dark); color:white; font-size:16px; font-weight:800; padding:16px; border-radius:100px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background .2s,transform .15s; margin-bottom:12px; }
+    .pay-modal-btn:hover { background:#333; transform:translateY(-1px); }
+    .pay-modal-secure { text-align:center; font-size:12px; color:#aaa; display:flex; align-items:center; justify-content:center; gap:5px; }
+    .pay-modal-divider { border:none; border-top:1px solid var(--border); margin:20px 0; }
+    .pay-input-group { margin-bottom:16px; }
+    .pay-input-group label { display:block; font-size:12px; font-weight:700; color:var(--dark); margin-bottom:6px; letter-spacing:.03em; }
+    .pay-input-group input { width:100%; padding:12px 14px; border:1.5px solid var(--border); border-radius:10px; font-size:14px; font-family:inherit; color:var(--dark); background:var(--bg); transition:border-color .2s; outline:none; }
+    .pay-input-group input:focus { border-color:var(--dark); }
+    .pay-inputs-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }</style>
 </head>
 <body>
 
@@ -253,24 +289,119 @@
         <div class="lock-icon">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="5" y="10" width="12" height="10" rx="2" fill="white"/><path d="M8 10V7a3 3 0 016 0v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
+        <div class="price-tag">$10<span>/month</span></div>
         <h4>Unlock Your Full Deck Diagnosis</h4>
-        <p>Get slide-by-slide feedback, exact rewrites, and a priority fix list from the RAISE team.</p>
-        <a href="get-started.html" class="unlock-btn">
-          Book a Free Call — Get Full Report
+        <p>Slide-by-slide feedback, exact rewrites, and priority fix list — updated every time you upload.</p>
+        <button class="unlock-btn" onclick="openPayModal()">
+          Unlock Full Report — $10/mo
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        </button>
+        <div class="lock-perks">
+          <span>✓ Cancel anytime</span>
+          <span>✓ Unlimited uploads</span>
+          <span>✓ Full feedback</span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="cta-box">
-    <h2>Ready to fix what's holding your deck back?</h2>
-    <p>Most founders score between 40–65. The ones who raise fix the exact gaps in this report first.</p>
-    <a href="get-started.html" class="cta-btn-dark">Work With RAISE →</a>
+    <div class="cta-price-pill">$10 / month</div>
+    <h2>Get the full breakdown — fix it fast.</h2>
+    <p>Most founders score 40–65. Subscribers get slide-by-slide rewrites and a priority fix list — for less than a coffee a week.</p>
+    <button class="cta-btn-dark" onclick="openPayModal()">
+      Unlock Full Report — $10/mo
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="cta-sub-note">Cancel anytime &middot; Unlimited deck uploads</div>
   </div>
 
   <button class="reset-btn" onclick="resetTool()">Analyze Another Deck</button>
 </div>
+
+<!-- Payment Modal -->
+<div class="pay-modal-backdrop" id="pay-modal-backdrop" onclick="handleBackdropClick(event)">
+  <div class="pay-modal" id="pay-modal">
+    <button class="pay-modal-close" onclick="closePayModal()">&#x2715;</button>
+    <div class="pay-modal-badge">⚡ RAISE PRO</div>
+    <h3>Unlock Full Deck Diagnosis</h3>
+    <div class="pay-modal-price">$10<span>/month</span></div>
+    <div class="pay-modal-desc">Cancel anytime. Billed monthly. Instant access after payment.</div>
+    <ul class="pay-modal-features">
+      <li><div class="feat-check">✓</div> Slide-by-slide feedback on every section</li>
+      <li><div class="feat-check">✓</div> Exact language rewrites from our team</li>
+      <li><div class="feat-check">✓</div> Priority fix list ranked by investor impact</li>
+      <li><div class="feat-check">✓</div> Unlimited deck uploads per month</li>
+      <li><div class="feat-check">✓</div> Cancel anytime — no questions asked</li>
+    </ul>
+    <hr class="pay-modal-divider">
+    <div id="pay-form-view">
+      <div class="pay-input-group">
+        <label>Email address</label>
+        <input type="email" id="pay-email" placeholder="you@startup.com">
+      </div>
+      <div class="pay-input-group">
+        <label>Card number</label>
+        <input type="text" id="pay-card" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
+      </div>
+      <div class="pay-inputs-row">
+        <div class="pay-input-group">
+          <label>Expiry</label>
+          <input type="text" id="pay-expiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
+        </div>
+        <div class="pay-input-group">
+          <label>CVC</label>
+          <input type="text" id="pay-cvc" placeholder="123" maxlength="3">
+        </div>
+      </div>
+      <button class="pay-modal-btn" id="pay-submit-btn" onclick="handlePayment()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/><path d="M1 7h14" stroke="white" stroke-width="1.5"/></svg>
+        Pay $10 — Unlock Now
+      </button>
+      <div class="pay-modal-secure">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="7" rx="1" fill="#aaa"/><path d="M4 5V4a2 2 0 014 0v1" stroke="#aaa" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Secured with 256-bit SSL encryption
+      </div>
+    </div>
+    <div id="pay-success-view" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:56px;margin-bottom:16px">🎉</div>
+      <h3 style="margin-bottom:8px">You're in!</h3>
+      <p style="color:var(--muted);font-size:15px;line-height:1.6">Your full deck diagnosis is now unlocked. Check your email for your receipt and access link.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openPayModal() { document.getElementById('pay-modal-backdrop').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closePayModal() { document.getElementById('pay-modal-backdrop').classList.remove('open'); document.body.style.overflow=''; }
+  function handleBackdropClick(e) { if (e.target === document.getElementById('pay-modal-backdrop')) closePayModal(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePayModal(); });
+
+  function formatCard(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,16);
+    el.value = v.replace(/(\d{4})(?=\d)/g,'$1 ');
+  }
+  function formatExpiry(el) {
+    let v = el.value.replace(/\D/g,'').slice(0,4);
+    if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
+    el.value = v;
+  }
+
+  function handlePayment() {
+    const email = document.getElementById('pay-email').value.trim();
+    const card = document.getElementById('pay-card').value.trim();
+    const expiry = document.getElementById('pay-expiry').value.trim();
+    const cvc = document.getElementById('pay-cvc').value.trim();
+    if (!email || !card || !expiry || !cvc) { alert('Please fill in all payment details.'); return; }
+    const btn = document.getElementById('pay-submit-btn');
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('pay-form-view').style.display = 'none';
+      document.getElementById('pay-success-view').style.display = 'block';
+    }, 1800);
+  }
+</script>
 
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
