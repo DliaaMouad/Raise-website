@@ -314,93 +314,17 @@
             </p>
           </div>
 
-          <form class="main-apply-form" id="gs-application-form" onsubmit="event.preventDefault(); window.handleApplySubmit();">
-            
-            <div class="form-grid-2">
-              <div class="form-field">
-                <label for="app-name">Full Name <span class="req">*</span></label>
-                <input type="text" id="app-name" placeholder="e.g. Mouad Dliaa" required>
-              </div>
-
-              <div class="form-field">
-                <label for="app-email">Work Email <span class="req">*</span></label>
-                <input type="email" id="app-email" placeholder="mouad@company.com" required>
-              </div>
-            </div>
-
-            <div class="form-grid-2">
-              <div class="form-field">
-                <label for="app-linkedin">LinkedIn Profile URL <span class="req">*</span></label>
-                <input type="url" id="app-linkedin" placeholder="https://linkedin.com/in/..." required>
-              </div>
-
-              <div class="form-field">
-                <label for="app-website">Company Website</label>
-                <input type="url" id="app-website" placeholder="https://yourstartup.com">
-              </div>
-            </div>
-
-            <div class="form-grid-2">
-              <div class="form-field">
-                <label for="app-raise-amount">How much are you raising? <span class="req">*</span></label>
-                <select id="app-raise-amount" required>
-                  <option value="" disabled selected>Select round size</option>
-                  <option value="under-250k">&lt; £250K</option>
-                  <option value="250k-500k">£250K – £500K</option>
-                  <option value="500k-1m">£500K – £1M</option>
-                  <option value="1m-2m">£1M – £2M</option>
-                  <option value="2m-plus">£2M+</option>
-                </select>
-              </div>
-
-              <div class="form-field">
-                <label for="app-stage">Stage <span class="req">*</span></label>
-                <select id="app-stage" required>
-                  <option value="" disabled selected>Select startup stage</option>
-                  <option value="pre-seed">Pre-seed</option>
-                  <option value="seed">Seed</option>
-                  <option value="series-a">Series A</option>
-                  <option value="other">Other / Extension</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-field">
-              <label for="app-deck-url">Pitch Deck Link (DocSend / Google Drive / Notion)</label>
-              <input type="url" id="app-deck-url" placeholder="https://docsend.com/view/... or paste 'No deck yet'">
-            </div>
-
-            <div class="form-field">
-              <label for="app-traction">What is your current traction? (Optional)</label>
-              <textarea id="app-traction" rows="3" placeholder="e.g. £15k MRR growing 20% MoM, active pilots, user waitlist, or pre-revenue..."></textarea>
-            </div>
-
-            <div class="form-field">
-              <label for="app-challenge">What is the #1 challenge in your raise right now? <span class="req">*</span></label>
-              <textarea id="app-challenge" rows="3" placeholder="e.g. VCs passing after call 1 saying it's a feature not a platform, valuation friction, narrative clarity..." required></textarea>
-            </div>
-
-            <div class="form-submit-row">
-              <button type="submit" class="btn btn-lime btn-xl btn-full pulse-hover" id="app-submit-btn">
-                <span>Apply Now</span>
-                <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </button>
-              <p class="form-sub-guarantee">
-                🔒 No commitment. We review every application personally under strict confidentiality.
-              </p>
-            </div>
-
-          </form>
-
-          <!-- Success State -->
-          <div class="app-success-box" id="app-success-box" style="display: none;">
-            <div class="success-icon-big">✓</div>
-            <h3 class="success-title">Application Submitted!</h3>
-            <p class="success-desc">
-              Thank you for applying. Mouad will personally review your deck and company details. You will receive an update and invitation to schedule your strategy call within 24 hours.
-            </p>
-            <a href="index.html" class="btn btn-dark btn-md">Return to Homepage</a>
-          </div>
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLScirBIpBrzYKVsYQmcrTr9H4gifvEbuAIqb-0wDTKndGIWBAg/viewform?embedded=true"
+            width="100%"
+            height="900"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            style="border-radius:12px; display:block;"
+            title="RAISE Application Form">
+            Loading…
+          </iframe>
 
         </div>
 
