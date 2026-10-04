@@ -1583,35 +1583,39 @@ p {
 /* ==========================================================================
    Responsive Breakpoints
    ========================================================================== */
+
+/* ── Laptop / Small Desktop (769px – 1024px) ── */
 @media (max-width: 1024px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .testimonial-card {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .stats-row {
-    grid-template-columns: 1fr;
-  }
+  :root { --header-height: 68px; }
 
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+  .hero-title { font-size: clamp(2.2rem, 4.5vw, 3.4rem); }
 
-  .footer-top {
-    grid-template-columns: 1fr;
-  }
+  .services-grid { grid-template-columns: 1fr; }
 
-  .footer-links-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .testimonial-card { grid-template-columns: 1fr; gap: 20px; }
+
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 40px; }
+
+  .footer-links-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .lime-banner-inner { padding: 36px 36px; gap: 24px; }
+
+  .grid-2x2 { grid-template-columns: repeat(2, 1fr); }
+
+  .comparison-grid { grid-template-columns: 1fr; }
+
+  .modal-box { max-width: 560px !important; }
 }
 
+/* ── Tablet (481px – 768px) ── */
 @media (max-width: 768px) {
+  :root { --header-height: 64px; }
+
+  /* Nav */
   .nav-links {
     position: fixed;
     top: var(--header-height);
@@ -1619,66 +1623,169 @@ p {
     right: 0;
     background-color: #FFFFFF;
     flex-direction: column;
-    padding: 24px;
+    padding: 24px 20px;
     gap: 20px;
     border-bottom: 1px solid var(--border-light);
     transform: translateY(-150%);
     transition: transform 0.3s ease;
     box-shadow: var(--shadow-lg);
+    z-index: 999;
+    align-items: flex-start;
   }
+  .nav-links.active { transform: translateY(0); }
+  .mobile-toggle { display: flex; }
+  #nav-cta-btn { display: none; }
 
-  .nav-links.active {
-    transform: translateY(0);
-  }
+  /* Section spacing */
+  .section { padding: 72px 0; }
+  .section-header { margin-bottom: 40px; }
 
-  .mobile-toggle {
-    display: flex;
-  }
+  /* Hero */
+  .hero-section { padding: 52px 0 44px; }
+  .hero-title { font-size: clamp(1.9rem, 5.5vw, 2.8rem); letter-spacing: -0.03em; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-cta-group { flex-direction: column; gap: 12px; width: 100%; }
+  .hero-cta-group .btn { width: 100%; justify-content: center; }
+  .hero-trust-line { flex-direction: column; text-align: center; gap: 10px; margin-bottom: 44px; }
 
-  #nav-cta-btn {
-    display: none;
-  }
+  /* Grids */
+  .grid-2x2 { grid-template-columns: 1fr; }
 
-  .grid-2x2 {
-    grid-template-columns: 1fr;
-  }
-
+  /* Lime banner */
   .lime-banner-inner {
     flex-direction: column;
     text-align: center;
-    padding: 36px 24px;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .about-creds {
-    flex-wrap: wrap;
+    padding: 32px 24px;
     gap: 20px;
   }
+  .lime-banner-inner .btn { width: 100%; justify-content: center; }
 
-  .comparison-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  /* Services */
+  .service-card-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  /* Teardown */
+  .teardown-card { padding: 24px 20px; }
+
+  /* Testimonials */
+  .testimonial-card { grid-template-columns: 1fr; gap: 16px; }
+  .testi-quote { font-size: 1.1rem; }
+
+  /* Stats */
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .stat-number { font-size: clamp(2.4rem, 8vw, 3.2rem); }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo-frame { max-width: 340px; margin: 0 auto; }
+  .about-creds { flex-wrap: wrap; gap: 16px; }
+
+  /* Comparison */
+  .comparison-row { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Results callout */
+  .results-callout { flex-direction: column; text-align: center; }
+
+  /* Forms */
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Modal */
+  .modal-overlay { padding: 16px; align-items: flex-end; }
+  .modal-box {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
-  .teardown-card {
-    padding: 24px 20px;
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-links-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+
+  /* Feature cards */
+  .feature-card { padding: 28px 24px; }
+}
+
+/* ── Mobile Phone (≤480px) ── */
+@media (max-width: 480px) {
+  :root { --header-height: 60px; }
+
+  /* Container tighter */
+  .container, .nav-container, .lime-banner-container { padding-left: 16px; padding-right: 16px; }
+
+  /* Nav */
+  .brand-logo { font-size: 1.25rem; }
+
+  /* Section spacing */
+  .section { padding: 56px 0; }
+  .section-title { font-size: clamp(1.6rem, 6.5vw, 2rem); }
+  .section-desc { font-size: 0.95rem; }
+
+  /* Hero */
+  .hero-section { padding: 40px 0 36px; }
+  .hero-title { font-size: clamp(1.7rem, 7vw, 2.2rem); line-height: 1.1; }
+  .hero-subtitle { font-size: 0.95rem; }
+  .hero-cta-group { gap: 10px; }
+  .hero-trust-line { margin-bottom: 36px; }
+
+  /* Buttons full-width on mobile */
+  .btn-xl { padding: 14px 24px; font-size: 1rem; }
+  .btn-lg { padding: 12px 22px; font-size: 0.95rem; }
+
+  /* Pill badge smaller */
+  .pill-badge { font-size: 0.65rem; padding: 6px 12px; }
+
+  /* Feature cards */
+  .feature-card { padding: 24px 18px; }
+  .card-title { font-size: 1.1rem; }
+  .card-text { font-size: 0.9rem; }
+
+  /* Lime banner */
+  .lime-banner-inner { padding: 28px 18px; border-radius: 16px; }
+  .banner-headline { font-size: clamp(1.4rem, 5.5vw, 1.8rem); }
+
+  /* Stats — single column */
+  .stats-row { grid-template-columns: 1fr; gap: 16px; }
+  .stat-number { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .stat-item { padding: 24px 20px; }
+
+  /* Teardown */
+  .teardown-card { padding: 20px 16px; }
+  .teardown-number { font-size: 2rem; }
+
+  /* Testimonials */
+  .testimonial-section .section { padding: 56px 0; }
+  .testi-quote { font-size: 1rem; }
+
+  /* About */
+  .about-content { gap: 28px; }
+  .about-headline { font-size: clamp(1.6rem, 6vw, 2rem); }
+  .about-creds { gap: 12px; }
+  .cred-item { min-width: unset; flex: 1 1 40%; }
+
+  /* Footer */
+  .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .footer-col-title { font-size: 0.85rem; }
+
+  /* Modal — full screen on phone */
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal-box {
+    border-radius: 20px 20px 0 0;
+    max-height: 95vh;
+    overflow-y: auto;
+    padding: 24px 20px !important;
   }
 
-  .results-callout {
-    flex-direction: column;
-    text-align: center;
-  }
+  /* Comparison */
+  .comparison-label { font-size: 0.85rem; }
 
-  .footer-links-grid {
-    grid-template-columns: 1fr;
-  }
+  /* Results callout text */
+  .callout-title { font-size: 1.4rem; }
 
-  .footer-bottom {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  }
+  /* Logos row */
+  .logos-row { gap: 24px 32px; }
+
+  /* Accelerator strip */
+  .accelerator-strip { padding-top: 20px; }
 }
