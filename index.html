@@ -736,80 +736,37 @@
     </div>
   </footer>
 
-  <!-- Interactive Deck Review / Contact Modal -->
+  <!-- Book a Call Modal -->
   <div class="modal-overlay" id="contact-modal" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
-      
-      <div class="modal-header">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="max-width:680px; padding:0; overflow:hidden; position:relative;">
+      <button class="modal-close" id="modal-close-btn" aria-label="Close modal" style="position:absolute;top:14px;right:14px;z-index:10;">&times;</button>
+
+      <div style="padding:28px 32px 0;">
         <span class="pill-badge modal-badge">
           <span class="pill-pulse pulse-lime"></span>
           <span>FREE 15-MIN CONFIDENTIAL AUDIT</span>
         </span>
-        <h3 class="modal-title" id="modal-title">Send Your Deck For Review</h3>
-        <p class="modal-desc">
-          Get a direct video or written breakdown of what’s holding your deck back from term sheets.
-        </p>
+        <h3 class="modal-title" id="modal-title" style="margin-top:10px;">Book Your Strategy Call</h3>
+        <p class="modal-desc">Fill in the form below and we'll be in touch within 24 hours.</p>
       </div>
 
-      <form class="modal-form" id="deck-review-form" onsubmit="event.preventDefault(); window.handleFormSubmit();">
-        <div class="form-group">
-          <label for="founder-name">Your Name</label>
-          <input type="text" id="founder-name" placeholder="Mouad Dliaa" required>
-        </div>
-
-        <div class="form-group">
-          <label for="founder-email">Work Email</label>
-          <input type="email" id="founder-email" placeholder="mouad@startup.com" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fundraise-stage">Round Stage</label>
-            <select id="fundraise-stage" required>
-              <option value="pre-seed">Pre-Seed (£250k - £1M)</option>
-              <option value="seed" selected>Seed (£1M - £3.5M)</option>
-              <option value="series-a">Series A (£4M - £10M)</option>
-              <option value="bridge">Bridge / Extension</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="startup-sector">Sector</label>
-            <input type="text" id="startup-sector" placeholder="AI / B2B SaaS / FinTech" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="deck-link">Pitch Deck Link (DocSend / Notion / Drive)</label>
-          <input type="url" id="deck-link" placeholder="https://docsend.com/view/..." required>
-        </div>
-
-        <div class="form-group">
-          <label for="deck-notes">Current Main Challenge (Optional)</label>
-          <textarea id="deck-notes" rows="2" placeholder="e.g. Getting passes after meeting #1, valuation pushback, struggling with TAM..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-lime btn-full" id="submit-form-btn">
-          Request Confidential Deck Audit →
-        </button>
-
-        <p class="form-disclaimer">
-          🔒 Strict NDA protected. We never share your deck or metrics with anyone.
-        </p>
-      </form>
-
-      <!-- Form Success State -->
-      <div class="form-success-state" id="form-success-state" style="display: none;">
-        <div class="success-icon">✓</div>
-        <h4>Deck Received!</h4>
-        <p>Thank you. Mouad will personally review your deck and get back to you within 24–48 hours with actionable teardown notes.</p>
-        <button class="btn btn-dark btn-sm" id="close-success-btn">Back to Website</button>
-      </div>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeqaTZETf6eYT34lfN5NdBsaggOpPJmC0W0ARta4NWFErJAXg/viewform?embedded=true"
+        width="100%"
+        height="560"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        style="display:block; margin-top:16px;"
+        title="RAISE Book a Call Form">
+        Loading…
+      </iframe>
 
     </div>
   </div>
 
   <script src="script.js"></script>
+
+
 </body>
 </html>
