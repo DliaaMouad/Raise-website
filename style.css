@@ -367,16 +367,17 @@ p {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
 }
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-secondary);
   transition: color 0.2s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -1584,7 +1585,7 @@ p {
    Responsive Breakpoints
    ========================================================================== */
 
-/* ── Laptop / Small Desktop (769px – 1024px) ── */
+/* ── Laptop / Tablet (769px – 1024px) ── */
 @media (max-width: 1024px) {
   :root { --header-height: 68px; }
 
@@ -1609,13 +1610,8 @@ p {
   .comparison-grid { grid-template-columns: 1fr; }
 
   .modal-box { max-width: 560px !important; }
-}
 
-/* ── Tablet (481px – 768px) ── */
-@media (max-width: 768px) {
-  :root { --header-height: 64px; }
-
-  /* Nav */
+  /* Nav Drawer */
   .nav-links {
     position: fixed;
     top: var(--header-height);
@@ -1635,6 +1631,7 @@ p {
   .nav-links.active { transform: translateY(0); }
   .mobile-toggle { display: flex; }
   #nav-cta-btn { display: none; }
+}
 
   /* Section spacing */
   .section { padding: 72px 0; }
