@@ -668,7 +668,7 @@
             </p>
           </div>
           <div>
-            <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" class="btn btn-lime btn-sm" style="display:inline-flex; align-items:center; gap:8px;">
+            <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" class="btn btn-lime btn-sm" style="display:inline-flex; align-items:center; gap:8px;">
               <span>Subscribe on Substack</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
@@ -678,122 +678,146 @@
         <!-- Featured Substack Subscribe Banner -->
         <div style="background:linear-gradient(135deg, rgba(185,255,102,0.12) 0%, rgba(23,24,27,0.9) 100%); border:1px solid rgba(185,255,102,0.3); border-radius:20px; padding:36px; margin-bottom:48px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; flex-wrap:wrap;">
           <div>
-            <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#B9FF66; text-transform:uppercase;">JOIN 3,500+ FOUNDERS & VCs</span>
+            <span style="font-size:11px; font-weight:800; letter-spacing:1px; color:#B9FF66; text-transform:uppercase;">OFFICIAL SUBSTACK — @RAISEOS</span>
             <h3 style="font-size:22px; font-weight:800; color:#fff; margin:6px 0 8px;">Get Weekly 3-Minute Pitch Teardowns In Your Inbox</h3>
-            <p style="font-size:14px; color:#A3A6B4; margin:0;">No fluff. Real pitch deck teardowns, narrative fixes, and seed valuation data delivered every Thursday.</p>
+            <p style="font-size:14px; color:#A3A6B4; margin:0;">No fluff. Real pitch deck teardowns, narrative fixes, and seed valuation data delivered every Thursday by Mouad Dliaa.</p>
           </div>
           <div>
-            <form onsubmit="event.preventDefault(); window.open('https://raiseready.substack.com', '_blank');" style="display:flex; gap:10px; flex-wrap:wrap;">
+            <form onsubmit="event.preventDefault(); window.open('https://substack.com/@raiseos', '_blank');" style="display:flex; gap:10px; flex-wrap:wrap;">
               <input type="email" required placeholder="Enter your work email..." style="background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:12px 16px; border-radius:100px; font-size:14px; outline:none; min-width:240px;">
               <button type="submit" class="btn btn-lime" style="border-radius:100px; padding:12px 24px; font-weight:800;">Subscribe Free</button>
             </form>
           </div>
         </div>
 
-        <!-- Editorial Articles Grid (a16z Card Style) -->
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:24px;">
+        <!-- Editorial Articles Grid (a16z & StartupFundraising Style Cards with Thumbnails) -->
+        <div id="substack-articles-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:24px;">
           
           <!-- Article 1 -->
-          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:28px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s, border-color 0.2s;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <span style="font-size:11px; font-weight:800; color:#B9FF66; background:rgba(185,255,102,0.12); padding:4px 10px; border-radius:100px; text-transform:uppercase;">DECK TEARDOWN</span>
-                <span style="font-size:12px; color:#848792;">4 min read</span>
+          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; justify-space-between; transition:transform 0.2s, border-color 0.2s;">
+            <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="display:block; height:180px; overflow:hidden; position:relative;">
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&auto=format&fit=crop&q=80" alt="Pitch Deck Teardown" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease;">
+              <span style="position:absolute; top:12px; left:12px; font-size:10px; font-weight:800; color:#111110; background:#B9FF66; padding:4px 10px; border-radius:100px; text-transform:uppercase;">DECK TEARDOWN</span>
+            </a>
+            <div style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                  <span style="font-size:12px; color:#B9FF66; font-weight:700;">@raiseos</span>
+                  <span style="font-size:12px; color:#848792;">4 min read</span>
+                </div>
+                <h3 style="font-size:17px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
+                  <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="color:inherit;">
+                    How Airbnb & Uber Scaled Their Slide 1 to 3: The 90-Second Hook Rule
+                  </a>
+                </h3>
+                <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
+                  Deconstructing the exact narrative sequence top seed decks use to lock in partner conviction before slide 4.
+                </p>
               </div>
-              <h3 style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
-                <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="color:inherit; transition:color 0.2s;">
-                  How Airbnb & Uber Scaled Their Slide 1 to 3: The 90-Second Hook Rule
+              <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
+                <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
+                  Read on Substack →
                 </a>
-              </h3>
-              <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
-                Deconstructing the exact narrative sequence top seed decks use to lock in partner conviction before slide 4.
-              </p>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
-              <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
-                Read Article →
-              </a>
+              </div>
             </div>
           </article>
 
           <!-- Article 2 -->
-          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:28px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s, border-color 0.2s;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <span style="font-size:11px; font-weight:800; color:#B9FF66; background:rgba(185,255,102,0.12); padding:4px 10px; border-radius:100px; text-transform:uppercase;">INSIDER VC LOGIC</span>
-                <span style="font-size:12px; color:#848792;">5 min read</span>
+          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; justify-space-between; transition:transform 0.2s, border-color 0.2s;">
+            <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="display:block; height:180px; overflow:hidden; position:relative;">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80" alt="VC Deal Memos" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease;">
+              <span style="position:absolute; top:12px; left:12px; font-size:10px; font-weight:800; color:#111110; background:#B9FF66; padding:4px 10px; border-radius:100px; text-transform:uppercase;">INSIDER VC LOGIC</span>
+            </a>
+            <div style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                  <span style="font-size:12px; color:#B9FF66; font-weight:700;">@raiseos</span>
+                  <span style="font-size:12px; color:#848792;">5 min read</span>
+                </div>
+                <h3 style="font-size:17px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
+                  <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="color:inherit;">
+                    The 4 Silent Reasons VCs Pass After Meeting #1 (What Partners Write on Deal Memos)
+                  </a>
+                </h3>
+                <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
+                  Why 'too early' is rarely about traction — and how to fix market sizing and moat framing before your next call.
+                </p>
               </div>
-              <h3 style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
-                <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="color:inherit; transition:color 0.2s;">
-                  The 4 Silent Reasons VCs Pass After Meeting #1 (What Partners Write on Deal Memos)
+              <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
+                <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
+                  Read on Substack →
                 </a>
-              </h3>
-              <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
-                Why 'too early' is rarely about traction — and how to fix market sizing and moat framing before your next call.
-              </p>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
-              <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
-                Read Article →
-              </a>
+              </div>
             </div>
           </article>
 
           <!-- Article 3 -->
-          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:28px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s, border-color 0.2s;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <span style="font-size:11px; font-weight:800; color:#B9FF66; background:rgba(185,255,102,0.12); padding:4px 10px; border-radius:100px; text-transform:uppercase;">FUNDRAISING MECHANICS</span>
-                <span style="font-size:12px; color:#848792;">6 min read</span>
+          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; justify-space-between; transition:transform 0.2s, border-color 0.2s;">
+            <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="display:block; height:180px; overflow:hidden; position:relative;">
+              <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&auto=format&fit=crop&q=80" alt="2026 Seed Round Benchmarks" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease;">
+              <span style="position:absolute; top:12px; left:12px; font-size:10px; font-weight:800; color:#111110; background:#B9FF66; padding:4px 10px; border-radius:100px; text-transform:uppercase;">FUNDRAISING MECHANICS</span>
+            </a>
+            <div style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                  <span style="font-size:12px; color:#B9FF66; font-weight:700;">@raiseos</span>
+                  <span style="font-size:12px; color:#848792;">6 min read</span>
+                </div>
+                <h3 style="font-size:17px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
+                  <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="color:inherit;">
+                    2026 Seed Round Benchmarks: Valuation, Dilution & Minimum ARR Requirements
+                  </a>
+                </h3>
+                <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
+                  What institutional Seed funds are requiring in ARR, growth velocity, and pilot terms across B2B SaaS, AI, and FinTech.
+                </p>
               </div>
-              <h3 style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
-                <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="color:inherit; transition:color 0.2s;">
-                  2026 Seed Round Benchmarks: Valuation, Dilution & Minimum ARR Requirements
+              <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
+                <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
+                  Read on Substack →
                 </a>
-              </h3>
-              <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
-                What institutional Seed funds are requiring in ARR, growth velocity, and pilot terms across B2B SaaS, AI, and FinTech.
-              </p>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
-              <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
-                Read Article →
-              </a>
+              </div>
             </div>
           </article>
 
-          <!-- Article 4 (Teardown Case Study) -->
-          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:28px; display:flex; flex-direction:column; justify-content:space-between; transition:transform 0.2s, border-color 0.2s;">
-            <div>
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-                <span style="font-size:11px; font-weight:800; color:#B9FF66; background:rgba(185,255,102,0.12); padding:4px 10px; border-radius:100px; text-transform:uppercase;">CASE STUDY TEARDOWN</span>
-                <span style="font-size:12px; color:#848792;">3 min read</span>
+          <!-- Article 4 -->
+          <article class="article-card reveal-item" style="background:#17181B; border:1px solid rgba(255,255,255,0.1); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; justify-space-between; transition:transform 0.2s, border-color 0.2s;">
+            <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="display:block; height:180px; overflow:hidden; position:relative;">
+              <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&auto=format&fit=crop&q=80" alt="Case Study Teardown" style="width:100%; height:100%; object-fit:cover; transition:transform 0.3s ease;">
+              <span style="position:absolute; top:12px; left:12px; font-size:10px; font-weight:800; color:#111110; background:#B9FF66; padding:4px 10px; border-radius:100px; text-transform:uppercase;">CASE STUDY TEARDOWN</span>
+            </a>
+            <div style="padding:24px; flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                  <span style="font-size:12px; color:#B9FF66; font-weight:700;">@raiseos</span>
+                  <span style="font-size:12px; color:#848792;">3 min read</span>
+                </div>
+                <h3 style="font-size:17px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
+                  <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="color:inherit;">
+                    Teardown: Rebuilding a HealthTech Deck from 4% to 45% Second-Meeting Rate
+                  </a>
+                </h3>
+                <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
+                  Step-by-step breakdown of how NovaHealth transformed an 18-slide feature dump into a 2-term-sheet oversubscribed round.
+                </p>
               </div>
-              <h3 style="font-size:18px; font-weight:800; color:#fff; margin-bottom:10px; line-height:1.4;">
-                <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="color:inherit; transition:color 0.2s;">
-                  Teardown: Rebuilding a HealthTech Deck from 4% to 45% Second-Meeting Rate
+              <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
+                <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
+                  Read on Substack →
                 </a>
-              </h3>
-              <p style="font-size:13px; color:#A3A6B4; line-height:1.6; margin-bottom:20px;">
-                Step-by-step breakdown of how NovaHealth transformed an 18-slide feature dump into a 2-term-sheet oversubscribed round.
-              </p>
-            </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#848792;">By Mouad Dliaa</span>
-              <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" style="font-size:13px; font-weight:700; color:#B9FF66; display:inline-flex; align-items:center; gap:4px;">
-                Read Article →
-              </a>
+              </div>
             </div>
           </article>
 
         </div>
 
         <div style="text-align:center; margin-top:40px;">
-          <a href="https://raiseready.substack.com" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-lg text-white" style="border-color:rgba(255,255,255,0.2);">
-            Explore All Substack Teardowns & Articles →
+          <a href="https://substack.com/@raiseos" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-lg text-white" style="border-color:rgba(255,255,255,0.2);">
+            View All Substack Field Notes (@raiseos) →
           </a>
         </div>
 
