@@ -1,278 +1,818 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raise OS | The 5-Phase System for Funded Founders</title>
-  <meta name="description" content="Raise OS is the operating system behind 70+ funded founders and &pound;12M+ raised. Five phases replace spray-and-pray fundraising with a repeatable, measurable system.">
+  <title>Raise OS | The 5-Phase System for Pre-Seed and Seed Founders</title>
+  <meta name="description" content="Raise OS is the 5-phase operating system that turns decks into term sheets. Used by 70+ founders who raised £12M+. Get your Raise Score free.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ---- Raise OS Manifesto Page Specific Styles ---- */
-    .os-hero { text-align: center; padding: 100px 24px 72px; max-width: 800px; margin: 0 auto; }
-    .os-hero .pill-badge { margin-bottom: 24px; }
-    .os-hero h1 { font-size: clamp(42px, 6vw, 70px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -3px; line-height: 1.02; margin-bottom: 24px; color: var(--text-primary); }
-    .os-hero h1 em { font-style: normal; color: var(--text-secondary); }
-    .os-hero .os-hero-sub { font-size: 19px; color: var(--text-secondary); line-height: 1.65; max-width: 580px; margin: 0 auto 40px; }
-    .os-score-hook { display: inline-flex; align-items: center; gap: 10px; background: var(--lime-primary); color: var(--text-primary); font-size: 16px; font-weight: 800; padding: 16px 32px; border-radius: 100px; text-decoration: none; transition: transform .2s, background .2s; }
-    .os-score-hook:hover { background: var(--lime-hover); transform: translateY(-2px); }
-    .os-score-hook svg { flex-shrink: 0; }
+    /* ============================================================
+       RAISE OS — Page-Level Styles
+       Design tokens inherited from style.css
+       ============================================================ */
 
-    .os-phases-section { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
-    .os-phases-header { margin-bottom: 40px; }
-    .os-phases-header .section-tag { display: block; margin-bottom: 10px; }
-    .os-phases-header h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -1px; line-height: 1.1; color: var(--text-primary); }
+    /* --- Shared layout helpers --- */
+    .ros-container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .ros-section { padding: 96px 0; }
+    .ros-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    .ros-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--lime-primary); border-radius: 2px; flex-shrink: 0; }
+    .ros-h2 { font-family: var(--font-heading); font-size: clamp(32px, 4.5vw, 52px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; color: var(--text-primary); }
+    .ros-h2-inv { color: #fff; }
 
-    .os-phases-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); }
+    /* ---- 1. NAV ---- */
+    .ros-nav { position: sticky; top: 0; z-index: 200; background: rgba(248,248,244,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-light); }
+    .ros-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; max-width: 1100px; margin: 0 auto; padding: 0 32px; gap: 32px; }
+    .ros-logo { font-family: var(--font-heading); font-size: 20px; font-weight: 900; letter-spacing: -0.5px; text-decoration: none; color: var(--text-primary); white-space: nowrap; }
+    .ros-logo span { color: var(--lime-primary); }
+    .ros-nav-links { display: flex; align-items: center; gap: 6px; }
+    .ros-nav-links a { font-size: 14px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color .2s, background .2s; white-space: nowrap; }
+    .ros-nav-links a:hover { color: var(--text-primary); background: rgba(0,0,0,.04); }
+    .ros-nav-cta { display: inline-flex; align-items: center; gap: 7px; background: var(--lime-primary); color: var(--text-primary); font-size: 14px; font-weight: 800; padding: 10px 22px; border-radius: 100px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; transition: background .2s, transform .15s; flex-shrink: 0; }
+    .ros-nav-cta:hover { background: var(--lime-hover); transform: translateY(-1px); }
+    .ros-nav-cta svg { flex-shrink: 0; }
+    .ros-mobile-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .ros-mobile-toggle span { width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; display: block; transition: .2s; }
 
-    .os-flywheel-section { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
-    .flywheel-steps { display: flex; flex-direction: column; gap: 0; }
-    .flywheel-step { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border-light); }
-    .flywheel-step:last-child { border-bottom: none; }
-    .flywheel-arrow { font-size: 20px; color: var(--lime-primary); font-weight: 900; flex-shrink: 0; width: 32px; text-align: center; line-height: 1.5; }
-    .flywheel-text { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
-    .flywheel-text strong { color: var(--text-primary); font-weight: 700; }
+    /* ---- 2. HERO ---- */
+    .ros-hero { background: var(--bg-main); padding: 96px 0 80px; overflow: hidden; position: relative; }
+    .ros-hero::before { content: ''; position: absolute; top: -120px; right: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(185,255,102,.22) 0%, transparent 70%); pointer-events: none; }
+    .ros-hero-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+    .ros-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--border-medium); border-radius: 100px; padding: 5px 14px 5px 8px; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 28px; }
+    .ros-hero-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime-primary); flex-shrink: 0; }
+    .ros-hero-h1 { font-family: var(--font-heading); font-size: clamp(40px, 5.5vw, 66px); font-weight: 900; letter-spacing: -2.5px; line-height: 1.02; color: var(--text-primary); margin-bottom: 24px; }
+    .ros-hero-h1 em { font-style: normal; color: var(--text-secondary); }
+    .ros-hero-sub { font-size: 18px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 40px; max-width: 520px; }
+    .ros-hero-cta-group { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+    .ros-btn-lime-lg { display: inline-flex; align-items: center; gap: 9px; background: var(--lime-primary); color: var(--text-primary); font-size: 16px; font-weight: 800; padding: 18px 36px; border-radius: 100px; text-decoration: none; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 8px 24px -6px rgba(185,255,102,.45); }
+    .ros-btn-lime-lg:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 14px 32px -8px rgba(185,255,102,.55); }
+    .ros-btn-lime-lg svg { flex-shrink: 0; }
+    .ros-hero-secondary { font-size: 14px; color: var(--text-muted); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 5px; transition: color .2s; padding-left: 4px; }
+    .ros-hero-secondary:hover { color: var(--text-primary); }
+    .ros-proof-line { display: flex; align-items: center; gap: 14px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border-light); }
+    .ros-proof-avatars { display: flex; }
+    .ros-proof-avatars span { width: 36px; height: 36px; border-radius: 50%; background: var(--text-primary); color: var(--lime-primary); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; border: 2px solid var(--bg-main); margin-left: -8px; flex-shrink: 0; }
+    .ros-proof-avatars span:first-child { margin-left: 0; }
+    .ros-proof-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .ros-proof-text strong { color: var(--text-primary); }
+    .ros-hero-visual { position: relative; }
+    .ros-score-card { background: var(--text-primary); border-radius: 20px; padding: 36px 32px; position: relative; overflow: hidden; }
+    .ros-score-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; background: var(--lime-primary); opacity: .08; border-radius: 50%; }
+    .ros-score-card-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--lime-primary); margin-bottom: 12px; }
+    .ros-score-big { font-family: var(--font-heading); font-size: 80px; font-weight: 900; letter-spacing: -4px; line-height: 1; color: #fff; }
+    .ros-score-big span { font-size: 32px; font-weight: 500; color: rgba(255,255,255,.3); }
+    .ros-score-grade { font-size: 16px; font-weight: 700; color: var(--lime-primary); margin: 8px 0 4px; }
+    .ros-score-sub { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.5; margin-bottom: 24px; }
+    .ros-score-bars { display: flex; flex-direction: column; gap: 10px; }
+    .ros-score-row { display: flex; align-items: center; gap: 10px; }
+    .ros-score-row-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.5); width: 90px; flex-shrink: 0; }
+    .ros-score-bar-bg { flex: 1; height: 6px; background: rgba(255,255,255,.1); border-radius: 100px; overflow: hidden; }
+    .ros-score-bar-fill { height: 100%; border-radius: 100px; background: var(--lime-primary); }
+    .ros-score-row-num { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6); width: 26px; text-align: right; }
+    .ros-score-cta-btn { display: flex; align-items: center; justify-content: center; gap: 7px; background: var(--lime-primary); color: var(--text-primary); font-size: 14px; font-weight: 800; padding: 14px; border-radius: 100px; text-decoration: none; margin-top: 24px; transition: background .2s; }
+    .ros-score-cta-btn:hover { background: var(--lime-hover); }
 
-    .os-proof-section { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
-    .proof-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
-    .proof-stat { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; }
-    .proof-stat-num { font-size: 42px; font-weight: 900; font-family: var(--font-heading); letter-spacing: -2px; color: var(--text-primary); line-height: 1; margin-bottom: 6px; }
-    .proof-stat-num span { color: var(--lime-primary); }
-    .proof-stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .ros-logos { display: flex; align-items: center; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
+    .ros-logos-label { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: .05em; text-transform: uppercase; }
+    .ros-logo-item { font-family: var(--font-heading); font-size: 14px; font-weight: 800; color: var(--text-muted); opacity: .55; letter-spacing: -.2px; }
+    .ros-logo-yc { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #FF6600; border-radius: 5px; font-size: 11px; font-weight: 900; color: #fff; }
 
-    .os-cta-section { max-width: 800px; margin: 0 auto 120px; padding: 0 24px; }
-    .os-cta-box { background: var(--bg-dark); border-radius: var(--radius-xl); padding: 60px 48px; text-align: center; position: relative; overflow: hidden; }
-    .os-cta-box::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: var(--lime-primary); opacity: .06; border-radius: 50%; }
-    .os-cta-box h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -1px; color: white; margin-bottom: 14px; }
-    .os-cta-box p { font-size: 16px; color: rgba(255,255,255,.6); margin-bottom: 32px; line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto; }
-    .os-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .os-btn-lime { display: inline-flex; align-items: center; gap: 8px; background: var(--lime-primary); color: var(--text-primary); font-size: 15px; font-weight: 800; padding: 16px 32px; border-radius: 100px; text-decoration: none; transition: transform .2s, background .2s; }
-    .os-btn-lime:hover { background: var(--lime-hover); transform: translateY(-2px); }
-    .os-btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.08); color: white; font-size: 15px; font-weight: 600; padding: 16px 32px; border-radius: 100px; text-decoration: none; border: 1px solid rgba(255,255,255,.15); transition: background .2s; }
-    .os-btn-ghost:hover { background: rgba(255,255,255,.14); }
+    /* ---- 3. NOT-A SECTION ---- */
+    .ros-nota { background: #fff; padding: 96px 0; }
+    .ros-nota-header { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .ros-nota-sub { font-size: 18px; color: var(--text-secondary); margin-top: 16px; line-height: 1.6; }
+    .ros-nota-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .ros-nota-card { border: 1px solid var(--border-light); border-radius: 20px; padding: 32px; background: var(--bg-main); transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .ros-nota-card:hover { border-color: var(--lime-primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .ros-nota-num { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--lime-primary); letter-spacing: .06em; margin-bottom: 14px; }
+    .ros-nota-title { font-family: var(--font-heading); font-size: 22px; font-weight: 900; letter-spacing: -.5px; margin-bottom: 10px; color: var(--text-primary); }
+    .ros-nota-body { font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
 
-    @media (max-width: 600px) {
-      .os-hero { padding: 72px 20px 48px; }
-      .proof-stats { grid-template-columns: 1fr 1fr; }
-      .proof-stats .proof-stat:last-child { grid-column: 1/-1; }
-      .os-cta-box { padding: 40px 24px; }
+    /* ---- 4. EMAIL BAND ---- */
+    .ros-email-band { background: var(--lime-primary); padding: 72px 0; }
+    .ros-email-inner { max-width: 640px; margin: 0 auto; text-align: center; padding: 0 32px; }
+    .ros-email-h3 { font-family: var(--font-heading); font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; letter-spacing: -1px; color: var(--text-primary); margin-bottom: 12px; }
+    .ros-email-sub { font-size: 16px; color: rgba(0,0,0,.6); margin-bottom: 32px; line-height: 1.6; }
+    .ros-email-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto 14px; }
+    .ros-email-input { flex: 1; padding: 14px 18px; border: 2px solid rgba(0,0,0,.15); border-radius: 100px; font-size: 14px; font-family: var(--font-body); color: var(--text-primary); background: rgba(255,255,255,.7); outline: none; transition: border-color .2s, background .2s; }
+    .ros-email-input:focus { border-color: var(--text-primary); background: #fff; }
+    .ros-email-input::placeholder { color: rgba(0,0,0,.4); }
+    .ros-email-btn { padding: 14px 26px; background: var(--text-primary); color: #fff; border: none; border-radius: 100px; font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap; font-family: var(--font-body); transition: background .2s, transform .15s; }
+    .ros-email-btn:hover { background: #2a2a2a; transform: translateY(-1px); }
+    .ros-email-fine { font-size: 12px; color: rgba(0,0,0,.45); }
+
+    /* ---- 5. PROOF ---- */
+    .ros-proof { background: var(--bg-main); padding: 96px 0; }
+    .ros-proof-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .ros-proof-cards { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+    .ros-case-card { background: var(--text-primary); border-radius: 20px; padding: 40px; color: #fff; }
+    .ros-case-tag { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--lime-primary); margin-bottom: 8px; }
+    .ros-case-company { font-family: var(--font-heading); font-size: 28px; font-weight: 900; letter-spacing: -.5px; margin-bottom: 4px; }
+    .ros-case-round { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 24px; }
+    .ros-case-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .ros-case-stat { background: rgba(255,255,255,.06); border-radius: 12px; padding: 18px; }
+    .ros-case-stat-num { font-family: var(--font-heading); font-size: 34px; font-weight: 900; letter-spacing: -1.5px; line-height: 1; color: var(--lime-primary); }
+    .ros-case-stat-label { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 4px; }
+    .ros-case-quote { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.75); font-style: italic; margin-bottom: 16px; border-left: 3px solid var(--lime-primary); padding-left: 18px; }
+    .ros-case-attr { font-size: 13px; color: rgba(255,255,255,.4); font-weight: 600; }
+    .ros-stat-card { background: #fff; border: 1px solid var(--border-light); border-radius: 20px; padding: 36px 32px; display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; }
+    .ros-stat-num { font-family: var(--font-heading); font-size: 72px; font-weight: 900; letter-spacing: -4px; line-height: 1; color: var(--text-primary); }
+    .ros-stat-num sup { font-size: 32px; letter-spacing: 0; vertical-align: super; }
+    .ros-stat-label { font-size: 15px; color: var(--text-secondary); line-height: 1.5; margin-top: 12px; }
+    .ros-stat-source { font-size: 11px; color: var(--text-muted); margin-top: 16px; font-style: italic; }
+
+    /* ---- 6. OFFER CARDS ---- */
+    .ros-offer { background: #fff; padding: 96px 0; }
+    .ros-offer-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .ros-offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .ros-offer-card { border: 1px solid var(--border-light); border-radius: 20px; padding: 36px; background: var(--bg-main); }
+    .ros-offer-card.highlighted { background: var(--text-primary); border-color: transparent; }
+    .ros-offer-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 20px; }
+    .ros-offer-pill.free { background: rgba(185,255,102,.2); color: #2d7a00; }
+    .ros-offer-pill.advisory { background: var(--lime-primary); color: var(--text-primary); }
+    .ros-offer-title { font-family: var(--font-heading); font-size: 26px; font-weight: 900; letter-spacing: -.5px; margin-bottom: 10px; color: var(--text-primary); }
+    .ros-offer-card.highlighted .ros-offer-title { color: #fff; }
+    .ros-offer-tagline { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.6; font-style: italic; }
+    .ros-offer-card.highlighted .ros-offer-tagline { color: rgba(255,255,255,.55); }
+    .ros-offer-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+    .ros-offer-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+    .ros-offer-card.highlighted .ros-offer-list li { color: rgba(255,255,255,.65); }
+    .ros-offer-list li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--lime-primary); flex-shrink: 0; background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23111110' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; margin-top: 2px; }
+    .ros-offer-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; padding: 14px 28px; border-radius: 100px; text-decoration: none; transition: .2s; }
+    .ros-offer-cta.dark { background: var(--text-primary); color: #fff; }
+    .ros-offer-cta.dark:hover { background: #2a2a2a; }
+    .ros-offer-cta.lime { background: var(--lime-primary); color: var(--text-primary); }
+    .ros-offer-cta.lime:hover { background: var(--lime-hover); }
+    .ros-offer-cta svg { flex-shrink: 0; }
+    .ros-risk-reversal { text-align: center; margin-top: 28px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .ros-risk-reversal strong { color: var(--text-primary); }
+
+    /* ---- 7. VALUE GRID ---- */
+    .ros-value { background: var(--bg-main); padding: 96px 0; }
+    .ros-value-header { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .ros-value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .ros-value-card { background: #fff; border: 1px solid var(--border-light); border-radius: 16px; padding: 28px; transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .ros-value-card:hover { border-color: var(--lime-primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .ros-value-phase { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; padding: 3px 10px; border-radius: 100px; display: inline-block; }
+    .phase-r .ros-value-phase { background: #f0fff0; color: #2d8a2d; }
+    .phase-a .ros-value-phase { background: #eff6ff; color: #0057b8; }
+    .phase-i .ros-value-phase { background: #f5f3ff; color: #7c3aed; }
+    .phase-s .ros-value-phase { background: #fffbeb; color: #b76e00; }
+    .phase-e .ros-value-phase { background: #fff5f5; color: #c0392b; }
+    .phase-p .ros-value-phase { background: #f8f8f4; color: #585a61; border: 1px solid #e2e2dc; }
+    .ros-value-title { font-family: var(--font-heading); font-size: 20px; font-weight: 800; letter-spacing: -.4px; margin-bottom: 8px; color: var(--text-primary); }
+    .ros-value-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .ros-value-tool { margin-top: 14px; font-size: 12px; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+    .ros-value-tool::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--lime-primary); flex-shrink: 0; }
+
+    /* ---- 8. TEARDOWN STRIP ---- */
+    .ros-teardown { background: #fff; padding: 96px 0; }
+    .ros-teardown-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+    .ros-teardown-link { font-size: 14px; font-weight: 700; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 5px; border-bottom: 2px solid var(--lime-primary); padding-bottom: 1px; transition: opacity .2s; }
+    .ros-teardown-link:hover { opacity: .7; }
+    .ros-teardown-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .ros-teardown-card { border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; background: var(--bg-main); transition: transform .2s, border-color .2s, box-shadow .2s; }
+    .ros-teardown-card:hover { transform: translateY(-3px); border-color: var(--lime-primary); box-shadow: var(--shadow-md); }
+    .ros-teardown-score-bar { height: 4px; background: var(--border-light); }
+    .ros-teardown-score-bar-fill { height: 100%; border-radius: 0; }
+    .ros-teardown-body { padding: 22px; }
+    .ros-teardown-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .ros-teardown-issue { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); font-family: var(--font-mono); }
+    .ros-teardown-score { font-family: var(--font-heading); font-size: 22px; font-weight: 900; letter-spacing: -1px; }
+    .ros-teardown-name { font-family: var(--font-heading); font-size: 18px; font-weight: 800; letter-spacing: -.3px; margin-bottom: 4px; color: var(--text-primary); }
+    .ros-teardown-round { font-size: 12px; color: var(--text-muted); font-weight: 500; margin-bottom: 12px; }
+    .ros-teardown-verdict { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+    .ros-teardown-footer { padding: 14px 22px; border-top: 1px solid var(--border-light); }
+    .ros-teardown-read { font-size: 13px; font-weight: 700; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: gap .15s; }
+    .ros-teardown-card:hover .ros-teardown-read { gap: 8px; }
+    .ros-fill-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--text-muted); background: var(--bg-main); border: 1px dashed var(--border-medium); border-radius: 100px; padding: 4px 12px; }
+
+    /* ---- 9. FINAL CTA ---- */
+    .ros-final-cta { background: var(--text-primary); padding: 120px 0; text-align: center; position: relative; overflow: hidden; }
+    .ros-final-cta::before { content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(185,255,102,.14) 0%, transparent 65%); }
+    .ros-final-cta-inner { position: relative; max-width: 640px; margin: 0 auto; padding: 0 32px; }
+    .ros-final-cta h2 { font-family: var(--font-heading); font-size: clamp(36px, 5vw, 58px); font-weight: 900; letter-spacing: -2px; line-height: 1.02; color: #fff; margin-bottom: 18px; }
+    .ros-final-cta p { font-size: 17px; color: rgba(255,255,255,.55); line-height: 1.65; margin-bottom: 40px; }
+    .ros-final-cta-micro { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,.3); }
+
+    /* ---- 10. FOOTER ---- */
+    .ros-footer { background: var(--bg-dark); color: rgba(255,255,255,.55); padding: 56px 0 36px; border-top: 1px solid rgba(255,255,255,.06); }
+    .ros-footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .ros-footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.06); margin-bottom: 32px; }
+    .ros-footer-logo { font-family: var(--font-heading); font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -.5px; margin-bottom: 10px; }
+    .ros-footer-logo span { color: var(--lime-primary); }
+    .ros-footer-desc { font-size: 14px; line-height: 1.65; max-width: 360px; }
+    .ros-footer-capture h4 { font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; letter-spacing: -.2px; }
+    .ros-footer-capture p { font-size: 13px; margin-bottom: 14px; line-height: 1.5; }
+    .ros-footer-form { display: flex; gap: 8px; }
+    .ros-footer-input { flex: 1; padding: 11px 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; font-size: 13px; color: #fff; font-family: var(--font-body); outline: none; transition: border-color .2s; }
+    .ros-footer-input:focus { border-color: var(--lime-primary); }
+    .ros-footer-input::placeholder { color: rgba(255,255,255,.3); }
+    .ros-footer-submit { padding: 11px 20px; background: var(--lime-primary); color: var(--text-primary); border: none; border-radius: 100px; font-size: 13px; font-weight: 800; cursor: pointer; white-space: nowrap; font-family: var(--font-body); transition: background .2s; }
+    .ros-footer-submit:hover { background: var(--lime-hover); }
+    .ros-footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .ros-footer-copy { font-size: 12px; }
+    .ros-footer-links { display: flex; gap: 20px; }
+    .ros-footer-links a { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: none; transition: color .2s; }
+    .ros-footer-links a:hover { color: #fff; }
+    .ros-footer-socials { display: flex; gap: 12px; }
+    .ros-footer-social { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: rgba(255,255,255,.5); transition: background .2s, color .2s; }
+    .ros-footer-social:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 900px) {
+      .ros-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .ros-hero-visual { display: none; }
+      .ros-proof-cards { grid-template-columns: 1fr; }
+      .ros-offer-grid { grid-template-columns: 1fr; }
+      .ros-value-grid { grid-template-columns: repeat(2, 1fr); }
+      .ros-footer-top { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 640px) {
+      .ros-container { padding: 0 20px; }
+      .ros-section { padding: 64px 0; }
+      .ros-nav-links { display: none; }
+      .ros-nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-main); border-bottom: 1px solid var(--border-light); padding: 16px 24px 24px; gap: 4px; z-index: 100; box-shadow: var(--shadow-lg); }
+      .ros-mobile-toggle { display: flex; }
+      .ros-nota-grid { grid-template-columns: 1fr; }
+      .ros-value-grid { grid-template-columns: 1fr; }
+      .ros-teardown-grid { grid-template-columns: 1fr; }
+      .ros-teardown-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .ros-email-form { flex-direction: column; }
+      .ros-footer-bottom { flex-direction: column; align-items: flex-start; }
+      .ros-hero { padding: 64px 0 56px; }
+      .ros-proof-cards { grid-template-columns: 1fr; }
+      .ros-stat-num { font-size: 52px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Nav -->
-  <header class="site-header" id="site-header">
-    <div class="nav-container">
-      <a href="index.html" class="brand-logo" aria-label="Raise OS Home">
-        <span class="logo-text">Raise<span class="logo-period">.</span></span>
-      </a>
+<!-- ============================================================
+     1. NAV
+     ============================================================ -->
+<header class="ros-nav" id="ros-nav">
+  <div class="ros-nav-inner">
+    <a href="index.html" class="ros-logo">Raise OS<span>.</span></a>
 
-      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
-        <a href="raise-os.html" class="nav-link" style="font-weight:700">The OS</a>
-        <a href="deck-rating.html" class="nav-link nav-phase-r">R &#8212; Readiness</a>
-        <a href="index.html#services" class="nav-link nav-phase-a">A &#8212; Aim</a>
-        <a href="index.html#about" class="nav-link nav-phase-i">I &#8212; Ignite</a>
-        <a href="index.html#services" class="nav-link nav-phase-s">S &#8212; Sell</a>
-        <a href="index.html#articles" class="nav-link nav-phase-e">E &#8212; Endure</a>
-        <a href="index.html#pricing" class="nav-link">Pricing</a>
-      </nav>
+    <nav class="ros-nav-links" id="ros-nav-links" aria-label="Raise OS Navigation">
+      <a href="#system">The System</a>
+      <a href="#tools">Tools</a>
+      <a href="#teardowns">Teardowns</a>
+      <a href="#about">About</a>
+    </nav>
 
-      <div class="nav-actions">
-        <a href="deck-rating.html" class="btn btn-lime btn-sm" id="nav-cta-btn">
+    <a href="deck-rating.html" class="ros-nav-cta" id="ros-nav-cta">
+      Get Your Raise Score
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <button class="ros-mobile-toggle" id="ros-mobile-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+
+<!-- ============================================================
+     2. HERO
+     ============================================================ -->
+<section class="ros-hero" id="hero">
+  <div class="ros-hero-inner">
+
+    <div>
+      <div class="ros-hero-badge">
+        <span class="ros-hero-badge-dot"></span>
+        FOR PRE-SEED &amp; SEED FOUNDERS RAISING &pound;250K&ndash;&pound;5M
+      </div>
+
+      <h1 class="ros-hero-h1">
+        Real Product.<br>
+        Real Traction.<br>
+        <em>Still No Term Sheet.</em>
+      </h1>
+
+      <p class="ros-hero-sub">
+        Your product says it's working. Your inbox says "let's stay in touch."
+        More cold emails won't fix a broken narrative.
+        Raise OS is the 5-phase system that turns decks into term sheets.
+      </p>
+
+      <div class="ros-hero-cta-group">
+        <a href="deck-rating.html" class="ros-btn-lime-lg" id="hero-score-cta">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#111110" stroke-width="2"/><path d="M9 5v4l3 2" stroke="#111110" stroke-width="2" stroke-linecap="round"/></svg>
           Get Your Raise Score
-          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqaTZETf6eYT34lfN5NdBsaggOpPJmC0W0ARta4NWFErJAXg/viewform?usp=publish-editor" target="_blank" rel="noopener" class="ros-hero-secondary">
+          or book a free audit call
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="ros-proof-line">
+        <div class="ros-proof-avatars">
+          <span title="Mouad Dliaa">MD</span>
+          <span title="Marcus Vance — Raised &pound;1.4M" style="background:#1a3a2a;">MV</span>
+          <span title="Sarah K." style="background:#1a1a3a;">SK</span>
+          <span title="David P. — Raised &pound;2.1M" style="background:#3a1a1a;">DP</span>
+        </div>
+        <div class="ros-proof-text">
+          Trusted by <strong>70+ founders</strong> who raised <strong>&pound;12M+</strong> running this system
+        </div>
+      </div>
+
+      <div class="ros-logos" style="margin-top:32px;">
+        <span class="ros-logos-label">Founders accepted into</span>
+        <span class="ros-logo-item" style="display:inline-flex;align-items:center;gap:6px;">
+          <span class="ros-logo-yc">Y</span> Combinator
+        </span>
+        <span class="ros-logo-item">techstars_</span>
+        <span class="ros-logo-item" style="letter-spacing:.1em;">ANTLER</span>
+        <span class="ros-logo-item">seedcamp</span>
       </div>
     </div>
-  </header>
 
-  <main>
+    <!-- Score card visual -->
+    <div class="ros-hero-visual">
+      <div class="ros-score-card">
+        <div class="ros-score-card-label">YOUR RAISE SCORE</div>
+        <div class="ros-score-big">74<span>/100</span></div>
+        <div class="ros-score-grade">Needs Work</div>
+        <div class="ros-score-sub">3 critical gaps found before your investor did.</div>
 
-    <!-- Hero -->
-    <section class="os-hero">
-      <div class="pill-badge">
-        <span class="pill-pulse"></span>
-        <span class="pill-text">THE RAISE OPERATING SYSTEM</span>
+        <div class="ros-score-bars">
+          <div class="ros-score-row">
+            <div class="ros-score-row-label">Problem</div>
+            <div class="ros-score-bar-bg"><div class="ros-score-bar-fill" style="width:88%;background:#B9FF66;"></div></div>
+            <div class="ros-score-row-num" style="color:#B9FF66;">88</div>
+          </div>
+          <div class="ros-score-row">
+            <div class="ros-score-row-label">Solution</div>
+            <div class="ros-score-bar-bg"><div class="ros-score-bar-fill" style="width:80%;background:#B9FF66;"></div></div>
+            <div class="ros-score-row-num" style="color:#B9FF66;">80</div>
+          </div>
+          <div class="ros-score-row">
+            <div class="ros-score-row-label">Market</div>
+            <div class="ros-score-bar-bg"><div class="ros-score-bar-fill" style="width:62%;background:#FFA940;"></div></div>
+            <div class="ros-score-row-num" style="color:#FFA940;">62</div>
+          </div>
+          <div class="ros-score-row">
+            <div class="ros-score-row-label">Traction</div>
+            <div class="ros-score-bar-bg"><div class="ros-score-bar-fill" style="width:45%;background:#FFA940;"></div></div>
+            <div class="ros-score-row-num" style="color:#FFA940;">45</div>
+          </div>
+          <div class="ros-score-row">
+            <div class="ros-score-row-label">The Ask</div>
+            <div class="ros-score-bar-bg"><div class="ros-score-bar-fill" style="width:22%;background:#FF5C5C;"></div></div>
+            <div class="ros-score-row-num" style="color:#FF5C5C;">22</div>
+          </div>
+        </div>
+
+        <a href="deck-rating.html" class="ros-score-cta-btn">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#111110" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Score your deck free
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     3. NOT-A POSITIONING
+     ============================================================ -->
+<section class="ros-nota" id="system">
+  <div class="ros-container">
+    <div class="ros-nota-header">
+      <div class="ros-eyebrow">THE RAISE OS DIFFERENCE</div>
+      <h2 class="ros-h2">Not a Course.<br>Not a Template. Not Guesswork.</h2>
+      <p class="ros-nota-sub">Raise OS installs the 5-phase system that takes you from unknown founder to oversubscribed round.</p>
+    </div>
+
+    <div class="ros-nota-grid">
+      <div class="ros-nota-card">
+        <div class="ros-nota-num">01</div>
+        <div class="ros-nota-title">Not a Course</div>
+        <p class="ros-nota-body">Fundraising advice is free and everywhere. Founders don't fail from lack of tips. They fail from running no system. Raise OS is the system, not the theory.</p>
+      </div>
+      <div class="ros-nota-card">
+        <div class="ros-nota-num">02</div>
+        <div class="ros-nota-title">Not a Template</div>
+        <p class="ros-nota-body">Cookie-cutter decks earn cookie-cutter passes. Your narrative is rebuilt around your unfair advantage, not a slide layout. Pattern-matched from 200+ deck teardowns.</p>
+      </div>
+      <div class="ros-nota-card">
+        <div class="ros-nota-num">03</div>
+        <div class="ros-nota-title">Not an Agency</div>
+        <p class="ros-nota-body">Agencies keep the thinking and hand you the slides. We install the system with you, so your team can run it after we're gone. You own the playbook.</p>
+      </div>
+      <div class="ros-nota-card" style="border-color:var(--lime-primary);background:#f8fff0;">
+        <div class="ros-nota-num" style="color:#2d7a00;">04</div>
+        <div class="ros-nota-title">Step-by-step guidance</div>
+        <p class="ros-nota-body">Readiness, Aim, Ignite, Sell, Execute. One phase at a time, measured at every step, until the round is closed. Every step has a tool. Every tool has a metric.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     4. EMAIL CAPTURE BAND
+     ============================================================ -->
+<section class="ros-email-band" id="briefing">
+  <div class="ros-email-inner">
+    <h3 class="ros-email-h3">Get the weekly Raise OS briefing.</h3>
+    <p class="ros-email-sub">One deck teardown, one fundraising framework, one investor insight. Every Thursday. Read by pre-seed and seed founders.</p>
+
+    <form class="ros-email-form" id="briefing-form" onsubmit="handleBriefingSignup(event)">
+      <input type="email" class="ros-email-input" placeholder="you@startup.com" required aria-label="Email address" id="briefing-email">
+      <button type="submit" class="ros-email-btn">Get the briefing</button>
+    </form>
+
+    <div class="ros-email-fine">Free. Unsubscribe anytime. Your deck stays confidential.</div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     5. PROOF
+     ============================================================ -->
+<section class="ros-proof" id="proof">
+  <div class="ros-container">
+    <div class="ros-proof-header">
+      <div class="ros-eyebrow">FOUNDER RESULTS</div>
+      <h2 class="ros-h2">What founders are saying:</h2>
+    </div>
+
+    <div class="ros-proof-cards">
+
+      <!-- NovaHealth case study -->
+      <div class="ros-case-card">
+        <div class="ros-case-tag">CASE STUDY &mdash; HEALTHTECH</div>
+        <div class="ros-case-company">NovaHealth</div>
+        <div class="ros-case-round">&pound;1.4M Seed &mdash; closed in 19 days from first meeting</div>
+
+        <div class="ros-case-stat-row">
+          <div class="ros-case-stat">
+            <div class="ros-case-stat-num">4%</div>
+            <div class="ros-case-stat-label">Call #2 rate before Raise OS</div>
+          </div>
+          <div class="ros-case-stat">
+            <div class="ros-case-stat-num">45%</div>
+            <div class="ros-case-stat-label">Call #2 rate after rebuild</div>
+          </div>
+        </div>
+
+        <p class="ros-case-quote">"Mouad completely transformed how VCs saw our business. We went from polite non-answers to two oversubscribed term sheets in three weeks."</p>
+        <div class="ros-case-attr">Marcus Vance, CEO &mdash; NovaHealth</div>
       </div>
 
-      <h1>Install the System.<br><em>Raise the Round.</em></h1>
+      <!-- Stat card -->
+      <div class="ros-stat-card" id="tools">
+        <div>
+          <div class="ros-stat-num">94<sup>%</sup></div>
+          <p class="ros-stat-label">of founders who work with RAISE secure 2x or more investor follow-up meetings after a rebuild.</p>
+        </div>
+        <div class="ros-stat-source">Post-rebuild founder surveys. Sample: 70+ founders.</div>
+      </div>
 
-      <p class="os-hero-sub">
-        Most founders fundraise on chaos: a bloated deck, 500 cold emails, polite passes they cannot decode.
-        Raise OS replaces chaos with five phases. Each phase has a tool, a metric, and a proven playbook.
-        The villain it defeats: <strong>spray-and-pray fundraising</strong>.
-      </p>
+    </div>
+  </div>
+</section>
 
-      <a href="deck-rating.html" class="os-score-hook">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#111110" stroke-width="2"/><path d="M9 5v4l3 2" stroke="#111110" stroke-width="2" stroke-linecap="round"/></svg>
-        What's Your Raise Score?
+
+<!-- ============================================================
+     6. OFFER CARDS
+     ============================================================ -->
+<section class="ros-offer" id="offer">
+  <div class="ros-container">
+    <div class="ros-offer-header">
+      <div class="ros-eyebrow">HOW TO WORK WITH US</div>
+      <h2 class="ros-h2">No fluff. Just the system, the tools, and the support.</h2>
+    </div>
+
+    <div class="ros-offer-grid">
+
+      <!-- Free tier -->
+      <div class="ros-offer-card">
+        <div class="ros-offer-pill free">Raise OS Free</div>
+        <div class="ros-offer-title">Install the system yourself.</div>
+        <p class="ros-offer-tagline">"Know your number before any investor does."</p>
+        <ul class="ros-offer-list">
+          <li>Deck Rater &mdash; full free report, no paywall</li>
+          <li>Raise Readiness Score (coming)</li>
+          <li>Investor Matcher (coming)</li>
+          <li>Teardown library &mdash; read every case study</li>
+          <li>Weekly Raise OS briefing on Substack</li>
+        </ul>
+        <a href="deck-rating.html" class="ros-offer-cta dark">
+          Start free
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Advisory tier -->
+      <div class="ros-offer-card highlighted">
+        <div class="ros-offer-pill advisory">Raise OS Advisory</div>
+        <div class="ros-offer-title" style="color:#fff;">We install it with you, 1-on-1.</div>
+        <p class="ros-offer-tagline">"Mouad works directly on your raise, not around it."</p>
+        <ul class="ros-offer-list">
+          <li>Free 15-min audit &mdash; diagnose the gaps first</li>
+          <li>&pound;250 Full deck audit &mdash; slide-by-slide verdict</li>
+          <li>&pound;1,500 Deck rebuild &mdash; narrative rebuilt from scratch</li>
+          <li>&pound;3,500 Advisory &mdash; full OS installed, round to close</li>
+          <li>Priority access &mdash; limited spots per month</li>
+        </ul>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqaTZETf6eYT34lfN5NdBsaggOpPJmC0W0ARta4NWFErJAXg/viewform?usp=publish-editor" target="_blank" rel="noopener" class="ros-offer-cta lime">
+          Book a call
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#111110" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+
+    <p class="ros-risk-reversal">
+      <strong>100% risk reversal:</strong> If after your audit you don't believe the rebuild is worth 10x the fee, you pay nothing. No contracts. No small print.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     7. VALUE GRID — The 5 phases
+     ============================================================ -->
+<section class="ros-value" id="phases">
+  <div class="ros-container">
+    <div class="ros-value-header">
+      <div class="ros-eyebrow">THE SYSTEM</div>
+      <h2 class="ros-h2">Install the system.<br>Raise the round.</h2>
+    </div>
+
+    <div class="ros-value-grid">
+
+      <div class="ros-value-card phase-r">
+        <div class="ros-value-phase">R &mdash; Readiness</div>
+        <div class="ros-value-title">Score your deck before investors do.</div>
+        <p class="ros-value-body">Know exactly what partners will attack before the first meeting. The Deck Rater diagnoses your deck against 200+ reviewed decks and gives you a Raise Score from 0 to 100.</p>
+        <div class="ros-value-tool">Tool: Deck Rater (free)</div>
+      </div>
+
+      <div class="ros-value-card phase-a">
+        <div class="ros-value-phase">A &mdash; Aim</div>
+        <div class="ros-value-title">50 right investors. Not 500 wrong inboxes.</div>
+        <p class="ros-value-body">Every investor on your list should be thesis-fit for your sector, stage, and geography. The Investor Matcher builds a tiered target list. Volume is the villain.</p>
+        <div class="ros-value-tool">Tool: Investor Matcher (coming)</div>
+      </div>
+
+      <div class="ros-value-card phase-i">
+        <div class="ros-value-phase">I &mdash; Ignite</div>
+        <div class="ros-value-title">Outreach sequences and warm intros that convert.</div>
+        <p class="ros-value-body">Half of all partner meetings come from one warm intro nobody sends correctly. The Warm Intro Tracker shows who owes you an intro and when to nudge them.</p>
+        <div class="ros-value-tool">Tool: Warm Intro Tracker (coming)</div>
+      </div>
+
+      <div class="ros-value-card phase-s">
+        <div class="ros-value-phase">S &mdash; Sell</div>
+        <div class="ros-value-title">Objection handling that wins the partner meeting.</div>
+        <p class="ros-value-body">The Objection Battle Cards give you model answers to the 20 questions partners actually ask: "Why won't Google build this?", "Why now?", "What's your moat?"</p>
+        <div class="ros-value-tool">Tool: Objection Battle Cards (coming)</div>
+      </div>
+
+      <div class="ros-value-card phase-e">
+        <div class="ros-value-phase">E &mdash; Execute</div>
+        <div class="ros-value-title">Investor updates and FOMO sprints that close oversubscribed.</div>
+        <p class="ros-value-body">The weekly Raise Sprint is the operating cadence that keeps momentum compounding. Monday: refresh list. Wednesday: outreach batch. Friday: follow-ups and update.</p>
+        <div class="ros-value-tool">Tool: Raise Sprint Tracker (coming)</div>
+      </div>
+
+      <div class="ros-value-card phase-p">
+        <div class="ros-value-phase">Pattern Recognition</div>
+        <div class="ros-value-title">Built from 200+ teardowns and &pound;12M+ closed.</div>
+        <p class="ros-value-body">Every insight in Raise OS comes from live deal data, not fundraising theory. The teardown library is the closest thing to a pattern database for pre-seed decks that exists publicly.</p>
+        <div class="ros-value-tool">Read: Teardown Library</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     8. TEARDOWN STRIP
+     ============================================================ -->
+<section class="ros-teardown" id="teardowns">
+  <div class="ros-container">
+    <div class="ros-teardown-header">
+      <div>
+        <div class="ros-eyebrow">TEARDOWN LIBRARY</div>
+        <h2 class="ros-h2">Fresh from the teardown library.</h2>
+      </div>
+      <a href="index.html#articles" class="ros-teardown-link">
+        Browse all teardowns
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-    </section>
-
-    <!-- Villain Banner -->
-    <div style="max-width:800px;margin:0 auto 48px;padding:0 24px;">
-      <div class="villain-banner">
-        <div class="villain-label">The Villain</div>
-        <div class="villain-headline">Spray-and-pray fundraising kills more<br>startups than a bad product ever could.</div>
-        <div class="villain-sub">500 cold emails. No warm intros. A deck that was never built to convert. The traction paradox: "come back when you have traction" from the investors you need to get traction. Raise OS is the answer.</div>
-      </div>
     </div>
 
-    <!-- The Five Phases -->
-    <section class="os-phases-section">
-      <div class="os-phases-header">
-        <span class="section-tag">THE SYSTEM</span>
-        <h2>Five Phases. One Round. Zero Chaos.</h2>
-      </div>
+    <div class="ros-teardown-grid">
 
-      <div class="os-phases-card">
-        <!-- Phase R -->
-        <div class="os-phase-block" style="padding:32px 36px 32px;">
-          <div class="os-phase-letter r">R</div>
-          <div>
-            <div class="os-phase-name">Phase R</div>
-            <div class="os-phase-promise">Readiness</div>
-            <p class="os-phase-desc">Walk in knowing exactly what partners will attack before they attack it. Your deck, narrative, and positioning are diagnosed against 200+ reviewed decks. No more surprises in the partner meeting.</p>
-            <div class="os-phase-metric">Key metric: Raise Score 0&#8211;100</div>
-            <div style="margin-top:16px;">
-              <a href="deck-rating.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#2d8a2d;text-decoration:none;">
-                Get Your Raise Score
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#2d8a2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
+      <!-- Teardown #1 — NovaHealth (real case) -->
+      <div class="ros-teardown-card">
+        <div class="ros-teardown-score-bar">
+          <div class="ros-teardown-score-bar-fill" style="width:72%;background:#FFA940;"></div>
+        </div>
+        <div class="ros-teardown-body">
+          <div class="ros-teardown-meta">
+            <div class="ros-teardown-issue">Raise OS Teardown #1</div>
+            <div class="ros-teardown-score" style="color:#FFA940;">72</div>
           </div>
+          <div class="ros-teardown-name">NovaHealth</div>
+          <div class="ros-teardown-round">HealthTech &mdash; &pound;1.4M Seed</div>
+          <p class="ros-teardown-verdict">Strong problem and team. Ask slide had no use of funds breakdown. Market sourcing cost credibility. Three targeted fixes later: two term sheets in 19 days.</p>
         </div>
-
-        <!-- Phase A -->
-        <div class="os-phase-block" style="padding:32px 36px 32px;">
-          <div class="os-phase-letter a">A</div>
-          <div>
-            <div class="os-phase-name">Phase A</div>
-            <div class="os-phase-promise">Aim</div>
-            <p class="os-phase-desc">50 right investors beat 500 wrong inboxes. Every time. Raise OS builds you a tiered target list of investors who actually fund pre-traction pre-seed in your sector and geography. Thesis-fit is the only metric that matters here.</p>
-            <div class="os-phase-metric">Key metric: % target list thesis-fit (aim: 100%)</div>
-          </div>
-        </div>
-
-        <!-- Phase I -->
-        <div class="os-phase-block" style="padding:32px 36px 32px;">
-          <div class="os-phase-letter i">I</div>
-          <div>
-            <div class="os-phase-name">Phase I</div>
-            <div class="os-phase-promise">Ignite</div>
-            <p class="os-phase-desc">Outreach as a system, not a hope. The Warm Intro Tracker shows who owes you an intro and to whom. The outreach sequencer turns cold to warm. Half of all partner meetings come from one email nobody sends correctly.</p>
-            <div class="os-phase-metric">Key metric: reply rate and meetings booked per 50 outreaches</div>
-          </div>
-        </div>
-
-        <!-- Phase S -->
-        <div class="os-phase-block" style="padding:32px 36px 32px;">
-          <div class="os-phase-letter s">S</div>
-          <div>
-            <div class="os-phase-name">Phase S</div>
-            <div class="os-phase-promise">Sell</div>
-            <p class="os-phase-desc">Command the partner meeting from minute zero. The Objection Battle Cards give you model answers to the 20 questions partners actually ask: "Why won't Google build this?", "Why now?", "What's your moat?" The narrative method turns a pitch into a story they repeat to their partners.</p>
-            <div class="os-phase-metric">Key metric: meeting-to-partner-meeting conversion rate</div>
-          </div>
-        </div>
-
-        <!-- Phase E -->
-        <div class="os-phase-block" style="padding:32px 36px 32px;border-bottom:none;">
-          <div class="os-phase-letter e">E</div>
-          <div>
-            <div class="os-phase-name">Phase E</div>
-            <div class="os-phase-promise">Endure</div>
-            <p class="os-phase-desc">Manufacture FOMO until the round is oversubscribed. The Raise Sprint is the weekly operating cadence: Monday refresh target list, Wednesday outreach batch, Friday follow-ups and investor update. Momentum compounds. Chaos doesn't.</p>
-            <div class="os-phase-metric">Key metric: weeks from first meeting to term sheet</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- The Flywheel -->
-    <section class="os-flywheel-section">
-      <div class="os-phases-header">
-        <span class="section-tag">THE FLYWHEEL</span>
-        <h2>Every Step Is Measurable. Every Step Compounds.</h2>
-      </div>
-      <div class="flywheel-steps">
-        <div class="flywheel-step">
-          <div class="flywheel-arrow">1</div>
-          <div class="flywheel-text"><strong>Get your Raise Score</strong> on the Deck Rater. Know your number before any investor does.</div>
-        </div>
-        <div class="flywheel-step">
-          <div class="flywheel-arrow">2</div>
-          <div class="flywheel-text"><strong>Build your 50-not-500 list.</strong> Thesis-fit over volume. The Investor Matcher guides the targeting.</div>
-        </div>
-        <div class="flywheel-step">
-          <div class="flywheel-arrow">3</div>
-          <div class="flywheel-text"><strong>Ignite with warm intros.</strong> The Warm Intro Tracker shows who owes you an intro. One warm intro outperforms 20 cold emails.</div>
-        </div>
-        <div class="flywheel-step">
-          <div class="flywheel-arrow">4</div>
-          <div class="flywheel-text"><strong>Sell the narrative, not the deck.</strong> Battle cards and the AI pitch coach prepare you for every objection a partner will throw.</div>
-        </div>
-        <div class="flywheel-step">
-          <div class="flywheel-arrow">5</div>
-          <div class="flywheel-text"><strong>Endure with weekly Raise Sprints.</strong> Update emails keep investors warm. Momentum creates FOMO. FOMO creates term sheets.</div>
-        </div>
-        <div class="flywheel-step" style="border-bottom:none;">
-          <div class="flywheel-arrow" style="color:#B9FF66;font-size:18px;">&#8599;</div>
-          <div class="flywheel-text"><strong>Close oversubscribed.</strong> The Term Sheet Decoder explains every clause in plain English. You sign from strength, not confusion.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Proof -->
-    <section class="os-proof-section">
-      <div class="os-phases-header">
-        <span class="section-tag">THE PROOF</span>
-        <h2>The System Has a Track Record.</h2>
-      </div>
-      <div class="proof-stats">
-        <div class="proof-stat">
-          <div class="proof-stat-num">70<span>+</span></div>
-          <div class="proof-stat-label">Founders who ran the OS</div>
-        </div>
-        <div class="proof-stat">
-          <div class="proof-stat-num">&pound;12<span>M+</span></div>
-          <div class="proof-stat-label">Raised from top VCs</div>
-        </div>
-        <div class="proof-stat">
-          <div class="proof-stat-num">200<span>+</span></div>
-          <div class="proof-stat-label">Decks torn down and rebuilt</div>
-        </div>
-      </div>
-      <p style="margin-top:24px;font-size:14px;color:var(--text-muted);text-align:center;line-height:1.6;">
-        NovaHealth raised £1.8M at 3 weeks from first meeting to term sheet after installing the Raise OS Readiness phase. Read the full teardown in the <a href="index.html#articles" style="color:var(--text-primary);font-weight:600;text-decoration:underline;">Articles and Teardowns</a> section.
-      </p>
-    </section>
-
-    <!-- CTA -->
-    <section class="os-cta-section">
-      <div class="os-cta-box">
-        <h2>What's Your Raise Score?</h2>
-        <p>Every founder using Raise OS starts here. Upload your deck. Get your score. Know your gaps before any investor does. Free. No sign-up.</p>
-        <div class="os-cta-row">
-          <a href="deck-rating.html" class="os-btn-lime">
-            Get My Raise Score (Free)
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqaTZETf6eYT34lfN5NdBsaggOpPJmC0W0ARta4NWFErJAXg/viewform?usp=publish-editor" target="_blank" rel="noopener" class="os-btn-ghost">
-            Book Free Audit Call
+        <div class="ros-teardown-footer">
+          <a href="index.html#articles" class="ros-teardown-read">
+            Read teardown
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
       </div>
-    </section>
 
-  </main>
+      <!-- Teardown #2 — FILL -->
+      <div class="ros-teardown-card" style="opacity:.65;">
+        <div class="ros-teardown-score-bar">
+          <div class="ros-teardown-score-bar-fill" style="width:0;background:#ddd;"></div>
+        </div>
+        <div class="ros-teardown-body">
+          <div class="ros-teardown-meta">
+            <div class="ros-teardown-issue">Raise OS Teardown #2</div>
+            <span class="ros-fill-tag">Coming soon</span>
+          </div>
+          <div class="ros-teardown-name" style="color:var(--text-muted);">Next teardown</div>
+          <div class="ros-teardown-round">Publishing Thursday</div>
+          <p class="ros-teardown-verdict" style="color:var(--text-muted);">Every Thursday, one real deck. Full score breakdown, issue list, and the exact fixes that moved the round forward.</p>
+        </div>
+        <div class="ros-teardown-footer">
+          <a href="https://substack.com/@raiseos" target="_blank" rel="noopener" class="ros-teardown-read" style="color:var(--text-muted);">
+            Subscribe to get it first
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
 
-  <script src="script.js"></script>
+      <!-- Teardown #3 — FILL -->
+      <div class="ros-teardown-card" style="opacity:.65;">
+        <div class="ros-teardown-score-bar">
+          <div class="ros-teardown-score-bar-fill" style="width:0;background:#ddd;"></div>
+        </div>
+        <div class="ros-teardown-body">
+          <div class="ros-teardown-meta">
+            <div class="ros-teardown-issue">Raise OS Teardown #3</div>
+            <span class="ros-fill-tag">Coming soon</span>
+          </div>
+          <div class="ros-teardown-name" style="color:var(--text-muted);">Next teardown</div>
+          <div class="ros-teardown-round">Publishing Thursday</div>
+          <p class="ros-teardown-verdict" style="color:var(--text-muted);">Real decks. Real scores. Real fixes. No invented case studies, no theory. Just pattern recognition from 200+ reviews.</p>
+        </div>
+        <div class="ros-teardown-footer">
+          <a href="https://substack.com/@raiseos" target="_blank" rel="noopener" class="ros-teardown-read" style="color:var(--text-muted);">
+            Subscribe to get it first
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     9. FINAL CTA
+     ============================================================ -->
+<section class="ros-final-cta" id="about">
+  <div class="ros-final-cta-inner">
+    <div class="ros-eyebrow" style="color:rgba(255,255,255,.3);justify-content:center;">
+      <span style="background:var(--lime-primary);"></span>
+      JOIN THE SYSTEM
+    </div>
+    <h2>Join founders raising the systematic way.</h2>
+    <p>Free. 2 minutes. Know exactly where your raise stands before any investor does.</p>
+    <a href="deck-rating.html" class="ros-btn-lime-lg" id="final-cta-btn" style="margin:0 auto;">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#111110" stroke-width="2"/><path d="M9 5v4l3 2" stroke="#111110" stroke-width="2" stroke-linecap="round"/></svg>
+      Get Your Raise Score
+    </a>
+    <div class="ros-final-cta-micro">Free. 2 minutes. Know exactly where your raise stands.</div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     10. FOOTER
+     ============================================================ -->
+<footer class="ros-footer">
+  <div class="ros-footer-inner">
+    <div class="ros-footer-top">
+
+      <div>
+        <div class="ros-footer-logo">RAISE OS<span>.</span></div>
+        <p class="ros-footer-desc">The 5-phase operating system for pre-seed and seed founders. Readiness, Aim, Ignite, Sell, Execute. No theory. No templates. No spray and pray.</p>
+        <div class="ros-footer-socials" style="margin-top:20px;">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="ros-footer-social" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/></svg>
+          </a>
+          <a href="https://substack.com/@raiseos" target="_blank" rel="noopener" class="ros-footer-social" aria-label="Substack">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="ros-footer-capture">
+        <h4>Get the weekly Raise OS briefing.</h4>
+        <p>One teardown. One framework. One insight. Every Thursday.</p>
+        <form class="ros-footer-form" onsubmit="handleFooterSignup(event)">
+          <input type="email" class="ros-footer-input" placeholder="you@startup.com" required aria-label="Email for briefing" id="footer-email">
+          <button type="submit" class="ros-footer-submit">Subscribe</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="ros-footer-bottom">
+      <div class="ros-footer-copy">&copy; 2026 Raise OS. All rights reserved.</div>
+      <div class="ros-footer-links">
+        <a href="mailto:mouad@raiseos.site">Contact</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Mobile nav toggle
+  var mobileToggle = document.getElementById('ros-mobile-toggle');
+  var navLinks = document.getElementById('ros-nav-links');
+  mobileToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+  });
+
+  // Nav scroll shadow
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('ros-nav');
+    if (window.scrollY > 10) {
+      nav.style.boxShadow = '0 4px 24px -6px rgba(0,0,0,.08)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // Email capture - briefing form
+  function handleBriefingSignup(e) {
+    e.preventDefault();
+    var email = document.getElementById('briefing-email').value.trim();
+    var btn = e.target.querySelector('button');
+    btn.textContent = 'Redirecting...';
+    // Redirect to Substack for actual subscription
+    setTimeout(function() {
+      window.open('https://substack.com/@raiseos', '_blank');
+      btn.textContent = 'Get the briefing';
+      e.target.reset();
+    }, 600);
+  }
+
+  // Footer email capture
+  function handleFooterSignup(e) {
+    e.preventDefault();
+    var btn = e.target.querySelector('button');
+    btn.textContent = 'Subscribing...';
+    setTimeout(function() {
+      window.open('https://substack.com/@raiseos', '_blank');
+      btn.textContent = 'Subscribe';
+      e.target.reset();
+    }, 600);
+  }
+
+  // Animate score bars on intersection
+  var scoreBarsFired = false;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !scoreBarsFired) {
+        scoreBarsFired = true;
+        document.querySelectorAll('.ros-score-bar-fill').forEach(function(bar) {
+          var targetW = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(function() { bar.style.transition = 'width 1.2s cubic-bezier(.4,0,.2,1)'; bar.style.width = targetW; }, 200);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  var scoreCard = document.querySelector('.ros-score-card');
+  if (scoreCard) obs.observe(scoreCard);
+</script>
+
 </body>
 </html>
