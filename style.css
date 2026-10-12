@@ -1642,7 +1642,7 @@ p {
   .hero-title { font-size: clamp(1.9rem, 5.5vw, 2.8rem); letter-spacing: -0.03em; }
   .hero-subtitle { font-size: 1rem; }
   .hero-cta-group { flex-direction: row; flex-wrap: wrap; gap: 10px; width: 100%; justify-content: center; }
-  .hero-cta-group .btn { width: auto; flex: 1 1 0; justify-content: center; white-space: nowrap; }
+  .hero-cta-group .btn { width: auto; flex: 0 1 auto; justify-content: center; white-space: nowrap; }
   .hero-trust-line { flex-direction: column; text-align: center; gap: 10px; margin-bottom: 44px; }
 
   /* Grids */
