@@ -124,6 +124,7 @@
       <nav class="pipe-nav-links" aria-label="Main Navigation">
         <a href="deck-rating.html">Raise Score</a>
         <a href="investors.html" class="active">Investors</a>
+        <a href="program.html">Program</a>
         <a href="index.html#pricing">Pricing</a>
       </nav>
       <a href="deck-rating.html" class="btn btn-lime btn-sm">Get Raise Score</a>
@@ -313,8 +314,7 @@ var ACCESS_CODE = 'Raise100';
       if (inv.linkedin) links += '<a class="inv-link" href="' + esc(inv.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>';
       return '<div class="inv-card">' +
         '<div class="inv-card-top"><h3>' + esc(inv.fund) + '</h3>' +
-        '<span style="display:flex;gap:6px;flex-shrink:0;">' +
-        (inv.type === 'accelerator' ? '<span class="inv-region" style="background:#B9FF66;color:#111110;">Accelerator</span>' : '') +
+        '<span style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;">' +
         (inv.stage ? '<span class="inv-region" style="background:#111110;color:#fff;">' + esc(inv.stage) + '</span>' : '') +
         '<span class="inv-region">' + esc(inv.region) + '</span></span></div>' +
         '<div class="inv-hq">' + esc(inv.hq) + '</div>' +
