@@ -1873,3 +1873,34 @@ p {
   .os-phase-block { grid-template-columns: 1fr; gap: 14px 0; }
   .villain-banner { padding: 32px 24px; }
 }
+
+/* ---------- Floating booking widget ---------- */
+.book-widget { position: fixed; right: 24px; bottom: 24px; z-index: 900; font-family: 'Plus Jakarta Sans', sans-serif; }
+.book-bubble { width: 62px; height: 62px; border-radius: 50%; border: 3px solid #B9FF66; padding: 0; overflow: hidden; cursor: pointer; background: #111110; box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: transform .2s; }
+.book-bubble:hover { transform: scale(1.06); }
+.book-bubble img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.book-bubble.hidden { display: none; }
+.book-card { display: none; width: 320px; max-width: calc(100vw - 48px); background: #fff; border-radius: 18px; box-shadow: 0 24px 60px rgba(0,0,0,.28); padding: 22px 20px 14px; position: relative; animation: bookPop .25s ease-out; }
+.book-card.open { display: block; }
+@keyframes bookPop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+.book-close { position: absolute; top: 8px; right: 12px; background: none; border: none; font-size: 22px; color: #848792; cursor: pointer; line-height: 1; padding: 4px; }
+.book-close:hover { color: #111110; }
+.book-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.book-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid #B9FF66; }
+.book-name { font-weight: 800; font-size: 16px; color: #111110; }
+.book-role { font-size: 13px; color: #6B6B6B; }
+.book-title { font-weight: 800; font-size: 17px; color: #111110; margin-bottom: 6px; }
+.book-desc { font-size: 13.5px; color: #585A61; line-height: 1.55; margin: 0 0 14px; }
+.book-days { display: flex; gap: 8px; margin-bottom: 14px; }
+.book-day { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px; border: 1.5px solid #E2E2DC; border-radius: 10px; background: #fff; cursor: pointer; font-family: inherit; transition: border-color .15s, background .15s; }
+.book-day span { font-size: 11px; font-weight: 600; color: #6B6B6B; }
+.book-day strong { font-size: 15px; font-weight: 800; color: #111110; }
+.book-day:hover { border-color: #B9FF66; }
+.book-day.selected { border-color: #B9FF66; background: #F4FFDF; }
+.book-day.selected span, .book-day.selected strong { color: #111110; }
+.book-schedule { width: 100%; justify-content: center; border-radius: 12px; padding: 13px; font-size: 15px; }
+.book-powered { text-align: center; font-size: 11px; color: #A3A6B4; margin-top: 10px; }
+@media (max-width: 600px) {
+  .book-widget { right: 16px; bottom: 16px; }
+  .book-card { width: 300px; }
+}
