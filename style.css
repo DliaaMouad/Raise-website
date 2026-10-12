@@ -1786,3 +1786,90 @@ p {
   /* Accelerator strip */
   .accelerator-strip { padding-top: 20px; }
 }
+
+/* ==========================================================================
+   RAISE OS — Phase Navigation Styles
+   ========================================================================== */
+
+/* Phase nav links — subtle tinted labels for R-A-I-S-E phases */
+.nav-phase-r { color: #2d8a2d; }
+.nav-phase-a { color: #0057b8; }
+.nav-phase-i { color: #7c3aed; }
+.nav-phase-s { color: #b76e00; }
+.nav-phase-e { color: #c0392b; }
+
+.nav-phase-r:hover, .nav-phase-a:hover, .nav-phase-i:hover,
+.nav-phase-s:hover, .nav-phase-e:hover {
+  color: var(--text-primary) !important;
+}
+
+/* Phase badge — appears on tool pages */
+.phase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 10px;
+  border-radius: 100px;
+  border: 1px solid;
+  margin-bottom: 20px;
+}
+.phase-badge-r { background: #f0fff0; color: #2d8a2d; border-color: #b3f0b3; }
+.phase-badge-a { background: #eff6ff; color: #0057b8; border-color: #bfdbfe; }
+.phase-badge-i { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+.phase-badge-s { background: #fffbeb; color: #b76e00; border-color: #fde68a; }
+.phase-badge-e { background: #fff5f5; color: #c0392b; border-color: #fecaca; }
+
+/* OS manifesto page — phase block cards */
+.os-phase-block {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0 24px;
+  align-items: start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.os-phase-block:last-child { border-bottom: none; }
+.os-phase-letter {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  flex-shrink: 0;
+}
+.os-phase-letter.r { background: #f0fff0; color: #2d8a2d; }
+.os-phase-letter.a { background: #eff6ff; color: #0057b8; }
+.os-phase-letter.i { background: #f5f3ff; color: #7c3aed; }
+.os-phase-letter.s { background: #fffbeb; color: #b76e00; }
+.os-phase-letter.e { background: #fff5f5; color: #c0392b; }
+.os-phase-name { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; color: var(--text-muted); }
+.os-phase-promise { font-size: 20px; font-weight: 800; font-family: var(--font-heading); letter-spacing: -.3px; margin-bottom: 10px; color: var(--text-primary); }
+.os-phase-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.65; }
+.os-phase-metric { margin-top: 12px; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: var(--text-muted); background: var(--bg-card-subtle); padding: 5px 12px; border-radius: 100px; }
+.os-phase-metric::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--lime-primary); flex-shrink: 0; }
+
+/* OS villain banner */
+.villain-banner {
+  background: var(--bg-dark);
+  color: var(--text-inverted);
+  border-radius: var(--radius-xl);
+  padding: 40px 48px;
+  text-align: center;
+  margin: 48px 0;
+}
+.villain-banner .villain-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--lime-primary); margin-bottom: 12px; }
+.villain-banner .villain-headline { font-size: clamp(22px, 3.5vw, 32px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -.5px; line-height: 1.2; }
+.villain-banner .villain-sub { font-size: 16px; color: var(--text-inverted-muted); margin-top: 10px; line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .os-phase-block { grid-template-columns: 1fr; gap: 14px 0; }
+  .villain-banner { padding: 32px 24px; }
+}

@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raise OS | The 5-Phase System for Funded Founders</title>
+  <meta name="description" content="Raise OS is the operating system behind 70+ funded founders and &pound;12M+ raised. Five phases replace spray-and-pray fundraising with a repeatable, measurable system.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ---- Raise OS Manifesto Page Specific Styles ---- */
+    .os-hero { text-align: center; padding: 100px 24px 72px; max-width: 800px; margin: 0 auto; }
+    .os-hero .pill-badge { margin-bottom: 24px; }
+    .os-hero h1 { font-size: clamp(42px, 6vw, 70px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -3px; line-height: 1.02; margin-bottom: 24px; color: var(--text-primary); }
+    .os-hero h1 em { font-style: normal; color: var(--text-secondary); }
+    .os-hero .os-hero-sub { font-size: 19px; color: var(--text-secondary); line-height: 1.65; max-width: 580px; margin: 0 auto 40px; }
+    .os-score-hook { display: inline-flex; align-items: center; gap: 10px; background: var(--lime-primary); color: var(--text-primary); font-size: 16px; font-weight: 800; padding: 16px 32px; border-radius: 100px; text-decoration: none; transition: transform .2s, background .2s; }
+    .os-score-hook:hover { background: var(--lime-hover); transform: translateY(-2px); }
+    .os-score-hook svg { flex-shrink: 0; }
+
+    .os-phases-section { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+    .os-phases-header { margin-bottom: 40px; }
+    .os-phases-header .section-tag { display: block; margin-bottom: 10px; }
+    .os-phases-header h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -1px; line-height: 1.1; color: var(--text-primary); }
+
+    .os-phases-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); }
+
+    .os-flywheel-section { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+    .flywheel-steps { display: flex; flex-direction: column; gap: 0; }
+    .flywheel-step { display: flex; align-items: flex-start; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border-light); }
+    .flywheel-step:last-child { border-bottom: none; }
+    .flywheel-arrow { font-size: 20px; color: var(--lime-primary); font-weight: 900; flex-shrink: 0; width: 32px; text-align: center; line-height: 1.5; }
+    .flywheel-text { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+    .flywheel-text strong { color: var(--text-primary); font-weight: 700; }
+
+    .os-proof-section { max-width: 800px; margin: 0 auto 80px; padding: 0 24px; }
+    .proof-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+    .proof-stat { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; }
+    .proof-stat-num { font-size: 42px; font-weight: 900; font-family: var(--font-heading); letter-spacing: -2px; color: var(--text-primary); line-height: 1; margin-bottom: 6px; }
+    .proof-stat-num span { color: var(--lime-primary); }
+    .proof-stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    .os-cta-section { max-width: 800px; margin: 0 auto 120px; padding: 0 24px; }
+    .os-cta-box { background: var(--bg-dark); border-radius: var(--radius-xl); padding: 60px 48px; text-align: center; position: relative; overflow: hidden; }
+    .os-cta-box::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: var(--lime-primary); opacity: .06; border-radius: 50%; }
+    .os-cta-box h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 900; font-family: var(--font-heading); letter-spacing: -1px; color: white; margin-bottom: 14px; }
+    .os-cta-box p { font-size: 16px; color: rgba(255,255,255,.6); margin-bottom: 32px; line-height: 1.6; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .os-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .os-btn-lime { display: inline-flex; align-items: center; gap: 8px; background: var(--lime-primary); color: var(--text-primary); font-size: 15px; font-weight: 800; padding: 16px 32px; border-radius: 100px; text-decoration: none; transition: transform .2s, background .2s; }
+    .os-btn-lime:hover { background: var(--lime-hover); transform: translateY(-2px); }
+    .os-btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.08); color: white; font-size: 15px; font-weight: 600; padding: 16px 32px; border-radius: 100px; text-decoration: none; border: 1px solid rgba(255,255,255,.15); transition: background .2s; }
+    .os-btn-ghost:hover { background: rgba(255,255,255,.14); }
+
+    @media (max-width: 600px) {
+      .os-hero { padding: 72px 20px 48px; }
+      .proof-stats { grid-template-columns: 1fr 1fr; }
+      .proof-stats .proof-stat:last-child { grid-column: 1/-1; }
+      .os-cta-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <header class="site-header" id="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" aria-label="Raise OS Home">
+        <span class="logo-text">Raise<span class="logo-period">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
+        <a href="raise-os.html" class="nav-link" style="font-weight:700">The OS</a>
+        <a href="deck-rating.html" class="nav-link nav-phase-r">R &#8212; Readiness</a>
+        <a href="index.html#services" class="nav-link nav-phase-a">A &#8212; Aim</a>
+        <a href="index.html#about" class="nav-link nav-phase-i">I &#8212; Ignite</a>
+        <a href="index.html#services" class="nav-link nav-phase-s">S &#8212; Sell</a>
+        <a href="index.html#articles" class="nav-link nav-phase-e">E &#8212; Endure</a>
+        <a href="index.html#pricing" class="nav-link">Pricing</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="deck-rating.html" class="btn btn-lime btn-sm" id="nav-cta-btn">
+          Get Your Raise Score
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="os-hero">
+      <div class="pill-badge">
+        <span class="pill-pulse"></span>
+        <span class="pill-text">THE RAISE OPERATING SYSTEM</span>
+      </div>
+
+      <h1>Install the System.<br><em>Raise the Round.</em></h1>
+
+      <p class="os-hero-sub">
+        Most founders fundraise on chaos: a bloated deck, 500 cold emails, polite passes they cannot decode.
+        Raise OS replaces chaos with five phases. Each phase has a tool, a metric, and a proven playbook.
+        The villain it defeats: <strong>spray-and-pray fundraising</strong>.
+      </p>
+
+      <a href="deck-rating.html" class="os-score-hook">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#111110" stroke-width="2"/><path d="M9 5v4l3 2" stroke="#111110" stroke-width="2" stroke-linecap="round"/></svg>
+        What's Your Raise Score?
+      </a>
+    </section>
+
+    <!-- Villain Banner -->
+    <div style="max-width:800px;margin:0 auto 48px;padding:0 24px;">
+      <div class="villain-banner">
+        <div class="villain-label">The Villain</div>
+        <div class="villain-headline">Spray-and-pray fundraising kills more<br>startups than a bad product ever could.</div>
+        <div class="villain-sub">500 cold emails. No warm intros. A deck that was never built to convert. The traction paradox: "come back when you have traction" from the investors you need to get traction. Raise OS is the answer.</div>
+      </div>
+    </div>
+
+    <!-- The Five Phases -->
+    <section class="os-phases-section">
+      <div class="os-phases-header">
+        <span class="section-tag">THE SYSTEM</span>
+        <h2>Five Phases. One Round. Zero Chaos.</h2>
+      </div>
+
+      <div class="os-phases-card">
+        <!-- Phase R -->
+        <div class="os-phase-block" style="padding:32px 36px 32px;">
+          <div class="os-phase-letter r">R</div>
+          <div>
+            <div class="os-phase-name">Phase R</div>
+            <div class="os-phase-promise">Readiness</div>
+            <p class="os-phase-desc">Walk in knowing exactly what partners will attack before they attack it. Your deck, narrative, and positioning are diagnosed against 200+ reviewed decks. No more surprises in the partner meeting.</p>
+            <div class="os-phase-metric">Key metric: Raise Score 0&#8211;100</div>
+            <div style="margin-top:16px;">
+              <a href="deck-rating.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#2d8a2d;text-decoration:none;">
+                Get Your Raise Score
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#2d8a2d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase A -->
+        <div class="os-phase-block" style="padding:32px 36px 32px;">
+          <div class="os-phase-letter a">A</div>
+          <div>
+            <div class="os-phase-name">Phase A</div>
+            <div class="os-phase-promise">Aim</div>
+            <p class="os-phase-desc">50 right investors beat 500 wrong inboxes. Every time. Raise OS builds you a tiered target list of investors who actually fund pre-traction pre-seed in your sector and geography. Thesis-fit is the only metric that matters here.</p>
+            <div class="os-phase-metric">Key metric: % target list thesis-fit (aim: 100%)</div>
+          </div>
+        </div>
+
+        <!-- Phase I -->
+        <div class="os-phase-block" style="padding:32px 36px 32px;">
+          <div class="os-phase-letter i">I</div>
+          <div>
+            <div class="os-phase-name">Phase I</div>
+            <div class="os-phase-promise">Ignite</div>
+            <p class="os-phase-desc">Outreach as a system, not a hope. The Warm Intro Tracker shows who owes you an intro and to whom. The outreach sequencer turns cold to warm. Half of all partner meetings come from one email nobody sends correctly.</p>
+            <div class="os-phase-metric">Key metric: reply rate and meetings booked per 50 outreaches</div>
+          </div>
+        </div>
+
+        <!-- Phase S -->
+        <div class="os-phase-block" style="padding:32px 36px 32px;">
+          <div class="os-phase-letter s">S</div>
+          <div>
+            <div class="os-phase-name">Phase S</div>
+            <div class="os-phase-promise">Sell</div>
+            <p class="os-phase-desc">Command the partner meeting from minute zero. The Objection Battle Cards give you model answers to the 20 questions partners actually ask: "Why won't Google build this?", "Why now?", "What's your moat?" The narrative method turns a pitch into a story they repeat to their partners.</p>
+            <div class="os-phase-metric">Key metric: meeting-to-partner-meeting conversion rate</div>
+          </div>
+        </div>
+
+        <!-- Phase E -->
+        <div class="os-phase-block" style="padding:32px 36px 32px;border-bottom:none;">
+          <div class="os-phase-letter e">E</div>
+          <div>
+            <div class="os-phase-name">Phase E</div>
+            <div class="os-phase-promise">Endure</div>
+            <p class="os-phase-desc">Manufacture FOMO until the round is oversubscribed. The Raise Sprint is the weekly operating cadence: Monday refresh target list, Wednesday outreach batch, Friday follow-ups and investor update. Momentum compounds. Chaos doesn't.</p>
+            <div class="os-phase-metric">Key metric: weeks from first meeting to term sheet</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Flywheel -->
+    <section class="os-flywheel-section">
+      <div class="os-phases-header">
+        <span class="section-tag">THE FLYWHEEL</span>
+        <h2>Every Step Is Measurable. Every Step Compounds.</h2>
+      </div>
+      <div class="flywheel-steps">
+        <div class="flywheel-step">
+          <div class="flywheel-arrow">1</div>
+          <div class="flywheel-text"><strong>Get your Raise Score</strong> on the Deck Rater. Know your number before any investor does.</div>
+        </div>
+        <div class="flywheel-step">
+          <div class="flywheel-arrow">2</div>
+          <div class="flywheel-text"><strong>Build your 50-not-500 list.</strong> Thesis-fit over volume. The Investor Matcher guides the targeting.</div>
+        </div>
+        <div class="flywheel-step">
+          <div class="flywheel-arrow">3</div>
+          <div class="flywheel-text"><strong>Ignite with warm intros.</strong> The Warm Intro Tracker shows who owes you an intro. One warm intro outperforms 20 cold emails.</div>
+        </div>
+        <div class="flywheel-step">
+          <div class="flywheel-arrow">4</div>
+          <div class="flywheel-text"><strong>Sell the narrative, not the deck.</strong> Battle cards and the AI pitch coach prepare you for every objection a partner will throw.</div>
+        </div>
+        <div class="flywheel-step">
+          <div class="flywheel-arrow">5</div>
+          <div class="flywheel-text"><strong>Endure with weekly Raise Sprints.</strong> Update emails keep investors warm. Momentum creates FOMO. FOMO creates term sheets.</div>
+        </div>
+        <div class="flywheel-step" style="border-bottom:none;">
+          <div class="flywheel-arrow" style="color:#B9FF66;font-size:18px;">&#8599;</div>
+          <div class="flywheel-text"><strong>Close oversubscribed.</strong> The Term Sheet Decoder explains every clause in plain English. You sign from strength, not confusion.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof -->
+    <section class="os-proof-section">
+      <div class="os-phases-header">
+        <span class="section-tag">THE PROOF</span>
+        <h2>The System Has a Track Record.</h2>
+      </div>
+      <div class="proof-stats">
+        <div class="proof-stat">
+          <div class="proof-stat-num">70<span>+</span></div>
+          <div class="proof-stat-label">Founders who ran the OS</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-num">&pound;12<span>M+</span></div>
+          <div class="proof-stat-label">Raised from top VCs</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-num">200<span>+</span></div>
+          <div class="proof-stat-label">Decks torn down and rebuilt</div>
+        </div>
+      </div>
+      <p style="margin-top:24px;font-size:14px;color:var(--text-muted);text-align:center;line-height:1.6;">
+        NovaHealth raised £1.8M at 3 weeks from first meeting to term sheet after installing the Raise OS Readiness phase. Read the full teardown in the <a href="index.html#articles" style="color:var(--text-primary);font-weight:600;text-decoration:underline;">Articles and Teardowns</a> section.
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <section class="os-cta-section">
+      <div class="os-cta-box">
+        <h2>What's Your Raise Score?</h2>
+        <p>Every founder using Raise OS starts here. Upload your deck. Get your score. Know your gaps before any investor does. Free. No sign-up.</p>
+        <div class="os-cta-row">
+          <a href="deck-rating.html" class="os-btn-lime">
+            Get My Raise Score (Free)
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqaTZETf6eYT34lfN5NdBsaggOpPJmC0W0ARta4NWFErJAXg/viewform?usp=publish-editor" target="_blank" rel="noopener" class="os-btn-ghost">
+            Book Free Audit Call
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
