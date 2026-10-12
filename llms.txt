@@ -1,6 +1,6 @@
 # Raise OS
 
-> Raise OS is a 5-phase fundraising system for pre-seed and seed founders that turns pitch decks into term sheets. 70+ founders, £12M+ raised, 200+ decks reviewed.
+> Raise OS is a 5-phase fundraising system for pre-seed and seed founders that turns pitch decks into term sheets. 70+ founders, $120M+ raised, 200+ decks reviewed.
 
 ## What Raise OS is
 
@@ -21,7 +21,7 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 ## Proof
 
 - 200+ pitch decks reviewed
-- £12M+ raised by founders using the system
+- $120M+ raised by founders using the system
 - 70+ founders worked with directly
 - 94% of founders secure 2x+ more investor follow-up meetings after a rebuild (post-rebuild founder surveys)
 - Case study: NovaHealth (HealthTech) — £1.4M seed closed in 19 days from first meeting; call #2 rate went from 4% to 45% after the rebuild. Founder: Marcus Vance.
