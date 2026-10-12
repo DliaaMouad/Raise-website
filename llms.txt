@@ -31,7 +31,7 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 - **Deck Audit — £250** (48-hour delivery): 90-second partner-lens Loom teardown, 30-min live audit call, slide scorecard.
 - **Deck Rebuild Sprint — £1,500** (14 days): full narrative and slide rewrite, visual redesign, pitch script and FAQ, unlimited revisions.
 - **1:1 Capital Raise Advisory — £3,500** (30 days): everything in the rebuild plus a 50+ investor target list, financial model review, and warm-intro orchestration.
-- **Free**: Deck Rater (full report, no paywall) at https://www.raiseos.site/deck-rating.html; weekly Raise OS briefing on Substack (@raiseos).
+- **Free**: Deck Rater (full report, no paywall) at https://www.raiseos.site/deck-rating.html; Investor Pipeline Tracker (kanban CRM for your raise, data stays in your browser) at https://www.raiseos.site/pipeline.html; weekly Raise OS briefing on Substack (@raiseos).
 - Risk reversal: if the initial audit call doesn't reveal at least 3 actionable narrative leaks costing you checks, you pay nothing.
 
 ## Key pages
