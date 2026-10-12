@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deck Rater — RAISE</title>
-  <meta name="description" content="Upload your pitch deck and get an instant investor-readiness score from RAISE. Free analysis. Detailed feedback unlocked with RAISE.">
+  <title>Deck Rater - RAISE</title>
+  <meta name="description" content="Upload your pitch deck and get a free, instant investor-readiness score from RAISE. YC-style analysis. No sign-up required.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,22 +18,16 @@
       --red: #FF5C5C; --orange: #FFA940;
     }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; }
-
-    /* NAV */
     nav { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; border-bottom:1px solid var(--border); background:var(--bg); position:sticky; top:0; z-index:100; }
     .nav-logo { font-size:22px; font-weight:900; letter-spacing:-0.5px; text-decoration:none; color:var(--dark); }
     .nav-logo span { color:var(--lime); }
     .nav-back { display:flex; align-items:center; gap:6px; font-size:14px; font-weight:500; color:var(--muted); text-decoration:none; transition:color .2s; }
     .nav-back:hover { color:var(--dark); }
-
-    /* HERO */
     .hero { text-align:center; padding:80px 24px 60px; max-width:720px; margin:0 auto; }
     .pill { display:inline-flex; align-items:center; gap:6px; background:var(--lime); color:var(--dark); font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; border-radius:100px; margin-bottom:24px; }
     .hero h1 { font-size:clamp(36px,6vw,58px); font-weight:900; letter-spacing:-2px; line-height:1.05; margin-bottom:20px; }
     .hero h1 em { font-style:normal; color:var(--muted); }
     .hero p { font-size:18px; color:var(--muted); line-height:1.6; max-width:520px; margin:0 auto; }
-
-    /* UPLOAD */
     .upload-section { max-width:680px; margin:0 auto 80px; padding:0 24px; }
     .upload-zone { border:2px dashed var(--border); border-radius:var(--radius); background:var(--card); padding:60px 40px; text-align:center; cursor:pointer; transition:border-color .2s,background .2s,transform .2s; position:relative; }
     .upload-zone:hover, .upload-zone.dragover { border-color:var(--lime); background:#f4ffe8; transform:translateY(-2px); }
@@ -45,8 +39,6 @@
     .upload-formats { margin-top:16px; font-size:12px; color:#9b9b9b; font-weight:500; }
     .upload-btn { display:inline-flex; align-items:center; gap:8px; background:var(--dark); color:var(--bg); font-size:15px; font-weight:700; padding:14px 32px; border-radius:100px; border:none; cursor:pointer; margin-top:28px; transition:background .2s,transform .15s; }
     .upload-btn:hover { background:#333; transform:translateY(-1px); }
-
-    /* LOADING */
     #loading-state { display:none; text-align:center; padding:60px 24px; max-width:480px; margin:0 auto; }
     .spinner-ring { width:72px; height:72px; border:4px solid var(--border); border-top-color:var(--lime); border-radius:50%; animation:spin .9s linear infinite; margin:0 auto 24px; }
     @keyframes spin { to { transform:rotate(360deg); } }
@@ -57,10 +49,7 @@
     .loading-step.active { opacity:1; transform:translateX(0); color:var(--dark); }
     .step-dot { width:8px; height:8px; border-radius:50%; background:var(--border); flex-shrink:0; transition:background .3s; }
     .loading-step.active .step-dot { background:var(--lime); }
-
-    /* RESULTS */
     #results-section { display:none; max-width:800px; margin:0 auto 100px; padding:0 24px; }
-
     .score-card { background:var(--dark); border-radius:var(--radius); padding:48px 40px; text-align:center; margin-bottom:32px; position:relative; overflow:hidden; }
     .score-card::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:var(--lime); opacity:.08; border-radius:50%; }
     .score-label { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--lime); margin-bottom:16px; }
@@ -68,13 +57,11 @@
     .score-number span { font-size:40px; font-weight:600; color:rgba(255,255,255,.4); }
     .score-grade { font-size:20px; font-weight:700; margin-bottom:16px; }
     .score-summary { font-size:15px; color:rgba(255,255,255,.6); max-width:440px; margin:0 auto; line-height:1.6; }
-
     .signals-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:32px; }
     .signal-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:20px; text-align:center; }
     .signal-icon { font-size:28px; margin-bottom:8px; }
     .signal-label { font-size:12px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
     .signal-value { font-size:20px; font-weight:800; }
-
     .teaser-section { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:32px; }
     .teaser-header { padding:24px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
     .teaser-header h3 { font-size:17px; font-weight:700; }
@@ -85,33 +72,29 @@
     .cat-bar-bg { flex:1; height:8px; background:#f0f0ec; border-radius:100px; overflow:hidden; }
     .cat-bar-fill { height:100%; border-radius:100px; width:0; transition:width 1.2s cubic-bezier(.4,0,.2,1); }
     .cat-score { font-size:14px; font-weight:700; width:40px; text-align:right; }
-
-    .locked-section { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:32px; position:relative; }
-    .locked-header { padding:24px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
-    .locked-header h3 { font-size:17px; font-weight:700; }
-    .locked-badge { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; background:#FFF8E7; color:#B76E00; border:1px solid #FFD98E; padding:3px 10px; border-radius:100px; }
-    .locked-items { padding:20px 28px; position:relative; }
-    .locked-item { display:flex; align-items:flex-start; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); filter:blur(4px); user-select:none; pointer-events:none; }
-    .locked-item:last-child { border-bottom:none; }
-    .locked-item-icon { width:36px; height:36px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:16px; }
-    .locked-item-text h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
-    .locked-item-text p { font-size:13px; color:var(--muted); line-height:1.5; }
-    .lock-overlay { position:absolute; inset:0; background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,.96) 38%); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding:32px 28px; text-align:center; }
-    .lock-icon { width:48px; height:48px; background:var(--dark); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
-    .lock-overlay h4 { font-size:18px; font-weight:800; margin-bottom:8px; }
-    .lock-overlay p { font-size:14px; color:var(--muted); margin-bottom:20px; line-height:1.5; }
-    .unlock-btn { display:inline-flex; align-items:center; gap:8px; background:var(--lime); color:var(--dark); font-size:15px; font-weight:800; padding:14px 32px; border-radius:100px; text-decoration:none; transition:background .2s,transform .15s; }
-    .unlock-btn:hover { background:var(--lime-dark); transform:translateY(-2px); }
-
+    .issues-section { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:32px; }
+    .issues-header { padding:24px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .issues-header h3 { font-size:17px; font-weight:700; }
+    .issues-list { padding:8px 0; }
+    .issue-item { display:flex; align-items:flex-start; gap:14px; padding:18px 28px; border-bottom:1px solid var(--border); }
+    .issue-item:last-child { border-bottom:none; }
+    .issue-sev { width:36px; height:36px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; }
+    .issue-sev.critical { background:#FFF0F0; color:var(--red); }
+    .issue-sev.warning { background:#FFF8E0; color:#B76E00; }
+    .issue-sev.pass { background:#F0FFF0; color:#2d8a2d; }
+    .issue-body h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
+    .issue-body p { font-size:13px; color:var(--muted); line-height:1.55; }
+    .issue-fix { margin-top:8px; padding:10px 14px; background:#f8f8f4; border-left:3px solid var(--lime); border-radius:0 6px 6px 0; font-size:12px; font-weight:600; color:var(--dark); line-height:1.5; }
+    .scanned-notice { background:#FFF8E0; border:1px solid #FFD98E; border-radius:var(--radius-sm); padding:18px 22px; margin-bottom:24px; display:flex; gap:12px; align-items:flex-start; }
+    .scanned-notice p { font-size:13px; color:#7a5200; line-height:1.55; }
+    .scanned-notice strong { font-weight:700; }
     .cta-box { background:var(--lime); border-radius:var(--radius); padding:48px 40px; text-align:center; }
     .cta-box h2 { font-size:28px; font-weight:900; margin-bottom:12px; letter-spacing:-.5px; }
     .cta-box p { font-size:16px; color:rgba(0,0,0,.6); margin-bottom:28px; line-height:1.5; }
-    .cta-btn-dark { display:inline-flex; align-items:center; gap:8px; background:var(--dark); color:white; font-size:15px; font-weight:700; padding:16px 36px; border-radius:100px; text-decoration:none; transition:background .2s,transform .15s; }
+    .cta-btn-dark { display:inline-flex; align-items:center; gap:8px; background:var(--dark); color:white; font-size:15px; font-weight:700; padding:16px 36px; border-radius:100px; text-decoration:none; transition:background .2s,transform .15s; border:none; cursor:pointer; }
     .cta-btn-dark:hover { background:#333; transform:translateY(-2px); }
-
     .reset-btn { display:block; text-align:center; margin:24px auto 0; background:none; border:1px solid var(--border); color:var(--muted); font-size:14px; font-weight:500; padding:10px 24px; border-radius:100px; cursor:pointer; transition:border-color .2s,color .2s; }
     .reset-btn:hover { border-color:var(--dark); color:var(--dark); }
-
     @media (max-width:600px) {
       nav { padding:16px 20px; }
       .hero { padding:48px 20px 40px; }
@@ -123,43 +106,7 @@
       .cat-name { width:110px; font-size:12px; }
       .cta-box { padding:36px 24px; }
     }
-
-    /* Price tag in lock overlay */
-    .price-tag { font-size:42px; font-weight:900; color:white; letter-spacing:-2px; margin-bottom:8px; }
-    .price-tag span { font-size:18px; font-weight:500; color:rgba(255,255,255,.5); letter-spacing:0; }
-    .lock-perks { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
-    .lock-perks span { font-size:12px; font-weight:600; color:rgba(0,0,0,.55); }
-    .unlock-btn { border:none; cursor:pointer; }
-
-    /* CTA box price pill */
-    .cta-price-pill { display:inline-block; background:rgba(0,0,0,.12); color:var(--dark); font-size:13px; font-weight:800; letter-spacing:.04em; padding:4px 14px; border-radius:100px; margin-bottom:16px; }
-    .cta-sub-note { margin-top:14px; font-size:13px; color:rgba(0,0,0,.5); font-weight:500; }
-    .cta-btn-dark { border:none; cursor:pointer; }
-
-    /* Payment Modal */
-    .pay-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:999; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
-    .pay-modal-backdrop.open { display:flex; }
-    .pay-modal { background:white; border-radius:24px; padding:40px 36px; max-width:440px; width:100%; position:relative; box-shadow:0 24px 80px rgba(0,0,0,.2); animation:slideUp .3s cubic-bezier(.4,0,.2,1); }
-    @keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-    .pay-modal-close { position:absolute; top:16px; right:16px; background:var(--bg); border:none; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px; color:var(--muted); transition:background .2s; }
-    .pay-modal-close:hover { background:var(--border); }
-    .pay-modal-badge { display:inline-flex; align-items:center; gap:6px; background:var(--lime); color:var(--dark); font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:4px 12px; border-radius:100px; margin-bottom:20px; }
-    .pay-modal h3 { font-size:24px; font-weight:900; letter-spacing:-.5px; margin-bottom:8px; }
-    .pay-modal-price { font-size:48px; font-weight:900; letter-spacing:-2px; margin:16px 0 4px; }
-    .pay-modal-price span { font-size:18px; font-weight:500; color:var(--muted); letter-spacing:0; }
-    .pay-modal-desc { font-size:14px; color:var(--muted); margin-bottom:24px; line-height:1.5; }
-    .pay-modal-features { list-style:none; margin-bottom:28px; display:flex; flex-direction:column; gap:10px; }
-    .pay-modal-features li { display:flex; align-items:center; gap:10px; font-size:14px; font-weight:500; }
-    .feat-check { width:20px; height:20px; background:var(--lime); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0; }
-    .pay-modal-btn { width:100%; background:var(--dark); color:white; font-size:16px; font-weight:800; padding:16px; border-radius:100px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background .2s,transform .15s; margin-bottom:12px; }
-    .pay-modal-btn:hover { background:#333; transform:translateY(-1px); }
-    .pay-modal-secure { text-align:center; font-size:12px; color:#aaa; display:flex; align-items:center; justify-content:center; gap:5px; }
-    .pay-modal-divider { border:none; border-top:1px solid var(--border); margin:20px 0; }
-    .pay-input-group { margin-bottom:16px; }
-    .pay-input-group label { display:block; font-size:12px; font-weight:700; color:var(--dark); margin-bottom:6px; letter-spacing:.03em; }
-    .pay-input-group input { width:100%; padding:12px 14px; border:1.5px solid var(--border); border-radius:10px; font-size:14px; font-family:inherit; color:var(--dark); background:var(--bg); transition:border-color .2s; outline:none; }
-    .pay-input-group input:focus { border-color:var(--dark); }
-    .pay-inputs-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }</style>
+  </style>
 </head>
 <body>
 
@@ -177,7 +124,7 @@
     FREE DECK RATER
   </div>
   <h1>How Strong Is <em>Your Deck?</em></h1>
-  <p>Upload your pitch deck and get an instant investor-readiness score in seconds. No sign-up required.</p>
+  <p>Upload your pitch deck and get a full investor-readiness report in seconds. No sign-up. No payment. 100% free.</p>
 </section>
 
 <div class="upload-section" id="upload-section">
@@ -204,13 +151,13 @@
 <div id="loading-state">
   <div class="spinner-ring"></div>
   <h3>Analyzing your deck...</h3>
-  <p>We're reading through your slides like an investor would.</p>
+  <p>Reading through your slides like an investor would.</p>
   <div class="loading-steps">
     <div class="loading-step" id="step-1"><div class="step-dot"></div> Extracting slide content</div>
     <div class="loading-step" id="step-2"><div class="step-dot"></div> Identifying key sections</div>
     <div class="loading-step" id="step-3"><div class="step-dot"></div> Scoring narrative strength</div>
     <div class="loading-step" id="step-4"><div class="step-dot"></div> Benchmarking against funded decks</div>
-    <div class="loading-step" id="step-5"><div class="step-dot"></div> Generating your report</div>
+    <div class="loading-step" id="step-5"><div class="step-dot"></div> Generating your full report</div>
   </div>
 </div>
 
@@ -218,213 +165,142 @@
   <div class="score-card">
     <div class="score-label">INVESTOR-READINESS SCORE</div>
     <div class="score-number" id="score-display">0<span>/100</span></div>
-    <div class="score-grade" id="score-grade" style="color:var(--lime)">—</div>
+    <div class="score-grade" id="score-grade" style="color:var(--lime)">--</div>
     <div class="score-summary" id="score-summary"></div>
   </div>
 
   <div class="signals-row">
     <div class="signal-card">
-      <div class="signal-icon">📄</div>
+      <div class="signal-icon">&#128196;</div>
       <div class="signal-label">Slides Detected</div>
-      <div class="signal-value" id="sig-slides">—</div>
+      <div class="signal-value" id="sig-slides">--</div>
     </div>
     <div class="signal-card">
-      <div class="signal-icon">🔍</div>
+      <div class="signal-icon">&#10004;</div>
       <div class="signal-label">Key Sections Found</div>
-      <div class="signal-value" id="sig-sections">—</div>
+      <div class="signal-value" id="sig-sections">--</div>
     </div>
     <div class="signal-card">
-      <div class="signal-icon">⚠️</div>
+      <div class="signal-icon">&#9888;</div>
       <div class="signal-label">Critical Gaps</div>
-      <div class="signal-value" id="sig-gaps" style="color:var(--red)">—</div>
+      <div class="signal-value" id="sig-gaps" style="color:var(--red)">--</div>
     </div>
+  </div>
+
+  <div class="scanned-notice" id="scanned-notice" style="display:none">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#B76E00" stroke-width="1.5"/><path d="M9 5v5M9 12.5v.5" stroke="#B76E00" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <p><strong>Image-based PDF detected.</strong> Your deck appears to be scanned or saved as image slides, so we could not extract slide text. The section scores below are based on structure only. For a full analysis, export your deck as a text-based PDF from your design tool (Canva, PowerPoint, Figma) and re-upload.</p>
   </div>
 
   <div class="teaser-section">
     <div class="teaser-header">
       <h3>Section Scores</h3>
-      <span class="free-badge">Free Preview</span>
+      <span class="free-badge">Free</span>
     </div>
     <div id="category-bars"></div>
   </div>
 
-  <div class="locked-section">
-    <div class="locked-header">
-      <h3>Slide-by-Slide Feedback</h3>
-      <span class="locked-badge">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><rect x="2" y="4" width="6" height="6" rx="1" fill="#B76E00"/><path d="M3 4V3a2 2 0 014 0v1" stroke="#B76E00" stroke-width="1.5" stroke-linecap="round"/></svg>
-        Unlock Required
-      </span>
+  <div class="issues-section">
+    <div class="issues-header">
+      <h3>Issues and Fixes</h3>
+      <span class="free-badge">Free</span>
     </div>
-    <div class="locked-items">
-      <div class="locked-item">
-        <div class="locked-item-icon" style="background:#FFF0F0">🔴</div>
-        <div class="locked-item-text">
-          <h4>Problem Slide: Missing urgency language</h4>
-          <p>Investors need to feel the pain before they believe in your solution. Your current framing is too passive — here's how to rewrite it...</p>
-        </div>
-      </div>
-      <div class="locked-item">
-        <div class="locked-item-icon" style="background:#FFF8E0">🟡</div>
-        <div class="locked-item-text">
-          <h4>Market Size: TAM claims need sourcing</h4>
-          <p>Your market slide shows a large number but no credible source. This is the number one reason investors lose confidence at slide 4...</p>
-        </div>
-      </div>
-      <div class="locked-item">
-        <div class="locked-item-icon" style="background:#F0FFF0">🟢</div>
-        <div class="locked-item-text">
-          <h4>Traction: Strong signals, weak framing</h4>
-          <p>You have good numbers but they're buried. Here's how to lead with the metric that creates FOMO...</p>
-        </div>
-      </div>
-      <div class="locked-item">
-        <div class="locked-item-icon" style="background:#FFF0F0">🔴</div>
-        <div class="locked-item-text">
-          <h4>Ask Slide: No use of funds breakdown</h4>
-          <p>Sophisticated investors want to see how you'll deploy capital. Without this, your ask feels unplanned...</p>
-        </div>
-      </div>
-      <div class="lock-overlay">
-        <div class="lock-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="5" y="10" width="12" height="10" rx="2" fill="white"/><path d="M8 10V7a3 3 0 016 0v3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="price-tag">$10<span>/month</span></div>
-        <h4>Unlock Your Full Deck Diagnosis</h4>
-        <p>Slide-by-slide feedback, exact rewrites, and priority fix list — updated every time you upload.</p>
-        <button class="unlock-btn" onclick="openPayModal()">
-          Unlock Full Report — $10/mo
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="lock-perks">
-          <span>✓ Cancel anytime</span>
-          <span>✓ Unlimited uploads</span>
-          <span>✓ Full feedback</span>
-        </div>
-      </div>
-    </div>
+    <div class="issues-list" id="issues-list"></div>
   </div>
 
+  <div class="cta-box">
+    <h2>Want a human expert to go deeper?</h2>
+    <p>Book a free 15-minute confidential audit with Mouad. He will review your deck personally and tell you the three highest-impact changes before you go to market.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqaTZETf6eYT34lfN5NdBsaggOpPJmC0W0ARta4NWFErJAXg/viewform?usp=publish-editor" target="_blank" rel="noopener" class="cta-btn-dark">
+      Book Free Audit Call
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 
   <button class="reset-btn" onclick="resetTool()">Analyze Another Deck</button>
 </div>
 
-<!-- Payment Modal -->
-<div class="pay-modal-backdrop" id="pay-modal-backdrop" onclick="handleBackdropClick(event)">
-  <div class="pay-modal" id="pay-modal">
-    <button class="pay-modal-close" onclick="closePayModal()">&#x2715;</button>
-    <div class="pay-modal-badge">⚡ RAISE PRO</div>
-    <h3>Unlock Full Deck Diagnosis</h3>
-    <div class="pay-modal-price">$10<span>/month</span></div>
-    <div class="pay-modal-desc">Cancel anytime. Billed monthly. Instant access after payment.</div>
-    <ul class="pay-modal-features">
-      <li><div class="feat-check">✓</div> Slide-by-slide feedback on every section</li>
-      <li><div class="feat-check">✓</div> Exact language rewrites from our team</li>
-      <li><div class="feat-check">✓</div> Priority fix list ranked by investor impact</li>
-      <li><div class="feat-check">✓</div> Unlimited deck uploads per month</li>
-      <li><div class="feat-check">✓</div> Cancel anytime — no questions asked</li>
-    </ul>
-    <hr class="pay-modal-divider">
-    <div id="pay-form-view">
-      <div class="pay-input-group">
-        <label>Email address</label>
-        <input type="email" id="pay-email" placeholder="you@startup.com">
-      </div>
-      <div class="pay-input-group">
-        <label>Card number</label>
-        <input type="text" id="pay-card" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
-      </div>
-      <div class="pay-inputs-row">
-        <div class="pay-input-group">
-          <label>Expiry</label>
-          <input type="text" id="pay-expiry" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)">
-        </div>
-        <div class="pay-input-group">
-          <label>CVC</label>
-          <input type="text" id="pay-cvc" placeholder="123" maxlength="3">
-        </div>
-      </div>
-      <button class="pay-modal-btn" id="pay-submit-btn" onclick="handlePayment()">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="10" rx="2" stroke="white" stroke-width="1.5"/><path d="M1 7h14" stroke="white" stroke-width="1.5"/></svg>
-        Pay $10 — Unlock Now
-      </button>
-      <div class="pay-modal-secure">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="5" width="8" height="7" rx="1" fill="#aaa"/><path d="M4 5V4a2 2 0 014 0v1" stroke="#aaa" stroke-width="1.2" stroke-linecap="round"/></svg>
-        Secured with 256-bit SSL encryption
-      </div>
-    </div>
-    <div id="pay-success-view" style="display:none;text-align:center;padding:20px 0">
-      <div style="font-size:56px;margin-bottom:16px">🎉</div>
-      <h3 style="margin-bottom:8px">You're in!</h3>
-      <p style="color:var(--muted);font-size:15px;line-height:1.6">Your full deck diagnosis is now unlocked. Check your email for your receipt and access link.</p>
-    </div>
-  </div>
-</div>
-
-<script>
-  function openPayModal() { document.getElementById('pay-modal-backdrop').classList.add('open'); document.body.style.overflow='hidden'; }
-  function closePayModal() { document.getElementById('pay-modal-backdrop').classList.remove('open'); document.body.style.overflow=''; }
-  function handleBackdropClick(e) { if (e.target === document.getElementById('pay-modal-backdrop')) closePayModal(); }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePayModal(); });
-
-  function formatCard(el) {
-    let v = el.value.replace(/\D/g,'').slice(0,16);
-    el.value = v.replace(/(\d{4})(?=\d)/g,'$1 ');
-  }
-  function formatExpiry(el) {
-    let v = el.value.replace(/\D/g,'').slice(0,4);
-    if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
-    el.value = v;
-  }
-
-  function handlePayment() {
-    const email = document.getElementById('pay-email').value.trim();
-    const card = document.getElementById('pay-card').value.trim();
-    const expiry = document.getElementById('pay-expiry').value.trim();
-    const cvc = document.getElementById('pay-cvc').value.trim();
-    if (!email || !card || !expiry || !cvc) { alert('Please fill in all payment details.'); return; }
-    const btn = document.getElementById('pay-submit-btn');
-    btn.textContent = 'Processing...';
-    btn.disabled = true;
-    setTimeout(() => {
-      document.getElementById('pay-form-view').style.display = 'none';
-      document.getElementById('pay-success-view').style.display = 'block';
-    }, 1800);
-  }
-</script>
-
 <script>
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-  let selectedFile = null;
-  const zone = document.getElementById('upload-zone');
-  const fileInput = document.getElementById('deck-input');
-  const analyzeBtn = document.getElementById('analyze-btn');
+  var selectedFile = null;
+  var zone = document.getElementById('upload-zone');
+  var fileInput = document.getElementById('deck-input');
+  var analyzeBtn = document.getElementById('analyze-btn');
 
-  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-  zone.addEventListener('drop', e => {
+  zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+  zone.addEventListener('drop', function(e) {
     e.preventDefault(); zone.classList.remove('dragover');
-    const f = e.dataTransfer.files[0];
+    var f = e.dataTransfer.files[0];
     if (f && f.type === 'application/pdf') handleFile(f);
   });
-  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+  fileInput.addEventListener('change', function() { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
 
   function handleFile(file) {
     selectedFile = file;
     zone.querySelector('h3').textContent = file.name;
-    zone.querySelector('p').textContent = (file.size/1024/1024).toFixed(1) + ' MB — Ready to analyze';
+    zone.querySelector('p').textContent = (file.size / 1024 / 1024).toFixed(1) + ' MB -- Ready to analyze';
     analyzeBtn.style.display = 'inline-flex';
   }
 
-  const CATEGORIES = [
-    { key:'problem',  label:'Problem',       keywords:['problem','pain','challenge','struggle','frustration','broken','inefficient','costly','fails','difficult'], weight:15 },
-    { key:'solution', label:'Solution',       keywords:['solution','platform','product','service','how it works','technology','tool','system','built','created'], weight:15 },
-    { key:'market',   label:'Market Size',    keywords:['market','tam','sam','som','billion','million','opportunity','addressable','industry','cagr','growing'], weight:15 },
-    { key:'traction', label:'Traction',       keywords:['traction','revenue','arr','mrr','users','customers','growth','retention','signed','contracts','paying','active'], weight:20 },
-    { key:'business', label:'Business Model', keywords:['revenue','model','subscription','saas','monetize','pricing','margin','ltv','cac','recurring'], weight:15 },
-    { key:'team',     label:'Team',           keywords:['team','founder','co-founder','cto','ceo','experience','background','previously','advisor'], weight:10 },
-    { key:'ask',      label:'The Ask',        keywords:['raise','raising','ask','funding','investment','seed','series','use of funds','runway','capital'], weight:10 },
+  var CATEGORIES = [
+    {
+      key: 'problem', label: 'Problem', weight: 15,
+      keywords: ['problem','pain','challenge','struggle','frustration','broken','inefficient','costly','fails','difficult'],
+      issues: {
+        low: { title: 'Problem slide: urgency language missing', fix: 'Lead with a crisp one-sentence statement of who suffers, what they lose, and how often. Investors need to feel the pain before they trust the solution.' },
+        mid: { title: 'Problem slide: framing is broad', fix: 'Narrow your problem to a specific customer and specific moment of failure. Generic problems signal unclear customer discovery.' }
+      }
+    },
+    {
+      key: 'solution', label: 'Solution', weight: 15,
+      keywords: ['solution','platform','product','service','how it works','technology','tool','system','built','created'],
+      issues: {
+        low: { title: 'Solution slide: unclear product description', fix: 'State in one sentence what you built, for whom, and the primary outcome it delivers. Avoid feature lists on the first pass.' },
+        mid: { title: 'Solution slide: lacks differentiation', fix: 'Add a sentence on why your approach works when others fail. Differentiation is the single question investors hold through every slide.' }
+      }
+    },
+    {
+      key: 'market', label: 'Market Size', weight: 15,
+      keywords: ['market','tam','sam','som','billion','million','opportunity','addressable','industry','cagr','growing'],
+      issues: {
+        low: { title: 'Market slide: no sizing data present', fix: 'Provide TAM, SAM, and SOM with cited sources. State your bottoms-up logic: number of target customers x average contract value.' },
+        mid: { title: 'Market slide: numbers lack credibility sources', fix: 'Cite a reputable research report (Gartner, PitchBook, CB Insights) next to your TAM figure. Unsourced billions lose investor trust immediately.' }
+      }
+    },
+    {
+      key: 'traction', label: 'Traction', weight: 20,
+      keywords: ['traction','revenue','arr','mrr','users','customers','growth','retention','signed','contracts','paying','active'],
+      issues: {
+        low: { title: 'Traction slide: no evidence of demand', fix: 'Show any evidence of pull: waitlist signups, LOIs, pilot agreements, revenue, or active users. Pre-revenue founders should show customer discovery calls conducted.' },
+        mid: { title: 'Traction slide: metrics lack growth context', fix: 'Present metrics with a time axis. Month-over-month percentage growth is more compelling than an absolute number without context.' }
+      }
+    },
+    {
+      key: 'business', label: 'Business Model', weight: 15,
+      keywords: ['revenue','model','subscription','saas','monetize','pricing','margin','ltv','cac','recurring'],
+      issues: {
+        low: { title: 'Business model slide: monetization is unclear', fix: 'State your pricing model, unit economics (LTV:CAC ratio), and gross margin. Investors need to see a path to a viable business, not just a product.' },
+        mid: { title: 'Business model: pricing logic is missing', fix: 'Include your price point, how you arrived at it (value-based, competitive, cost-plus), and how it compares to the next best alternative.' }
+      }
+    },
+    {
+      key: 'team', label: 'Team', weight: 10,
+      keywords: ['team','founder','co-founder','cto','ceo','experience','background','previously','advisor'],
+      issues: {
+        low: { title: 'Team slide: founder credibility not established', fix: 'Answer two questions for each founder: why are you uniquely suited to solve this problem, and what have you built or shipped before? Advisors without named companies add noise, not signal.' },
+        mid: { title: 'Team slide: missing domain expertise signal', fix: 'Call out the one thing that makes you an unfair advantage. A prior exit, a decade in the industry, or a proprietary dataset all count.' }
+      }
+    },
+    {
+      key: 'ask', label: 'The Ask', weight: 10,
+      keywords: ['raise','raising','ask','funding','investment','seed','series','use of funds','runway','capital'],
+      issues: {
+        low: { title: 'Ask slide: raise amount and use of funds missing', fix: 'State the exact amount you are raising, the instrument (SAFE, priced round), lead ticket size, and a breakdown of how capital will be deployed by function (product, GTM, team).' },
+        mid: { title: 'Ask slide: runway and milestones not stated', fix: 'Show how many months of runway this raise buys and what milestone (ARR target, product launch, or market entry) you hit before the next raise.' }
+      }
+    }
   ];
 
   async function startAnalysis() {
@@ -432,108 +308,159 @@
     document.getElementById('upload-section').style.display = 'none';
     document.getElementById('loading-state').style.display = 'block';
 
-    const steps = ['step-1','step-2','step-3','step-4','step-5'];
-    for (let i = 0; i < steps.length; i++) {
+    var steps = ['step-1','step-2','step-3','step-4','step-5'];
+    for (var i = 0; i < steps.length; i++) {
       await delay(600 + i * 400);
       document.getElementById(steps[i]).classList.add('active');
     }
 
-    let text = '', pageCount = 0;
+    var text = '', pageCount = 0;
     try {
-      const buf = await selectedFile.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+      var buf = await selectedFile.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({ data: buf }).promise;
       pageCount = pdf.numPages;
-      for (let i = 1; i <= Math.min(pageCount, 40); i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        text += content.items.map(it => it.str).join(' ') + ' ';
+      for (var p = 1; p <= Math.min(pageCount, 40); p++) {
+        var page = await pdf.getPage(p);
+        var content = await page.getTextContent();
+        text += content.items.map(function(it) { return it.str; }).join(' ') + ' ';
       }
     } catch(e) { text = ''; }
 
     await delay(400);
-    const results = scoreDeck(text.toLowerCase(), pageCount);
-    showResults(results, pageCount);
+    var isScanned = text.trim().length < 80;
+    var results = scoreDeck(text.toLowerCase(), pageCount);
+    showResults(results, pageCount, isScanned);
   }
 
-  function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+  function delay(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
   function scoreDeck(text, pageCount) {
-    const scores = {};
-    let total = 0;
-    CATEGORIES.forEach(cat => {
-      const hits = cat.keywords.filter(kw => text.includes(kw)).length;
-      const ratio = Math.min(hits / Math.max(cat.keywords.length * 0.45, 1), 1);
-      const noise = (Math.random() * 16) - 8;
-      const raw = Math.round(Math.max(0, Math.min(100, ratio * 100 + noise)));
+    var scores = {};
+    var total = 0;
+
+    CATEGORIES.forEach(function(cat) {
+      var hits = cat.keywords.filter(function(kw) { return text.includes(kw); }).length;
+      var ratio = Math.min(hits / (cat.keywords.length * 0.45), 1);
+      var raw = Math.round(ratio * 100);
       scores[cat.key] = raw;
       total += (raw * cat.weight) / 100;
     });
-    if (pageCount > 0 && pageCount < 8) total -= 10;
-    if (pageCount > 25) total -= 8;
+
+    if (pageCount > 0 && pageCount < 8)  total -= 10;
+    if (pageCount > 25)                   total -= 8;
     if (pageCount >= 10 && pageCount <= 18) total += 5;
-    if (text.trim().length < 200) {
-      total = Math.max(20, Math.min(50, pageCount * 3 + Math.random() * 15));
-      Object.keys(scores).forEach(k => { scores[k] = Math.round(20 + Math.random() * 40); });
+
+    if (text.trim().length < 80) {
+      total = Math.min(pageCount * 3, 40);
+      CATEGORIES.forEach(function(cat) { scores[cat.key] = 0; });
     }
+
     total = Math.round(Math.max(5, Math.min(96, total)));
-    return { categoryScores: scores, total };
+    return { categoryScores: scores, total: total };
   }
 
-  function showResults({ categoryScores, total }, pageCount) {
+  function showResults(data, pageCount, isScanned) {
+    var categoryScores = data.categoryScores;
+    var total = data.total;
+
     document.getElementById('loading-state').style.display = 'none';
     document.getElementById('results-section').style.display = 'block';
     animateNumber('score-display', total, '/100');
 
-    let grade, summary, gradeColor;
+    var grade, summary, gradeColor;
     if (total >= 80) {
       grade = 'Strong Deck'; gradeColor = '#B9FF66';
-      summary = 'Your deck is performing above average. There are still a few details holding you back from a top-tier presentation.';
+      summary = 'Your deck is performing above average. A few refinements will take it to top-tier presentation quality.';
     } else if (total >= 60) {
       grade = 'Needs Work'; gradeColor = '#FFA940';
-      summary = 'Your deck has potential but several key sections are weakening your story. Investors will likely ask hard questions — or pass.';
+      summary = 'Your deck has potential but several key sections are weakening the narrative. Investors will likely ask hard questions or pass.';
     } else if (total >= 40) {
       grade = 'High Risk'; gradeColor = '#FF5C5C';
       summary = 'Multiple critical sections are missing or unclear. In its current state, this deck will struggle to get past a first read.';
     } else {
       grade = 'Not Investor-Ready'; gradeColor = '#FF5C5C';
-      summary = 'Your deck needs a significant rebuild before going to market. The foundations — problem, market, and ask — are unclear.';
+      summary = 'Your deck needs a significant rebuild before going to market. Problem, market, and ask are unclear to investors.';
     }
 
     document.getElementById('score-grade').textContent = grade;
     document.getElementById('score-grade').style.color = gradeColor;
     document.getElementById('score-summary').textContent = summary;
 
-    const gaps = Object.values(categoryScores).filter(s => s < 40).length;
-    const found = Object.values(categoryScores).filter(s => s >= 50).length;
+    var vals = Object.values(categoryScores);
+    var gaps = vals.filter(function(s) { return s < 40; }).length;
+    var found = vals.filter(function(s) { return s >= 50; }).length;
     document.getElementById('sig-slides').textContent = pageCount > 0 ? pageCount : 'N/A';
     document.getElementById('sig-sections').textContent = found + ' / ' + CATEGORIES.length;
     document.getElementById('sig-gaps').textContent = gaps;
 
-    const container = document.getElementById('category-bars');
+    if (isScanned) document.getElementById('scanned-notice').style.display = 'flex';
+
+    var container = document.getElementById('category-bars');
     container.innerHTML = '';
-    CATEGORIES.forEach(cat => {
-      const score = categoryScores[cat.key];
-      const color = score >= 65 ? '#B9FF66' : score >= 40 ? '#FFA940' : '#FF5C5C';
-      const row = document.createElement('div');
+    CATEGORIES.forEach(function(cat) {
+      var score = categoryScores[cat.key];
+      var color = score >= 65 ? '#B9FF66' : score >= 40 ? '#FFA940' : '#FF5C5C';
+      var row = document.createElement('div');
       row.className = 'category-row';
-      row.innerHTML = '<div class="cat-name">' + cat.label + '</div>' +
+      row.innerHTML =
+        '<div class="cat-name">' + cat.label + '</div>' +
         '<div class="cat-bar-bg"><div class="cat-bar-fill" data-width="' + score + '" style="background:' + color + '"></div></div>' +
         '<div class="cat-score" style="color:' + color + '">' + score + '</div>';
       container.appendChild(row);
     });
 
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        document.querySelectorAll('.cat-bar-fill').forEach(bar => { bar.style.width = bar.dataset.width + '%'; });
+    requestAnimationFrame(function() {
+      setTimeout(function() {
+        document.querySelectorAll('.cat-bar-fill').forEach(function(bar) { bar.style.width = bar.dataset.width + '%'; });
       }, 100);
     });
+
+    buildIssuesList(categoryScores, isScanned);
+  }
+
+  function buildIssuesList(categoryScores, isScanned) {
+    var list = document.getElementById('issues-list');
+    list.innerHTML = '';
+    var itemCount = 0;
+
+    CATEGORIES.forEach(function(cat) {
+      var score = categoryScores[cat.key];
+      var sevClass, sevLabel, issueData;
+
+      if (score >= 65) {
+        return; // no issue
+      } else if (score >= 40) {
+        sevClass = 'warning'; sevLabel = '!';
+        issueData = cat.issues.mid;
+      } else {
+        sevClass = 'critical'; sevLabel = '!!';
+        issueData = cat.issues.low;
+      }
+
+      if (issueData) {
+        itemCount++;
+        var item = document.createElement('div');
+        item.className = 'issue-item';
+        var fixContent = isScanned
+          ? '<p>Text could not be extracted from this deck. Export as a text-based PDF to receive specific feedback on this section.</p>'
+          : '<div class="issue-fix">Fix: ' + issueData.fix + '</div>';
+        item.innerHTML =
+          '<div class="issue-sev ' + sevClass + '">' + sevLabel + '</div>' +
+          '<div class="issue-body"><h4>' + issueData.title + '</h4>' + fixContent + '</div>';
+        list.appendChild(item);
+      }
+    });
+
+    if (itemCount === 0) {
+      list.innerHTML = '<div class="issue-item"><div class="issue-body"><h4>No critical issues detected</h4><p>Your deck covers all seven core sections. Book an audit call for a qualitative review of narrative flow, visual hierarchy, and investor-specific objections.</p></div></div>';
+    }
   }
 
   function animateNumber(id, target, suffix) {
-    const el = document.getElementById(id);
-    let current = 0;
-    const step = Math.ceil(target / 60);
-    const interval = setInterval(() => {
+    var el = document.getElementById(id);
+    var current = 0;
+    var step = Math.ceil(target / 60);
+    var interval = setInterval(function() {
       current = Math.min(current + step, target);
       el.innerHTML = current + '<span>' + suffix + '</span>';
       if (current >= target) clearInterval(interval);
@@ -547,7 +474,8 @@
     analyzeBtn.style.display = 'none';
     document.getElementById('upload-section').style.display = 'block';
     document.getElementById('results-section').style.display = 'none';
-    document.querySelectorAll('.loading-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('scanned-notice').style.display = 'none';
+    document.querySelectorAll('.loading-step').forEach(function(s) { s.classList.remove('active'); });
   }
 </script>
 </body>
