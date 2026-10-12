@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Raise Program | Turn Your Pitch Deck Into a Term Sheet</title>
+  <meta name="description" content="The Raise Program: slide-by-slide deck rebuilds, narrative restructuring, investor targeting across 754 VCs and accelerators, and pitch dry-runs for pre-seed founders. Study the decks that raised, then book a call.">
+  <link rel="canonical" href="https://www.raiseos.site/program.html">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Mouad Dliaa">
+  <meta name="theme-color" content="#0F1012">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Raise OS">
+  <meta property="og:title" content="The Raise Program | Turn Your Pitch Deck Into a Term Sheet">
+  <meta property="og:description" content="The 5-phase fundraising program behind 70+ founders and $120M+ raised. Study real decks that raised, rebuild yours, target 754 investors.">
+  <meta property="og:url" content="https://www.raiseos.site/program.html">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Raise Program | Turn Your Pitch Deck Into a Term Sheet">
+  <meta name="twitter:description" content="Study the decks that raised. Rebuild yours. Target 754 investors. Book a call.">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "The Raise Program",
+    "url": "https://www.raiseos.site/program.html",
+    "description": "The Raise Program is a 5-phase fundraising program (Readiness, Aim, Ignite, Sell, Execute) that helps pre-seed founders rebuild their pitch deck, target the right investors, and close their round.",
+    "isPartOf": { "@id": "https://www.raiseos.site/#site" },
+    "about": { "@id": "https://www.raiseos.site/#org" }
+  }
+  </script>
+
+  <style>
+    .program-hero { padding: 72px 0 56px; background: #111110; color: #fff; }
+    .program-hero h1 { color: #fff; font-size: clamp(2.4rem, 5vw, 3.8rem); letter-spacing: -0.03em; margin: 0 0 18px; }
+    .program-hero h1 em { font-style: normal; color: #B9FF66; }
+    .program-hero .section-desc { color: rgba(255,255,255,.72); max-width: 640px; font-size: 1.12rem; }
+    .program-hero .pill-badge { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .program-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 44px; }
+    .program-stat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 22px; }
+    .program-stat strong { display: block; font-size: 1.9rem; color: #B9FF66; letter-spacing: -0.02em; }
+    .program-stat span { color: rgba(255,255,255,.6); font-size: .88rem; }
+    .phase-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 36px; }
+    .phase-card { background: #F8F8F4; border: 1px solid #E2E2DC; border-radius: 18px; padding: 24px 20px; }
+    .phase-card .phase-num { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #111110; color: #B9FF66; font-weight: 800; font-size: .85rem; margin-bottom: 14px; }
+    .phase-card h3 { font-size: 1.05rem; margin: 0 0 8px; }
+    .phase-card p { font-size: .9rem; line-height: 1.55; margin: 0; }
+    .inside-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 36px; }
+    .inside-card { border: 1px solid #E2E2DC; border-radius: 18px; padding: 28px; background: #fff; }
+    .inside-card h3 { font-size: 1.15rem; margin: 0 0 10px; }
+    .inside-card p { font-size: .95rem; line-height: 1.6; margin: 0; }
+    .inside-card .tick { color: #2d7a00; font-weight: 800; margin-right: 8px; }
+    .decks-section { background: #111110; padding: 72px 0; }
+    .decks-section .section-title { color: #fff; }
+    .decks-section .section-desc { color: rgba(255,255,255,.65); max-width: 640px; }
+    .decks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    .deck-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; transition: transform .2s ease, border-color .2s ease; }
+    .deck-card:hover { transform: translateY(-3px); border-color: rgba(185,255,102,.5); }
+    .deck-card .deck-round { display: inline-block; align-self: flex-start; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; background: rgba(185,255,102,.16); color: #B9FF66; padding: 5px 12px; border-radius: 100px; margin-bottom: 16px; }
+    .deck-card h3 { color: #fff; font-size: 1.35rem; margin: 0 0 6px; }
+    .deck-card .deck-meta { color: rgba(255,255,255,.6); font-size: .88rem; margin-bottom: 20px; }
+    .deck-card .deck-meta strong { color: #B9FF66; }
+    .deck-card a.deck-link { margin-top: auto; color: #B9FF66; font-weight: 700; font-size: .92rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .deck-card a.deck-link:hover { text-decoration: underline; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+    .step-card { text-align: left; padding: 28px; border: 1px solid #E2E2DC; border-radius: 18px; background: #fff; }
+    .step-card .step-n { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: #2d7a00; margin-bottom: 10px; }
+    .step-card h3 { font-size: 1.15rem; margin: 0 0 10px; }
+    .step-card p { font-size: .93rem; line-height: 1.6; margin: 0; }
+    .program-cta { background: #B9FF66; border-radius: 24px; padding: 56px 48px; margin: 72px 0; text-align: center; }
+    .program-cta h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin: 0 0 14px; color: #111110; }
+    .program-cta p { color: #111110; opacity: .75; max-width: 560px; margin: 0 auto 28px; font-size: 1.05rem; }
+    .section-pad { padding: 72px 0; }
+    .nav-link.active { color: #111110; font-weight: 800; }
+    @media (max-width: 900px) {
+      .phase-grid { grid-template-columns: repeat(2, 1fr); }
+      .program-stats { grid-template-columns: repeat(2, 1fr); }
+      .decks-grid { grid-template-columns: 1fr; }
+      .inside-grid, .steps-grid { grid-template-columns: 1fr; }
+      .program-cta { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="nav-container">
+      <a href="index.html" class="brand-logo" aria-label="RAISE Home">
+        <span class="logo-text">Raise<span class="logo-period">.</span></span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
+        <a href="deck-rating.html" class="nav-link">Raise Score</a>
+        <a href="investors.html" class="nav-link">Investors</a>
+        <a href="program.html" class="nav-link active">Program</a>
+        <a href="index.html#results" class="nav-link">Results</a>
+        <a href="index.html#pricing" class="nav-link">Pricing</a>
+        <a href="index.html#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://cal.com/mouad-dliaa/15min" target="_blank" rel="noopener" class="btn btn-lime btn-sm" id="nav-cta-btn">
+          Book a Call
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="program-hero">
+      <div class="container">
+        <div class="pill-badge">
+          <span class="pill-pulse"></span>
+          <span class="pill-text">The Raise Program</span>
+        </div>
+        <h1>Turn your pitch deck into <em>a term sheet.</em></h1>
+        <p class="section-desc">A 5-phase fundraising program for pre-seed founders. We rebuild your deck slide by slide, sharpen the narrative investors actually fund, target the right VCs and accelerators from a database of 754, and drill your pitch until it lands.</p>
+        <div class="hero-ctas">
+          <a href="https://cal.com/mouad-dliaa/15min" target="_blank" rel="noopener" class="btn btn-lime btn-lg">Book a Call</a>
+          <a href="#decks" class="btn btn-ghost btn-lg" style="color:#fff;border-color:rgba(255,255,255,.3);">See decks that raised</a>
+        </div>
+        <div class="program-stats">
+          <div class="program-stat"><strong>200+</strong><span>decks reviewed</span></div>
+          <div class="program-stat"><strong>$120M+</strong><span>raised by founders</span></div>
+          <div class="program-stat"><strong>70+</strong><span>founders through the program</span></div>
+          <div class="program-stat"><strong>754</strong><span>VCs and accelerators targeted</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 5 phases -->
+    <section class="section-pad">
+      <div class="container">
+        <h2 class="section-title">One system. Five phases.</h2>
+        <p class="section-desc">Every founder in the program runs the same operating system, tuned to their round. No templates, no generic advice.</p>
+        <div class="phase-grid">
+          <div class="phase-card">
+            <div class="phase-num">1</div>
+            <h3>Readiness</h3>
+            <p>We tear your deck apart like a partner would. Every narrative leak, weak proof point, and unanswered objection gets flagged before an investor ever sees it.</p>
+          </div>
+          <div class="phase-card">
+            <div class="phase-num">2</div>
+            <h3>Aim</h3>
+            <p>We build your target list from 754 verified VCs and accelerators. Right stage, right check size, right thesis. No spray and pray.</p>
+          </div>
+          <div class="phase-card">
+            <div class="phase-num">3</div>
+            <h3>Ignite</h3>
+            <p>Your story gets rebuilt around the one belief an investor must hold to write the check. Positioning that makes you the obvious pick, not one of fifty.</p>
+          </div>
+          <div class="phase-card">
+            <div class="phase-num">4</div>
+            <h3>Sell</h3>
+            <p>Outreach sequences, warm intro mapping, and pitch dry-runs. You walk into every meeting knowing the objections before they are raised.</p>
+          </div>
+          <div class="phase-card">
+            <div class="phase-num">5</div>
+            <h3>Execute</h3>
+            <p>Term sheet to close. We help you run a tight process, create competitive tension, and negotiate from strength until the money is wired.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's inside -->
+    <section style="background:#F8F8F4;" class="section-pad">
+      <div class="container">
+        <h2 class="section-title">What is inside the program</h2>
+        <p class="section-desc">Everything is done with you, not handed to you as homework.</p>
+        <div class="inside-grid">
+          <div class="inside-card">
+            <h3><span class="tick">✓</span>Slide-by-slide deck rebuild</h3>
+            <p>Your full deck rewritten and redesigned around investor psychology. Every slide earns its place or it gets cut. The average rebuild removes a third of the slides and doubles the clarity.</p>
+          </div>
+          <div class="inside-card">
+            <h3><span class="tick">✓</span>Narrative restructuring</h3>
+            <p>We find the sharpest version of your story: the villain, the inevitable shift, and why you win. Founders come in with features. They leave with a thesis.</p>
+          </div>
+          <div class="inside-card">
+            <h3><span class="tick">✓</span>Curated investor targeting</h3>
+            <p>A ranked hit list from 754 verified pre-seed and seed VCs plus accelerators worldwide, matched to your stage, sector, and geography, with how-to-pitch notes on each.</p>
+          </div>
+          <div class="inside-card">
+            <h3><span class="tick">✓</span>Pitch dry-runs</h3>
+            <p>Live practice sessions where we play the skeptical partner. You get grilled on traction, moat, and go-to-market until your answers are airtight.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Decks that raised -->
+    <section class="decks-section" id="decks">
+      <div class="container">
+        <h2 class="section-title">Decks that raised.</h2>
+        <p class="section-desc">Real pitch decks from companies that went on to raise serious money. Study what worked: the narrative arc, the proof, the ask. Then build yours to the same standard.</p>
+        <div class="decks-grid">
+          <div class="deck-card">
+  <span class="deck-round">Seed &middot; 2009</span>
+  <h3>Airbnb</h3>
+  <div class="deck-meta">Raised <strong>$600K</strong> &middot; 14 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/ryangum/airbnb-pitch-deck-from-2008" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2008</span>
+  <h3>Uber (UberCab)</h3>
+  <div class="deck-meta">Raised <strong>$200K</strong> &middot; 25 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/kambosu/uber-pitch-deck" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Series B &middot; 2004</span>
+  <h3>LinkedIn</h3>
+  <div class="deck-meta">Raised <strong>$10M</strong> &middot; 37 slides</div>
+  <a class="deck-link" href="http://reidhoffman.org/linkedin-pitch-to-greylock/" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2011</span>
+  <h3>Buffer</h3>
+  <div class="deck-meta">Raised <strong>$450K</strong> &middot; 13 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/Bufferapp/buffer-seedrounddeck/12-foundersbufferappcom" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2011</span>
+  <h3>Intercom</h3>
+  <div class="deck-meta">Raised <strong>$600K</strong> &middot; 8 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/eoghanmccabe/intercoms-first-pitch-deck" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Series C &middot; 2014</span>
+  <h3>Mixpanel</h3>
+  <div class="deck-meta">Raised <strong>$65M</strong> &middot; 12 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/metrics1/mixpanel-our-pitch-deck-that-we-used-to-raise-65m" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2007</span>
+  <h3>Moz (SEOmoz)</h3>
+  <div class="deck-meta">Raised <strong>$1.1M</strong> &middot; 36 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/randfish/seomoz-pitch-deck-july-2011" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2009</span>
+  <h3>Foursquare</h3>
+  <div class="deck-meta">Raised <strong>$1.35M</strong> &middot; 15 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/alkarmi/foursquare-1stpitch2009" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2012</span>
+  <h3>Coinbase</h3>
+  <div class="deck-meta">Raised <strong>$600K</strong> &middot; 11 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/BrianArmstrong29/coinbase-seed-round-pitch-deck" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Series A &middot; 2016</span>
+  <h3>Front</h3>
+  <div class="deck-meta">Raised <strong>$10M</strong> &middot; 21 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/MathildeCollin/front-series-a-deck-64596550" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Series A &middot; 2014</span>
+  <h3>Mattermark</h3>
+  <div class="deck-meta">Raised <strong>$6.5M</strong> &middot; 30 slides</div>
+  <a class="deck-link" href="https://www.slideshare.net/DanielleMorrill/mattermark-2nd-final-series-a-deck" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+<div class="deck-card">
+  <span class="deck-round">Seed &middot; 2026</span>
+  <h3>Moritz</h3>
+  <div class="deck-meta">Raised <strong>$9M</strong> &middot; 12 slides</div>
+  <a class="deck-link" href="https://startupfundraising.com/library/articles/moritz-pitch-deck-teardown" target="_blank" rel="noopener">View the deck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section-pad">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-n">Step 1</div>
+            <h3>Book a call</h3>
+            <p>A 15-minute conversation about your startup, your round, and where your deck stands today. If there is no fit, we will tell you straight.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-n">Step 2</div>
+            <h3>Get the teardown</h3>
+            <p>We review your deck like an investment committee would and show you exactly what is costing you meetings, in plain language.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-n">Step 3</div>
+            <h3>Run the program</h3>
+            <p>Deck rebuild, narrative, investor targeting, and dry-runs. You go to market with a deck and a process built to close.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section>
+      <div class="container">
+        <div class="program-cta">
+          <h2>Your deck is either raising you money or costing you money.</h2>
+          <p>Book a 15-minute call. We will look at your deck and tell you which one it is doing, and what to fix first.</p>
+          <a href="https://cal.com/mouad-dliaa/15min" target="_blank" rel="noopener" class="btn btn-dark btn-lg">Book a Call</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-top">
+        <div class="footer-brand-column">
+          <a href="index.html" class="brand-logo footer-logo">
+            <span class="logo-text text-white">Raise<span class="logo-period">.</span></span>
+          </a>
+
+          <p class="footer-desc">
+            Helping ambitious founders eliminate deck blind spots and close oversubscribed rounds with top-tier investors.
+          </p>
+
+          <a href="deck-rating.html" class="btn btn-lime btn-sm">
+            Submit Your Deck
+          </a>
+        </div>
+
+        <div class="footer-links-grid">
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Program</h5>
+            <ul class="footer-nav">
+              <li><a href="program.html">The Raise Program</a></li>
+              <li><a href="program.html#decks">Decks That Raised</a></li>
+              <li><a href="index.html#pricing">Pricing</a></li>
+              <li><a href="partners.html">Referral Partner Program</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Resources</h5>
+            <ul class="footer-nav">
+              <li><a href="deck-rating.html">⚡ Rate My Deck (Instant)</a></li>
+              <li><a href="investors.html">Investor Search</a></li>
+              <li><a href="index.html#faq">Fundraising FAQ</a></li>
+              <li><a href="partners.html">Refer a Founder</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Company</h5>
+            <ul class="footer-nav">
+              <li><a href="index.html#about">About Mouad</a></li>
+              <li><a href="index.html#results">Case Studies & Results</a></li>
+              <li><a href="partners.html">VC & Accelerator Partners</a></li>
+              <li><a href="mailto:mouaadliaa@gmail.com">Contact Support</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">
+          © <span id="current-year">2026</span> Raise OS. All rights reserved.
+        </p>
+
+        <div class="social-links">
+          <a href="https://x.com/raise_os" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X / Twitter" title="X / Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/raise-os" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
