@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>579 Pre-Seed & Seed Investors | Raise OS</title>
-  <meta name="description" content="Search 579 verified pre-seed and seed VCs across 6 regions. Filter by stage and region, see check sizes, and build your target list of 50. Free.">
+  <meta name="description" content="Search 579 verified pre-seed and seed VCs across 6 regions. Filter by stage and region, see check sizes, and build your target list of 50. Free account required.">
   <link rel="canonical" href="https://www.raiseos.site/investors.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
@@ -31,6 +31,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    #auth-gate { position: fixed; inset: 0; z-index: 500; background: #F8F8F4; display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
+    .auth-card { background: #fff; border: 1px solid #E2E2DC; border-radius: 22px; padding: 40px 38px 32px; width: 100%; max-width: 440px; box-shadow: 0 24px 60px rgba(0,0,0,.10); text-align: center; }
+    .auth-card h2 { font-size: 26px; font-weight: 900; letter-spacing: -0.8px; margin: 16px 0 8px; line-height: 1.2; }
+    .auth-card h2 em { font-style: normal; background: #B9FF66; padding: 0 8px; border-radius: 6px; }
+    .auth-card > p { color: #585A61; font-size: 14.5px; line-height: 1.6; margin: 0 0 20px; }
+    .auth-tabs { display: flex; background: #F1F1EC; border-radius: 100px; padding: 4px; margin-bottom: 18px; }
+    .auth-tab { flex: 1; border: none; background: none; font-family: inherit; font-weight: 800; font-size: 14px; padding: 10px; border-radius: 100px; cursor: pointer; color: #585A61; }
+    .auth-tab.sel { background: #111110; color: #fff; }
+    .auth-card input { width: 100%; font-family: inherit; font-size: 15px; padding: 13px 18px; border: 1px solid #E2E2DC; border-radius: 12px; margin-bottom: 12px; outline: none; box-sizing: border-box; }
+    .auth-card input:focus { border-color: #B9FF66; box-shadow: 0 0 0 3px rgba(185,255,102,.25); }
+    .auth-err { color: #B3261E; font-size: 13.5px; font-weight: 600; min-height: 20px; margin: 12px 0 0; }
+    .auth-fine { font-size: 12.5px; color: #848792; margin: 14px 0 0; }
+    #app-content { display: none; }
+    #nav-auth-area { display: none; align-items: center; gap: 10px; }
+    #nav-user { font-size: 13px; color: #585A61; max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-ghost { background: #fff; color: #111110; border: 1px solid #E2E2DC; }
+
+  </style>
   <style>
     body { background: #F8F8F4; color: #111110; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
     .pipe-nav { position: sticky; top: 0; z-index: 200; background: rgba(248,248,244,.94); backdrop-filter: blur(12px); border-bottom: 1px solid #E2E2DC; }
@@ -112,6 +131,21 @@
     </div>
   </header>
 
+  <div id="auth-gate">
+    <div class="auth-card">
+      <a href="index.html" class="pipe-logo">Raise<span>.</span></a>
+      <h2>Unlock <em>579</em> verified investors</h2>
+      <p>Enter your access code to search 579 pre-seed and seed VCs across 6 regions. Filter by stage and region, build your target list of 50.</p>
+      <form id="code-form">
+        <input id="access-code" placeholder="Access code" required autocomplete="off" autocapitalize="characters" spellcheck="false">
+        <button class="btn btn-lime" type="submit" style="width:100%; justify-content:center;">Unlock access</button>
+      </form>
+      <p class="auth-err" id="auth-err"></p>
+      <p class="auth-fine">No code yet? Message Mouad to get one.</p>
+    </div>
+  </div>
+  <div id="app-content">
+
   <div class="inv-hero">
     <h1>579 investors who write <em>first cheques.</em></h1>
     <p>Pre-seed and seed funds across 6 regions, every one verified to invest early. Search, filter by stage and region, and build your target list of 50.</p>
@@ -146,14 +180,75 @@
     </div>
   </div>
 
+  </div>
   <div class="toast" id="toast"></div>
 
-<script src="investors-data-1.js"></script>
-  <script src="investors-data-2.js"></script>
-  <script src="investors-data-3.js"></script>
   <script>
+/* Access gate — shared code wall */
+var ACCESS_CODE = 'Raise100';
+
 (function() {
   'use strict';
+
+  var gate = document.getElementById('auth-gate');
+  var appEl = document.getElementById('app-content');
+  var errEl = document.getElementById('auth-err');
+  var authed = false;
+  var LS_KEY = 'raiseos_access';
+
+  function setErr(m) { errEl.textContent = m || ''; }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function loadDataScripts() {
+    if (window.INVESTORS && window.INVESTORS.length) return Promise.resolve();
+    var chain = Promise.resolve();
+    [1, 2, 3].forEach(function(i) {
+      chain = chain.then(function() {
+        return new Promise(function(res, rej) {
+          var s = document.createElement('script');
+          s.src = 'investors-data-' + i + '.js';
+          s.onload = res; s.onerror = rej;
+          document.head.appendChild(s);
+        });
+      });
+    });
+    return chain;
+  }
+
+  function showApp() {
+    if (authed) return;
+    authed = true;
+    gate.style.display = 'none';
+    appEl.style.display = 'block';
+    loadDataScripts().then(initApp).catch(function() {
+      document.getElementById('inv-grid').innerHTML =
+        '<div class="no-results"><h3 style="color:#111110;">Could not load investor data.</h3><p>Please refresh the page.</p></div>';
+    });
+  }
+
+  document.getElementById('code-form').addEventListener('submit', function(e) {
+    e.preventDefault(); setErr('');
+    var code = document.getElementById('access-code').value.trim();
+    if (code === ACCESS_CODE) {
+      try { localStorage.setItem(LS_KEY, '1'); } catch (e) {}
+      showApp();
+    } else {
+      setErr('Wrong code. Check it and try again.');
+    }
+  });
+
+  try {
+    if (localStorage.getItem(LS_KEY) === '1') showApp();
+  } catch (e) {}
+
+  function initApp() {
+'use strict';
   var REGIONS = ['Africa', 'Asia-Pacific', 'Europe', 'Latin America', 'Middle East', 'North America'];
   var query = '', region = 'all', stage = 'all';
 
@@ -185,14 +280,6 @@
     render();
   });
 
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-  function toast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove('show'); }, 2400);
-  }
   var filtered = [];
   function render() {
     filtered = INVESTORS.filter(function(inv) {
@@ -233,8 +320,9 @@
     document.getElementById('stat-stages').textContent = Object.keys(_st).length;
   } catch (e) {}
   render();
+  }
 })();
 
-</script>
+  </script>
 </body>
 </html>
