@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>100 Pre-Seed Investors (No Traction Required) | Raise OS</title>
-  <meta name="description" content="Search 100 verified pre-seed funds and accelerators that invest with zero revenue. Filter by region, see check sizes, and add thesis-fit investors straight to your pipeline. Free.">
+  <meta name="description" content="Search 100 verified pre-seed funds and accelerators that invest with zero revenue. Filter by region and see check sizes. Free.">
   <link rel="canonical" href="https://www.raiseos.site/investors.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Raise OS">
   <meta property="og:title" content="100 Pre-Seed Investors (No Traction Required) | Raise OS">
-  <meta property="og:description" content="100 verified funds that write pre-seed cheques with zero revenue. Search, filter, add to your pipeline. Free.">
+  <meta property="og:description" content="100 verified funds that write pre-seed cheques with zero revenue. Search and filter by region. Free.">
   <meta property="og:url" content="https://www.raiseos.site/investors.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="100 Pre-Seed Investors (No Traction Required) | Raise OS">
@@ -105,17 +105,16 @@
       <nav class="pipe-nav-links" aria-label="Main Navigation">
         <a href="raise-os.html">The OS</a>
         <a href="deck-rating.html">Raise Score</a>
-        <a href="pipeline.html">Pipeline</a>
         <a href="investors.html" class="active">Investors</a>
         <a href="index.html#pricing">Pricing</a>
       </nav>
-      <a href="pipeline.html" class="btn btn-lime btn-sm">Open Pipeline</a>
+      <a href="deck-rating.html" class="btn btn-lime btn-sm">Get Raise Score</a>
     </div>
   </header>
 
   <div class="inv-hero">
     <h1>100 pre-seed investors.<br><em>No traction required.</em></h1>
-    <p>Every fund on this list has written pre-seed cheques to founders with zero revenue. Search, filter by region, and add thesis-fit investors straight to your pipeline.</p>
+    <p>Every fund on this list has written pre-seed cheques to founders with zero revenue. Search, filter by region, and build your target list of 50.</p>
     <div class="inv-counts">
       <div><strong>100</strong><span>Verified funds</span></div>
       <div><strong>6</strong><span>Regions</span></div>
@@ -135,10 +134,10 @@
   <div class="inv-cta">
     <div class="inv-cta-inner">
       <div>
-        <h2>Found your 50? Now run them like a campaign.</h2>
-        <p>Add investors to your pipeline and track every warm intro, meeting, and follow-up across 7 stages. Never let a conversation go cold.</p>
+        <h2>Found your 50? Make your deck worthy of them.</h2>
+        <p>Every investor on this list sees hundreds of decks a year. Run yours through the free Deck Rater and fix what is killing you before you send a single email.</p>
       </div>
-      <a href="pipeline.html" class="btn btn-lime">Open Pipeline Tracker</a>
+      <a href="deck-rating.html" class="btn btn-lime">Get Your Raise Score</a>
     </div>
   </div>
 
@@ -149,7 +148,6 @@ var INVESTORS = [{"fund": "Seedcamp", "website": "https://seedcamp.com", "check"
 (function() {
   'use strict';
   var REGIONS = ['Africa', 'Asia-Pacific', 'Europe', 'Latin America', 'Middle East', 'North America'];
-  var LS_KEY = 'raiseos_pipeline_v1';
   var query = '', region = 'all';
 
   var chipsWrap = document.getElementById('region-chips');
@@ -176,43 +174,11 @@ var INVESTORS = [{"fund": "Seedcamp", "website": "https://seedcamp.com", "check"
   function esc(s) {
     return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  function inPipeline(fund) {
-    try {
-      var s = JSON.parse(localStorage.getItem(LS_KEY) || '{"investors":[]}');
-      return s.investors.some(function(i){ return i.firm === fund; });
-    } catch (e) { return false; }
-  }
   function toast(msg) {
     var t = document.getElementById('toast');
     t.textContent = msg; t.classList.add('show');
     clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove('show'); }, 2400);
   }
-  function todayISO() { return new Date().toISOString().slice(0, 10); }
-
-  window.addToPipeline = function(idx) {
-    var inv = filtered[idx];
-    if (!inv) return;
-    try {
-      var raw = localStorage.getItem(LS_KEY);
-      var state = raw ? JSON.parse(raw) : { investors: [] };
-      if (state.investors.some(function(i){ return i.firm === inv.fund; })) {
-        toast('Already in your pipeline'); return;
-      }
-      state.investors.push({
-        id: 'inv_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-        name: inv.fund, firm: inv.hq || inv.fund, email: '',
-        checkSize: inv.check, stage: 'research', thesisFit: 3,
-        warmIntro: '', nextAction: 'Research thesis fit', nextActionDate: '',
-        notes: inv.focus, createdAt: todayISO(), stageEnteredAt: todayISO(),
-        outcome: null,
-        interactions: [{ date: todayISO(), type: 'Added', note: 'Added from Investor Search' }]
-      });
-      localStorage.setItem(LS_KEY, JSON.stringify(state));
-      toast(inv.fund + ' added to your pipeline');
-      render();
-    } catch (e) { toast('Could not save — browser storage unavailable'); }
-  };
-
   var filtered = [];
   function render() {
     filtered = INVESTORS.filter(function(inv) {
@@ -226,8 +192,7 @@ var INVESTORS = [{"fund": "Seedcamp", "website": "https://seedcamp.com", "check"
       grid.innerHTML = '<div class="no-results"><h3 style="color:#111110;">No investors match.</h3><p>Try a broader search or a different region.</p></div>';
       return;
     }
-    grid.innerHTML = filtered.map(function(inv, i) {
-      var added = inPipeline(inv.fund);
+    grid.innerHTML = filtered.map(function(inv) {
       var links = '';
       if (inv.website) links += '<a class="inv-link" href="' + esc(inv.website) + '" target="_blank" rel="noopener">Website</a>';
       if (inv.linkedin) links += '<a class="inv-link" href="' + esc(inv.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>';
@@ -241,11 +206,7 @@ var INVESTORS = [{"fund": "Seedcamp", "website": "https://seedcamp.com", "check"
           '<p class="inv-evidence">"' + esc(inv.evidence) + '"</p>' +
           (inv.pitch ? '<p class="inv-pitch"><strong>How to pitch:</strong> ' + esc(inv.pitch) + '</p>' : '') +
         '</details>' +
-        '<div class="inv-card-actions">' + links +
-        '<button class="add-pipe-btn' + (added ? ' added' : '') + '" ' +
-          (added ? 'disabled' : 'onclick="addToPipeline(' + i + ')"') + '>' +
-          (added ? 'In pipeline ✓' : '+ Add to Pipeline') + '</button>' +
-        '</div></div>';
+        '<div class="inv-card-actions">' + links + '</div></div>';
     }).join('');
   }
   render();
