@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1010 Pre-Seed Investors & Accelerators | Raise OS</title>
-  <meta name="description" content="Search 1010 verified pre-seed and seed VCs and accelerators across 6 regions. Filter by type, stage and region, see check sizes, and build your target list of 50. Free account required.">
+  <title>1020 Pre-Seed Investors & Accelerators | Raise OS</title>
+  <meta name="description" content="Search 1020 verified pre-seed and seed VCs and accelerators across 6 regions. Filter by type, stage and region, see check sizes, and build your target list of 50. Free account required.">
   <link rel="canonical" href="https://www.raiseos.site/investors.html">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Raise OS">
-  <meta property="og:title" content="1010 Pre-Seed Investors & Accelerators | Raise OS">
-  <meta property="og:description" content="1010 verified funds and accelerators that write first cheques. Search, filter by type, stage and region. Free.">
+  <meta property="og:title" content="1020 Pre-Seed Investors & Accelerators | Raise OS">
+  <meta property="og:description" content="1020 verified funds and accelerators that write first cheques. Search, filter by type, stage and region. Free.">
   <meta property="og:url" content="https://www.raiseos.site/investors.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="1010 Pre-Seed Investors & Accelerators | Raise OS">
-  <meta name="twitter:description" content="Search 1010 verified pre-seed funds and accelerators. Filter by type, stage and region. Free.">
+  <meta name="twitter:title" content="1020 Pre-Seed Investors & Accelerators | Raise OS">
+  <meta name="twitter:description" content="Search 1020 verified pre-seed funds and accelerators. Filter by type, stage and region. Free.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,7 +24,7 @@
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": "Searchable database of 1010 verified pre-seed and seed venture funds and accelerators worldwide, with check sizes, regions, stages, and how-to-pitch notes."
+    "description": "Searchable database of 1020 verified pre-seed and seed venture funds and accelerators worldwide, with check sizes, regions, stages, and how-to-pitch notes."
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,8 +152,8 @@
   <div id="auth-gate">
     <div class="auth-card">
       <a href="index.html" class="pipe-logo">Raise<span>.</span></a>
-      <h2>Unlock <em>1010</em> verified investors</h2>
-      <p>Enter your access code to search 1010 pre-seed and seed VCs and accelerators across 6 regions. Filter by type, stage and region, build your target list of 50.</p>
+      <h2>Unlock <em>1020</em> verified investors</h2>
+      <p>Enter your access code to search 1020 pre-seed and seed VCs, angels, and accelerators across 6 regions. Filter by type, stage and region, build your target list of 50.</p>
       <form id="code-form">
         <input id="access-code" placeholder="Access code" required autocomplete="off" autocapitalize="characters" spellcheck="false">
         <button class="btn btn-lime" type="submit" style="width:100%; justify-content:center;">Unlock access</button>
@@ -165,7 +165,7 @@
   <div id="app-content">
 
   <div class="inv-hero">
-    <h1><span id="hero-count">1010</span> investors who write <em>first cheques.</em></h1>
+    <h1><span id="hero-count">1020</span> investors who write <em>first cheques.</em></h1>
     <p>Pre-seed and seed funds <em>and</em> accelerators across 6 regions, every one verified to invest early. Search, filter by type, stage and region, and build your target list of 50.</p>
     <div class="inv-counts">
       <div><strong id="stat-total">&ndash;</strong><span>Funds &amp; accelerators</span></div>
@@ -185,6 +185,7 @@
           <h4>Type</h4>
           <label class="filter-opt"><input type="checkbox" data-dim="type" value="vc"> VCs</label>
           <label class="filter-opt"><input type="checkbox" data-dim="type" value="accelerator"> Accelerators</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="type" value="angel"> Angels</label>
         </div>
         <div class="filter-group">
           <h4>Stage</h4>
@@ -263,7 +264,7 @@ var ACCESS_CODE = 'Raise100';
   function loadDataScripts() {
     if (window.INVESTORS && window.INVESTORS.length) return Promise.resolve();
     var chain = Promise.resolve();
-    [1, 2, 3, 4, 5, 6].forEach(function(i) {
+    [1, 2, 3, 4, 5, 6, 7].forEach(function(i) {
       chain = chain.then(function() {
         return new Promise(function(res) {
           var s = document.createElement('script');
@@ -309,7 +310,7 @@ var ACCESS_CODE = 'Raise100';
   // An empty Set means "no constraint" for that dimension.
   var filters = { type: new Set(), stage: new Set(), region: new Set(), model: new Set(), check: new Set() };
   var DIM_LABELS = {
-    type: { vc: 'VCs', accelerator: 'Accelerators' },
+    type: { vc: 'VCs', accelerator: 'Accelerators', angel: 'Angels' },
     stage: { 'Pre-seed': 'Pre-seed', 'Seed': 'Seed' },
     region: { 'Africa': 'Africa', 'Asia-Pacific': 'Asia-Pacific', 'Europe': 'Europe', 'Latin America': 'Latin America', 'Middle East': 'Middle East', 'North America': 'North America' },
     model: { B2B: 'B2B', B2C: 'B2C' },
