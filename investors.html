@@ -78,11 +78,29 @@
     .inv-filters { max-width: 1200px; margin: 26px auto 0; padding: 0 24px; position: sticky; top: 66px; z-index: 100; background: rgba(248,248,244,.96); backdrop-filter: blur(10px); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid #E2E2DC; }
     .inv-search { width: 100%; padding: 13px 20px; border: 1px solid #E2E2DC; border-radius: 100px; font-family: inherit; font-size: 15px; background: #fff; outline: none; margin-bottom: 12px; }
     .inv-search:focus { border-color: #B9FF66; box-shadow: 0 0 0 3px rgba(185,255,102,.25); }
-    .region-chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .chip { font-family: inherit; font-size: 13px; font-weight: 700; padding: 8px 16px; border-radius: 100px; border: 1px solid #E2E2DC; background: #fff; cursor: pointer; color: #585A61; }
-    .chip:hover { border-color: #B9FF66; }
-    .chip.sel { background: #111110; color: #fff; border-color: #111110; }
     .inv-result-count { margin-left: auto; font-size: 13px; color: #6B6B6B; font-weight: 600; }
+    .search-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 12px; }
+    .search-row .inv-search { margin-bottom: 0; flex: 1; }
+    .filter-btn { font-family: inherit; font-size: 14px; font-weight: 800; padding: 0 20px; border-radius: 100px; border: 1.5px solid #111110; background: #fff; color: #111110; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+    .filter-btn:hover { background: #B9FF66; border-color: #B9FF66; }
+    .filter-btn.open { background: #111110; color: #fff; }
+    .filter-badge { background: #B9FF66; color: #111110; font-size: 11px; font-weight: 900; min-width: 20px; height: 20px; border-radius: 100px; display: none; align-items: center; justify-content: center; padding: 0 5px; }
+    .filter-btn.open .filter-badge { background: #fff; }
+    .filter-badge.show { display: inline-flex; }
+    .filter-panel { display: none; background: #fff; border: 1px solid #E2E2DC; border-radius: 16px; padding: 20px 22px 16px; margin-bottom: 12px; }
+    .filter-panel.open { display: block; }
+    .filter-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px 24px; }
+    .filter-group h4 { margin: 0 0 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; color: #6B6B6B; }
+    .filter-opt { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: #111110; padding: 4px 0; cursor: pointer; }
+    .filter-opt input { accent-color: #111110; width: 16px; height: 16px; cursor: pointer; }
+    .filter-note { font-size: 11.5px; color: #6B6B6B; margin-top: 6px; line-height: 1.5; }
+    .filter-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px solid #E2E2DC; }
+    .filter-clear { font-family: inherit; font-size: 13px; font-weight: 700; color: #111110; background: none; border: none; cursor: pointer; text-decoration: underline; }
+    .filter-done { font-family: inherit; font-size: 13px; font-weight: 800; padding: 8px 20px; border-radius: 100px; border: none; background: #111110; color: #fff; cursor: pointer; }
+    .active-pills { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+    .active-pills:empty { display: none; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; background: #111110; color: #fff; padding: 6px 10px 6px 12px; border-radius: 100px; }
+    .pill button { background: none; border: none; color: #fff; font-size: 14px; line-height: 1; cursor: pointer; padding: 0; }
 
     .inv-grid { max-width: 1200px; margin: 24px auto 30px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
     .inv-card { background: #fff; border: 1px solid #E2E2DC; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s; }
@@ -157,25 +175,52 @@
   </div>
 
   <div class="inv-filters">
-    <input type="search" class="inv-search" id="inv-search" placeholder="Search funds, cities, sectors... (e.g. fintech, Berlin, SaaS)" aria-label="Search investors">
-    <div class="region-chips" id="type-chips" style="margin-bottom:10px;">
-      <button class="chip sel" data-type="all">All</button>
-      <button class="chip" data-type="vc">VCs</button>
-      <button class="chip" data-type="accelerator">Accelerators</button>
+    <div class="search-row">
+      <input type="search" class="inv-search" id="inv-search" placeholder="Search funds, cities, sectors... (e.g. fintech, Berlin, SaaS)" aria-label="Search investors">
+      <button class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-panel">Filters <span class="filter-badge" id="filter-badge">0</span></button>
     </div>
-    <div class="region-chips" id="b2b-chips" style="margin-bottom:10px;">
-      <button class="chip sel" data-b2b="all">B2B + B2C</button>
-      <button class="chip" data-b2b="B2B">B2B</button>
-      <button class="chip" data-b2b="B2C">B2C</button>
+    <div class="filter-panel" id="filter-panel">
+      <div class="filter-groups">
+        <div class="filter-group">
+          <h4>Type</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="type" value="vc"> VCs</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="type" value="accelerator"> Accelerators</label>
+        </div>
+        <div class="filter-group">
+          <h4>Stage</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="stage" value="Pre-seed"> Pre-seed</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="stage" value="Seed"> Seed</label>
+        </div>
+        <div class="filter-group">
+          <h4>Region</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Africa"> Africa</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Asia-Pacific"> Asia-Pacific</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Europe"> Europe</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Latin America"> Latin America</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Middle East"> Middle East</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="North America"> North America</label>
+        </div>
+        <div class="filter-group">
+          <h4>Focus</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="model" value="B2B"> B2B</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="model" value="B2C"> B2C</label>
+          <p class="filter-note">Funds without a stated focus are always shown.</p>
+        </div>
+        <div class="filter-group">
+          <h4>Cheque size</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="check" value="under500k"> Under $500K</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="check" value="500k-2m"> $500K – $2M</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="check" value="over2m"> Over $2M</label>
+          <p class="filter-note">Only funds with a known cheque size. Converted to USD at approx. rates.</p>
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button class="filter-clear" id="filter-clear">Clear all filters</button>
+        <button class="filter-done" id="filter-done">Show results</button>
+      </div>
     </div>
-    <div class="region-chips" id="stage-chips" style="margin-bottom:10px;">
-      <button class="chip sel" data-stage="all">All stages</button>
-      <button class="chip" data-stage="Pre-seed">Pre-seed</button>
-      <button class="chip" data-stage="Seed">Seed</button>
-    </div>
-    <div class="region-chips" id="region-chips">
-      <button class="chip sel" data-region="all">All regions</button>
-    </div>
+    <div class="active-pills" id="active-pills"></div>
+    <div style="display:flex;align-items:center;"><span class="inv-result-count" id="inv-count"></span></div>
   </div>
 
   <div class="inv-grid" id="inv-grid"></div>
@@ -259,45 +304,104 @@ var ACCESS_CODE = 'Raise100';
 
   function initApp() {
 'use strict';
-  var REGIONS = ['Africa', 'Asia-Pacific', 'Europe', 'Latin America', 'Middle East', 'North America'];
-  var query = '', region = 'all', stage = 'all', type = 'all', b2b = 'all';
+  var query = '';
+  // Filter state: each dimension holds a Set of selected values.
+  // An empty Set means "no constraint" for that dimension.
+  var filters = { type: new Set(), stage: new Set(), region: new Set(), model: new Set(), check: new Set() };
+  var DIM_LABELS = {
+    type: { vc: 'VCs', accelerator: 'Accelerators' },
+    stage: { 'Pre-seed': 'Pre-seed', 'Seed': 'Seed' },
+    region: { 'Africa': 'Africa', 'Asia-Pacific': 'Asia-Pacific', 'Europe': 'Europe', 'Latin America': 'Latin America', 'Middle East': 'Middle East', 'North America': 'North America' },
+    model: { B2B: 'B2B', B2C: 'B2C' },
+    check: { under500k: 'Under $500K', '500k-2m': '$500K – $2M', over2m: 'Over $2M' }
+  };
+  var CHECK_BUCKETS = {
+    under500k: [0, 500000],
+    '500k-2m': [500000, 2000000],
+    over2m: [2000000, Infinity]
+  };
 
-  var chipsWrap = document.getElementById('region-chips');
-  REGIONS.forEach(function(r) {
-    var b = document.createElement('button');
-    b.className = 'chip'; b.setAttribute('data-region', r); b.textContent = r;
-    chipsWrap.appendChild(b);
-  });
-  var countEl = document.createElement('span');
-  countEl.className = 'inv-result-count'; countEl.id = 'inv-count';
-  chipsWrap.appendChild(countEl);
+  // Parse a cheque-size string like "$350K–$1.25M" or "EUR 100K-EUR 1.5M"
+  // into an approximate USD range {min, max}. Returns null when unparseable.
+  // Currency conversion uses fixed approximate rates (EUR 1.08, GBP 1.27).
+  function parseCheck(s) {
+    if (!s) return null;
+    var cur = '$';
+    if (/EUR|€/.test(s)) cur = 'EUR';
+    else if (/GBP|£/.test(s)) cur = 'GBP';
+    var rate = cur === 'EUR' ? 1.08 : (cur === 'GBP' ? 1.27 : 1);
+    s = s.replace(/\d+(?:\.\d+)?\s*%/g, ''); // drop percentages like "~7%" (not money)
+    var nums = [];
+    var re = /(\d+(?:\.\d+)?)\s*([KMB])?/g, m;
+    while ((m = re.exec(s)) !== null) {
+      var v = parseFloat(m[1]);
+      var mult = m[2] === 'M' ? 1000000 : (m[2] === 'B' ? 1000000000 : 1000);
+      nums.push(v * mult * rate);
+    }
+    if (!nums.length) return null;
+    // "Up to X" at the start: range is 0..X. A single value: a point range.
+    // A range "A–B": A..B (first two numbers; follow-on figures may widen it).
+    if (/^\s*up to/i.test(s)) return { min: 0, max: nums[0] };
+    if (nums.length === 1) return { min: nums[0], max: nums[0] };
+    return { min: Math.min(nums[0], nums[1]), max: Math.max(nums[0], nums[1]) };
+  }
 
-  chipsWrap.addEventListener('click', function(e) {
-    var b = e.target.closest('.chip'); if (!b) return;
-    region = b.getAttribute('data-region');
-    chipsWrap.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('sel', x === b); });
+  function activeFilterCount() {
+    var n = 0;
+    Object.keys(filters).forEach(function(d) { n += filters[d].size; });
+    return n;
+  }
+
+  function syncFilterUI() {
+    var panel = document.getElementById('filter-panel');
+    var btn = document.getElementById('filter-btn');
+    var badge = document.getElementById('filter-badge');
+    var n = activeFilterCount();
+    badge.textContent = n;
+    badge.classList.toggle('show', n > 0);
+    // pills
+    var pills = document.getElementById('active-pills');
+    var html = '';
+    Object.keys(filters).forEach(function(d) {
+      filters[d].forEach(function(v) {
+        html += '<span class="pill">' + esc(DIM_LABELS[d][v] || v) +
+          ' <button data-dim="' + d + '" data-val="' + esc(v) + '" aria-label="Remove filter">&times;</button></span>';
+      });
+    });
+    pills.innerHTML = html;
+    pills.querySelectorAll('button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        filters[b.getAttribute('data-dim')].delete(b.getAttribute('data-val'));
+        var cb = document.querySelector('.filter-panel input[data-dim="' + b.getAttribute('data-dim') + '"][value="' + b.getAttribute('data-val') + '"]');
+        if (cb) cb.checked = false;
+        render();
+      });
+    });
+    return panel;
+  }
+
+  function togglePanel(force) {
+    var panel = document.getElementById('filter-panel');
+    var btn = document.getElementById('filter-btn');
+    var open = force !== undefined ? force : !panel.classList.contains('open');
+    panel.classList.toggle('open', open);
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  document.getElementById('filter-btn').addEventListener('click', function() { togglePanel(); });
+  document.getElementById('filter-done').addEventListener('click', function() { togglePanel(false); });
+  document.getElementById('filter-clear').addEventListener('click', function() {
+    Object.keys(filters).forEach(function(d) { filters[d].clear(); });
+    document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
     render();
   });
-  var typeWrap = document.getElementById('type-chips');
-  typeWrap.addEventListener('click', function(e) {
-    var b = e.target.closest('.chip'); if (!b) return;
-    type = b.getAttribute('data-type');
-    typeWrap.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('sel', x === b); });
-    render();
-  });
-  var b2bWrap = document.getElementById('b2b-chips');
-  b2bWrap.addEventListener('click', function(e) {
-    var b = e.target.closest('.chip'); if (!b) return;
-    b2b = b.getAttribute('data-b2b');
-    b2bWrap.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('sel', x === b); });
-    render();
-  });
-  var stageWrap = document.getElementById('stage-chips');
-  stageWrap.addEventListener('click', function(e) {
-    var b = e.target.closest('.chip'); if (!b) return;
-    stage = b.getAttribute('data-stage');
-    stageWrap.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('sel', x === b); });
-    render();
+  document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      var set = filters[cb.getAttribute('data-dim')];
+      if (cb.checked) set.add(cb.value); else set.delete(cb.value);
+      render();
+    });
   });
   document.getElementById('inv-search').addEventListener('input', function(e) {
     query = e.target.value.trim().toLowerCase();
@@ -306,23 +410,35 @@ var ACCESS_CODE = 'Raise100';
 
   var filtered = [];
   function render() {
+    syncFilterUI();
     filtered = INVESTORS.filter(function(inv) {
-      var t = inv.type || 'vc';
-      if (type !== 'all' && t !== type) return false;
-      if (b2b !== 'all') {
+      if (filters.type.size && !filters.type.has(inv.type || 'vc')) return false;
+      if (filters.stage.size && !filters.stage.has(inv.stage || '')) return false;
+      if (filters.region.size && !filters.region.has(inv.region || '')) return false;
+      if (filters.model.size) {
         var tag = (inv.b2b_b2c || '').trim();
-        if (tag === 'B2B' && b2b !== 'B2B') return false;
-        if (tag === 'B2C' && b2b !== 'B2C') return false;
+        if (tag === 'B2B' && !filters.model.has('B2B')) return false;
+        if (tag === 'B2C' && !filters.model.has('B2C')) return false;
+        if (tag === 'Both' && !filters.model.has('B2B') && !filters.model.has('B2C')) return false;
+        // blank tag: focus unknown, always shown (previous behaviour kept)
       }
-      if (region !== 'all' && inv.region !== region) return false;
-      if (stage !== 'all' && inv.stage !== stage) return false;
+      if (filters.check.size) {
+        var range = parseCheck(inv.check || '');
+        if (!range) return false; // cheque-size filter only covers funds with known sizes
+        var overlaps = false;
+        filters.check.forEach(function(b) {
+          var bk = CHECK_BUCKETS[b];
+          if (range.min <= bk[1] && range.max >= bk[0]) overlaps = true;
+        });
+        if (!overlaps) return false;
+      }
       if (!query) return true;
       return (inv.fund + ' ' + inv.hq + ' ' + inv.focus + ' ' + inv.check).toLowerCase().indexOf(query) > -1;
     });
     document.getElementById('inv-count').textContent = filtered.length + ' of ' + INVESTORS.length;
     var grid = document.getElementById('inv-grid');
     if (!filtered.length) {
-      grid.innerHTML = '<div class="no-results"><h3 style="color:#111110;">No investors match.</h3><p>Try a broader search or a different region.</p></div>';
+      grid.innerHTML = '<div class="no-results"><h3 style="color:#111110;">No investors match.</h3><p>Try a broader search or clear some filters.</p></div>';
       return;
     }
     grid.innerHTML = filtered.map(function(inv) {
