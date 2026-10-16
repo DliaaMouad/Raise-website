@@ -202,4 +202,31 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Substack feed fallback:', err);
       });
   }
+
+  // 8. FAQ Accordion Interactivity
+  const faqTriggers = document.querySelectorAll('.faq-trigger');
+  faqTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      
+      // Close other open items
+      faqTriggers.forEach(other => {
+        if (other !== trigger) {
+          other.setAttribute('aria-expanded', 'false');
+          const otherPanel = other.nextElementSibling;
+          if (otherPanel) otherPanel.style.maxHeight = null;
+        }
+      });
+
+      trigger.setAttribute('aria-expanded', !isExpanded);
+      const panel = trigger.nextElementSibling;
+      if (panel) {
+        if (!isExpanded) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        } else {
+          panel.style.maxHeight = null;
+        }
+      }
+    });
+  });
 });
