@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundraising CRM | Raise Tools</title>
+<link rel="stylesheet" href="tools.css">
+</head>
+<body>
+<header class="tools-topbar">
+  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
+  <nav class="tools-nav">
+    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
+    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
+  </nav>
+  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
+</header>
+<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
+<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
+<main>
+  <div id="gate" class="gate">
+    <h2>Sign up / Log in</h2>
+    <p>Sign in with Google to save your data.</p>
+    <div id="google-btn-holder"></div>
+    <button class="btn" id="google-btn">Continue with Google</button>
+    <p><button class="btn btn-ghost" id="local-btn" hidden>Continue on this device</button></p>
+    <p class="privacy">Your data is stored in your own Google account or on this device. Raise does not receive it.</p>
+  </div>
+  <div id="app" hidden>
+    <h1>Fundraising CRM</h1>
+    <p class="sub">Track your investor pipeline. Add investors, move them through stages, keep meeting notes, and never miss a follow-up.</p>
+    <div class="syncbar">
+      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
+      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
+      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
+      <span id="sync-status"></span>
+    </div>
+    <div class="grid2">
+      <section class="card">
+        <h2 style="margin:0 0 4px;font-size:18px;">Add / edit investor</h2>
+        <form id="investor-form">
+          <label for="f-name">Investor name</label><input id="f-name" required>
+          <label for="f-firm">Firm</label><input id="f-firm">
+          <label for="f-stage">Stage</label>
+          <select id="f-stage"><option>Target</option><option>Contacted</option><option>Meeting</option><option>Diligence</option><option>Committed</option><option>Passed</option></select>
+          <label for="f-follow">Follow-up date</label><input id="f-follow" type="date">
+          <label for="f-notes">Notes</label><textarea id="f-notes" placeholder="Context, last conversation, next step..."></textarea>
+          <p style="margin-top:14px;display:flex;gap:8px;">
+            <button class="btn btn-lime" type="submit">Save investor</button>
+            <button class="btn btn-ghost" type="button" id="form-clear">Clear</button>
+            <button class="btn btn-ghost" type="button" id="form-delete" hidden>Delete</button>
+          </p>
+        </form>
+      </section>
+      <section class="card">
+        <h2 style="margin:0 0 4px;font-size:18px;">Follow-ups</h2>
+        <p class="note">Investors with a follow-up date, soonest first. Overdue follow-ups are flagged.</p>
+        <div id="followups"></div>
+        <h2 style="margin:20px 0 4px;font-size:18px;">Meeting notes</h2>
+        <p class="note">Notes live on each investor. Click an investor card to edit and add notes.</p>
+        <div id="notes-list"></div>
+      </section>
+    </div>
+    <h2 style="margin:24px 0 10px;">Pipeline board</h2>
+    <div class="board" id="board"></div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script src="sheets.js"></script>
+<script>
+window.TOOL_KEY = 'crm';
+var STAGES = ['Target', 'Contacted', 'Meeting', 'Diligence', 'Committed', 'Passed'];
+var state = RaiseSheets.loadLocal('crm', { investors: [] });
+var editingId = null;
+function save() {
+  RaiseSheets.saveLocal('crm', state);
+  render();
+}
+window.getToolData = function () { return state; };
+window.setToolData = function (d) { if (d && Array.isArray(d.investors)) { state = d; save(); } };
+function uid() { return 'inv_' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36); }
+function render() {
+  var board = document.getElementById('board');
+  board.innerHTML = '';
+  STAGES.forEach(function (stage) {
+    var col = document.createElement('div');
+    col.className = 'stage-col';
+    var list = state.investors.filter(function (i) { return i.stage === stage; });
+    var h = document.createElement('h3');
+    h.innerHTML = stage + ' <span>(' + list.length + ')</span>';
+    col.appendChild(h);
+    list.forEach(function (inv) {
+      var card = document.createElement('div');
+      card.className = 'investor-card';
+      card.innerHTML = '<b></b><p></p>';
+      card.querySelector('b').textContent = inv.name + (inv.firm ? ' · ' + inv.firm : '');
+      card.querySelector('p').textContent = (inv.followUp ? 'Follow-up: ' + inv.followUp + ' · ' : '') + (inv.notes ? inv.notes.slice(-1) : '');
+      card.addEventListener('click', function () { loadIntoForm(inv.id); });
+      col.appendChild(card);
+    });
+    board.appendChild(col);
+  });
+  var today = new Date().toISOString().slice(0, 10);
+  var withDate = state.investors.filter(function (i) { return i.followUp; })
+    .sort(function (a, b) { return a.followUp.localeCompare(b.followUp); });
+  var fu = document.getElementById('followups');
+  fu.innerHTML = withDate.length ? '' : '<p class="note">No follow-ups set yet.</p>';
+  withDate.forEach(function (inv) {
+    var overdue = inv.followUp < today && inv.stage !== 'Committed' && inv.stage !== 'Passed';
+    var div = document.createElement('p');
+    div.innerHTML = '<b></b> <span class="pill ' + (overdue ? 'bad' : '') + '">' + (overdue ? 'Overdue' : inv.followUp) + '</span> <span class="note">' + inv.stage + '</span>';
+    div.querySelector('b').textContent = inv.name + (inv.firm ? ' (' + inv.firm + ')' : '');
+    fu.appendChild(div);
+  });
+  var nl = document.getElementById('notes-list');
+  var noted = state.investors.filter(function (i) { return i.notes; });
+  nl.innerHTML = noted.length ? '' : '<p class="note">No notes yet.</p>';
+  noted.slice(-5).reverse().forEach(function (inv) {
+    var div = document.createElement('p');
+    div.innerHTML = '<b></b>: <span></span>';
+    div.querySelector('b').textContent = inv.name;
+    div.querySelector('span').textContent = inv.notes;
+    nl.appendChild(div);
+  });
+}
+function loadIntoForm(id) {
+  var inv = state.investors.find(function (i) { return i.id === id; });
+  if (!inv) return;
+  editingId = id;
+  document.getElementById('f-name').value = inv.name || '';
+  document.getElementById('f-firm').value = inv.firm || '';
+  document.getElementById('f-stage').value = inv.stage || 'Target';
+  document.getElementById('f-follow').value = inv.followUp || '';
+  document.getElementById('f-notes').value = inv.notes || '';
+  document.getElementById('form-delete').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function clearForm() {
+  editingId = null;
+  document.getElementById('investor-form').reset();
+  document.getElementById('form-delete').hidden = true;
+}
+document.getElementById('investor-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var name = document.getElementById('f-name').value.trim();
+  if (!name) return;
+  if (editingId) {
+    var inv = state.investors.find(function (i) { return i.id === editingId; });
+    if (inv) {
+      inv.name = name;
+      inv.firm = document.getElementById('f-firm').value.trim();
+      inv.stage = document.getElementById('f-stage').value;
+      inv.followUp = document.getElementById('f-follow').value;
+      inv.notes = document.getElementById('f-notes').value.trim();
+    }
+  } else {
+    state.investors.push({
+      id: uid(), name: name,
+      firm: document.getElementById('f-firm').value.trim(),
+      stage: document.getElementById('f-stage').value,
+      followUp: document.getElementById('f-follow').value,
+      notes: document.getElementById('f-notes').value.trim()
+    });
+  }
+  clearForm();
+  save();
+});
+document.getElementById('form-clear').addEventListener('click', clearForm);
+document.getElementById('form-delete').addEventListener('click', function () {
+  if (editingId) state.investors = state.investors.filter(function (i) { return i.id !== editingId; });
+  clearForm();
+  save();
+});
+render();
+</script>
+</body>
+</html>

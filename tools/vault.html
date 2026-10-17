@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Due Diligence Vault | Raise Tools</title>
+<link rel="stylesheet" href="tools.css">
+</head>
+<body>
+<header class="tools-topbar">
+  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
+  <nav class="tools-nav">
+    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
+    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
+  </nav>
+  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
+</header>
+<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
+<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
+<main>
+  <div id="gate" class="gate">
+    <h2>Sign up / Log in</h2>
+    <p>Sign in with Google to save your data.</p>
+    <div id="google-btn-holder"></div>
+    <button class="btn" id="google-btn">Continue with Google</button>
+    <p><button class="btn btn-ghost" id="local-btn" hidden>Continue on this device</button></p>
+    <p class="privacy">Your data is stored in your own Google account or on this device. Raise does not receive it.</p>
+  </div>
+  <div id="app" hidden>
+    <h1>Due Diligence Vault</h1>
+    <p class="sub">Organize your data room. Track which documents are ready, which are missing, and flag issues before investors find them. No files are uploaded here: this checklist stores document names, status, and notes only.</p>
+    <div class="syncbar">
+      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
+      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
+      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
+      <span id="sync-status"></span>
+    </div>
+    <section class="card">
+      <h2 style="margin:0 0 4px;font-size:18px;">Data room status</h2>
+      <p><span class="pill" id="sum-present">0 present</span> <span class="pill warn" id="sum-missing">0 missing</span> <span class="pill bad" id="sum-flagged">0 flagged issues</span></p>
+      <div class="scorebar"><div id="vault-bar" style="width:0%"></div></div>
+      <p class="formula" id="vault-pct">0% of documents marked present.</p>
+    </section>
+    <h2 style="margin:24px 0 10px;">Document checklist</h2>
+    <section class="card"><div id="docs"></div></section>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script src="sheets.js"></script>
+<script>
+window.TOOL_KEY = 'vault';
+var DOCS = ['Pitch deck', 'Financial model', 'Cap table', 'Incorporation documents', 'Founder agreements', 'IP assignments', 'Customer contracts', 'Privacy policy', 'Terms of service', 'Tax filings', 'Bank statements', 'Board minutes'];
+var state = RaiseSheets.loadLocal('vault', { docs: {} });
+function save() { RaiseSheets.saveLocal('vault', state); compute(); }
+window.getToolData = function () { return state; };
+window.setToolData = function (d) { if (d && d.docs) { state = d; renderDocs(); compute(); } };
+function docState(name) {
+  if (!state.docs[name]) state.docs[name] = { status: 'Missing', fileName: '', notes: '', flagged: false };
+  return state.docs[name];
+}
+function compute() {
+  var present = 0, missing = 0, flagged = 0;
+  DOCS.forEach(function (name) {
+    var d = docState(name);
+    if (d.status === 'Present') present++;
+    if (d.status === 'Missing') missing++;
+    if (d.flagged) flagged++;
+  });
+  document.getElementById('sum-present').textContent = present + ' present';
+  document.getElementById('sum-missing').textContent = missing + ' missing';
+  document.getElementById('sum-flagged').textContent = flagged + ' flagged issues';
+  var pct = Math.round((present / DOCS.length) * 100);
+  document.getElementById('vault-bar').style.width = pct + '%';
+  document.getElementById('vault-pct').textContent = pct + '% of documents marked present.';
+}
+function renderDocs() {
+  var el = document.getElementById('docs');
+  el.innerHTML = '';
+  var head = document.createElement('div');
+  head.innerHTML = '<table><tr><th>Document</th><th>Status</th><th>File name (reference only)</th><th>Notes</th><th>Flag issue</th></tr></table>';
+  el.appendChild(head);
+  var table = head.querySelector('table');
+  DOCS.forEach(function (name) {
+    var d = docState(name);
+    var tr = document.createElement('tr');
+    var tdName = document.createElement('td'); tdName.innerHTML = '<b></b>'; tdName.querySelector('b').textContent = name;
+    var tdStatus = document.createElement('td');
+    var sel = document.createElement('select');
+    ['Missing', 'In progress', 'Present'].forEach(function (s) { var o = document.createElement('option'); o.textContent = s; sel.appendChild(o); });
+    sel.value = d.status;
+    sel.addEventListener('change', function () { d.status = sel.value; save(); });
+    tdStatus.appendChild(sel);
+    var tdFile = document.createElement('td');
+    var fileInput = document.createElement('input');
+    fileInput.placeholder = 'e.g. cap-table-2026.pdf';
+    fileInput.value = d.fileName || '';
+    fileInput.addEventListener('input', function () { d.fileName = fileInput.value; RaiseSheets.saveLocal('vault', state); });
+    tdFile.appendChild(fileInput);
+    var tdNotes = document.createElement('td');
+    var notesInput = document.createElement('input');
+    notesInput.placeholder = 'Notes or gaps';
+    notesInput.value = d.notes || '';
+    notesInput.addEventListener('input', function () { d.notes = notesInput.value; RaiseSheets.saveLocal('vault', state); });
+    tdNotes.appendChild(notesInput);
+    var tdFlag = document.createElement('td');
+    var flag = document.createElement('input');
+    flag.type = 'checkbox'; flag.checked = !!d.flagged;
+    flag.addEventListener('change', function () { d.flagged = flag.checked; save(); });
+    tdFlag.appendChild(flag);
+    tr.appendChild(tdName); tr.appendChild(tdStatus); tr.appendChild(tdFile); tr.appendChild(tdNotes); tr.appendChild(tdFlag);
+    table.appendChild(tr);
+  });
+}
+renderDocs();
+compute();
+</script>
+</body>
+</html>

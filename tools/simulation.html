@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VC Partner Simulation | Raise Tools</title>
+<link rel="stylesheet" href="tools.css">
+</head>
+<body>
+<header class="tools-topbar">
+  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
+  <nav class="tools-nav">
+    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
+    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
+  </nav>
+  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
+</header>
+<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
+<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
+<main>
+  <div id="gate" class="gate">
+    <h2>Sign up / Log in</h2>
+    <p>Sign in with Google to save your data.</p>
+    <div id="google-btn-holder"></div>
+    <button class="btn" id="google-btn">Continue with Google</button>
+    <p><button class="btn btn-ghost" id="local-btn" hidden>Continue on this device</button></p>
+    <p class="privacy">Your data is stored in your own Google account or on this device. Raise does not receive it.</p>
+  </div>
+  <div id="app" hidden>
+    <h1>VC Partner Simulation</h1>
+    <p class="sub">Stress-test your narrative with hard investor questions. <b>Practice question bank, not AI.</b> Questions are selected by rules from a fixed question bank. No AI, no API, no data leaves this page.</p>
+    <div class="syncbar">
+      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
+      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
+      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
+      <span id="sync-status"></span>
+    </div>
+    <section class="card">
+      <label for="s-pitch">Your pitch / narrative (optional, stays on this device)</label>
+      <textarea id="s-pitch" placeholder="Paste your one-paragraph pitch or narrative..."></textarea>
+      <p style="margin:12px 0 4px;font-weight:600;font-size:13px;">Topics to drill</p>
+      <div id="topics" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <label style="display:inline-flex;gap:6px;"><input type="checkbox" value="market" checked> Market</label>
+        <label style="display:inline-flex;gap:6px;"><input type="checkbox" value="moat" checked> Moat</label>
+        <label style="display:inline-flex;gap:6px;"><input type="checkbox" value="traction" checked> Traction</label>
+        <label style="display:inline-flex;gap:6px;"><input type="checkbox" value="team" checked> Team</label>
+        <label style="display:inline-flex;gap:6px;"><input type="checkbox" value="financials" checked> Financials</label>
+      </div>
+      <p style="margin-top:14px;display:flex;gap:8px;">
+        <button class="btn btn-lime" id="get-questions">Get questions</button>
+        <button class="btn btn-ghost" id="next-set">Get another set</button>
+      </p>
+      <p class="note">Selection rule: for each selected topic, the tool takes 3 questions starting at an offset set by your pitch length and how many sets you have drawn, cycling through the bank. Nothing is generated.</p>
+    </section>
+    <h2 style="margin:24px 0 10px;">Your questions</h2>
+    <div id="questions"><p class="note">Select topics and press "Get questions".</p></div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="auth.js"></script>
+<script src="sheets.js"></script>
+<script>
+window.TOOL_KEY = 'simulation';
+var BANK = {
+  market: [
+    { q: 'Who exactly is your first customer, and how many of them exist?', hint: 'A strong answer names a specific buyer, a countable segment, and how you reach them.' },
+    { q: 'How did you size this market bottom-up, and what is wrong with the top-down number?', hint: 'Show the math from customers you can actually reach, not a headline TAM.' },
+    { q: 'Why is this market opening now, and what changes if you wait 18 months?', hint: 'Name the shift: regulation, cost curve, behavior change, or platform change.' },
+    { q: 'Which adjacent market do founders usually confuse with yours?', hint: 'Show you know where your market ends and the lookalike begins.' },
+    { q: 'What would have to be true for this market to be 10x smaller than you claim?', hint: 'Steel-man the bear case before the partner does.' },
+    { q: 'Who pays, who uses, and are they the same person?', hint: 'If buyer and user differ, explain both sales motions.' }
+  ],
+  moat: [
+    { q: 'What stops an incumbent from copying this in a quarter?', hint: 'Name the asset that compounds: data, distribution, workflow lock-in, or regulatory position.' },
+    { q: 'What is your unfair advantage, and why can nobody else claim it?', hint: 'An advantage must be specific to this team, not true of any competent team.' },
+    { q: 'If a well-funded clone launched tomorrow, what would you do in the first 30 days?', hint: 'Show a plan that uses your head start, not a hope they fail.' },
+    { q: 'Where does your margin come from, and what erodes it?', hint: 'Tie the moat to unit economics, not to features.' },
+    { q: 'What part of your product is a feature of someone else\'s platform?', hint: 'Be honest about platform risk and your answer to it.' },
+    { q: 'How does your moat get stronger with every customer?', hint: 'Network effects, data flywheels, or switching costs must compound.' }
+  ],
+  traction: [
+    { q: 'What is your revenue today, and how much of it is recurring?', hint: 'Separate one-off revenue from repeatable revenue. Partners will.' },
+    { q: 'Show me the cohort: do customers stay, expand, or churn?', hint: 'Retention beats growth claims. Bring the cohort table.' },
+    { q: 'What is your growth rate over the last 3 months, measured weekly?', hint: 'Weekly numbers expose whether growth is real or a single spike.' },
+    { q: 'Which customer would you lose first, and why?', hint: 'Knowing your weakest customer shows you understand churn risk.' },
+    { q: 'What did your last 10 customer conversations change about the product?', hint: 'Traction is learning speed, not just a chart.' },
+    { q: 'What is the one metric that would make you shut this down if it flatlined?', hint: 'Name the metric that actually decides the company.' }
+  ],
+  team: [
+    { q: 'Why is this team the one to win this market?', hint: 'Connect each founder to a specific edge: distribution, domain, or technical depth.' },
+    { q: 'What is the biggest gap on this team, and who closes it?', hint: 'Name the gap and the hire, not a vague plan to hire.' },
+    { q: 'Have the founders worked together before, and through what hardship?', hint: 'Partners probe co-founder durability, not just resumes.' },
+    { q: 'Who sells, and what have they sold before?', hint: 'Someone must own revenue from day one.' },
+    { q: 'What would make a founder leave in the next 12 months?', hint: 'Honesty about risk reads as maturity, not weakness.' },
+    { q: 'Which advisor would you call first in a crisis, and why?', hint: 'Show the team has counsel it actually uses.' }
+  ],
+  financials: [
+    { q: 'What is your burn, runway, and what does this round buy?', hint: 'Give exact numbers: burn, runway in months, and the milestones the round funds.' },
+    { q: 'Walk me through your unit economics: CAC, LTV, payback, and how you measured them.', hint: 'Show the inputs and the sample size, not just the ratios.' },
+    { q: 'When do you reach break-even, and what has to go right?', hint: 'Name the assumptions the plan depends on.' },
+    { q: 'What happens to the plan if growth is half your forecast?', hint: 'Show the downside case and the levers you would pull.' },
+    { q: 'How much of this round goes to product vs. sales, and why that split?', hint: 'The split must follow the bottleneck, not habit.' },
+    { q: 'What is your pricing power, and when did you last raise prices?', hint: 'Pricing is evidence of value. Have the story ready.' }
+  ]
+};
+var state = RaiseSheets.loadLocal('simulation', { pitch: '', draws: 0 });
+function save() { RaiseSheets.saveLocal('simulation', state); }
+window.getToolData = function () { return state; };
+window.setToolData = function (d) {
+  if (d && typeof d.pitch === 'string') { state = d; document.getElementById('s-pitch').value = state.pitch; }
+};
+document.getElementById('s-pitch').value = state.pitch || '';
+document.getElementById('s-pitch').addEventListener('input', function (e) { state.pitch = e.target.value; save(); });
+function selectedTopics() {
+  return Array.prototype.slice.call(document.querySelectorAll('#topics input:checked')).map(function (el) { return el.value; });
+}
+function draw() {
+  var topics = selectedTopics();
+  var el = document.getElementById('questions');
+  if (!topics.length) { el.innerHTML = '<p class="note">Select at least one topic.</p>'; return; }
+  var offset = (state.pitch.length + state.draws * 3) % 6;
+  el.innerHTML = '';
+  topics.forEach(function (topic) {
+    var bank = BANK[topic];
+    for (var i = 0; i < 3; i++) {
+      var item = bank[(offset + i) % bank.length];
+      var card = document.createElement('div');
+      card.className = 'q-card';
+      card.innerHTML = '<span class="pill"></span><br><b></b><p></p>';
+      card.querySelector('.pill').textContent = topic;
+      card.querySelector('b').textContent = item.q;
+      card.querySelector('p').textContent = item.hint;
+      el.appendChild(card);
+    }
+  });
+  state.draws++;
+  save();
+}
+document.getElementById('get-questions').addEventListener('click', draw);
+document.getElementById('next-set').addEventListener('click', draw);
+</script>
+</body>
+</html>
