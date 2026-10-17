@@ -1,17 +1,17 @@
-/* Raise Tools shared styles. Palette: ink #1D1D1F, deep green #1E7543,
-   warm off-white #F5F5F0, white, neutrals. */
+/* Raise Tools shared styles. Palette: near-black #111215, lime #B9FF66,
+   warm off-white #F3F3ED, white, neutrals. */
 * { box-sizing: border-box; }
-body { margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #1D1D1F; }
-a { color: #1D1D1F; }
-.tools-topbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 20px; background: #1D1D1F; color: #fff; position: sticky; top: 0; z-index: 10; }
+body { margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #F3F3ED; color: #111215; }
+a { color: #111215; }
+.tools-topbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 20px; background: #111215; color: #fff; position: sticky; top: 0; z-index: 10; }
 .tools-topbar a { color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; }
-.tools-topbar a:hover { color: #1E7543; }
+.tools-topbar a:hover { color: #B9FF66; }
 .tools-brand { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
-.tools-brand span { color: #1E7543; }
+.tools-brand span { color: #B9FF66; }
 .tools-nav { display: flex; gap: 14px; flex-wrap: wrap; margin-left: 8px; }
 .tools-auth { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 13px; }
 .tools-auth button { background: transparent; color: #fff; border: 1px solid #555; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
-.tools-auth button:hover { border-color: #1E7543; color: #1E7543; }
+.tools-auth button:hover { border-color: #B9FF66; color: #B9FF66; }
 .banner { background: #FFF3CD; border: 1px solid #E6C200; color: #5A4300; padding: 10px 16px; font-size: 14px; text-align: center; }
 .banner.local { background: #E7F6E7; border-color: #1E7543; color: #14532D; }
 main { max-width: 1100px; margin: 0 auto; padding: 24px 20px 64px; }
@@ -21,10 +21,10 @@ h1 { font-size: 30px; letter-spacing: -0.02em; margin: 8px 0 6px; }
 .gate h2 { margin: 0 0 8px; font-size: 24px; }
 .gate p { color: #555; line-height: 1.55; }
 .privacy { font-size: 13px; color: #777; }
-.btn { display: inline-block; border: 0; border-radius: 999px; padding: 12px 22px; font-size: 15px; font-weight: 700; cursor: pointer; background: #1D1D1F; color: #fff; }
+.btn { display: inline-block; border: 0; border-radius: 999px; padding: 12px 22px; font-size: 15px; font-weight: 700; cursor: pointer; background: #111215; color: #fff; }
 .btn:hover { opacity: .88; }
-.btn-lime { background: #1E7543; color: #fff; }
-.btn-ghost { background: #fff; color: #1D1D1F; border: 1px solid #CCC; }
+.btn-lime { background: #B9FF66; color: #111215; }
+.btn-ghost { background: #fff; color: #111215; border: 1px solid #CCC; }
 .btn-small { padding: 8px 14px; font-size: 13px; }
 #google-btn-holder { display: flex; justify-content: center; margin: 16px 0 8px; }
 .syncbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: #fff; border: 1px solid #E2E2DC; border-radius: 12px; padding: 12px 16px; margin: 0 0 20px; }
@@ -35,20 +35,20 @@ label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
 input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #CCC; border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
 textarea { min-height: 90px; resize: vertical; }
 input[type="checkbox"] { width: auto; }
-.formula { font-size: 13px; color: #555; background: #F5F5F0; border-radius: 8px; padding: 8px 10px; margin: 6px 0 0; }
+.formula { font-size: 13px; color: #555; background: #F3F3ED; border-radius: 8px; padding: 8px 10px; margin: 6px 0 0; }
 .metric { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
 .metric-label { font-size: 13px; color: #555; }
 .pill { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 3px 10px; background: #E7F6E7; color: #14532D; }
 .pill.warn { background: #FFF3CD; color: #5A4300; }
 .pill.bad { background: #FDE8E8; color: #7A1F1F; }
-.draft-output { white-space: pre-wrap; background: #1D1D1F; color: #F5F5F0; border-radius: 12px; padding: 16px; font-size: 14px; line-height: 1.6; }
+.draft-output { white-space: pre-wrap; background: #111215; color: #F3F3ED; border-radius: 12px; padding: 16px; font-size: 14px; line-height: 1.6; }
 .note { font-size: 13px; color: #777; }
 .board { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; align-items: start; }
 .stage-col { background: #fff; border: 1px solid #E2E2DC; border-radius: 12px; padding: 10px; min-height: 120px; }
 .stage-col h3 { font-size: 13px; margin: 0 0 8px; }
 .stage-col h3 span { color: #777; font-weight: 500; }
-.investor-card { background: #F5F5F0; border-radius: 10px; padding: 10px; margin-bottom: 8px; cursor: pointer; border: 1px solid transparent; }
-.investor-card:hover { border-color: #1D1D1F; }
+.investor-card { background: #F3F3ED; border-radius: 10px; padding: 10px; margin-bottom: 8px; cursor: pointer; border: 1px solid transparent; }
+.investor-card:hover { border-color: #111215; }
 .investor-card b { font-size: 14px; }
 .investor-card p { font-size: 12px; color: #555; margin: 4px 0 0; }
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
