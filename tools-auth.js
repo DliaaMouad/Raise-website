@@ -5,8 +5,7 @@
    Passwords live in Supabase Auth, never in our tables or the browser.
    The old localStorage session (raise_user_session) and the fake
    "Google" login that accepted any email are gone.
-   Google sign-in comes later via Supabase OAuth (provider config in the
-   Supabase dashboard); until then the modal is email + password only.
+   Email + password only. Google sign-in was removed by decision.
    If Supabase is not configured yet, the forms show a setup notice.
    ========================================================= */
 (function () {
@@ -32,8 +31,6 @@
   var headerLoginBtn = document.getElementById('header-login-btn');
   var mobileSignupBtn = document.getElementById('mobile-signup-btn');
   var mobileLoginBtn = document.getElementById('mobile-login-btn');
-  var suGoogleBtn = document.getElementById('su-google-btn');
-  var liGoogleBtn = document.getElementById('li-google-btn');
 
   // Containers
   var headerAuthActions = document.getElementById('header-auth-actions');
@@ -369,15 +366,6 @@
       });
     });
   }
-
-  // Google sign-in is not wired yet (Supabase OAuth provider config needed).
-  // Never fake a session: tell the founder to use email for now.
-  function handleGoogleSoon() {
-    setSuError('Google sign-in is coming soon. Use email for now.');
-    setLiError('Google sign-in is coming soon. Use email for now.');
-  }
-  if (suGoogleBtn) suGoogleBtn.addEventListener('click', handleGoogleSoon);
-  if (liGoogleBtn) liGoogleBtn.addEventListener('click', handleGoogleSoon);
 
   function showWelcomeBanner(msg) {
     var banner = document.createElement('div');

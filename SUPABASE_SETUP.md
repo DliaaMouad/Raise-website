@@ -73,10 +73,8 @@ local account.
 
 ## Later (not needed for launch)
 
-- **Google sign-in:** Supabase dashboard -> **Authentication** ->
-  **Providers** -> **Google**, add the Google Cloud OAuth client ID/secret.
-  The site already shows "Google sign-in coming soon" until this is on.
-- **Privacy Policy + Terms pages.** Once you store founder data centrally,
-  the site needs real policy pages. The footer currently has plain text.
-- **Password reset:** Supabase Auth supports it out of the box; the site
-  does not have a "Forgot password" link yet.
+- **Google sign-in was removed by decision (2026-10-18).** No Google button
+  on sign-up or log-in anywhere. Email + password only.
+- **Privacy Policy + Terms pages** are live and linked in both footers.
+  They are plain-language pages; have a lawyer review them before relying
+  on them for compliance.

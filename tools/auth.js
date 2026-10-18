@@ -435,15 +435,6 @@
     bindToggle('su-show', ['su-password', 'su-confirm']);
     bindToggle('li-show', ['li-password']);
 
-    // Google sign-in for accounts comes later via Supabase OAuth (needs the
-    // provider configured in the Supabase dashboard). Until then the gate
-    // is email + password only. Sheets connect lives inside each tool.
-    var googleBtn = $('google-btn');
-    if (googleBtn) {
-      googleBtn.disabled = true;
-      googleBtn.textContent = 'Google sign-in coming soon';
-    }
-
     var signout = $('signout-btn');
     if (signout) signout.addEventListener('click', signOut);
 
