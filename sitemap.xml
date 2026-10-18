@@ -16,6 +16,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.raiseos.site/tools</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.raiseos.site/deck-rating</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

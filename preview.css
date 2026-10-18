@@ -671,3 +671,210 @@ a.tool-item:hover, a.tool-item:focus-visible {
   .footer-wrap { flex-direction: column; }
   .tools-dropdown { position: static; }
 }
+
+/* ---------- Tools Subnav in Header ---------- */
+.tools-subnav {
+  background: #f7f7f2;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tools-subnav::-webkit-scrollbar { display: none; }
+.tools-subnav { -ms-overflow-style: none; scrollbar-width: none; }
+
+.tools-subnav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tools-subnav-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.tools-subnav-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all .15s ease;
+}
+
+.tools-subnav-chip:hover {
+  background: var(--lime);
+  border-color: var(--lime);
+  transform: translateY(-1px);
+}
+
+.tools-subnav-chip.active {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.tools-subnav-chip .chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5d8a1e;
+}
+
+/* Tool Deep Dive Sections */
+.tool-section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 130px;
+}
+
+.tool-section:last-of-type {
+  border-bottom: none;
+}
+
+.tool-detail-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.tool-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.tool-pillar-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  background: var(--offwhite);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.tool-live-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--lime);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.tool-detail-title {
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+
+.tool-detail-desc {
+  font-size: 16.5px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.tool-feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.tool-feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.tool-feature-list li .check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(185, 255, 102, 0.4);
+  color: #1f5008;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tool-visual-box {
+  background: #111215;
+  color: var(--white);
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.35);
+  font-size: 13.5px;
+}
+
+.tool-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.tool-box-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--lime);
+}
+
+.tool-box-content {
+  line-height: 1.6;
+  color: #c9cac7;
+}
+
+.tool-box-metric {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+  .tool-detail-grid { grid-template-columns: 1fr; gap: 32px; }
+}
