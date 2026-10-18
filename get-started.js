@@ -1,5 +1,5 @@
 /**
- * RAISE — "Get Started" Page Interactive Controller
+ * RAISE - "Get Started" Page Interactive Controller
  * Handles Accordion toggles and Application Form Submission
  */
 

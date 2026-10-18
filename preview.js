@@ -11,7 +11,7 @@
   var mobileMenu = document.getElementById('mobile-menu');
   var mobileToolsToggle = document.getElementById('mobile-tools-toggle');
   var mobileToolsList = document.getElementById('mobile-tools-list');
-  var openedBy = null; // 'hover' or 'click' — tracks how the menu was opened
+  var openedBy = null; // 'hover' or 'click' - tracks how the menu was opened
 
   function openTools(source) {
     openedBy = source;

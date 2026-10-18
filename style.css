@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RAISE — Pitch Deck & Investor Readiness
+   RAISE - Pitch Deck & Investor Readiness
    Design System & Master Stylesheet
    ========================================================================== */
 
@@ -1742,7 +1742,7 @@ p {
   .lime-banner-inner { padding: 28px 18px; border-radius: 16px; }
   .banner-headline { font-size: clamp(1.4rem, 5.5vw, 1.8rem); }
 
-  /* Stats — single column */
+  /* Stats - single column */
   .stats-row { grid-template-columns: 1fr; gap: 16px; }
   .stat-number { font-size: clamp(2.2rem, 9vw, 3rem); }
   .stat-item { padding: 24px 20px; }
@@ -1765,7 +1765,7 @@ p {
   .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
   .footer-col-title { font-size: 0.85rem; }
 
-  /* Modal — full screen on phone */
+  /* Modal - full screen on phone */
   .modal-overlay { padding: 0; align-items: flex-end; }
   .modal-box {
     border-radius: 20px 20px 0 0;
@@ -1788,10 +1788,10 @@ p {
 }
 
 /* ==========================================================================
-   RAISE OS — Phase Navigation Styles
+   RAISE OS - Phase Navigation Styles
    ========================================================================== */
 
-/* Phase nav links — subtle tinted labels for R-A-I-S-E phases */
+/* Phase nav links - subtle tinted labels for R-A-I-S-E phases */
 .nav-phase-r { color: #2d8a2d; }
 .nav-phase-a { color: #0057b8; }
 .nav-phase-i { color: #7c3aed; }
@@ -1803,7 +1803,7 @@ p {
   color: var(--text-primary) !important;
 }
 
-/* Phase badge — appears on tool pages */
+/* Phase badge - appears on tool pages */
 .phase-badge {
   display: inline-flex;
   align-items: center;
@@ -1823,7 +1823,7 @@ p {
 .phase-badge-s { background: #fffbeb; color: #b76e00; border-color: #fde68a; }
 .phase-badge-e { background: #fff5f5; color: #c0392b; border-color: #fecaca; }
 
-/* OS manifesto page — phase block cards */
+/* OS manifesto page - phase block cards */
 .os-phase-block {
   display: grid;
   grid-template-columns: 48px 1fr;
