@@ -1,0 +1,34 @@
+/* Shared site header: slim centered white pill nav, same on every page. */
+.pill-header { position: sticky; top: 16px; z-index: 50; padding: 0 16px; }
+.pill-nav {
+  max-width: 1080px; margin: 0 auto; background: #ffffff;
+  border-radius: 999px; box-shadow: 0 8px 28px rgba(17, 18, 21, 0.10);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px 12px 12px 24px;
+}
+.pill-logo {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
+  text-decoration: none; color: #111215;
+}
+.pill-logo-dot { color: #7fb32e; }
+.pill-links { display: flex; align-items: center; gap: 4px; }
+.pill-links a {
+  font-family: 'Inter', sans-serif;
+  text-decoration: none; font-size: 14px; font-weight: 600;
+  padding: 8px 14px; border-radius: 999px; color: #111215;
+}
+.pill-links a:hover { background: #F3F3ED; }
+.pill-links a[aria-current="page"] { background: #F3F3ED; }
+.pill-cta {
+  font-family: 'Inter', sans-serif;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #B9FF66; color: #111215; font-weight: 700; font-size: 14px;
+  padding: 10px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+}
+.pill-cta:hover { filter: brightness(0.96); }
+.pill-header a:focus-visible { outline: 3px solid #111215; outline-offset: 3px; border-radius: 6px; }
+@media (max-width: 640px) {
+  .pill-links { display: none; }
+  .pill-nav { padding: 10px 10px 10px 20px; }
+}
