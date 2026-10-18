@@ -1,21 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Removed | Raise</title>
-<meta http-equiv="refresh" content="0; url=/">
-<style>
-  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #111215; }
-  .wrap { max-width: 520px; margin: 96px auto; padding: 0 20px; text-align: center; }
-  a { color: #111215; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1625 Pre-Seed Investors & Accelerators | Raise OS</title>
+  <meta name="description" content="Search 1625 verified pre-seed and seed VCs and accelerators across 6 regions. Filter by type, stage, region and industry, see check sizes, and build your target list of 50.">
+  <link rel="canonical" href="https://www.raiseos.site/investors.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Raise OS">
+  <meta property="og:title" content="1625 Pre-Seed Investors & Accelerators | Raise OS">
+  <meta property="og:description" content="1625 verified funds and accelerators that write first cheques. Search, filter by type, stage, region and industry. Free.">
+  <meta property="og:url" content="https://www.raiseos.site/investors.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1625 Pre-Seed Investors & Accelerators | Raise OS">
+  <meta name="twitter:description" content="Search 1625 verified pre-seed funds and accelerators. Filter by type, stage, region and industry. Free.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pre-Seed Investor Search by Raise OS",
+    "url": "https://www.raiseos.site/investors.html",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Searchable database of 1625 verified pre-seed and seed venture funds and accelerators worldwide, with check sizes, regions, stages, and how-to-pitch notes."
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="header.css">
+  <style>
+    #auth-gate { position: fixed; inset: 0; z-index: 500; background: #F8F8F4; display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
+    .auth-card { background: #fff; border: 1px solid #E2E2DC; border-radius: 22px; padding: 40px 38px 32px; width: 100%; max-width: 440px; box-shadow: 0 24px 60px rgba(0,0,0,.10); text-align: center; }
+    .auth-card h2 { font-size: 26px; font-weight: 900; letter-spacing: -0.8px; margin: 16px 0 8px; line-height: 1.2; }
+    .auth-card h2 em { font-style: normal; background: #B9FF66; padding: 0 8px; border-radius: 6px; }
+    .auth-card > p { color: #585A61; font-size: 14.5px; line-height: 1.6; margin: 0 0 20px; }
+    .auth-tabs { display: flex; background: #F1F1EC; border-radius: 100px; padding: 4px; margin-bottom: 18px; }
+    .auth-tab { flex: 1; border: none; background: none; font-family: inherit; font-weight: 800; font-size: 14px; padding: 10px; border-radius: 100px; cursor: pointer; color: #585A61; }
+    .auth-tab.sel { background: #111110; color: #fff; }
+    .auth-card input { width: 100%; font-family: inherit; font-size: 15px; padding: 13px 18px; border: 1px solid #E2E2DC; border-radius: 12px; margin-bottom: 12px; outline: none; box-sizing: border-box; }
+    .auth-card input:focus { border-color: #B9FF66; box-shadow: 0 0 0 3px rgba(185,255,102,.25); }
+    .auth-err { color: #B3261E; font-size: 13.5px; font-weight: 600; min-height: 20px; margin: 12px 0 0; }
+    .auth-fine { font-size: 12.5px; color: #848792; margin: 14px 0 0; }
+    #app-content { display: none; }
+    #nav-auth-area { display: none; align-items: center; gap: 10px; }
+    #nav-user { font-size: 13px; color: #585A61; max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-ghost { background: #fff; color: #111110; border: 1px solid #E2E2DC; }
+
+  </style>
+  <style>
+    body { background: #F8F8F4; color: #111110; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; }
+    .pipe-nav { position: sticky; top: 0; z-index: 200; background: rgba(248,248,244,.94); backdrop-filter: blur(12px); border-bottom: 1px solid #E2E2DC; }
+    .pipe-nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 66px; display: flex; align-items: center; justify-content: space-between; }
+    .pipe-logo { font-weight: 900; font-size: 20px; letter-spacing: -0.5px; text-decoration: none; color: #111110; }
+    .pipe-logo span { color: #7ac700; }
+    .pipe-nav-links { display: flex; gap: 4px; align-items: center; }
+    .pipe-nav-links a { font-size: 14px; font-weight: 500; color: #585A61; text-decoration: none; padding: 8px 14px; border-radius: 8px; }
+    .pipe-nav-links a:hover { color: #111110; background: rgba(0,0,0,.05); }
+    .pipe-nav-links a.active { color: #111110; font-weight: 700; background: rgba(185,255,102,.35); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 800; font-size: 14px; padding: 11px 20px; border-radius: 100px; border: none; cursor: pointer; text-decoration: none; }
+    .btn-lime { background: #B9FF66; color: #111110; }
+    .btn-lime:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(185,255,102,.45); }
+    .btn-dark { background: #111110; color: #fff; }
+    .btn-sm { padding: 8px 16px; font-size: 13px; }
+
+    .inv-hero { max-width: 1200px; margin: 0 auto; padding: 44px 24px 10px; text-align: center; }
+    .inv-hero h1 { font-size: clamp(30px, 4.5vw, 52px); font-weight: 900; letter-spacing: -1.5px; margin: 0 0 10px; line-height: 1.05; }
+    .inv-hero h1 em { font-style: normal; background: #B9FF66; padding: 0 10px; border-radius: 8px; }
+    .inv-hero p { color: #585A61; font-size: 16px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+    .inv-counts { display: flex; gap: 26px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .inv-counts div { text-align: center; }
+    .inv-counts strong { font-size: 24px; font-weight: 900; display: block; }
+    .inv-counts span { font-size: 12px; color: #6B6B6B; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+
+    .inv-filters { max-width: 1200px; margin: 26px auto 0; padding: 0 24px; position: sticky; top: 66px; z-index: 100; background: rgba(248,248,244,.96); backdrop-filter: blur(10px); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid #E2E2DC; }
+    .inv-search { width: 100%; padding: 13px 20px; border: 1px solid #E2E2DC; border-radius: 100px; font-family: inherit; font-size: 15px; background: #fff; outline: none; margin-bottom: 12px; }
+    .inv-search:focus { border-color: #B9FF66; box-shadow: 0 0 0 3px rgba(185,255,102,.25); }
+    .inv-result-count { margin-left: auto; font-size: 13px; color: #6B6B6B; font-weight: 600; }
+    .search-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 12px; }
+    .search-row .inv-search { margin-bottom: 0; flex: 1; }
+    .filter-btn { font-family: inherit; font-size: 14px; font-weight: 800; padding: 0 20px; border-radius: 100px; border: 1.5px solid #111110; background: #fff; color: #111110; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+    .filter-btn:hover { background: #B9FF66; border-color: #B9FF66; }
+    .filter-btn.open { background: #111110; color: #fff; }
+    .filter-badge { background: #B9FF66; color: #111110; font-size: 11px; font-weight: 900; min-width: 20px; height: 20px; border-radius: 100px; display: none; align-items: center; justify-content: center; padding: 0 5px; }
+    .filter-btn.open .filter-badge { background: #fff; }
+    .filter-badge.show { display: inline-flex; }
+    .filter-panel { display: none; background: #fff; border: 1px solid #E2E2DC; border-radius: 16px; padding: 20px 22px 16px; margin-bottom: 12px; }
+    .filter-panel.open { display: block; }
+    .filter-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px 24px; }
+    .filter-group h4 { margin: 0 0 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; color: #6B6B6B; }
+    .filter-opt { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: #111110; padding: 4px 0; cursor: pointer; }
+    .filter-opt input { accent-color: #111110; width: 16px; height: 16px; cursor: pointer; }
+    .filter-note { font-size: 11.5px; color: #6B6B6B; margin-top: 6px; line-height: 1.5; }
+    .filter-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px solid #E2E2DC; }
+    .filter-clear { font-family: inherit; font-size: 13px; font-weight: 700; color: #111110; background: none; border: none; cursor: pointer; text-decoration: underline; }
+    .filter-done { font-family: inherit; font-size: 13px; font-weight: 800; padding: 8px 20px; border-radius: 100px; border: none; background: #111110; color: #fff; cursor: pointer; }
+    .active-pills { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+    .active-pills:empty { display: none; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; background: #111110; color: #fff; padding: 6px 10px 6px 12px; border-radius: 100px; }
+    .pill button { background: none; border: none; color: #fff; font-size: 14px; line-height: 1; cursor: pointer; padding: 0; }
+
+    .inv-grid { max-width: 1200px; margin: 24px auto 30px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+    .inv-card { background: #fff; border: 1px solid #E2E2DC; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s; }
+    .inv-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,.08); transform: translateY(-2px); }
+    .inv-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+    .inv-card h3 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.3px; }
+    .hot-badge { font-size: 16px; vertical-align: middle; }
+    .inv-region { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; background: rgba(185,255,102,.4); color: #111110; padding: 4px 10px; border-radius: 100px; white-space: nowrap; }
+    .inv-hq { font-size: 13px; color: #6B6B6B; margin-bottom: 10px; }
+    .inv-check { font-size: 14px; font-weight: 800; color: #2d7a00; margin-bottom: 10px; }
+    .inv-focus { font-size: 13.5px; color: #3a3b3e; line-height: 1.55; margin: 0 0 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .inv-card details { margin-bottom: 14px; font-size: 13px; }
+    .inv-card summary { cursor: pointer; font-weight: 700; color: #111110; font-size: 13px; }
+    .inv-evidence { margin: 8px 0 0; padding: 10px 14px; background: #F8F8F4; border-left: 3px solid #B9FF66; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #585A61; line-height: 1.55; font-style: italic; }
+    .inv-pitch { font-size: 12.5px; color: #585A61; margin: 8px 0 0; }
+    .inv-pitch strong { color: #111110; }
+    .inv-card-actions { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; align-items: center; }
+    .inv-link { font-size: 13px; font-weight: 700; color: #111110; text-decoration: none; border-bottom: 2px solid #B9FF66; }
+    .inv-link:hover { background: #B9FF66; }
+    .add-pipe-btn { margin-left: auto; font-size: 12.5px; font-weight: 800; padding: 8px 15px; border-radius: 100px; border: 1.5px solid #111110; background: #fff; cursor: pointer; font-family: inherit; }
+    .add-pipe-btn:hover { background: #B9FF66; border-color: #B9FF66; }
+    .add-pipe-btn.added { background: #EAFCE0; border-color: #2d7a00; color: #2d7a00; cursor: default; }
+
+    .inv-cta { max-width: 1200px; margin: 10px auto 70px; padding: 0 24px; }
+    .inv-cta-inner { background: #111110; color: #fff; border-radius: 20px; padding: 40px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .inv-cta-inner h2 { margin: 0 0 8px; font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+    .inv-cta-inner p { margin: 0; color: #A3A6B4; font-size: 14.5px; max-width: 520px; line-height: 1.6; }
+
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: #111110; color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 100px; opacity: 0; transition: all .25s; z-index: 2000; pointer-events: none; max-width: 90vw; text-align: center; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .no-results { text-align: center; padding: 50px 20px; color: #6B6B6B; grid-column: 1 / -1; }
+
+    @media (max-width: 700px) { .pipe-nav-links { display: none; } }
+  </style>
 </head>
 <body>
-<main class="wrap">
-  <h1>This page was removed</h1>
-  <p>Raise no longer offers software tools. Redirecting you to the homepage...</p>
-  <p><a href="/">Go to homepage</a></p>
-</main>
+  <header class="pill-header">
+  <nav class="pill-nav" aria-label="Primary">
+    <a href="/" class="pill-logo" aria-label="Raise home">Raise<span class="pill-logo-dot">.</span></a>
+    <div class="pill-links">
+      <a href="/">Home</a>
+      <a href="/#services">Advisory</a>
+      <a href="/#system">Methodology</a>
+      <a href="/#founder">About</a>
+      <a href="/about.html">About Us</a>
+      <a href="/investors.html" aria-current="page">Investors</a>
+    </div>
+    <a class="pill-cta" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+  </nav>
+</header>
+
+  <div id="auth-gate">
+    <div class="auth-card">
+      <a href="index.html" class="pipe-logo">Raise<span>.</span></a>
+      <h2>Unlock <em>1625</em> verified investors</h2>
+      <p>Enter your access code to search 1625 pre-seed and seed VCs, angels, and accelerators across 6 regions. Filter by type, stage, region and industry, build your target list of 50.</p>
+      <form id="code-form">
+        <input id="access-code" placeholder="Access code" required autocomplete="off" autocapitalize="characters" spellcheck="false">
+        <button class="btn btn-lime" type="submit" style="width:100%; justify-content:center;">Unlock access</button>
+      </form>
+      <p class="auth-err" id="auth-err"></p>
+      <p class="auth-fine">No code yet? Message Mouad to get one.</p>
+    </div>
+  </div>
+  <div id="app-content">
+
+  <div class="inv-hero">
+    <h1><span id="hero-count">1625</span> investors who write <em>first cheques.</em></h1>
+    <p>Pre-seed and seed funds <em>and</em> accelerators across 6 regions, every one verified to invest early. Search, filter by type, stage, region and industry, and build your target list of 50.</p>
+    <div class="inv-counts">
+      <div><strong id="stat-total">&ndash;</strong><span>Funds &amp; accelerators</span></div>
+      <div><strong>6</strong><span>Regions</span></div>
+      <div><strong id="stat-stages">&ndash;</strong><span>Stages</span></div>
+    </div>
+  </div>
+
+  <div class="inv-filters">
+    <div class="search-row">
+      <input type="search" class="inv-search" id="inv-search" placeholder="Search funds, cities, sectors... (e.g. fintech, Berlin, SaaS)" aria-label="Search investors">
+      <button class="filter-btn" id="filter-btn" aria-expanded="false" aria-controls="filter-panel">Filters <span class="filter-badge" id="filter-badge">0</span></button>
+    </div>
+    <div class="filter-panel" id="filter-panel">
+      <div class="filter-groups">
+        <div class="filter-group">
+          <h4>Type</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="type" value="vc"> VCs</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="type" value="accelerator"> Accelerators</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="type" value="angel"> Angels</label>
+        </div>
+        <div class="filter-group">
+          <h4>Stage</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="stage" value="Pre-seed"> Pre-seed</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="stage" value="Seed"> Seed</label>
+        </div>
+        <div class="filter-group">
+          <h4>Region</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Africa"> Africa</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Asia-Pacific"> Asia-Pacific</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Europe"> Europe</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Latin America"> Latin America</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="Middle East"> Middle East</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="region" value="North America"> North America</label>
+        </div>
+        <div class="filter-group">
+          <h4>Industry</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="FinTech"> FinTech</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="AI &amp; Deep Tech"> AI &amp; Deep Tech</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="SaaS &amp; Enterprise"> SaaS &amp; Enterprise</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="HealthTech &amp; BioTech"> HealthTech &amp; BioTech</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="Climate &amp; Energy"> Climate &amp; Energy</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="Consumer &amp; E-commerce"> Consumer &amp; E-commerce</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="EdTech"> EdTech</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="Gaming &amp; Media"> Gaming &amp; Media</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="Mobility &amp; Logistics"> Mobility &amp; Logistics</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="PropTech"> PropTech</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="Food &amp; AgTech"> Food &amp; AgTech</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="industry" value="Cybersecurity"> Cybersecurity</label>
+          <p class="filter-note">Funds without an industry tag are hidden when filtering by industry.</p>
+        </div>
+        <div class="filter-group">
+          <h4>Focus</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="model" value="B2B"> B2B</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="model" value="B2C"> B2C</label>
+          <p class="filter-note">Funds without a stated focus are always shown.</p>
+        </div>
+        <div class="filter-group">
+          <h4>Cheque size</h4>
+          <label class="filter-opt"><input type="checkbox" data-dim="check" value="under500k"> Under $500K</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="check" value="500k-2m"> $500K – $2M</label>
+          <label class="filter-opt"><input type="checkbox" data-dim="check" value="over2m"> Over $2M</label>
+          <p class="filter-note">Only funds with a known cheque size. Converted to USD at approx. rates.</p>
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button class="filter-clear" id="filter-clear">Clear all filters</button>
+        <button class="filter-done" id="filter-done">Show results</button>
+      </div>
+    </div>
+    <div class="active-pills" id="active-pills"></div>
+    <div style="display:flex;align-items:center;"><span class="inv-result-count" id="inv-count"></span></div>
+  </div>
+
+  <div class="inv-grid" id="inv-grid"></div>
+
+  <div class="inv-cta">
+    <div class="inv-cta-inner">
+      <div>
+        <h2>Found your 50? Make your deck worthy of them.</h2>
+        <p>Every investor on this list sees hundreds of decks a year. Work with Raise to fix what is killing your deck before you send a single email.</p>
+      </div>
+      <a href="https://cal.com/mouad-dliaa/15min" class="btn btn-lime">Book a Call</a>
+    </div>
+  </div>
+
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+/* Access gate — shared code wall */
+var ACCESS_CODE = 'Raise100';
+
+(function() {
+  'use strict';
+
+  var gate = document.getElementById('auth-gate');
+  var appEl = document.getElementById('app-content');
+  var errEl = document.getElementById('auth-err');
+  var authed = false;
+  var LS_KEY = 'raiseos_access';
+
+  function setErr(m) { errEl.textContent = m || ''; }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+  function loadDataScripts() {
+    if (window.INVESTORS && window.INVESTORS.length) return Promise.resolve();
+    var chain = Promise.resolve();
+    ['investors-data-1.js', 'investors-data-2.js', 'investors-data-3.js', 'investors-data-4.js', 'investors-data-5.js', 'investors-data-6.js', 'investors-data-7.js', 'investors-data-8.js', 'investors-data-9.js', 'investors-data-10.js', 'investors-data-11.js', 'investors-data-12.js', 'investors-data-13.js', 'investors-industries.js', 'investors-flags.js'].forEach(function(file) {
+      chain = chain.then(function() {
+        return new Promise(function(res) {
+          var s = document.createElement('script');
+          s.src = file;
+          s.onload = res; s.onerror = res; /* missing chunk files are fine */
+          document.head.appendChild(s);
+        });
+      });
+    });
+    return chain;
+  }
+
+  function showApp() {
+    if (authed) return;
+    authed = true;
+    gate.style.display = 'none';
+    appEl.style.display = 'block';
+    loadDataScripts().then(initApp).catch(function() {
+      document.getElementById('inv-grid').innerHTML =
+        '<div class="no-results"><h3 style="color:#111110;">Could not load investor data.</h3><p>Please refresh the page.</p></div>';
+    });
+  }
+
+  document.getElementById('code-form').addEventListener('submit', function(e) {
+    e.preventDefault(); setErr('');
+    var code = document.getElementById('access-code').value.trim();
+    if (code === ACCESS_CODE) {
+      try { localStorage.setItem(LS_KEY, '1'); } catch (e) {}
+      showApp();
+    } else {
+      setErr('Wrong code. Check it and try again.');
+    }
+  });
+
+  try {
+    if (localStorage.getItem(LS_KEY) === '1') showApp();
+  } catch (e) {}
+
+  function initApp() {
+'use strict';
+  var query = '';
+  // Filter state: each dimension holds a Set of selected values.
+  // An empty Set means "no constraint" for that dimension.
+  var filters = { type: new Set(), stage: new Set(), region: new Set(), industry: new Set(), model: new Set(), check: new Set() };
+  var DIM_LABELS = {
+    type: { vc: 'VCs', accelerator: 'Accelerators', angel: 'Angels' },
+    stage: { 'Pre-seed': 'Pre-seed', 'Seed': 'Seed' },
+    region: { 'Africa': 'Africa', 'Asia-Pacific': 'Asia-Pacific', 'Europe': 'Europe', 'Latin America': 'Latin America', 'Middle East': 'Middle East', 'North America': 'North America' },
+    industry: { 'FinTech': 'FinTech', 'AI & Deep Tech': 'AI & Deep Tech', 'SaaS & Enterprise': 'SaaS & Enterprise', 'HealthTech & BioTech': 'HealthTech & BioTech', 'Climate & Energy': 'Climate & Energy', 'Consumer & E-commerce': 'Consumer & E-commerce', 'EdTech': 'EdTech', 'Gaming & Media': 'Gaming & Media', 'Mobility & Logistics': 'Mobility & Logistics', 'PropTech': 'PropTech', 'Food & AgTech': 'Food & AgTech', 'Cybersecurity': 'Cybersecurity' },
+    model: { B2B: 'B2B', B2C: 'B2C' },
+    check: { under500k: 'Under $500K', '500k-2m': '$500K – $2M', over2m: 'Over $2M' }
+  };
+  var CHECK_BUCKETS = {
+    under500k: [0, 500000],
+    '500k-2m': [500000, 2000000],
+    over2m: [2000000, Infinity]
+  };
+
+  // Parse a cheque-size string like "$350K–$1.25M" or "EUR 100K-EUR 1.5M"
+  // into an approximate USD range {min, max}. Returns null when unparseable.
+  // Currency conversion uses fixed approximate rates (EUR 1.08, GBP 1.27).
+  function parseCheck(s) {
+    if (!s) return null;
+    var cur = '$';
+    if (/EUR|€/.test(s)) cur = 'EUR';
+    else if (/GBP|£/.test(s)) cur = 'GBP';
+    var rate = cur === 'EUR' ? 1.08 : (cur === 'GBP' ? 1.27 : 1);
+    s = s.replace(/\d+(?:\.\d+)?\s*%/g, ''); // drop percentages like "~7%" (not money)
+    var nums = [];
+    var re = /(\d+(?:\.\d+)?)\s*([KMB])?/g, m;
+    while ((m = re.exec(s)) !== null) {
+      var v = parseFloat(m[1]);
+      var mult = m[2] === 'M' ? 1000000 : (m[2] === 'B' ? 1000000000 : 1000);
+      nums.push(v * mult * rate);
+    }
+    if (!nums.length) return null;
+    // "Up to X" at the start: range is 0..X. A single value: a point range.
+    // A range "A–B": A..B (first two numbers; follow-on figures may widen it).
+    if (/^\s*up to/i.test(s)) return { min: 0, max: nums[0] };
+    if (nums.length === 1) return { min: nums[0], max: nums[0] };
+    return { min: Math.min(nums[0], nums[1]), max: Math.max(nums[0], nums[1]) };
+  }
+
+  function activeFilterCount() {
+    var n = 0;
+    Object.keys(filters).forEach(function(d) { n += filters[d].size; });
+    return n;
+  }
+
+  function syncFilterUI() {
+    var panel = document.getElementById('filter-panel');
+    var btn = document.getElementById('filter-btn');
+    var badge = document.getElementById('filter-badge');
+    var n = activeFilterCount();
+    badge.textContent = n;
+    badge.classList.toggle('show', n > 0);
+    // pills
+    var pills = document.getElementById('active-pills');
+    var html = '';
+    Object.keys(filters).forEach(function(d) {
+      filters[d].forEach(function(v) {
+        html += '<span class="pill">' + esc(DIM_LABELS[d][v] || v) +
+          ' <button data-dim="' + d + '" data-val="' + esc(v) + '" aria-label="Remove filter">&times;</button></span>';
+      });
+    });
+    pills.innerHTML = html;
+    pills.querySelectorAll('button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        filters[b.getAttribute('data-dim')].delete(b.getAttribute('data-val'));
+        var cb = document.querySelector('.filter-panel input[data-dim="' + b.getAttribute('data-dim') + '"][value="' + b.getAttribute('data-val') + '"]');
+        if (cb) cb.checked = false;
+        render();
+      });
+    });
+    return panel;
+  }
+
+  function togglePanel(force) {
+    var panel = document.getElementById('filter-panel');
+    var btn = document.getElementById('filter-btn');
+    var open = force !== undefined ? force : !panel.classList.contains('open');
+    panel.classList.toggle('open', open);
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  document.getElementById('filter-btn').addEventListener('click', function() { togglePanel(); });
+  document.getElementById('filter-done').addEventListener('click', function() { togglePanel(false); });
+  document.getElementById('filter-clear').addEventListener('click', function() {
+    Object.keys(filters).forEach(function(d) { filters[d].clear(); });
+    document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+    render();
+  });
+  document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      var set = filters[cb.getAttribute('data-dim')];
+      if (cb.checked) set.add(cb.value); else set.delete(cb.value);
+      render();
+    });
+  });
+  document.getElementById('inv-search').addEventListener('input', function(e) {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  var filtered = [];
+  function render() {
+    syncFilterUI();
+    filtered = INVESTORS.filter(function(inv) {
+      if (filters.type.size && !filters.type.has(inv.type || 'vc')) return false;
+      if (filters.stage.size && !filters.stage.has(inv.stage || '')) return false;
+      if (filters.region.size && !filters.region.has(inv.region || '')) return false;
+      var inds = inv.industry || (typeof INDUSTRY_MAP !== 'undefined' ? INDUSTRY_MAP[inv.fund] : null) || [];
+      if (filters.industry.size) {
+        if (!inds.length) return false; // untagged (generalist) funds are hidden under a specific industry filter
+        var industryHit = false;
+        filters.industry.forEach(function(v) { if (inds.indexOf(v) > -1) industryHit = true; });
+        if (!industryHit) return false;
+      }
+      if (filters.model.size) {
+        var tag = (inv.b2b_b2c || '').trim();
+        if (tag === 'B2B' && !filters.model.has('B2B')) return false;
+        if (tag === 'B2C' && !filters.model.has('B2C')) return false;
+        if (tag === 'Both' && !filters.model.has('B2B') && !filters.model.has('B2C')) return false;
+        // blank tag: focus unknown, always shown (previous behaviour kept)
+      }
+      if (filters.check.size) {
+        var range = parseCheck(inv.check || '');
+        if (!range) return false; // cheque-size filter only covers funds with known sizes
+        var overlaps = false;
+        filters.check.forEach(function(b) {
+          var bk = CHECK_BUCKETS[b];
+          if (range.min <= bk[1] && range.max >= bk[0]) overlaps = true;
+        });
+        if (!overlaps) return false;
+      }
+      if (!query) return true;
+      return (inv.fund + ' ' + inv.hq + ' ' + inv.focus + ' ' + inv.check + ' ' + inds.join(' ')).toLowerCase().indexOf(query) > -1;
+    });
+    document.getElementById('inv-count').textContent = filtered.length + ' of ' + INVESTORS.length;
+    var grid = document.getElementById('inv-grid');
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="no-results"><h3 style="color:#111110;">No investors match.</h3><p>Try a broader search or clear some filters.</p></div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(function(inv) {
+      var links = '';
+      var isHot = inv.hot || (typeof HOT_MAP !== 'undefined' && HOT_MAP[inv.fund]);
+      if (inv.website) links += '<a class="inv-link" href="' + esc(inv.website) + '" target="_blank" rel="noopener">Website</a>';
+      if (inv.linkedin) links += '<a class="inv-link" href="' + esc(inv.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>';
+      return '<div class="inv-card">' +
+        '<div class="inv-card-top"><h3>' + esc(inv.fund) + (isHot ? ' <span class="hot-badge" title="Actively investing: verified 2025/2026 deal or new fund">🔥</span>' : '') + '</h3>' +
+        '<span style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;">' +
+        (inv.stage ? '<span class="inv-region" style="background:#111110;color:#fff;">' + esc(inv.stage) + '</span>' : '') +
+        '<span class="inv-region">' + esc(inv.region) + '</span></span></div>' +
+        '<div class="inv-hq">' + esc(inv.hq) + '</div>' +
+        (inv.check ? '<div class="inv-check">' + esc(inv.check) + '</div>' : '') +
+        '<p class="inv-focus">' + esc(inv.focus) + '</p>' +
+        '<details><summary>Why they made the list</summary>' +
+          '<p class="inv-evidence">"' + esc(inv.evidence) + '"</p>' +
+          (inv.pitch ? '<p class="inv-pitch"><strong>How to pitch:</strong> ' + esc(inv.pitch) + '</p>' : '') +
+        '</details>' +
+        '<div class="inv-card-actions">' + links + '</div></div>';
+    }).join('');
+  }
+  try {
+    document.getElementById('stat-total').textContent = INVESTORS.length;
+    document.getElementById('hero-count').textContent = INVESTORS.length;
+    var _st = {};
+    INVESTORS.forEach(function(i){ if (i.stage) _st[i.stage] = 1; });
+    document.getElementById('stat-stages').textContent = Object.keys(_st).length;
+  } catch (e) {}
+  render();
+  }
+})();
+
+  </script>
 </body>
 </html>
