@@ -145,7 +145,7 @@ h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
 /* Problem */
 .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
 .problem-card { background: #1c1e21; border: 1px solid #2a2c30; border-radius: var(--radius); padding: 28px 24px; }
-.problem-card h3 { margin-bottom: 10px; }
+.problem-card h3 { margin-bottom: 10px; color: #fff; }
 .problem-card p { font-size: 15px; color: #c9cac7; }
 .problem-card .problem-answer { margin-top: 16px; font-size: 14px; color: var(--lime); font-weight: 600; }
 
