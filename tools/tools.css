@@ -73,6 +73,7 @@ th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #E7E7E0; 
 .auth-form { text-align: left; margin-top: 8px; }
 .auth-form .auth-submit { width: 100%; margin-top: 6px; }
 .auth-error { background: #FDE8E8; color: #7A1F1F; border: 1px solid #F5C2C2; border-radius: 10px; padding: 10px 12px; font-size: 14px; text-align: left; }
+.auth-success { background: #E6F4EA; color: #14532D; border: 1px solid #A7D8B5; border-radius: 10px; padding: 10px 12px; font-size: 14px; text-align: left; }
 .auth-switch { margin: 10px 0 0; }
 .link-btn { background: none; border: 0; color: #111215; font-weight: 700; font-size: 14px; cursor: pointer; text-decoration: underline; font-family: inherit; }
 .auth-divider { display: flex; align-items: center; gap: 12px; color: #777; font-size: 13px; margin: 20px 0 4px; }

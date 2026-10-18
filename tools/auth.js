@@ -20,8 +20,50 @@
     'United States', 'Vietnam', 'Other'];
 
   var SETUP_MSG = 'Founder accounts are being set up. Come back shortly.';
+  var LEGACY_ACCOUNT_KEY = 'raise_account';
+  var LEGACY_SESSION_KEY = 'raise_auth_user';
   var cachedUser = null;
   var cachedProfile = null;
+
+  // SHA-256, only used to verify a legacy local-account password during
+  // migration. Passwords for real accounts live in Supabase Auth.
+  function hashPassword(pw) {
+    if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) return Promise.resolve(null);
+    var data = new TextEncoder().encode(pw);
+    return window.crypto.subtle.digest('SHA-256', data).then(function (buf) {
+      return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+    });
+  }
+
+  // Legacy account from the short window the browser-only gate was live:
+  // localStorage 'raise_account' (profile + password hash, no email), or a
+  // leftover 'raise_auth_user' session with a password profile.
+  function getLegacyAccount() {
+    try {
+      var raw = localStorage.getItem(LEGACY_ACCOUNT_KEY);
+      if (raw) {
+        var a = JSON.parse(raw);
+        if (a && a.fullName) return a;
+      }
+    } catch (e) { /* no usable legacy account */ }
+    try {
+      var s = JSON.parse(localStorage.getItem(LEGACY_SESSION_KEY) || 'null');
+      if (s && s.mode === 'password' && s.profile) {
+        return { fullName: s.name || '', country: s.profile.country || '',
+          company: s.profile.company || '', stage: s.profile.stage || '',
+          linkedin: s.profile.linkedin || '', passHash: null };
+      }
+    } catch (e) { /* no usable legacy session */ }
+    return null;
+  }
+
+  function clearLegacyAccount() {
+    try { localStorage.removeItem(LEGACY_ACCOUNT_KEY); } catch (e) {}
+    try { localStorage.removeItem(LEGACY_SESSION_KEY); } catch (e) {}
+    try { sessionStorage.removeItem(LEGACY_SESSION_KEY); } catch (e) {}
+    var block = $('migration-block');
+    if (block) block.hidden = true;
+  }
 
   function cfg() { return window.RAISE_TOOLS_CONFIG || {}; }
 
@@ -63,18 +105,45 @@
     if (el) { el.textContent = ''; el.hidden = true; }
   }
 
+  function showSuccess(msg) {
+    var el = $('auth-success');
+    if (!el) {
+      el = document.createElement('p');
+      el.id = 'auth-success';
+      el.className = 'auth-success';
+      el.hidden = true;
+      var err = $('auth-error');
+      if (err && err.parentNode) err.parentNode.insertBefore(el, err.nextSibling);
+      else return;
+    }
+    el.textContent = msg;
+    el.hidden = false;
+  }
+
+  function clearSuccess() {
+    var el = $('auth-success');
+    if (el) { el.textContent = ''; el.hidden = true; }
+  }
+
   function showForm(which) {
     var signup = $('signup-form');
     var login = $('login-form');
+    var forgot = $('forgot-form');
     var title = $('gate-title');
     var toLogin = $('show-login');
     var toSignup = $('show-signup');
     clearError();
+    clearSuccess();
     if (signup) signup.hidden = which !== 'signup';
     if (login) login.hidden = which !== 'login';
-    if (title) title.textContent = which === 'login' ? 'Welcome back' : 'Create your account';
+    if (forgot) forgot.hidden = which !== 'forgot';
+    var migration = $('migration-block');
+    if (migration && which !== 'signup') migration.hidden = true;
+    if (title) title.textContent = which === 'login' ? 'Welcome back' : which === 'forgot' ? 'Reset your password' : 'Create your account';
     if (toLogin) toLogin.hidden = which !== 'signup';
-    if (toSignup) toSignup.hidden = which !== 'login';
+    if (toSignup) toSignup.hidden = which !== 'login' && which !== 'forgot';
+    var toForgot = $('show-forgot');
+    if (toForgot) toForgot.hidden = which !== 'login';
   }
 
   function setBusy(formId, busy, label) {
@@ -102,10 +171,139 @@
     return null;
   }
 
+  // Move a legacy browser-only account into Supabase. The founder adds the
+  // email their old account never had, and confirms the old password.
+  // Profile (name, country, company, stage, LinkedIn) carries over, so
+  // nothing has to be retyped. The legacy account is deleted once the
+  // Supabase account exists.
+  function handleMigration(e) {
+    e.preventDefault();
+    clearError();
+    clearSuccess();
+    if (!isSupabaseConfigured()) { showError(SETUP_MSG); return; }
+    var legacy = getLegacyAccount();
+    if (!legacy) { showError('No earlier account found on this device.'); return; }
+    var email = ($('mg-email') || {}).value ? $('mg-email').value.trim() : '';
+    var pw = ($('mg-password') || {}).value || '';
+    if (!email) { showError('Email is required.'); return; }
+    if (!validEmail(email)) { showError('Enter a valid email address.'); return; }
+    if (!pw) { showError('Your earlier password is required.'); return; }
+    setBusy('migration-form', true, 'Moving your account...');
+    var verify = legacy.passHash
+      ? hashPassword(pw).then(function (hash) { return hash === legacy.passHash; })
+      : Promise.resolve(true);
+    verify.then(function (ok) {
+      if (!ok) throw new Error('WRONG_LEGACY_PASSWORD');
+      return window.RaiseSupabase.signUp({
+        email: email,
+        password: pw,
+        profile: {
+          full_name: legacy.fullName, country: legacy.country || '',
+          company: legacy.company || '', stage: legacy.stage || '',
+          linkedin: legacy.linkedin || '', twitter: ''
+        }
+      });
+    }).then(function (res) {
+      setBusy('migration-form', false);
+      if (res.needsConfirmation) {
+        showForm('login');
+        showError('Check your email to confirm your account, then log in.');
+        return;
+      }
+      cachedUser = res.user;
+      cachedProfile = res.profile;
+      clearLegacyAccount();
+      render();
+      showSuccess('Your earlier account is moved. You are logged in.');
+    }).catch(function (ex) {
+      setBusy('migration-form', false);
+      if (ex && ex.message === 'WRONG_LEGACY_PASSWORD') {
+        showError('That password does not match your earlier account.');
+        return;
+      }
+      if (ex && /user already registered/i.test(ex.message || '')) {
+        clearLegacyAccount();
+        showForm('login');
+        showError('An account with this email already exists. Log in instead.');
+        return;
+      }
+      showError(window.RaiseSupabase.friendlyAuthError(ex));
+    });
+  }
+
+  function handleForgot(e) {
+    e.preventDefault();
+    clearError();
+    clearSuccess();
+    if (!isSupabaseConfigured()) { showError(SETUP_MSG); return; }
+    var email = ($('fp-email') || {}).value ? $('fp-email').value.trim() : '';
+    if (!email) { showError('Email is required.'); return; }
+    if (!validEmail(email)) { showError('Enter a valid email address.'); return; }
+    setBusy('forgot-form', true, 'Sending...');
+    window.RaiseSupabase.sendPasswordReset(email).then(function () {
+      setBusy('forgot-form', false);
+      showForm('login');
+      showSuccess('Check your email for a password reset link.');
+    }).catch(function (ex) {
+      setBusy('forgot-form', false);
+      showError(window.RaiseSupabase.friendlyAuthError(ex));
+    });
+  }
+
+  // The migration block, forgot form, and "Forgot password?" link are
+  // injected by JS so the six tool pages keep one identical gate block.
+  function buildGateExtras() {
+    var signup = $('signup-form');
+    var login = $('login-form');
+    if (signup && !$('migration-block')) {
+      var block = document.createElement('div');
+      block.id = 'migration-block';
+      block.className = 'auth-form';
+      block.hidden = true;
+      block.innerHTML =
+        '<p class="gate-sub">You have an account from an earlier version. Add your email and confirm your earlier password to move it. Nothing else to retype.</p>' +
+        '<form id="migration-form" class="auth-form" novalidate>' +
+        '<label for="mg-email">Email *</label>' +
+        '<input id="mg-email" type="email" autocomplete="email" required>' +
+        '<label for="mg-password">Earlier password *</label>' +
+        '<input id="mg-password" type="password" autocomplete="current-password" required>' +
+        '<p><button class="btn btn-lime auth-submit" type="submit">Move my account</button></p>' +
+        '</form>';
+      signup.parentNode.insertBefore(block, signup);
+      var mgForm = $('migration-form');
+      if (mgForm) mgForm.addEventListener('submit', handleMigration);
+    }
+    if (login && !$('forgot-form')) {
+      var forgot = document.createElement('form');
+      forgot.id = 'forgot-form';
+      forgot.className = 'auth-form';
+      forgot.hidden = true;
+      forgot.setAttribute('novalidate', '');
+      forgot.innerHTML =
+        '<label for="fp-email">Email *</label>' +
+        '<input id="fp-email" type="email" autocomplete="email" required>' +
+        '<p><button class="btn btn-lime auth-submit" type="submit">Send reset link</button></p>' +
+        '<p class="auth-switch"><button type="button" class="link-btn" id="back-to-login">Back to log in</button></p>';
+      login.parentNode.insertBefore(forgot, login.nextSibling);
+      forgot.addEventListener('submit', handleForgot);
+      var back = $('back-to-login');
+      if (back) back.addEventListener('click', function () { showForm('login'); });
+    }
+    if (login && !$('show-forgot')) {
+      var link = document.createElement('p');
+      link.className = 'auth-switch';
+      link.innerHTML = '<button type="button" class="link-btn" id="show-forgot">Forgot password?</button>';
+      login.parentNode.insertBefore(link, login.nextSibling);
+      var btn = $('show-forgot');
+      if (btn) btn.addEventListener('click', function () { showForm('forgot'); });
+    }
+  }
+
   function refreshSession() {
     if (!isSupabaseConfigured()) { cachedUser = null; cachedProfile = null; render(); return; }
     window.RaiseSupabase.getSessionUser().then(function (user) {
       if (!user) { cachedUser = null; cachedProfile = null; render(); return; }
+      clearLegacyAccount();
       cachedUser = user;
       window.RaiseSupabase.getClient().then(function (client) {
         return window.RaiseSupabase.ensureProfile(client, user);
@@ -149,6 +347,7 @@
       }
       cachedUser = res.user;
       cachedProfile = res.profile;
+      clearLegacyAccount();
       render();
     }).catch(function (ex) {
       setBusy('signup-form', false);
@@ -170,6 +369,7 @@
       setBusy('login-form', false);
       cachedUser = res.user;
       cachedProfile = res.profile;
+      clearLegacyAccount();
       render();
     }).catch(function (ex) {
       setBusy('login-form', false);
@@ -192,6 +392,8 @@
     if (signout) signout.hidden = !user;
     if (localBanner) localBanner.hidden = true;
     if (gate && app) { gate.hidden = !!user; app.hidden = !user; }
+    var migration = $('migration-block');
+    if (migration) migration.hidden = !(!user && isSupabaseConfigured() && !!getLegacyAccount());
     if (gate && !user && !isSupabaseConfigured()) {
       var title = $('gate-title');
       if (title) title.textContent = 'Create your account';
@@ -220,6 +422,7 @@
         list.appendChild(opt);
       });
     }
+    buildGateExtras();
     showForm('signup');
     var signupForm = $('signup-form');
     if (signupForm) signupForm.addEventListener('submit', handleSignup);

@@ -116,6 +116,31 @@
     return getClient().then(function (client) { return client.auth.signOut(); });
   }
 
+  function sendPasswordReset(email) {
+    return getClient().then(function (client) {
+      // The reset link lands on /tools/reset-password, which must be in the
+      // Supabase dashboard allowlist: Auth -> URL Configuration ->
+      // Redirect URLs -> https://www.raiseos.site/tools/reset-password
+      var redirectTo = window.location.origin + '/tools/reset-password';
+      return client.auth.resetPasswordForEmail(email, { redirectTo: redirectTo })
+        .then(function (res) { if (res.error) throw res.error; return true; });
+    });
+  }
+
+  function updatePassword(newPassword) {
+    return getClient().then(function (client) {
+      return client.auth.updateUser({ password: newPassword })
+        .then(function (res) { if (res.error) throw res.error; return res.data && res.data.user; });
+    });
+  }
+
+  function exchangeCode(code) {
+    return getClient().then(function (client) {
+      return client.auth.exchangeCodeForSession(code)
+        .then(function (res) { if (res.error) throw res.error; return res.data && res.data.session; });
+    });
+  }
+
   function onAuthStateChange(cb) {
     getClient().then(function (client) {
       client.auth.onAuthStateChange(function (event) {
@@ -142,6 +167,9 @@
     signUp: signUp,
     signIn: signIn,
     signOut: signOut,
+    sendPasswordReset: sendPasswordReset,
+    updatePassword: updatePassword,
+    exchangeCode: exchangeCode,
     onAuthStateChange: onAuthStateChange,
     friendlyAuthError: friendlyAuthError
   };

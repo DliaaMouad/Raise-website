@@ -50,6 +50,27 @@ public; Row Level Security on `profiles` is what protects founder data
 4. Open a second tool or a new tab: you stay logged in. Sign out in one
    tab: the other tabs update.
 
+## Forgot password
+
+The gate has a "Forgot password?" link and the landing page links to
+`/tools/reset-password`. For the reset email link to land there, add the
+redirect URL in Supabase: **Authentication** -> **URL Configuration** ->
+**Redirect URLs** -> add `https://www.raiseos.site/tools/reset-password`.
+Also set **Site URL** to `https://www.raiseos.site`. Without the redirect
+URL allowlisted, Supabase ignores it and the reset link goes to the Site
+URL instead of the reset page.
+
+## Earlier browser-only accounts
+
+For about an hour the tools ran a browser-only gate (accounts in each
+founder's own localStorage, no email). Those founders are not lost: when
+they next open a tool, the gate shows a "move your account" block. They
+add their email and confirm their earlier password, their profile (name,
+country, company, stage, LinkedIn) carries over into Supabase, and the
+old local account is deleted. If they already created a Supabase account
+with that email, the gate tells them to log in instead and drops the stale
+local account.
+
 ## Later (not needed for launch)
 
 - **Google sign-in:** Supabase dashboard -> **Authentication** ->
