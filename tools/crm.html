@@ -19,12 +19,51 @@
 <div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
 <main>
   <div id="gate" class="gate">
-    <h2>Sign up / Log in</h2>
-    <p>Sign in with Google to save your data.</p>
+    <h2 id="gate-title">Create your account</h2>
+    <p class="gate-sub">Create an account to use the Raise tools.</p>
+    <p id="auth-error" class="auth-error" hidden></p>
+    <form id="signup-form" class="auth-form" novalidate>
+      <label for="su-name">Full name *</label>
+      <input id="su-name" type="text" autocomplete="name" required>
+      <label for="su-country">Country *</label>
+      <input id="su-country" type="text" list="country-list" autocomplete="country-name" required>
+      <datalist id="country-list"></datalist>
+      <label for="su-company">Company name *</label>
+      <input id="su-company" type="text" autocomplete="organization" required>
+      <label for="su-stage">Stage you are raising *</label>
+      <select id="su-stage" required>
+        <option value="">Select your stage</option>
+        <option>Pre-seed</option>
+        <option>Seed</option>
+        <option>Series A</option>
+        <option>Series B</option>
+        <option>Series C+</option>
+        <option>Other</option>
+      </select>
+      <label for="su-linkedin">LinkedIn profile link <span class="optional">(optional)</span></label>
+      <input id="su-linkedin" type="url" inputmode="url" placeholder="https://www.linkedin.com/in/your-name" autocomplete="url">
+      <label for="su-password">Password *</label>
+      <input id="su-password" type="password" autocomplete="new-password" minlength="8" required>
+      <label for="su-confirm">Confirm password *</label>
+      <input id="su-confirm" type="password" autocomplete="new-password" required>
+      <label class="check-row"><input type="checkbox" id="su-show"> Show passwords</label>
+      <p><button class="btn btn-lime auth-submit" type="submit">Create account</button></p>
+    </form>
+    <form id="login-form" class="auth-form" hidden novalidate>
+      <label for="li-name">Full name *</label>
+      <input id="li-name" type="text" autocomplete="name" required>
+      <label for="li-password">Password *</label>
+      <input id="li-password" type="password" autocomplete="current-password" required>
+      <label class="check-row"><input type="checkbox" id="li-show"> Show password</label>
+      <p><button class="btn btn-lime auth-submit" type="submit">Log in</button></p>
+      <p class="note">Your account lives on this device. Log in with the full name you signed up with.</p>
+    </form>
+    <p class="auth-switch"><button type="button" class="link-btn" id="show-login">Already have an account? Log in</button></p>
+    <p class="auth-switch"><button type="button" class="link-btn" id="show-signup" hidden>New here? Create an account</button></p>
+    <div class="auth-divider"><span>or</span></div>
     <div id="google-btn-holder"></div>
     <button class="btn" id="google-btn">Continue with Google</button>
-    <p><button class="btn btn-ghost" id="local-btn" hidden>Continue on this device</button></p>
-    <p class="privacy">Your data is stored in your own Google account or on this device. Raise does not receive it.</p>
+    <p class="privacy">Your account and data are saved on this device only. Raise does not receive them.</p>
   </div>
   <div id="app" hidden>
     <h1>Fundraising CRM</h1>
