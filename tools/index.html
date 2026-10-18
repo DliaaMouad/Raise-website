@@ -17,7 +17,7 @@
 <!-- ================= MAIN HEADER ================= -->
 <header class="site-header" id="site-header">
   <div class="header-inner">
-    <a href="/" class="logo" aria-label="Raise home">Raise<span class="logo-dot">.</span></a>
+    <a href="/tools" class="logo logo-raise-tools" aria-label="Raise Tools home">Raise<span class="logo-tools-accent"> Tools</span><span class="logo-dot">.</span></a>
     <nav class="main-nav" aria-label="Primary">
       <ul class="nav-list">
         <li><a class="nav-link" href="/#services">Advisory</a></li>
@@ -26,7 +26,10 @@
         <li><a class="nav-link" href="/#founder">About</a></li>
       </ul>
     </nav>
-    <a class="btn btn-primary btn-nav" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+    <div class="header-auth-actions" id="header-auth-actions">
+      <button type="button" class="btn btn-ghost btn-auth" id="header-login-btn">Log In</button>
+      <button type="button" class="btn btn-primary btn-auth btn-signup" id="header-signup-btn">Sign Up</button>
+    </div>
     <button class="hamburger" id="hamburger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -38,7 +41,10 @@
     <a class="mobile-link" href="/tools" style="font-weight:700;">Tools</a>
     <a class="mobile-link" href="/#system">Methodology</a>
     <a class="mobile-link" href="/#founder">About</a>
-    <a class="btn btn-primary btn-mobile" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+    <div class="mobile-auth-actions" id="mobile-auth-actions">
+      <button type="button" class="btn btn-ghost btn-mobile-auth" id="mobile-login-btn">Log In</button>
+      <button type="button" class="btn btn-primary btn-mobile-auth btn-signup" id="mobile-signup-btn">Sign Up</button>
+    </div>
   </div>
 
   <!-- STICKY TOOLS SUBNAV BAR IN HEADER -->
@@ -485,12 +491,12 @@
 <footer class="site-footer">
   <div class="wrap footer-wrap">
     <div class="footer-brand">
-      <a href="/" class="logo">Raise<span class="logo-dot">.</span></a>
+      <a href="/tools" class="logo logo-raise-tools">Raise<span class="logo-tools-accent"> Tools</span><span class="logo-dot">.</span></a>
       <p>Fundraising advisory and 8-tool software suite for pre-seed and seed founders.</p>
     </div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/#services">Advisory</a>
-      <a href="/tools" style="color:var(--lime);">Tools</a>
+      <a href="/tools" style="color:#a2f543;">Tools</a>
       <a href="/#system">Methodology</a>
       <a href="/#founder">About</a>
       <a href="https://cal.com/mouad-dliaa/15min">Contact</a>
@@ -502,6 +508,105 @@
   </div>
 </footer>
 
+<!-- ================= AUTH MODAL (SIGNUP & LOGIN) ================= -->
+<div class="auth-modal-backdrop" id="auth-modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="auth-modal-card">
+    <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <!-- SIGNUP VIEW -->
+    <div id="signup-view">
+      <h2 class="auth-form-title" id="modal-title">Create Your Founder Account</h2>
+      <p class="auth-form-sub">Access all 8 fundraising tools, run deep diagnostics, and build your round pipeline.</p>
+
+      <div class="auth-error-msg" id="su-error" hidden></div>
+
+      <form id="signup-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="su-firstname">First name <span class="req">*</span></label>
+            <input class="form-input" type="text" id="su-firstname" name="firstName" required placeholder="First name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="su-lastname">Last name <span class="req">*</span></label>
+            <input class="form-input" type="text" id="su-lastname" name="lastName" required placeholder="Last name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="su-linkedin">Linkedin profile</label>
+          <input class="form-input" type="url" id="su-linkedin" name="linkedin" placeholder="https://www.linkedin.com/...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="su-twitter">Twitter handle</label>
+          <input class="form-input" type="text" id="su-twitter" name="twitter" placeholder="@YourHandle">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="su-email">Email address <span class="req">*</span></label>
+          <input class="form-input" type="email" id="su-email" name="email" required placeholder="founder@company.com">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="su-password">Password <span class="req">*</span></label>
+            <input class="form-input" type="password" id="su-password" name="password" required placeholder="At least 8 characters" minlength="8">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="su-confirm-password">Confirm password <span class="req">*</span></label>
+            <input class="form-input" type="password" id="su-confirm-password" name="confirmPassword" required placeholder="Re-enter password" minlength="8">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-auth-submit" id="su-submit-btn">Create Account</button>
+      </form>
+
+      <div class="auth-divider"><span>or sign up with</span></div>
+
+      <button type="button" class="btn-google" id="su-google-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span>Sign up with Google</span>
+      </button>
+
+      <p class="auth-switch">Already have an account? <button type="button" class="auth-switch-link" id="switch-to-login">Log In</button></p>
+    </div>
+
+    <!-- LOGIN VIEW -->
+    <div id="login-view" hidden>
+      <h2 class="auth-form-title">Welcome Back</h2>
+      <p class="auth-form-sub">Log in to access your fundraising tools and pipeline.</p>
+
+      <div class="auth-error-msg" id="li-error" hidden></div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="li-email">Email address <span class="req">*</span></label>
+          <input class="form-input" type="email" id="li-email" name="email" required placeholder="founder@company.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="li-password">Password <span class="req">*</span></label>
+          <input class="form-input" type="password" id="li-password" name="password" required placeholder="••••••••">
+        </div>
+
+        <button type="submit" class="btn btn-auth-submit" id="li-submit-btn">Log In</button>
+      </form>
+
+      <div class="auth-divider"><span>or log in with</span></div>
+
+      <button type="button" class="btn-google" id="li-google-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <p class="auth-switch">Don't have an account? <button type="button" class="auth-switch-link" id="switch-to-signup">Sign Up</button></p>
+    </div>
+  </div>
+</div>
+
 <script src="/preview.js"></script>
+<script src="/tools-auth.js"></script>
 </body>
 </html>
