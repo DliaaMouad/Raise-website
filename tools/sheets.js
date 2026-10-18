@@ -8,7 +8,6 @@
   var TOKEN_KEY = 'raise_sheets_token';
   var TAB_BY_KEY = {
     crm: 'CRM',
-    outreach: 'Outreach',
     readiness: 'Readiness',
     financials: 'Financials',
     vault: 'Vault',
@@ -114,7 +113,7 @@
   function ensureSpreadsheet(cb) {
     var existing = getSheetId();
     if (existing) { if (cb) cb(existing); return; }
-    var tabs = ['CRM', 'Outreach', 'Readiness', 'Financials', 'Vault', 'Simulation'];
+    var tabs = ['CRM', 'Readiness', 'Financials', 'Vault', 'Simulation'];
     api('spreadsheets', 'POST', {
       properties: { title: cfg().SHEETS_TITLE || 'Raise Tools' },
       sheets: tabs.map(function (t) { return { properties: { title: t } }; })

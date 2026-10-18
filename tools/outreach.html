@@ -1,190 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Investor Outreach Generator | Raise Tools</title>
-<link rel="stylesheet" href="tools.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tool removed | Raise Tools</title>
+<meta http-equiv="refresh" content="3; url=/tools">
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #111215; }
+  .wrap { max-width: 520px; margin: 96px auto; padding: 0 20px; text-align: center; }
+  a { color: #111215; }
+</style>
 </head>
 <body>
-<header class="tools-topbar">
-  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
-  <nav class="tools-nav">
-    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
-    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
-  </nav>
-  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
-</header>
-<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
-<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
-<main>
-  <div id="gate" class="gate">
-    <h2 id="gate-title">Create your account</h2>
-    <p class="gate-sub">Create an account to use the Raise tools.</p>
-    <p id="auth-error" class="auth-error" hidden></p>
-    <form id="signup-form" class="auth-form" novalidate>
-      <label for="su-name">Full name *</label>
-      <input id="su-name" type="text" autocomplete="name" required>
-      <label for="su-email">Email *</label>
-      <input id="su-email" type="email" autocomplete="email" required>
-      <label for="su-country">Country *</label>
-      <input id="su-country" type="text" list="country-list" autocomplete="country-name" required>
-      <datalist id="country-list"></datalist>
-      <label for="su-company">Company name *</label>
-      <input id="su-company" type="text" autocomplete="organization" required>
-      <label for="su-stage">Stage you are raising *</label>
-      <select id="su-stage" required>
-        <option value="">Select your stage</option>
-        <option>Pre-seed</option>
-        <option>Seed</option>
-        <option>Series A</option>
-        <option>Series B</option>
-        <option>Series C+</option>
-        <option>Other</option>
-      </select>
-      <label for="su-linkedin">LinkedIn profile link <span class="optional">(optional)</span></label>
-      <input id="su-linkedin" type="url" inputmode="url" placeholder="https://www.linkedin.com/in/your-name" autocomplete="url">
-      <label for="su-password">Password *</label>
-      <input id="su-password" type="password" autocomplete="new-password" minlength="8" required>
-      <label for="su-confirm">Confirm password *</label>
-      <input id="su-confirm" type="password" autocomplete="new-password" required>
-      <label class="check-row"><input type="checkbox" id="su-show"> Show passwords</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Create account</button></p>
-    </form>
-    <form id="login-form" class="auth-form" hidden novalidate>
-      <label for="li-email">Email *</label>
-      <input id="li-email" type="email" autocomplete="email" required>
-      <label for="li-password">Password *</label>
-      <input id="li-password" type="password" autocomplete="current-password" required>
-      <label class="check-row"><input type="checkbox" id="li-show"> Show password</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Log in</button></p>
-      <p class="note">One account works across all tools and devices.</p>
-    </form>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-login">Already have an account? Log in</button></p>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-signup" hidden>New here? Create an account</button></p>
-    <p class="privacy">Your account is stored securely with Supabase. Your tool data stays in your own Google Sheet or on this device.</p>
-  </div>
-  <div id="app" hidden>
-    <h1>Investor Outreach Generator</h1>
-    <p class="sub">Draft a personalized cold email, warm-introduction request, or follow-up. Draft only. Nothing is sent from this page.</p>
-    <div class="syncbar">
-      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
-      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
-      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
-      <span id="sync-status"></span>
-    </div>
-    <div class="grid2">
-      <section class="card">
-        <h2 style="margin:0 0 4px;font-size:18px;">Your details</h2>
-        <form id="outreach-form">
-          <label for="o-name">Your name</label><input id="o-name" required>
-          <label for="o-startup">Startup name</label><input id="o-startup" required>
-          <label for="o-oneliner">One-liner</label><input id="o-oneliner" placeholder="What your startup does, in one line" required>
-          <label for="o-proof">One proof point (optional)</label><input id="o-proof" placeholder="e.g. 40 paying customers, $12k MRR">
-          <label for="o-investor">Investor name</label><input id="o-investor" required>
-          <label for="o-firm">Investor firm</label><input id="o-firm" required>
-          <label for="o-type">Email type</label>
-          <select id="o-type"><option value="cold">Cold email</option><option value="warm">Warm-introduction request</option><option value="followup">Follow-up</option></select>
-          <p style="margin-top:14px;"><button class="btn btn-lime" type="submit">Generate draft</button></p>
-        </form>
-      </section>
-      <section class="card">
-        <h2 style="margin:0 0 4px;font-size:18px;">Draft</h2>
-        <p class="note">Built only from what you typed above. Edit freely before sending from your own email.</p>
-        <div class="draft-output" id="draft-output">Your draft will appear here.</div>
-        <p style="margin-top:12px;display:flex;gap:8px;">
-          <button class="btn btn-small" id="copy-btn">Copy draft</button>
-          <button class="btn btn-small btn-ghost" id="save-draft-btn">Save draft</button>
-        </p>
-        <p id="copy-status" class="note"></p>
-      </section>
-    </div>
-    <h2 style="margin:24px 0 10px;">Saved drafts</h2>
-    <div id="drafts-list"></div>
-  </div>
+<main class="wrap">
+  <h1>This tool was removed</h1>
+  <p>The Outreach Generator is no longer part of Raise Tools. Redirecting you to all tools...</p>
+  <p><a href="/tools">Go to all tools</a></p>
 </main>
-<script src="config.js"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
-<script src="sheets.js"></script>
-<script>
-window.TOOL_KEY = 'outreach';
-var state = RaiseSheets.loadLocal('outreach', { drafts: [] });
-var currentDraft = '';
-function save() { RaiseSheets.saveLocal('outreach', state); renderDrafts(); }
-window.getToolData = function () { return state; };
-window.setToolData = function (d) { if (d && Array.isArray(d.drafts)) { state = d; save(); } };
-function renderDrafts() {
-  var el = document.getElementById('drafts-list');
-  if (!state.drafts.length) { el.innerHTML = '<p class="note">No saved drafts yet.</p>'; return; }
-  el.innerHTML = '';
-  state.drafts.slice().reverse().forEach(function (d) {
-    var div = document.createElement('div');
-    div.className = 'q-card';
-    div.innerHTML = '<b></b><pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;"></pre>';
-    div.querySelector('b').textContent = d.subject + ' · ' + (d.savedAt || '');
-    div.querySelector('pre').textContent = d.body;
-    el.appendChild(div);
-  });
-}
-function buildDraft(v) {
-  var proof = v.proof ? '\nProof point: ' + v.proof + '.' : '';
-  if (v.type === 'cold') {
-    return {
-      subject: v.startup + ' — ' + v.oneliner,
-      body: 'Hi ' + v.investor + ',\n\nI\'m ' + v.name + ', founder of ' + v.startup + '. ' + v.oneliner + '.' + proof +
-        '\n\nI\'m reaching out because ' + v.firm + ' backs founders at our stage, and I believe our story fits your thesis. We are raising and I would value a 15-minute conversation to share what we have built and where we are headed.' +
-        '\n\nWould you be open to a short call next week?\n\nBest,\n' + v.name
-    };
-  }
-  if (v.type === 'warm') {
-    return {
-      subject: 'Intro request: ' + v.startup + ' <> ' + v.firm,
-      body: 'Hi ' + v.investor + ',\n\nI hope you are well. I\'m ' + v.name + ', founder of ' + v.startup + '. ' + v.oneliner + '.' + proof +
-        '\n\nI noticed your connection to ' + v.firm + ' and wondered whether you would be comfortable making a short introduction. I am happy to share a one-paragraph intro you can forward, and I will keep any ask light: a 15-minute conversation, nothing more.' +
-        '\n\nThank you for considering it.\n\nBest,\n' + v.name
-    };
-  }
-  return {
-    subject: 'Re: ' + v.startup + ' — following up',
-    body: 'Hi ' + v.investor + ',\n\nFollowing up on my earlier note about ' + v.startup + '. ' + v.oneliner + '.' + proof +
-      '\n\nI wanted to check whether a short conversation would be useful. If the timing is not right, I understand, and I am happy to share a brief update instead.' +
-      '\n\nBest,\n' + v.name
-  };
-}
-document.getElementById('outreach-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  var v = {
-    name: document.getElementById('o-name').value.trim(),
-    startup: document.getElementById('o-startup').value.trim(),
-    oneliner: document.getElementById('o-oneliner').value.trim(),
-    proof: document.getElementById('o-proof').value.trim(),
-    investor: document.getElementById('o-investor').value.trim(),
-    firm: document.getElementById('o-firm').value.trim(),
-    type: document.getElementById('o-type').value
-  };
-  var d = buildDraft(v);
-  currentDraft = 'Subject: ' + d.subject + '\n\n' + d.body;
-  document.getElementById('draft-output').textContent = currentDraft;
-});
-document.getElementById('copy-btn').addEventListener('click', function () {
-  if (!currentDraft) return;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(currentDraft).then(function () {
-      document.getElementById('copy-status').textContent = 'Copied.';
-    });
-  } else {
-    document.getElementById('copy-status').textContent = 'Copy is not available in this browser. Select the draft text manually.';
-  }
-});
-document.getElementById('save-draft-btn').addEventListener('click', function () {
-  if (!currentDraft) return;
-  var subject = currentDraft.split('\n')[0].replace('Subject: ', '');
-  state.drafts.push({ subject: subject, body: currentDraft, savedAt: new Date().toISOString().slice(0, 10) });
-  save();
-  document.getElementById('copy-status').textContent = 'Draft saved.';
-});
-renderDrafts();
-</script>
 </body>
 </html>
