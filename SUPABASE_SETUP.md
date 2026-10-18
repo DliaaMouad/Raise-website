@@ -1,0 +1,61 @@
+# Raise Tools: Supabase setup (one time, about 10 minutes)
+
+Founder accounts now run on Supabase Auth + a `profiles` table. The code is
+already written and tested. It is NOT live yet: the live site still runs the
+old browser-only gate until the keys below are in `tools/config.js`.
+
+## 1. Create the project
+
+1. Go to https://supabase.com and create a free account (or log in).
+2. New project. Name: `Raise Tools`. Set a database password and keep it
+   somewhere safe (it is NOT used in the website).
+3. Region: pick the one closest to most founders, e.g. EU West (Frankfurt).
+
+## 2. Create the profiles table
+
+1. In the Supabase dashboard, open **SQL Editor** -> **New query**.
+2. Paste the whole contents of `supabase-schema.sql` (repo root) and Run.
+3. Check it worked: **Table Editor** -> `profiles` exists with columns
+   id, email, full_name, country, company, stage, linkedin, twitter.
+
+## 3. Email confirmation: pick one
+
+**Authentication** -> **Sign-in / Providers** -> **Email** -> **Confirm email**:
+
+- **OFF (recommended for now).** Founders sign up and go straight into the
+  tools. Less friction, more signups.
+- **ON.** Founders must click a confirmation link in their email before
+  they can log in. The site already handles this: after sign-up it tells
+  them to check their email and switch to the log-in form.
+
+## 4. Copy the keys (anon key only)
+
+**Settings** -> **API**. Copy:
+
+- **Project URL** -> `SUPABASE_URL` in `tools/config.js`
+- **anon public** key -> `SUPABASE_ANON_KEY` in `tools/config.js`
+
+NEVER copy the **service_role** key into the website. It bypasses Row Level
+Security and must stay server-side only. The anon key is designed to be
+public; Row Level Security on `profiles` is what protects founder data
+(each founder can only read/write their own row).
+
+## 5. Test
+
+1. Push the Supabase code (it is local until the keys are in).
+2. On the live site, sign up with a test email. You should land inside the
+   tool with no second login.
+3. In Supabase: **Authentication** -> **Users** shows the new user, and
+   **Table Editor** -> `profiles` shows their profile row.
+4. Open a second tool or a new tab: you stay logged in. Sign out in one
+   tab: the other tabs update.
+
+## Later (not needed for launch)
+
+- **Google sign-in:** Supabase dashboard -> **Authentication** ->
+  **Providers** -> **Google**, add the Google Cloud OAuth client ID/secret.
+  The site already shows "Google sign-in coming soon" until this is on.
+- **Privacy Policy + Terms pages.** Once you store founder data centrally,
+  the site needs real policy pages. The footer currently has plain text.
+- **Password reset:** Supabase Auth supports it out of the box; the site
+  does not have a "Forgot password" link yet.

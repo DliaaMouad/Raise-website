@@ -1,10 +1,19 @@
 /* =========================================================
-   Raise Tools — Authentication & Modal Handler
+   Raise Tools — Authentication & Modal Handler (landing page)
+   ONE account system, shared with the in-tool gate (tools/auth.js):
+   Supabase Auth + a profiles row. Sign up once, log in anywhere.
+   Passwords live in Supabase Auth, never in our tables or the browser.
+   The old localStorage session (raise_user_session) and the fake
+   "Google" login that accepted any email are gone.
+   Google sign-in comes later via Supabase OAuth (provider config in the
+   Supabase dashboard); until then the modal is email + password only.
+   If Supabase is not configured yet, the forms show a setup notice.
    ========================================================= */
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'raise_user_session';
+  var SETUP_MSG = 'Founder accounts are being set up. Come back shortly.';
+  var currentProfile = null;
 
   // Elements
   var authModal = document.getElementById('auth-modal');
@@ -29,6 +38,10 @@
   // Containers
   var headerAuthActions = document.getElementById('header-auth-actions');
   var mobileAuthActions = document.getElementById('mobile-auth-actions');
+
+  function isSupabaseConfigured() {
+    return window.RaiseSupabase && window.RaiseSupabase.isConfigured();
+  }
 
   function openModal(view) {
     if (!authModal) return;
@@ -82,39 +95,42 @@
     }
   }
 
-  function getSession() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) {
-      return null;
-    }
+  function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+  function firstNameOf(profile) {
+    var full = (profile && profile.full_name) || '';
+    return full.split(' ')[0] || '';
   }
 
-  function saveSession(data) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch (e) {
-      console.warn('Could not save session to localStorage', e);
-    }
-    renderAuthState();
+  function refreshAuthState() {
+    if (!isSupabaseConfigured()) { currentProfile = null; renderAuthState(); return; }
+    window.RaiseSupabase.getSessionUser().then(function (user) {
+      if (!user) { currentProfile = null; renderAuthState(); return; }
+      window.RaiseSupabase.getClient().then(function (client) {
+        return window.RaiseSupabase.ensureProfile(client, user);
+      }).then(function (profile) {
+        currentProfile = profile;
+        renderAuthState();
+      }).catch(function () { currentProfile = null; renderAuthState(); });
+    }).catch(function () { currentProfile = null; renderAuthState(); });
   }
 
   function logout() {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (e) {}
+    currentProfile = null;
     renderAuthState();
+    if (isSupabaseConfigured()) {
+      window.RaiseSupabase.signOut().catch(function () { /* already signed out */ });
+    }
   }
 
   function renderAuthState() {
-    var session = getSession();
     var existingProfile = document.getElementById('user-profile-menu');
     if (existingProfile) {
       existingProfile.remove();
     }
 
-    if (session && session.firstName) {
+    var firstName = currentProfile ? firstNameOf(currentProfile) : '';
+    if (currentProfile && firstName) {
       if (headerAuthActions) headerAuthActions.hidden = true;
       if (mobileAuthActions) mobileAuthActions.hidden = true;
 
@@ -124,17 +140,18 @@
         profileWrapper.className = 'user-profile-menu';
         profileWrapper.id = 'user-profile-menu';
 
-        var initials = (session.firstName[0] || 'U') + (session.lastName ? session.lastName[0] : '');
+        var initials = (firstName[0] || 'U') + ((currentProfile.full_name || '').split(' ')[1] || '').charAt(0);
+        var fullName = currentProfile.full_name || '';
         profileWrapper.innerHTML = [
           '<button type="button" class="btn-profile" id="user-profile-btn" aria-expanded="false" aria-label="Founder account">',
           '  <span class="user-avatar">' + escapeHtml(initials) + '</span>',
-          '  <span class="user-greeting">' + escapeHtml(session.firstName) + '</span>',
+          '  <span class="user-greeting">' + escapeHtml(firstName) + '</span>',
           '  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>',
           '</button>',
           '<div class="user-dropdown" id="user-dropdown" hidden>',
           '  <div class="user-dropdown-info">',
-          '    <strong>' + escapeHtml(session.firstName + (session.lastName ? ' ' + session.lastName : '')) + '</strong>',
-          '    <span>' + escapeHtml(session.email || '') + '</span>',
+          '    <strong>' + escapeHtml(fullName) + '</strong>',
+          '    <span>' + escapeHtml(currentProfile.email || '') + '</span>',
           '  </div>',
           '  <hr class="user-dropdown-sep">',
           '  <a href="/deck-rating" class="user-dropdown-link">◈ Deck Audit</a>',
@@ -260,6 +277,7 @@
     signupForm.addEventListener('submit', function (e) {
       e.preventDefault();
       clearErrors();
+      if (!isSupabaseConfigured()) { setSuError(SETUP_MSG); return; }
 
       var firstName = (document.getElementById('su-firstname').value || '').trim();
       var lastName = (document.getElementById('su-lastname').value || '').trim();
@@ -273,30 +291,48 @@
         setSuError('Please fill in all required fields marked with *');
         return;
       }
-
+      if (!validEmail(email)) {
+        setSuError('Enter a valid email address.');
+        return;
+      }
+      if (linkedin && !/^https?:\/\/.+/i.test(linkedin)) {
+        setSuError('LinkedIn link must start with https://');
+        return;
+      }
       if (password.length < 8) {
         setSuError('Password must be at least 8 characters long');
         return;
       }
-
       if (password !== confirmPassword) {
         setSuError('Passwords do not match. Please re-enter.');
         return;
       }
 
-      var userSession = {
-        firstName: firstName,
-        lastName: lastName,
+      var submitBtn = document.getElementById('su-submit-btn');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Creating account...'; }
+      window.RaiseSupabase.signUp({
         email: email,
-        linkedin: linkedin,
-        twitter: twitter,
-        provider: 'email',
-        signedUpAt: new Date().toISOString()
-      };
-
-      saveSession(userSession);
-      closeModal();
-      showWelcomeBanner('Welcome to Raise Tools, ' + firstName + '! Your account is active.');
+        password: password,
+        profile: {
+          full_name: firstName + ' ' + lastName,
+          country: '', company: '', stage: '',
+          linkedin: linkedin, twitter: twitter
+        }
+      }).then(function (res) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Create account'; }
+        if (res.needsConfirmation) {
+          showLoginView();
+          setLiError('Check your email to confirm your account, then log in.');
+          return;
+        }
+        currentProfile = res.profile;
+        renderAuthState();
+        closeModal();
+        showWelcomeBanner('Welcome to Raise Tools, ' + firstName + '! Your account is active.');
+      }).catch(function (err) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Create account'; }
+        setSuError(window.RaiseSupabase.friendlyAuthError(err));
+      });
     });
   }
 
@@ -305,6 +341,7 @@
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
       clearErrors();
+      if (!isSupabaseConfigured()) { setLiError(SETUP_MSG); return; }
 
       var email = (document.getElementById('li-email').value || '').trim();
       var password = document.getElementById('li-password').value || '';
@@ -313,42 +350,34 @@
         setLiError('Please provide both email and password');
         return;
       }
+      if (!validEmail(email)) {
+        setLiError('Enter a valid email address.');
+        return;
+      }
 
-      // Check existing session name or deduce from email
-      var prev = getSession();
-      var firstName = (prev && prev.firstName) ? prev.firstName : email.split('@')[0];
-      var lastName = (prev && prev.lastName) ? prev.lastName : '';
-
-      var userSession = {
-        firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
-        lastName: lastName,
-        email: email,
-        provider: 'email',
-        loggedInAt: new Date().toISOString()
-      };
-
-      saveSession(userSession);
-      closeModal();
-      showWelcomeBanner('Welcome back, ' + userSession.firstName + '!');
+      var submitBtn = document.getElementById('li-submit-btn');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Logging in...'; }
+      window.RaiseSupabase.signIn(email, password).then(function (res) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Log in'; }
+        currentProfile = res.profile;
+        renderAuthState();
+        closeModal();
+        showWelcomeBanner('Welcome back, ' + firstNameOf(res.profile) + '!');
+      }).catch(function (err) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Log in'; }
+        setLiError(window.RaiseSupabase.friendlyAuthError(err));
+      });
     });
   }
 
-  // Google Sign-in Handler
-  function handleGoogleAuth() {
-    var googleUser = {
-      firstName: 'Founder',
-      lastName: '',
-      email: 'founder@raiseos.site',
-      provider: 'google',
-      signedUpAt: new Date().toISOString()
-    };
-    saveSession(googleUser);
-    closeModal();
-    showWelcomeBanner('Signed in with Google successfully!');
+  // Google sign-in is not wired yet (Supabase OAuth provider config needed).
+  // Never fake a session: tell the founder to use email for now.
+  function handleGoogleSoon() {
+    setSuError('Google sign-in is coming soon. Use email for now.');
+    setLiError('Google sign-in is coming soon. Use email for now.');
   }
-
-  if (suGoogleBtn) suGoogleBtn.addEventListener('click', handleGoogleAuth);
-  if (liGoogleBtn) liGoogleBtn.addEventListener('click', handleGoogleAuth);
+  if (suGoogleBtn) suGoogleBtn.addEventListener('click', handleGoogleSoon);
+  if (liGoogleBtn) liGoogleBtn.addEventListener('click', handleGoogleSoon);
 
   function showWelcomeBanner(msg) {
     var banner = document.createElement('div');
@@ -361,6 +390,7 @@
     }, 4000);
   }
 
-  // Initial check
-  renderAuthState();
+  // Initial check + live auth events (including other tabs).
+  refreshAuthState();
+  if (window.RaiseSupabase) window.RaiseSupabase.onAuthStateChange(function () { refreshAuthState(); });
 })();

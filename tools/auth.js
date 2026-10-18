@@ -1,21 +1,12 @@
-/* Raise Tools shared auth.
- * Two ways in:
- *  1. Password account: sign up with full name, country, company name,
- *     stage raising, LinkedIn link (optional), password + confirm password.
- *     The account lives in this browser's localStorage: profile + SHA-256
- *     password hash, never the plaintext password. Log in with full name
- *     + password. One account per device. No backend, so accounts do not
- *     roam across devices and Raise never receives the profile.
- *  2. Google (Google Identity Services) when an OAuth client ID is
- *     configured. First-time Google sign-in = sign up; returning = log in.
- * The session lives in localStorage, so one sign-up / log-in covers all
- * tools, all tabs, and return visits on this device, until Sign out.
- * A legacy sessionStorage session (from the older gate) is migrated to
- * localStorage on first read. */
+/* Raise Tools shared auth (in-tool gate).
+ * ONE account system, shared with the Tools landing page (tools-auth.js):
+ * Supabase Auth + a profiles row. Sign up once, log in anywhere, on any
+ * device. Passwords live in Supabase Auth, never in our tables or in the
+ * browser. The Google button below is unchanged: it connects the founder's
+ * own Google Sheet for tool data (needs the Google OAuth client ID).
+ * If Supabase is not configured yet, the forms show a setup notice instead
+ * of failing. */
 (function () {
-  var SESSION_KEY = 'raise_auth_user';
-  var ACCOUNT_KEY = 'raise_account';
-
   var COUNTRIES = ['Algeria', 'Argentina', 'Australia', 'Austria', 'Bahrain', 'Bangladesh',
     'Belgium', 'Brazil', 'Bulgaria', 'Canada', 'Chile', 'China', 'Colombia', 'Croatia',
     'Czech Republic', 'Denmark', 'Egypt', 'Estonia', 'Ethiopia', 'Finland', 'France',
@@ -28,60 +19,36 @@
     'Thailand', 'Tunisia', 'Turkey', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
     'United States', 'Vietnam', 'Other'];
 
+  var SETUP_MSG = 'Founder accounts are being set up. Come back shortly.';
+  var cachedUser = null;
+  var cachedProfile = null;
+
   function cfg() { return window.RAISE_TOOLS_CONFIG || {}; }
 
+  // Google OAuth client ID for Sheets connect (kept separate from Supabase).
   function isConfigured() {
     var id = cfg().GOOGLE_OAUTH_CLIENT_ID || '';
     return id && id.indexOf('[FILL') !== 0;
   }
 
+  function isSupabaseConfigured() {
+    return window.RaiseSupabase && window.RaiseSupabase.isConfigured();
+  }
+
   function $(id) { return document.getElementById(id); }
 
-  function getUser() {
-    try {
-      var raw = localStorage.getItem(SESSION_KEY);
-      if (raw) return JSON.parse(raw);
-      // Migrate a legacy sessionStorage session (older gate) once.
-      var legacy = sessionStorage.getItem(SESSION_KEY);
-      if (legacy) {
-        try { localStorage.setItem(SESSION_KEY, legacy); } catch (e) {}
-        try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
-        return JSON.parse(legacy);
-      }
-      return null;
-    } catch (e) { return null; }
-  }
-
-  function isSignedIn() { return !!getUser(); }
-
-  function setUser(u) {
-    try { localStorage.setItem(SESSION_KEY, JSON.stringify(u)); } catch (e) {}
-    render();
-  }
+  function getUser() { return cachedUser; }
+  function isSignedIn() { return !!cachedUser; }
+  function getProfile() { return cachedProfile; }
 
   function signOut() {
-    try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
-    try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
     try { sessionStorage.removeItem('raise_sheets_token'); } catch (e) {}
+    cachedUser = null;
+    cachedProfile = null;
     render();
-  }
-
-  function getAccount() {
-    try { return JSON.parse(localStorage.getItem(ACCOUNT_KEY) || 'null'); } catch (e) { return null; }
-  }
-
-  function getProfile() {
-    var a = getAccount();
-    if (!a) return null;
-    return { fullName: a.fullName, country: a.country, company: a.company, stage: a.stage, linkedin: a.linkedin || '' };
-  }
-
-  function hashPassword(pw) {
-    if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) return Promise.resolve(null);
-    var data = new TextEncoder().encode(pw);
-    return window.crypto.subtle.digest('SHA-256', data).then(function (buf) {
-      return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
-    });
+    if (isSupabaseConfigured()) {
+      window.RaiseSupabase.signOut().catch(function () { /* already signed out */ });
+    }
   }
 
   function showError(msg) {
@@ -110,8 +77,21 @@
     if (toSignup) toSignup.hidden = which !== 'login';
   }
 
+  function setBusy(formId, busy, label) {
+    var btn = document.querySelector('#' + formId + ' button[type="submit"]');
+    if (btn) {
+      btn.disabled = busy;
+      if (busy) { btn.dataset.label = btn.textContent; btn.textContent = label; }
+      else if (btn.dataset.label) { btn.textContent = btn.dataset.label; }
+    }
+  }
+
+  function validEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
   function validSignup(f) {
     if (!f.fullName) return 'Full name is required.';
+    if (!f.email) return 'Email is required.';
+    if (!validEmail(f.email)) return 'Enter a valid email address.';
     if (!f.country) return 'Country is required.';
     if (!f.company) return 'Company name is required.';
     if (!f.stage) return 'Stage you are raising is required.';
@@ -122,11 +102,27 @@
     return null;
   }
 
+  function refreshSession() {
+    if (!isSupabaseConfigured()) { cachedUser = null; cachedProfile = null; render(); return; }
+    window.RaiseSupabase.getSessionUser().then(function (user) {
+      if (!user) { cachedUser = null; cachedProfile = null; render(); return; }
+      cachedUser = user;
+      window.RaiseSupabase.getClient().then(function (client) {
+        return window.RaiseSupabase.ensureProfile(client, user);
+      }).then(function (profile) {
+        cachedProfile = profile;
+        render();
+      }).catch(function () { cachedProfile = null; render(); });
+    }).catch(function () { cachedUser = null; cachedProfile = null; render(); });
+  }
+
   function handleSignup(e) {
     e.preventDefault();
     clearError();
+    if (!isSupabaseConfigured()) { showError(SETUP_MSG); return; }
     var f = {
       fullName: ($('su-name') || {}).value ? $('su-name').value.trim() : '',
+      email: ($('su-email') || {}).value ? $('su-email').value.trim() : '',
       country: ($('su-country') || {}).value ? $('su-country').value.trim() : '',
       company: ($('su-company') || {}).value ? $('su-company').value.trim() : '',
       stage: ($('su-stage') || {}).value || '',
@@ -136,71 +132,53 @@
     };
     var err = validSignup(f);
     if (err) { showError(err); return; }
-    if (getAccount()) { showForm('login'); showError('An account already exists on this device. Log in instead.'); return; }
-    hashPassword(f.password).then(function (hash) {
-      if (!hash) { showError('Password sign-up needs a secure connection (HTTPS). Use Google instead.'); return; }
-      try {
-        localStorage.setItem(ACCOUNT_KEY, JSON.stringify({
-          fullName: f.fullName, country: f.country, company: f.company,
-          stage: f.stage, linkedin: f.linkedin, passHash: hash,
-          provider: 'password', createdAt: new Date().toISOString()
-        }));
-      } catch (ex) { showError('Could not save the account on this device.'); return; }
-      setUser({
-        name: f.fullName, email: '', picture: '', mode: 'password',
-        profile: { country: f.country, company: f.company, stage: f.stage, linkedin: f.linkedin },
-        signedInAt: new Date().toISOString()
-      });
+    setBusy('signup-form', true, 'Creating account...');
+    window.RaiseSupabase.signUp({
+      email: f.email,
+      password: f.password,
+      profile: {
+        full_name: f.fullName, country: f.country, company: f.company,
+        stage: f.stage, linkedin: f.linkedin, twitter: ''
+      }
+    }).then(function (res) {
+      setBusy('signup-form', false);
+      if (res.needsConfirmation) {
+        showForm('login');
+        showError('Check your email to confirm your account, then log in.');
+        return;
+      }
+      cachedUser = res.user;
+      cachedProfile = res.profile;
+      render();
+    }).catch(function (ex) {
+      setBusy('signup-form', false);
+      showError(window.RaiseSupabase.friendlyAuthError(ex));
     });
   }
 
   function handleLogin(e) {
     e.preventDefault();
     clearError();
-    var name = ($('li-name') || {}).value ? $('li-name').value.trim() : '';
+    if (!isSupabaseConfigured()) { showError(SETUP_MSG); return; }
+    var email = ($('li-email') || {}).value ? $('li-email').value.trim() : '';
     var pw = ($('li-password') || {}).value || '';
-    if (!name) { showError('Full name is required.'); return; }
+    if (!email) { showError('Email is required.'); return; }
+    if (!validEmail(email)) { showError('Enter a valid email address.'); return; }
     if (!pw) { showError('Password is required.'); return; }
-    var account = getAccount();
-    if (!account) { showForm('signup'); showError('No account on this device yet. Create one below.'); return; }
-    if (account.fullName.trim().toLowerCase() !== name.toLowerCase()) {
-      showError('No account with that full name on this device.');
-      return;
-    }
-    hashPassword(pw).then(function (hash) {
-      if (!hash) { showError('Log in needs a secure connection (HTTPS).'); return; }
-      if (hash !== account.passHash) { showError('Wrong password. Try again.'); return; }
-      setUser({
-        name: account.fullName, email: '', picture: '', mode: 'password',
-        profile: { country: account.country, company: account.company, stage: account.stage, linkedin: account.linkedin || '' },
-        signedInAt: new Date().toISOString()
-      });
+    setBusy('login-form', true, 'Logging in...');
+    window.RaiseSupabase.signIn(email, pw).then(function (res) {
+      setBusy('login-form', false);
+      cachedUser = res.user;
+      cachedProfile = res.profile;
+      render();
+    }).catch(function (ex) {
+      setBusy('login-form', false);
+      showError(window.RaiseSupabase.friendlyAuthError(ex));
     });
   }
 
-  function decodeJwt(token) {
-    var parts = token.split('.');
-    var payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
-    while (payload.length % 4) payload += '=';
-    return JSON.parse(atob(payload));
-  }
-
-  function onGoogleCredential(resp) {
-    try {
-      var p = decodeJwt(resp.credential);
-      setUser({
-        name: p.name || 'Google user',
-        email: p.email || '',
-        picture: p.picture || '',
-        mode: 'google',
-        sub: p.sub || '',
-        signedInAt: new Date().toISOString()
-      });
-    } catch (e) { /* invalid credential: stay signed out */ }
-  }
-
   function render() {
-    var user = getUser();
+    var user = cachedUser;
     var status = $('auth-status');
     var signout = $('signout-btn');
     var localBanner = $('local-banner');
@@ -208,12 +186,17 @@
     var app = $('app');
     if (status) {
       status.textContent = user
-        ? (user.mode === 'google' ? ('Signed in as ' + (user.email || user.name)) : ('Signed in as ' + user.name))
+        ? ('Signed in as ' + ((cachedProfile && cachedProfile.full_name) || user.email || ''))
         : 'Not signed in';
     }
     if (signout) signout.hidden = !user;
-    if (localBanner) localBanner.hidden = !(user && (user.mode === 'local' || user.mode === 'password'));
+    if (localBanner) localBanner.hidden = true;
     if (gate && app) { gate.hidden = !!user; app.hidden = !user; }
+    if (gate && !user && !isSupabaseConfigured()) {
+      var title = $('gate-title');
+      if (title) title.textContent = 'Create your account';
+      showError(SETUP_MSG);
+    }
   }
 
   function bindToggle(checkboxId, inputIds) {
@@ -237,7 +220,7 @@
         list.appendChild(opt);
       });
     }
-    showForm(getAccount() ? 'login' : 'signup');
+    showForm('signup');
     var signupForm = $('signup-form');
     if (signupForm) signupForm.addEventListener('submit', handleSignup);
     var loginForm = $('login-form');
@@ -249,48 +232,27 @@
     bindToggle('su-show', ['su-password', 'su-confirm']);
     bindToggle('li-show', ['li-password']);
 
+    // Google sign-in for accounts comes later via Supabase OAuth (needs the
+    // provider configured in the Supabase dashboard). Until then the gate
+    // is email + password only. Sheets connect lives inside each tool.
     var googleBtn = $('google-btn');
-    var holder = $('google-btn-holder');
-    var banner = $('sheets-banner');
-
-    if (!isConfigured()) {
-      if (banner) banner.hidden = false;
-      if (googleBtn) googleBtn.addEventListener('click', function () {
-        if (banner) { banner.hidden = false; banner.scrollIntoView(); }
-      });
-    } else {
-      if (googleBtn) googleBtn.hidden = true;
-      var s = document.createElement('script');
-      s.src = 'https://accounts.google.com/gsi/client';
-      s.async = true;
-      s.defer = true;
-      s.onload = function () {
-        window.google.accounts.id.initialize({
-          client_id: cfg().GOOGLE_OAUTH_CLIENT_ID,
-          callback: onGoogleCredential
-        });
-        if (holder) {
-          window.google.accounts.id.renderButton(holder, {
-            theme: 'filled_black', size: 'large', text: 'continue_with', width: 320
-          });
-        }
-      };
-      document.head.appendChild(s);
+    if (googleBtn) {
+      googleBtn.disabled = true;
+      googleBtn.textContent = 'Google sign-in coming soon';
     }
 
     var signout = $('signout-btn');
     if (signout) signout.addEventListener('click', signOut);
-  }
 
-  // Keep every open tool tab in sync: logging in or out in one tab
-  // updates the gate in all the others without a reload.
-  window.addEventListener('storage', function (e) {
-    if (e && e.key === SESSION_KEY) render();
-  });
+    // Live session: first load + every sign-in / sign-out (including other tabs).
+    refreshSession();
+    if (window.RaiseSupabase) window.RaiseSupabase.onAuthStateChange(function () { refreshSession(); });
+  }
 
   document.addEventListener('DOMContentLoaded', initGate);
   window.RaiseAuth = {
     isConfigured: isConfigured,
+    isSupabaseConfigured: isSupabaseConfigured,
     getUser: getUser,
     isSignedIn: isSignedIn,
     getProfile: getProfile,

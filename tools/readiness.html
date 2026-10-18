@@ -25,6 +25,8 @@
     <form id="signup-form" class="auth-form" novalidate>
       <label for="su-name">Full name *</label>
       <input id="su-name" type="text" autocomplete="name" required>
+      <label for="su-email">Email *</label>
+      <input id="su-email" type="email" autocomplete="email" required>
       <label for="su-country">Country *</label>
       <input id="su-country" type="text" list="country-list" autocomplete="country-name" required>
       <datalist id="country-list"></datalist>
@@ -50,20 +52,20 @@
       <p><button class="btn btn-lime auth-submit" type="submit">Create account</button></p>
     </form>
     <form id="login-form" class="auth-form" hidden novalidate>
-      <label for="li-name">Full name *</label>
-      <input id="li-name" type="text" autocomplete="name" required>
+      <label for="li-email">Email *</label>
+      <input id="li-email" type="email" autocomplete="email" required>
       <label for="li-password">Password *</label>
       <input id="li-password" type="password" autocomplete="current-password" required>
       <label class="check-row"><input type="checkbox" id="li-show"> Show password</label>
       <p><button class="btn btn-lime auth-submit" type="submit">Log in</button></p>
-      <p class="note">Your account lives on this device. Log in with the full name you signed up with.</p>
+      <p class="note">One account works across all tools and devices.</p>
     </form>
     <p class="auth-switch"><button type="button" class="link-btn" id="show-login">Already have an account? Log in</button></p>
     <p class="auth-switch"><button type="button" class="link-btn" id="show-signup" hidden>New here? Create an account</button></p>
     <div class="auth-divider"><span>or</span></div>
     <div id="google-btn-holder"></div>
     <button class="btn" id="google-btn">Continue with Google</button>
-    <p class="privacy">Your account and data are saved on this device only. Raise does not receive them.</p>
+    <p class="privacy">Your account is stored securely with Supabase. Your tool data stays in your own Google Sheet or on this device.</p>
   </div>
   <div id="app" hidden>
     <h1>Fundraising Readiness</h1>
@@ -95,6 +97,7 @@
   </div>
 </main>
 <script src="config.js"></script>
+<script src="supabase.js"></script>
 <script src="auth.js"></script>
 <script src="sheets.js"></script>
 <script>
