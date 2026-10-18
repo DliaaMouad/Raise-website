@@ -1,158 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Due Diligence Vault | Raise Tools</title>
-<link rel="stylesheet" href="tools.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Removed | Raise</title>
+<meta http-equiv="refresh" content="0; url=/">
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #111215; }
+  .wrap { max-width: 520px; margin: 96px auto; padding: 0 20px; text-align: center; }
+  a { color: #111215; }
+</style>
 </head>
 <body>
-<header class="tools-topbar">
-  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
-  <nav class="tools-nav">
-    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
-    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
-  </nav>
-  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
-</header>
-<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
-<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
-<main>
-  <div id="gate" class="gate">
-    <h2 id="gate-title">Create your account</h2>
-    <p class="gate-sub">Create an account to use the Raise tools.</p>
-    <p id="auth-error" class="auth-error" hidden></p>
-    <form id="signup-form" class="auth-form" novalidate>
-      <label for="su-name">Full name *</label>
-      <input id="su-name" type="text" autocomplete="name" required>
-      <label for="su-email">Email *</label>
-      <input id="su-email" type="email" autocomplete="email" required>
-      <label for="su-country">Country *</label>
-      <input id="su-country" type="text" list="country-list" autocomplete="country-name" required>
-      <datalist id="country-list"></datalist>
-      <label for="su-company">Company name *</label>
-      <input id="su-company" type="text" autocomplete="organization" required>
-      <label for="su-stage">Stage you are raising *</label>
-      <select id="su-stage" required>
-        <option value="">Select your stage</option>
-        <option>Pre-seed</option>
-        <option>Seed</option>
-        <option>Series A</option>
-        <option>Series B</option>
-        <option>Series C+</option>
-        <option>Other</option>
-      </select>
-      <label for="su-linkedin">LinkedIn profile link <span class="optional">(optional)</span></label>
-      <input id="su-linkedin" type="url" inputmode="url" placeholder="https://www.linkedin.com/in/your-name" autocomplete="url">
-      <label for="su-password">Password *</label>
-      <input id="su-password" type="password" autocomplete="new-password" minlength="8" required>
-      <label for="su-confirm">Confirm password *</label>
-      <input id="su-confirm" type="password" autocomplete="new-password" required>
-      <label class="check-row"><input type="checkbox" id="su-show"> Show passwords</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Create account</button></p>
-    </form>
-    <form id="login-form" class="auth-form" hidden novalidate>
-      <label for="li-email">Email *</label>
-      <input id="li-email" type="email" autocomplete="email" required>
-      <label for="li-password">Password *</label>
-      <input id="li-password" type="password" autocomplete="current-password" required>
-      <label class="check-row"><input type="checkbox" id="li-show"> Show password</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Log in</button></p>
-      <p class="note">One account works across all tools and devices.</p>
-    </form>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-login">Already have an account? Log in</button></p>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-signup" hidden>New here? Create an account</button></p>
-    <p class="privacy">Your account is stored securely with Supabase. Your tool data stays in your own Google Sheet or on this device.</p>
-  </div>
-  <div id="app" hidden>
-    <h1>Due Diligence Vault</h1>
-    <p class="sub">Organize your data room. Track which documents are ready, which are missing, and flag issues before investors find them. No files are uploaded here: this checklist stores document names, status, and notes only.</p>
-    <div class="syncbar">
-      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
-      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
-      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
-      <span id="sync-status"></span>
-    </div>
-    <section class="card">
-      <h2 style="margin:0 0 4px;font-size:18px;">Data room status</h2>
-      <p><span class="pill" id="sum-present">0 present</span> <span class="pill warn" id="sum-missing">0 missing</span> <span class="pill bad" id="sum-flagged">0 flagged issues</span></p>
-      <div class="scorebar"><div id="vault-bar" style="width:0%"></div></div>
-      <p class="formula" id="vault-pct">0% of documents marked present.</p>
-    </section>
-    <h2 style="margin:24px 0 10px;">Document checklist</h2>
-    <section class="card"><div id="docs"></div></section>
-  </div>
+<main class="wrap">
+  <h1>This page was removed</h1>
+  <p>Raise no longer offers software tools. Redirecting you to the homepage...</p>
+  <p><a href="/">Go to homepage</a></p>
 </main>
-<script src="config.js"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
-<script src="sheets.js"></script>
-<script>
-window.TOOL_KEY = 'vault';
-var DOCS = ['Pitch deck', 'Financial model', 'Cap table', 'Incorporation documents', 'Founder agreements', 'IP assignments', 'Customer contracts', 'Privacy policy', 'Terms of service', 'Tax filings', 'Bank statements', 'Board minutes'];
-var state = RaiseSheets.loadLocal('vault', { docs: {} });
-function save() { RaiseSheets.saveLocal('vault', state); compute(); }
-window.getToolData = function () { return state; };
-window.setToolData = function (d) { if (d && d.docs) { state = d; renderDocs(); compute(); } };
-function docState(name) {
-  if (!state.docs[name]) state.docs[name] = { status: 'Missing', fileName: '', notes: '', flagged: false };
-  return state.docs[name];
-}
-function compute() {
-  var present = 0, missing = 0, flagged = 0;
-  DOCS.forEach(function (name) {
-    var d = docState(name);
-    if (d.status === 'Present') present++;
-    if (d.status === 'Missing') missing++;
-    if (d.flagged) flagged++;
-  });
-  document.getElementById('sum-present').textContent = present + ' present';
-  document.getElementById('sum-missing').textContent = missing + ' missing';
-  document.getElementById('sum-flagged').textContent = flagged + ' flagged issues';
-  var pct = Math.round((present / DOCS.length) * 100);
-  document.getElementById('vault-bar').style.width = pct + '%';
-  document.getElementById('vault-pct').textContent = pct + '% of documents marked present.';
-}
-function renderDocs() {
-  var el = document.getElementById('docs');
-  el.innerHTML = '';
-  var head = document.createElement('div');
-  head.innerHTML = '<table><tr><th>Document</th><th>Status</th><th>File name (reference only)</th><th>Notes</th><th>Flag issue</th></tr></table>';
-  el.appendChild(head);
-  var table = head.querySelector('table');
-  DOCS.forEach(function (name) {
-    var d = docState(name);
-    var tr = document.createElement('tr');
-    var tdName = document.createElement('td'); tdName.innerHTML = '<b></b>'; tdName.querySelector('b').textContent = name;
-    var tdStatus = document.createElement('td');
-    var sel = document.createElement('select');
-    ['Missing', 'In progress', 'Present'].forEach(function (s) { var o = document.createElement('option'); o.textContent = s; sel.appendChild(o); });
-    sel.value = d.status;
-    sel.addEventListener('change', function () { d.status = sel.value; save(); });
-    tdStatus.appendChild(sel);
-    var tdFile = document.createElement('td');
-    var fileInput = document.createElement('input');
-    fileInput.placeholder = 'e.g. cap-table-2026.pdf';
-    fileInput.value = d.fileName || '';
-    fileInput.addEventListener('input', function () { d.fileName = fileInput.value; RaiseSheets.saveLocal('vault', state); });
-    tdFile.appendChild(fileInput);
-    var tdNotes = document.createElement('td');
-    var notesInput = document.createElement('input');
-    notesInput.placeholder = 'Notes or gaps';
-    notesInput.value = d.notes || '';
-    notesInput.addEventListener('input', function () { d.notes = notesInput.value; RaiseSheets.saveLocal('vault', state); });
-    tdNotes.appendChild(notesInput);
-    var tdFlag = document.createElement('td');
-    var flag = document.createElement('input');
-    flag.type = 'checkbox'; flag.checked = !!d.flagged;
-    flag.addEventListener('change', function () { d.flagged = flag.checked; save(); });
-    tdFlag.appendChild(flag);
-    tr.appendChild(tdName); tr.appendChild(tdStatus); tr.appendChild(tdFile); tr.appendChild(tdNotes); tr.appendChild(tdFlag);
-    table.appendChild(tr);
-  });
-}
-renderDocs();
-compute();
-</script>
 </body>
 </html>

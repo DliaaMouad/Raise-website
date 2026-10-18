@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.raiseos.site/</loc>
+    <loc>https://www.raiseos.site/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.raiseos.site/raise-os</loc>
+    <loc>https://www.raiseos.site/raise-os.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.raiseos.site/program</loc>
+    <loc>https://www.raiseos.site/program.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.raiseos.site/tools</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.raiseos.site/deck-rating</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.raiseos.site/investors</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.raiseos.site/get-started</loc>
+    <loc>https://www.raiseos.site/get-started.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.raiseos.site/partners</loc>
+    <loc>https://www.raiseos.site/partners.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

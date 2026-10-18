@@ -1,182 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fundraising Readiness | Raise Tools</title>
-<link rel="stylesheet" href="tools.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Removed | Raise</title>
+<meta http-equiv="refresh" content="0; url=/">
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #111215; }
+  .wrap { max-width: 520px; margin: 96px auto; padding: 0 20px; text-align: center; }
+  a { color: #111215; }
+</style>
 </head>
 <body>
-<header class="tools-topbar">
-  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
-  <nav class="tools-nav">
-    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
-    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
-  </nav>
-  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
-</header>
-<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
-<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
-<main>
-  <div id="gate" class="gate">
-    <h2 id="gate-title">Create your account</h2>
-    <p class="gate-sub">Create an account to use the Raise tools.</p>
-    <p id="auth-error" class="auth-error" hidden></p>
-    <form id="signup-form" class="auth-form" novalidate>
-      <label for="su-name">Full name *</label>
-      <input id="su-name" type="text" autocomplete="name" required>
-      <label for="su-email">Email *</label>
-      <input id="su-email" type="email" autocomplete="email" required>
-      <label for="su-country">Country *</label>
-      <input id="su-country" type="text" list="country-list" autocomplete="country-name" required>
-      <datalist id="country-list"></datalist>
-      <label for="su-company">Company name *</label>
-      <input id="su-company" type="text" autocomplete="organization" required>
-      <label for="su-stage">Stage you are raising *</label>
-      <select id="su-stage" required>
-        <option value="">Select your stage</option>
-        <option>Pre-seed</option>
-        <option>Seed</option>
-        <option>Series A</option>
-        <option>Series B</option>
-        <option>Series C+</option>
-        <option>Other</option>
-      </select>
-      <label for="su-linkedin">LinkedIn profile link <span class="optional">(optional)</span></label>
-      <input id="su-linkedin" type="url" inputmode="url" placeholder="https://www.linkedin.com/in/your-name" autocomplete="url">
-      <label for="su-password">Password *</label>
-      <input id="su-password" type="password" autocomplete="new-password" minlength="8" required>
-      <label for="su-confirm">Confirm password *</label>
-      <input id="su-confirm" type="password" autocomplete="new-password" required>
-      <label class="check-row"><input type="checkbox" id="su-show"> Show passwords</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Create account</button></p>
-    </form>
-    <form id="login-form" class="auth-form" hidden novalidate>
-      <label for="li-email">Email *</label>
-      <input id="li-email" type="email" autocomplete="email" required>
-      <label for="li-password">Password *</label>
-      <input id="li-password" type="password" autocomplete="current-password" required>
-      <label class="check-row"><input type="checkbox" id="li-show"> Show password</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Log in</button></p>
-      <p class="note">One account works across all tools and devices.</p>
-    </form>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-login">Already have an account? Log in</button></p>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-signup" hidden>New here? Create an account</button></p>
-    <p class="privacy">Your account is stored securely with Supabase. Your tool data stays in your own Google Sheet or on this device.</p>
-  </div>
-  <div id="app" hidden>
-    <h1>Fundraising Readiness</h1>
-    <p class="sub">Score your fundraising preparation. Check what is true for your startup. Your score is computed from your answers only.</p>
-    <div class="syncbar">
-      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
-      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
-      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
-      <span id="sync-status"></span>
-    </div>
-    <div class="grid2">
-      <section class="card">
-        <h2 style="margin:0 0 4px;font-size:18px;">Readiness score</h2>
-        <div class="metric" id="score-big">0%</div>
-        <div class="scorebar"><div id="score-bar" style="width:0%"></div></div>
-        <p class="formula">Score = checked items / total items × 100. Each item counts equally. Category scores use the same formula within each category.</p>
-        <div id="category-scores"></div>
-      </section>
-      <section class="card">
-        <h2 style="margin:0 0 4px;font-size:18px;">Gaps to close</h2>
-        <p class="note">Every unchecked item, in the order below. Work through them before approaching investors.</p>
-        <div id="gaps"></div>
-      </section>
-    </div>
-    <h2 style="margin:24px 0 10px;">Self-assessment</h2>
-    <div class="card" id="checklist"></div>
-    <label for="r-notes">Notes</label>
-    <textarea id="r-notes" placeholder="Evidence, blockers, next steps..."></textarea>
-  </div>
+<main class="wrap">
+  <h1>This page was removed</h1>
+  <p>Raise no longer offers software tools. Redirecting you to the homepage...</p>
+  <p><a href="/">Go to homepage</a></p>
 </main>
-<script src="config.js"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
-<script src="sheets.js"></script>
-<script>
-window.TOOL_KEY = 'readiness';
-var ITEMS = [
-  { cat: 'Pitch', label: 'One-line pitch is clear: what you do, for whom, and why now' },
-  { cat: 'Pitch', label: 'Deck covers problem, solution, market, business model, team, and ask' },
-  { cat: 'Pitch', label: 'Narrative explains why this team wins this market' },
-  { cat: 'Pitch', label: 'Ask is specific: amount, runway, and what it buys' },
-  { cat: 'Evidence', label: 'Traction metrics are documented and verifiable' },
-  { cat: 'Evidence', label: 'Customer proof exists (users, revenue, pilots, or letters of intent)' },
-  { cat: 'Evidence', label: 'Market sizing uses a bottom-up method, not only top-down' },
-  { cat: 'Evidence', label: 'Competitive position is honest and differentiated' },
-  { cat: 'Diligence', label: 'Cap table is up to date and clean' },
-  { cat: 'Diligence', label: 'Financial model exists (burn, runway, hiring plan)' },
-  { cat: 'Diligence', label: 'Key documents are ready: deck, financials, incorporation, agreements' },
-  { cat: 'Diligence', label: 'Objection answers are prepared for the hardest investor questions' },
-  { cat: 'Team', label: 'Founder roles are clear and cover product, sales, and operations' },
-  { cat: 'Team', label: 'Hiring gaps are named with a plan to close them' },
-  { cat: 'Team', label: 'Advisors or references can vouch for the team' },
-  { cat: 'Team', label: 'Founders can explain the business without the deck' }
-];
-var state = RaiseSheets.loadLocal('readiness', { checked: [], notes: '' });
-function save() { RaiseSheets.saveLocal('readiness', state); compute(); }
-window.getToolData = function () { return state; };
-window.setToolData = function (d) {
-  if (d && Array.isArray(d.checked)) { state = d; document.getElementById('r-notes').value = state.notes || ''; renderChecklist(); compute(); }
-};
-function pct(n, d) { return d ? Math.round((n / d) * 100) : 0; }
-function compute() {
-  var total = ITEMS.length;
-  var checked = state.checked.length;
-  var score = pct(checked, total);
-  document.getElementById('score-big').textContent = score + '%';
-  document.getElementById('score-bar').style.width = score + '%';
-  var cats = {};
-  ITEMS.forEach(function (it) { cats[it.cat] = cats[it.cat] || { t: 0, c: 0 }; cats[it.cat].t++; if (state.checked.indexOf(it.label) > -1) cats[it.cat].c++; });
-  var cs = document.getElementById('category-scores');
-  cs.innerHTML = '';
-  Object.keys(cats).forEach(function (cat) {
-    var p = document.createElement('p');
-    p.innerHTML = '<b></b>: <span></span>';
-    p.querySelector('b').textContent = cat;
-    p.querySelector('span').textContent = pct(cats[cat].c, cats[cat].t) + '% (' + cats[cat].c + '/' + cats[cat].t + ')';
-    cs.appendChild(p);
-  });
-  var gaps = document.getElementById('gaps');
-  var missing = ITEMS.filter(function (it) { return state.checked.indexOf(it.label) === -1; });
-  gaps.innerHTML = missing.length ? '' : '<p class="note">No gaps. Everything is checked.</p>';
-  missing.forEach(function (it) {
-    var p = document.createElement('p');
-    p.innerHTML = '<span class="pill warn"></span> ';
-    p.querySelector('.pill').textContent = it.cat;
-    p.appendChild(document.createTextNode(it.label));
-    gaps.appendChild(p);
-  });
-}
-function renderChecklist() {
-  var el = document.getElementById('checklist');
-  el.innerHTML = '';
-  var currentCat = '';
-  ITEMS.forEach(function (it, idx) {
-    if (it.cat !== currentCat) { currentCat = it.cat; var h = document.createElement('h3'); h.textContent = currentCat; h.style.margin = '14px 0 2px'; el.appendChild(h); }
-    var row = document.createElement('div');
-    row.className = 'check-row';
-    var cb = document.createElement('input');
-    cb.type = 'checkbox'; cb.checked = state.checked.indexOf(it.label) > -1;
-    cb.addEventListener('change', function () {
-      if (cb.checked) { if (state.checked.indexOf(it.label) === -1) state.checked.push(it.label); }
-      else { state.checked = state.checked.filter(function (l) { return l !== it.label; }); }
-      save();
-    });
-    var lab = document.createElement('label');
-    lab.textContent = it.label;
-    row.appendChild(cb); row.appendChild(lab);
-    el.appendChild(row);
-  });
-}
-document.getElementById('r-notes').value = state.notes || '';
-document.getElementById('r-notes').addEventListener('input', function (e) { state.notes = e.target.value; RaiseSheets.saveLocal('readiness', state); });
-renderChecklist();
-compute();
-</script>
 </body>
 </html>

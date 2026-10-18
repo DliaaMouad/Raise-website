@@ -1,160 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Financial Diagnostics | Raise Tools</title>
-<link rel="stylesheet" href="tools.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Removed | Raise</title>
+<meta http-equiv="refresh" content="0; url=/">
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #111215; }
+  .wrap { max-width: 520px; margin: 96px auto; padding: 0 20px; text-align: center; }
+  a { color: #111215; }
+</style>
 </head>
 <body>
-<header class="tools-topbar">
-  <a class="tools-brand" href="../index">Raise<span> Tools</span></a>
-  <nav class="tools-nav">
-    <a href="crm">CRM</a><a href="outreach">Outreach</a><a href="readiness">Readiness</a>
-    <a href="financials">Financials</a><a href="vault">Vault</a><a href="simulation">Simulation</a>
-  </nav>
-  <div class="tools-auth"><span id="auth-status">Not signed in</span><button id="signout-btn" hidden>Sign out</button></div>
-</header>
-<div id="sheets-banner" class="banner" hidden>Google connect needs an OAuth client ID to be configured.</div>
-<div id="local-banner" class="banner local" hidden>Saved on this device only.</div>
-<main>
-  <div id="gate" class="gate">
-    <h2 id="gate-title">Create your account</h2>
-    <p class="gate-sub">Create an account to use the Raise tools.</p>
-    <p id="auth-error" class="auth-error" hidden></p>
-    <form id="signup-form" class="auth-form" novalidate>
-      <label for="su-name">Full name *</label>
-      <input id="su-name" type="text" autocomplete="name" required>
-      <label for="su-email">Email *</label>
-      <input id="su-email" type="email" autocomplete="email" required>
-      <label for="su-country">Country *</label>
-      <input id="su-country" type="text" list="country-list" autocomplete="country-name" required>
-      <datalist id="country-list"></datalist>
-      <label for="su-company">Company name *</label>
-      <input id="su-company" type="text" autocomplete="organization" required>
-      <label for="su-stage">Stage you are raising *</label>
-      <select id="su-stage" required>
-        <option value="">Select your stage</option>
-        <option>Pre-seed</option>
-        <option>Seed</option>
-        <option>Series A</option>
-        <option>Series B</option>
-        <option>Series C+</option>
-        <option>Other</option>
-      </select>
-      <label for="su-linkedin">LinkedIn profile link <span class="optional">(optional)</span></label>
-      <input id="su-linkedin" type="url" inputmode="url" placeholder="https://www.linkedin.com/in/your-name" autocomplete="url">
-      <label for="su-password">Password *</label>
-      <input id="su-password" type="password" autocomplete="new-password" minlength="8" required>
-      <label for="su-confirm">Confirm password *</label>
-      <input id="su-confirm" type="password" autocomplete="new-password" required>
-      <label class="check-row"><input type="checkbox" id="su-show"> Show passwords</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Create account</button></p>
-    </form>
-    <form id="login-form" class="auth-form" hidden novalidate>
-      <label for="li-email">Email *</label>
-      <input id="li-email" type="email" autocomplete="email" required>
-      <label for="li-password">Password *</label>
-      <input id="li-password" type="password" autocomplete="current-password" required>
-      <label class="check-row"><input type="checkbox" id="li-show"> Show password</label>
-      <p><button class="btn btn-lime auth-submit" type="submit">Log in</button></p>
-      <p class="note">One account works across all tools and devices.</p>
-    </form>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-login">Already have an account? Log in</button></p>
-    <p class="auth-switch"><button type="button" class="link-btn" id="show-signup" hidden>New here? Create an account</button></p>
-    <p class="privacy">Your account is stored securely with Supabase. Your tool data stays in your own Google Sheet or on this device.</p>
-  </div>
-  <div id="app" hidden>
-    <h1>Financial Diagnostics</h1>
-    <p class="sub">Enter your numbers. Every metric below is computed from your inputs with the formula shown. No data is invented.</p>
-    <div class="syncbar">
-      <button class="btn btn-small" id="connect-sheets">Connect Google Sheets</button>
-      <button class="btn btn-small btn-ghost" id="sync-sheets">Sync now</button>
-      <button class="btn btn-small btn-ghost" id="pull-sheets">Load from Sheets</button>
-      <span id="sync-status"></span>
-    </div>
-    <div class="grid2">
-      <section class="card">
-        <h2 style="margin:0 0 4px;font-size:18px;">Your numbers (monthly, same currency)</h2>
-        <label for="n-cash">Cash on hand</label><input id="n-cash" type="number" min="0" step="any">
-        <label for="n-burn">Monthly burn (total monthly spend)</label><input id="n-burn" type="number" min="0" step="any">
-        <label for="n-rev">Monthly revenue</label><input id="n-rev" type="number" min="0" step="any">
-        <label for="n-new">New monthly revenue added this month (new MRR)</label><input id="n-new" type="number" min="0" step="any">
-        <label for="n-cust">Paying customers</label><input id="n-cust" type="number" min="0" step="1">
-        <label for="n-cac">CAC (cost to acquire one customer)</label><input id="n-cac" type="number" min="0" step="any">
-        <label for="n-ltv">LTV (lifetime value per customer)</label><input id="n-ltv" type="number" min="0" step="any">
-        <label for="n-margin">Gross margin % (your assumption)</label><input id="n-margin" type="number" min="0" max="100" step="any" value="80">
-      </section>
-      <section class="card">
-        <h2 style="margin:0 0 4px;font-size:18px;">Results</h2>
-        <p class="metric-label">Net burn</p><p class="metric" id="m-netburn">—</p>
-        <p class="formula">Net burn = Monthly burn − Monthly revenue</p>
-        <p class="metric-label">Runway</p><p class="metric" id="m-runway">—</p>
-        <p class="formula">Runway (months) = Cash on hand / Net burn. If net burn is zero or negative, runway is not the constraint.</p>
-        <p class="metric-label">Burn multiple</p><p class="metric" id="m-burnmult">—</p>
-        <p class="formula">Burn multiple = Net burn / (New monthly revenue added × 12). Lower is better; below 1 means efficient growth.</p>
-        <p class="metric-label">LTV : CAC</p><p class="metric" id="m-ltvcac">—</p>
-        <p class="formula">LTV : CAC = LTV / CAC. Above 3 is generally considered healthy.</p>
-        <p class="metric-label">CAC payback</p><p class="metric" id="m-payback">—</p>
-        <p class="formula">CAC payback (months) = CAC / (ARPU × Gross margin), where ARPU = Monthly revenue / Paying customers.</p>
-        <p class="note" id="m-note"></p>
-      </section>
-    </div>
-  </div>
+<main class="wrap">
+  <h1>This page was removed</h1>
+  <p>Raise no longer offers software tools. Redirecting you to the homepage...</p>
+  <p><a href="/">Go to homepage</a></p>
 </main>
-<script src="config.js"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
-<script src="sheets.js"></script>
-<script>
-window.TOOL_KEY = 'financials';
-var FIELDS = ['n-cash', 'n-burn', 'n-rev', 'n-new', 'n-cust', 'n-cac', 'n-ltv', 'n-margin'];
-var state = RaiseSheets.loadLocal('financials', { inputs: {} });
-function save() {
-  var inputs = {};
-  FIELDS.forEach(function (f) { inputs[f] = document.getElementById(f).value; });
-  state.inputs = inputs;
-  RaiseSheets.saveLocal('financials', state);
-  compute();
-}
-window.getToolData = function () {
-  var inputs = {};
-  FIELDS.forEach(function (f) { inputs[f] = document.getElementById(f).value; });
-  return { inputs: inputs };
-};
-window.setToolData = function (d) {
-  if (d && d.inputs) {
-    state = d;
-    FIELDS.forEach(function (f) { if (state.inputs[f] !== undefined) document.getElementById(f).value = state.inputs[f]; });
-    compute();
-  }
-};
-function num(id) { var v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
-function fmt(v, suffix) { return (Math.round(v * 100) / 100).toLocaleString('en-US') + (suffix || ''); }
-function compute() {
-  var cash = num('n-cash'), burn = num('n-burn'), rev = num('n-rev'), added = num('n-new');
-  var cust = num('n-cust'), cac = num('n-cac'), ltv = num('n-ltv'), margin = num('n-margin') / 100;
-  var netBurn = burn - rev;
-  document.getElementById('m-netburn').textContent = fmt(netBurn);
-  document.getElementById('m-runway').textContent = netBurn > 0 ? fmt(cash / netBurn, ' months') : 'Profitable / no limit';
-  document.getElementById('m-burnmult').textContent = (netBurn > 0 && added > 0) ? fmt(netBurn / (added * 12), 'x') : '— (needs net burn and new revenue)';
-  document.getElementById('m-ltvcac').textContent = cac > 0 ? fmt(ltv / cac, 'x') : '— (needs CAC)';
-  var arpu = cust > 0 ? rev / cust : 0;
-  document.getElementById('m-payback').textContent = (cac > 0 && arpu > 0 && margin > 0) ? fmt(cac / (arpu * margin), ' months') : '— (needs CAC, revenue, customers, margin)';
-  var note = '';
-  if (netBurn > 0 && cash > 0) {
-    var runway = cash / netBurn;
-    if (runway < 6) note = 'Runway under 6 months: fundraising urgency is high.';
-    else if (runway < 12) note = 'Runway under 12 months: start fundraising preparation now.';
-    else note = 'Runway over 12 months: room to grow before raising.';
-  }
-  document.getElementById('m-note').textContent = note;
-}
-FIELDS.forEach(function (f) {
-  if (state.inputs && state.inputs[f] !== undefined) document.getElementById(f).value = state.inputs[f];
-  document.getElementById(f).addEventListener('input', save);
-});
-compute();
-</script>
 </body>
 </html>
