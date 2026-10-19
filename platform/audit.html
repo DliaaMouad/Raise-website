@@ -23,21 +23,47 @@
   a { color: #111215; }
   .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5a7a1e; margin: 0 0 12px; }
   .lead { font-size: 18px; color: #333; margin: 0 0 32px; }
-  input#deck-file { display: block; margin: 10px 0; font-family: 'Inter', sans-serif; font-size: 15px; }
-  .word-count { font-weight: 600; margin: 8px 0 0; }
+  .audit-hero { background: radial-gradient(640px 320px at 85% 0%, rgba(185,255,102,0.22), transparent 60%), #000000; color: #ffffff; padding: 64px 0 96px; }
+  .audit-hero .wrap { padding-top: 0; padding-bottom: 0; }
+  .audit-hero .eyebrow { display: inline-block; color: #B9FF66; border: 1px solid rgba(185,255,102,0.55); border-radius: 999px; padding: 6px 14px; margin-bottom: 20px; }
+  .audit-hero h1 { color: #ffffff; font-size: clamp(36px, 5vw, 56px); }
+  .audit-hero h1 .lime { color: #B9FF66; }
+  .audit-hero .lead { color: #c9cac7; max-width: 640px; margin-bottom: 0; }
+  .wrap-overlap { margin-top: -64px; padding-top: 0; }
+  .upload-card { background: #ffffff; border-radius: 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); padding: 28px; position: relative; z-index: 1; }
+  .dropzone { display: block; border: 2px dashed #d8d8d0; border-radius: 16px; padding: 32px 20px; text-align: center; cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease; }
+  .dropzone:hover { border-color: #111215; }
+  .dropzone.dragover { border-color: #111215; border-style: solid; background: #f2ffe0; }
+  .dropzone input#deck-file { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .dropzone-icon { display: block; margin: 0 auto 12px; }
+  .dropzone-title { display: block; font-weight: 700; font-size: 17px; }
+  .dropzone-sub { display: block; font-size: 13px; color: #666; margin-top: 4px; }
+  .word-count { font-weight: 600; margin: 16px 0 0; }
   .deck-error { color: #b00020; min-height: 20px; font-size: 14px; }
   .privacy-inline { font-size: 13px; color: #555; margin: 8px 0 16px; }
-  .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; }
+  .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
   .btn-dark { background: #111215; color: #fff; }
   .btn-lime { background: #B9FF66; color: #111215; }
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-  .results { background: #fff; border: 1px solid #e6e6e0; border-radius: 16px; padding: 28px; margin: 32px 0 0; }
-  .score-big { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 48px; font-weight: 800; margin: 0; }
-  .band { font-size: 18px; font-weight: 600; margin: 4px 0 20px; }
-  .leak-card { background: #F3F3ED; border-radius: 12px; padding: 16px; margin: 0 0 12px; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  .results { background: #fff; border: 1px solid #e6e6e0; border-radius: 20px; padding: 28px; margin: 32px 0 0; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+  .score-head { display: flex; gap: 24px; align-items: center; margin-bottom: 24px; }
+  .score-ring-wrap { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
+  .score-ring { width: 100%; height: 100%; }
+  .score-ring-track { fill: none; stroke: #e6e6e0; stroke-width: 10; }
+  .score-ring-fill { fill: none; stroke: #A2F543; stroke-width: 10; stroke-linecap: round; stroke-dasharray: 376.99; stroke-dashoffset: 376.99; transform: rotate(-90deg); transform-origin: center; transition: stroke-dashoffset 0.8s ease; }
+  .score-big { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 800; margin: 0; }
+  .band { font-size: 18px; font-weight: 600; margin: 4px 0 0; }
+  .leak-card { background: #fff; border: 1px solid #e6e6e0; border-left: 4px solid #111215; border-radius: 12px; padding: 16px 18px; margin: 0 0 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .leak-card h3 { font-size: 17px; }
   .leak-card p { margin: 0 0 6px; color: #333; }
   .leak-card p:last-child { margin-bottom: 0; }
-  .gate { background: #111215; color: #fff; border-radius: 16px; padding: 28px; margin: 24px 0 0; }
+  .tags-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin: 10px 0 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 6px; }
+  .tag { font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .tag-found { background: #eaffd0; color: #3a5a00; }
+  .tag-missing { background: #f3f3ed; color: #555; border: 1px dashed #ccc; }
+  .gate { background: #111215; color: #fff; border-radius: 20px; padding: 28px; margin: 24px 0 0; }
   .gate h2 { color: #fff; }
   .gate p { color: #ddd; }
   .gate label { display: block; margin: 12px 0; font-size: 15px; }
@@ -46,7 +72,7 @@
   .gate .privacy-note { font-size: 13px; color: #bbb; }
   .gate .privacy-note a { color: #fff; }
   .gate-error { color: #ffb3b3; min-height: 20px; font-size: 14px; }
-  .fix-row { border-bottom: 1px solid #eee; padding: 14px 0; }
+  .fix-row { border-bottom: 1px solid #eee; padding: 18px 0; }
   .fix-row:last-child { border-bottom: 0; }
   .fix-head { font-weight: 700; margin: 0 0 4px; }
   .fix-row p { margin: 0 0 4px; color: #333; }
@@ -54,6 +80,12 @@
   .ctas { margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .retake { background: none; border: 0; cursor: pointer; text-decoration: underline; font-size: 15px; color: #555; padding: 0; }
   .foot-note { font-size: 13px; color: #666; margin-top: 32px; }
+  @media (max-width: 560px) {
+    .score-head { flex-direction: column; text-align: center; }
+    .upload-card { padding: 20px; }
+    .audit-hero { padding: 48px 0 80px; }
+    .wrap-overlap { margin-top: -48px; }
+  }
 </style>
 </head>
 <body>
@@ -81,22 +113,42 @@
 </header>
 <script src="/header.js" defer></script>
 
-<main class="wrap">
-  <p class="eyebrow">Free deck rater &middot; 30-day pilot</p>
-  <h1>How investor-ready is your deck?</h1>
-  <p class="lead">Upload your deck as a PDF. Get your score, your top 3 leaks, and the fixes that close them.</p>
+<section class="audit-hero">
+  <div class="wrap">
+    <p class="eyebrow">Free deck rater &middot; 30-day pilot</p>
+    <h1>How investor-ready is <span class="lime">your deck?</span></h1>
+    <p class="lead">Upload your deck as a PDF. Get your score, your top 3 leaks, and the fixes that close them.</p>
+  </div>
+</section>
 
-  <label for="deck-file">Upload your deck as a PDF.</label>
-  <input id="deck-file" type="file" accept="application/pdf,.pdf">
-  <p class="word-count" id="deck-words">No file selected</p>
-  <p class="deck-error" id="deck-error" role="alert"></p>
-  <p class="privacy-inline">Your PDF is read in your browser. It is never uploaded, stored, or shared.</p>
-  <button class="btn btn-dark" id="audit-analyze" type="button">Analyze my deck</button>
+<main class="wrap wrap-overlap">
+  <section class="upload-card">
+    <label class="dropzone" id="deck-drop" for="deck-file">
+      <input id="deck-file" type="file" accept="application/pdf,.pdf">
+      <svg class="dropzone-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#111215" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
+      <span class="dropzone-title">Drop your deck PDF here</span>
+      <span class="dropzone-sub">or click to browse &middot; PDF only, up to 10MB</span>
+    </label>
+    <p class="word-count" id="deck-words">No file selected</p>
+    <p class="deck-error" id="deck-error" role="alert"></p>
+    <p class="privacy-inline">Your PDF is read in your browser. It is never uploaded, stored, or shared.</p>
+    <button class="btn btn-dark" id="audit-analyze" type="button">Analyze my deck</button>
+  </section>
 
   <section class="results" id="audit-results" hidden>
-    <h2>Your result</h2>
-    <p class="score-big" id="audit-score"></p>
-    <p class="band" id="audit-band"></p>
+    <div class="score-head">
+      <div class="score-ring-wrap">
+        <svg class="score-ring" viewBox="0 0 140 140" aria-hidden="true">
+          <circle class="score-ring-track" cx="70" cy="70" r="60"></circle>
+          <circle class="score-ring-fill" id="audit-ring" cx="70" cy="70" r="60"></circle>
+        </svg>
+        <p class="score-big" id="audit-score"></p>
+      </div>
+      <div class="score-copy">
+        <h2>Your result</h2>
+        <p class="band" id="audit-band"></p>
+      </div>
+    </div>
     <h3>Your top 3 leaks</h3>
     <div id="audit-leaks"></div>
   </section>

@@ -11,6 +11,9 @@
   if (!cfg) return;
 
   var deckFile = document.getElementById("deck-file");
+  var dropzone = document.getElementById("deck-drop");
+  var ring = document.getElementById("audit-ring");
+  var RING_C = 376.99; /* 2 * pi * 60, matches the SVG ring */
   var deckWords = document.getElementById("deck-words");
   var deckError = document.getElementById("deck-error");
   var analyzeBtn = document.getElementById("audit-analyze");
@@ -131,9 +134,19 @@
       var p = document.createElement("p");
       p.textContent = item.dim.leak;
       card.appendChild(p);
-      var missing = document.createElement("p");
-      missing.textContent = "Missing: " + item.failed.map(function (c) { return c.label; }).join("; ");
-      card.appendChild(missing);
+      var missingLabel = document.createElement("p");
+      missingLabel.className = "tags-label";
+      missingLabel.textContent = "Missing";
+      card.appendChild(missingLabel);
+      var missingTags = document.createElement("div");
+      missingTags.className = "tags";
+      item.failed.forEach(function (c) {
+        var tag = document.createElement("span");
+        tag.className = "tag tag-missing";
+        tag.textContent = c.label;
+        missingTags.appendChild(tag);
+      });
+      card.appendChild(missingTags);
       leaksEl.appendChild(card);
     });
   }
@@ -148,14 +161,34 @@
       head.textContent = item.dim.name + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
       row.appendChild(head);
       if (item.passed.length) {
-        var found = document.createElement("p");
-        found.textContent = "Found: " + item.passed.map(function (c) { return c.label; }).join("; ");
-        row.appendChild(found);
+        var foundLabel = document.createElement("p");
+        foundLabel.className = "tags-label";
+        foundLabel.textContent = "Found";
+        row.appendChild(foundLabel);
+        var foundTags = document.createElement("div");
+        foundTags.className = "tags";
+        item.passed.forEach(function (c) {
+          var tag = document.createElement("span");
+          tag.className = "tag tag-found";
+          tag.textContent = c.label;
+          foundTags.appendChild(tag);
+        });
+        row.appendChild(foundTags);
       }
       if (item.failed.length) {
-        var missing = document.createElement("p");
-        missing.textContent = "Missing: " + item.failed.map(function (c) { return c.label; }).join("; ");
-        row.appendChild(missing);
+        var missingLabel = document.createElement("p");
+        missingLabel.className = "tags-label";
+        missingLabel.textContent = "Missing";
+        row.appendChild(missingLabel);
+        var missingTags = document.createElement("div");
+        missingTags.className = "tags";
+        item.failed.forEach(function (c) {
+          var tag = document.createElement("span");
+          tag.className = "tag tag-missing";
+          tag.textContent = c.label;
+          missingTags.appendChild(tag);
+        });
+        row.appendChild(missingTags);
       }
       var fix = document.createElement("p");
       fix.textContent = "Fix: " + item.dim.fix;
@@ -217,8 +250,7 @@
     });
   }
 
-  deckFile.addEventListener("change", function () {
-    var file = deckFile.files && deckFile.files[0];
+  function handleFile(file) {
     extractedText = "";
     resultsEl.hidden = true;
     gateEl.hidden = true;
@@ -261,7 +293,27 @@
       deckWords.textContent = "No file selected";
       extractedText = "";
     });
+  }
+
+  deckFile.addEventListener("change", function () {
+    handleFile(deckFile.files && deckFile.files[0]);
   });
+
+  if (dropzone) {
+    dropzone.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      dropzone.classList.add("dragover");
+    });
+    dropzone.addEventListener("dragleave", function () {
+      dropzone.classList.remove("dragover");
+    });
+    dropzone.addEventListener("drop", function (e) {
+      e.preventDefault();
+      dropzone.classList.remove("dragover");
+      var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      handleFile(file);
+    });
+  }
 
   analyzeBtn.addEventListener("click", function () {
     if (!extractedText) {
@@ -285,6 +337,9 @@
     var leaks = sortedByWeakness(results).slice(0, 3).map(function (item) { return item.dim.key; });
 
     scoreEl.textContent = total + " / 50";
+    if (ring) {
+      ring.setAttribute("stroke-dashoffset", String(RING_C * (1 - total / 50)));
+    }
     bandEl.textContent = band.label + ": " + band.description;
     renderLeaks(results);
     renderReport(results);
