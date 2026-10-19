@@ -32,3 +32,30 @@
   .pill-links { display: none; }
   .pill-nav { padding: 10px 10px 10px 20px; }
 }
+
+/* Mobile menu: hamburger button (visible below 640px) + dropdown panel. */
+.pill-hamburger {
+  display: none; background: none; border: 0; cursor: pointer;
+  padding: 8px; border-radius: 999px;
+}
+.pill-hamburger span {
+  display: block; width: 22px; height: 2px; background: #111215;
+  margin: 3px 0; border-radius: 2px;
+}
+.pill-mobile-menu { display: none; }
+@media (max-width: 640px) {
+  .pill-hamburger { display: block; }
+  .pill-mobile-menu.open {
+    display: flex; flex-direction: column; gap: 4px;
+    background: #ffffff; border-radius: 24px;
+    box-shadow: 0 8px 28px rgba(17, 18, 21, 0.10);
+    padding: 12px; margin-top: 8px;
+  }
+  .pill-mobile-menu.open a {
+    font-family: 'Inter', sans-serif; text-decoration: none;
+    font-size: 15px; font-weight: 600; color: #111215;
+    padding: 10px 14px; border-radius: 999px;
+  }
+  .pill-mobile-menu.open a:hover { background: #F3F3ED; }
+  .pill-mobile-menu.open .pill-cta { background: #B9FF66; text-align: center; }
+}

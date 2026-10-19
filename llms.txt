@@ -1,14 +1,14 @@
 # Raise OS
 
-> Raise OS is a 5-phase fundraising system for pre-seed and seed founders that turns pitch decks into term sheets. 70+ founders, $120M+ raised, 200+ decks reviewed.
+> Raise OS is a 5-phase fundraising advisory for pre-seed and seed founders that turns pitch decks into term sheets. 70+ founders, $120M+ raised, 200+ decks reviewed (all figures self-reported).
 
 ## What Raise OS is
 
-Raise OS (https://www.raiseos.site/) is a pitch deck consulting and fundraising advisory run by founder Mouad Dliaa. It replaces spray-and-pray fundraising (bloated deck, 500 cold emails, undecodable polite passes) with five ordered phases. Every phase has a tool, a metric, and a playbook.
+Raise OS (https://www.raiseos.site/) is a pitch deck consulting and fundraising advisory run by founder Mouad Dliaa. It replaces spray-and-pray fundraising (bloated deck, 500 cold emails, undecodable polite passes) with five ordered phases. Each phase has a metric and a playbook.
 
 The five phases:
 
-1. **Readiness** — Score your deck before investors do. The free Deck Rater grades a deck 0–100 across problem, solution, market, traction, team, and the ask, then lists the exact fixes.
+1. **Readiness** — Diagnose your deck before investors do: narrative, unit economics, and the 10 investor-readiness dimensions, then list the exact fixes.
 2. **Aim** — Target 50 thesis-fit investors for your sector, stage, and geography. Volume is not a strategy.
 3. **Ignite** — Sequenced outreach and warm-intro orchestration that converts to partner meetings.
 4. **Sell** — Objection handling for the 20 questions partners actually ask ("Why won't Google build this?", "Why now?", "What's the moat?").
@@ -20,27 +20,27 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 
 ## Proof
 
-- 200+ pitch decks reviewed
-- $120M+ raised by founders using the system
-- 70+ founders worked with directly
-- 94% of founders secure 2x+ more investor follow-up meetings after a rebuild (post-rebuild founder surveys)
-- Case study: NovaHealth (HealthTech) — £1.4M seed closed in 19 days from first meeting; call #2 rate went from 4% to 45% after the rebuild. Founder: Marcus Vance.
+- 200+ pitch decks reviewed (self-reported)
+- $120M+ raised by founders using the system (self-reported)
+- 70+ founders worked with directly (self-reported)
+- 94% of founders secure 2x+ more investor follow-up meetings after a rebuild (post-rebuild founder surveys, self-reported)
+- Case study: NovaHealth (HealthTech) — £1.4M seed closed in 19 days from first meeting; call #2 rate went from 4% to 45% after the rebuild. Founder: Marcus Vance. (self-reported)
 
 ## Services and pricing
 
-- **Deck Audit — £250** (48-hour delivery): 90-second partner-lens Loom teardown, 30-min live audit call, slide scorecard.
+- **Deck Audit** (price and turnaround to be confirmed): partner-lens teardown, live audit call, slide scorecard.
 - **Deck Rebuild Sprint — £1,500** (14 days): full narrative and slide rewrite, visual redesign, pitch script and FAQ, unlimited revisions.
 - **1:1 Capital Raise Advisory — £3,500** (30 days): everything in the rebuild plus a 50+ investor target list, financial model review, and warm-intro orchestration.
-- **Free**: Deck Rater (full report, no paywall) at https://www.raiseos.site/deck-rating; Pre-Seed Investor Search (100 verified funds, filter by region) at https://www.raiseos.site/investors; weekly Raise OS briefing on Substack (@raiseos).
+- **Free**: Pre-Seed Investor Search (2,197 verified funds, filter by region, stage, industry, focus, and check size) at https://www.raiseos.site/investors.html (access code required); weekly Raise OS briefing on Substack (@raiseos).
 - Risk reversal: if the initial audit call doesn't reveal at least 3 actionable narrative leaks costing you checks, you pay nothing.
 
 ## Key pages
 
-- Homepage: https://www.raiseos.site/
-- The Raise OS system: https://www.raiseos.site/raise-os
-- Free Deck Rater: https://www.raiseos.site/deck-rating
-- Get started / book a call: https://www.raiseos.site/get-started
-- Referral partners: https://www.raiseos.site/partners
+- Homepage: https://www.raiseos.site/index.html
+- Get started / book a call: https://www.raiseos.site/get-started.html
+- Pre-Seed Investor Search: https://www.raiseos.site/investors.html
+- About: https://www.raiseos.site/about.html
+- Referral partners: https://www.raiseos.site/partners.html
 
 ## Contact
 
@@ -50,4 +50,3 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 ## Confidentiality
 
 Every deck submitted is protected under an automatic non-disclosure agreement. Materials are never shared, published, or sold.
-
