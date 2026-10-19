@@ -4,147 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Data Room Builder: Diligence Checklist by Stage | Raise</title>
-<meta name="description" content="Pick your stage. Get the diligence checklist investors will ask for, with what good looks like for each item. Tick items off as you prepare them.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/header.css">
-<script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.js"></script>
+<title>Removed | Raise</title>
+<meta http-equiv="refresh" content="0; url=/">
 <style>
-  * { box-sizing: border-box; }
-  body { margin: 0; font-family: 'Inter', sans-serif; background: #F5F5F0; color: #111215; line-height: 1.65; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; }
-  h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
-  h1 { font-size: 40px; line-height: 1.1; margin: 0 0 12px; }
-  h2 { font-size: 28px; margin: 0 0 12px; }
-  h3 { font-size: 19px; margin: 0 0 8px; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #F5F5F0; color: #111215; }
+  .wrap { max-width: 520px; margin: 96px auto; padding: 0 20px; text-align: center; }
   a { color: #111215; }
-  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5a7a1e; margin: 0 0 12px; }
-  .lead { font-size: 18px; color: #333; margin: 0 0 32px; }
-  .tool-hero { background: radial-gradient(640px 320px at 85% 0%, rgba(185,255,102,0.22), transparent 60%), #000000; color: #ffffff; padding: 64px 0 96px; }
-  .tool-hero .wrap { padding-top: 0; padding-bottom: 0; }
-  .tool-hero .eyebrow { display: inline-block; color: #B9FF66; border: 1px solid rgba(185,255,102,0.55); border-radius: 999px; padding: 6px 14px; margin-bottom: 20px; }
-  .tool-hero h1 { color: #ffffff; font-size: clamp(36px, 5vw, 56px); }
-  .tool-hero h1 .lime { color: #B9FF66; }
-  .tool-hero .lead { color: #c9cac7; max-width: 640px; margin-bottom: 0; }
-  .wrap-overlap { margin-top: -64px; padding-top: 0; }
-  .tool-card { background: #ffffff; border-radius: 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); padding: 28px; position: relative; z-index: 1; }
-  .stage-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; }
-  .stage-btn { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; padding: 10px 18px; border-radius: 999px; border: 1px solid #d8d8d0; background: #fff; cursor: pointer; }
-  .stage-btn.active { background: #111215; color: #fff; border-color: #111215; }
-  .progress-row { display: flex; align-items: center; gap: 12px; margin: 0 0 24px; }
-  .progress-track { flex: 1; height: 10px; background: #eee; border-radius: 999px; overflow: hidden; }
-  .progress-fill { height: 100%; background: #A2F543; border-radius: 999px; transition: width 0.3s ease; width: 0; }
-  .progress-text { font-weight: 700; font-size: 15px; white-space: nowrap; }
-  .check-group { margin: 0 0 24px; }
-  .check-group:last-child { margin-bottom: 0; }
-  .check-group h3 { font-size: 17px; margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
-  .check-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; cursor: pointer; }
-  .check-row input[type="checkbox"] { accent-color: #111215; width: 18px; height: 18px; margin-top: 3px; flex-shrink: 0; }
-  .check-text { display: block; }
-  .check-text strong { display: block; font-size: 15px; }
-  .check-detail { display: block; font-size: 13.5px; color: #666; margin-top: 2px; }
-  .dataroom-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 24px 0 0; }
-  .copy-msg { font-size: 14px; color: #3a5a00; min-height: 20px; }
-  .print-only { display: none; }
-  .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
-  .btn-dark { background: #111215; color: #fff; }
-  .btn-lime { background: #B9FF66; color: #111215; }
-  .btn-outline { background: #fff; color: #111215; border: 1px solid #d8d8d0; }
-  .ctas { margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .foot-note { font-size: 13px; color: #666; margin-top: 32px; }
-  @media (max-width: 560px) {
-    .tool-card { padding: 20px; }
-    .tool-hero { padding: 48px 0 80px; }
-    .wrap-overlap { margin-top: -48px; }
-  }
-  @media print {
-    .pill-header, .tool-hero, .stage-row, .dataroom-actions, .foot-note, .ctas { display: none !important; }
-    body { background: #ffffff; }
-    .wrap-overlap { margin-top: 0; padding-top: 24px; }
-    .tool-card { box-shadow: none; padding: 0; }
-    .print-only { display: block; font-size: 18px; font-weight: 700; margin: 0 0 16px; }
-    .progress-row { display: none; }
-  }
 </style>
 </head>
 <body>
-<header class="pill-header">
-  <nav class="pill-nav" aria-label="Primary">
-    <a href="/" class="pill-logo" aria-label="Raise home">Raise<span class="pill-logo-dot">.</span></a>
-    <div class="pill-links">
-      <div class="pill-tools">
-        <button class="pill-tools-toggle" type="button" aria-expanded="false" aria-haspopup="true">Tools <span class="tools-chevron" aria-hidden="true">▾</span></button>
-        <div class="tools-dropdown">
-          <a class="tool-item" href="/platform/audit.html"><strong>Audit</strong><span>Score your deck against Sequoia + YC</span></a>
-          <a class="tool-item" href="/platform/investor-fit.html"><strong>Investor-fit matcher</strong><span>Ranked investors for your round</span></a>
-          <a class="tool-item" href="/platform/data-room.html" aria-current="page"><strong>Data room builder</strong><span>Diligence checklist by stage</span></a>
-          <a class="tool-item" href="/platform/ai-data-room.html"><strong>AI Data Room</strong><span>AI builds your data room from your deck</span></a>
-        </div>
-      </div>
-      <a href="/#services">Advisory</a>
-      <a href="/#system">Methodology</a>
-      <a href="/investors.html">Investors</a>
-      <a href="/about.html">About Us</a>
-    </div>
-    <button class="pill-hamburger" id="pill-hamburger" type="button" aria-expanded="false" aria-controls="pill-mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
-    <a class="pill-cta" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
-  </nav>
-  <div class="pill-mobile-menu" id="pill-mobile-menu">
-      <span class="mobile-tools-label">Tools</span>
-      <a href="/platform/audit.html">Audit</a>
-      <a href="/platform/investor-fit.html">Investor-fit matcher</a>
-      <a href="/platform/data-room.html" aria-current="page">Data room builder</a>
-      <a href="/platform/ai-data-room.html">AI Data Room</a>
-      <a href="/#services">Advisory</a>
-      <a href="/#system">Methodology</a>
-      <a href="/investors.html">Investors</a>
-      <a href="/about.html">About Us</a>
-      <a class="pill-cta" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
-  </div>
-</header>
-<script src="/header.js" defer></script>
-
-<section class="tool-hero">
-  <div class="wrap">
-    <p class="eyebrow">Free tool &middot; Diligence</p>
-    <h1>Build your data room <span class="lime">before investors ask.</span></h1>
-    <p class="lead">Pick your stage. Get the diligence checklist investors will ask for, with what good looks like for each item. Tick items off as you prepare them.</p>
-  </div>
-</section>
-
-<main class="wrap wrap-overlap">
-  <section class="tool-card">
-    <p class="print-only" id="dataroom-print-stage"></p>
-    <div class="stage-row" role="group" aria-label="Stage">
-      <button class="stage-btn active" type="button" data-stage-btn="pre-seed" aria-pressed="true">Pre-seed</button>
-      <button class="stage-btn" type="button" data-stage-btn="seed" aria-pressed="false">Seed</button>
-      <button class="stage-btn" type="button" data-stage-btn="series-a" aria-pressed="false">Series A</button>
-    </div>
-    <div class="progress-row">
-      <div class="progress-track"><div class="progress-fill" id="dataroom-progress-fill"></div></div>
-      <span class="progress-text" id="dataroom-progress-text">0 of 0 ready</span>
-    </div>
-    <div id="dataroom-list"></div>
-    <div class="dataroom-actions">
-      <button class="btn btn-dark" id="dataroom-copy" type="button">Copy as Markdown</button>
-      <button class="btn btn-outline" id="dataroom-print" type="button">Print / Save as PDF</button>
-      <span class="copy-msg" id="dataroom-copy-msg" role="status"></span>
-    </div>
-  </section>
-
-  <div class="ctas">
-    <h2 style="width:100%;">Room ready? Make your deck worthy of it.</h2>
-    <a class="btn btn-dark" href="https://cal.com/mouad-dliaa/15min">Book a 15-minute call</a>
-    <a class="btn btn-lime" href="/platform/audit.html">Score your deck</a>
-  </div>
-
-  <p class="foot-note">Checklists are template guidance, not legal advice. Your lawyer should review the legal items before you share the room. Checked items are saved in your browser only.</p>
+<main class="wrap">
+  <h1>This page was removed</h1>
+  <p>Redirecting you to the homepage...</p>
+  <p><a href="/">Go to homepage</a></p>
 </main>
-
-<script src="data-room-config.js"></script>
-<script src="data-room.js"></script>
 </body>
 </html>
