@@ -129,7 +129,7 @@
       var card = document.createElement("article");
       card.className = "leak-card";
       var h = document.createElement("h3");
-      h.textContent = "Leak " + (i + 1) + ": " + item.dim.name + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
+      h.textContent = "Leak " + (i + 1) + ": " + item.dim.name + " · " + item.dim.source + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
       card.appendChild(h);
       var p = document.createElement("p");
       p.textContent = item.dim.leak;
@@ -158,7 +158,11 @@
       row.className = "fix-row";
       var head = document.createElement("p");
       head.className = "fix-head";
-      head.textContent = item.dim.name + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
+      head.textContent = item.dim.name + " · " + item.dim.source + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
+      var sourceNote = document.createElement("p");
+      sourceNote.className = "source-note";
+      sourceNote.textContent = item.dim.sourceNote;
+      row.appendChild(sourceNote);
       row.appendChild(head);
       if (item.passed.length) {
         var foundLabel = document.createElement("p");

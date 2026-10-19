@@ -76,6 +76,9 @@
   .fix-row:last-child { border-bottom: 0; }
   .fix-head { font-weight: 700; margin: 0 0 4px; }
   .fix-row p { margin: 0 0 4px; color: #333; }
+  .source-note { font-size: 13px; color: #888; font-style: italic; }
+  .how { margin: 32px 0 0; }
+  .how p { color: #333; }
   .fix-row p:last-child { margin-bottom: 0; }
   .ctas { margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .retake { background: none; border: 0; cursor: pointer; text-decoration: underline; font-size: 15px; color: #555; padding: 0; }
@@ -117,7 +120,7 @@
   <div class="wrap">
     <p class="eyebrow">Free deck rater &middot; 30-day pilot</p>
     <h1>How investor-ready is <span class="lime">your deck?</span></h1>
-    <p class="lead">Upload your deck as a PDF. Get your score, your top 3 leaks, and the fixes that close them.</p>
+    <p class="lead">Upload your deck as a PDF. Get your score against the Sequoia and YC frameworks, your top 3 leaks, and the fixes that close them.</p>
   </div>
 </section>
 
@@ -181,7 +184,12 @@
     <button class="retake" id="audit-retake" type="button">Retake the Audit</button>
   </div>
 
-  <p class="foot-note">The Audit is a 30-day pilot. Scores are an automated estimate from the checks shown, not a guarantee of funding outcomes.</p>
+  <section class="how">
+    <h2>How the rating works</h2>
+    <p>10 dimensions drawn from Sequoia Capital's published 10-slide framework and Y Combinator's published application criteria. Each dimension has 4 checks. Your score is the share of those questions your deck answers, out of 100. It checks whether the answers are present, not whether they are true or compelling.</p>
+  </section>
+
+  <p class="foot-note">The Audit is a 30-day pilot. Checks are grounded in Sequoia Capital's published 10-slide framework and Y Combinator's published application criteria. The score is an automated estimate of whether your deck answers those questions, not a judgment of your answers. Not affiliated with or endorsed by Sequoia or Y Combinator.</p>
 </main>
 
 <script src="audit-config.js"></script>
