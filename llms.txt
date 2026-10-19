@@ -8,7 +8,7 @@ Raise OS (https://www.raiseos.site/) is a pitch deck consulting and fundraising 
 
 The five phases:
 
-1. **Readiness**: Diagnose your deck before investors do: narrative, unit economics, and the 10 investor-readiness dimensions, then list the exact fixes. Try the free Audit diagnostic: paste your deck text at https://www.raiseos.site/platform/audit.html for a score and fixes.
+1. **Readiness**: Diagnose your deck before investors do: narrative, unit economics, and the 10 investor-readiness dimensions, then list the exact fixes. Try the free Audit diagnostic: upload your deck as a PDF at https://www.raiseos.site/platform/audit.html for a score and fixes.
 2. **Aim**: Target 50 thesis-fit investors for your sector, stage, and geography. Volume is not a strategy.
 3. **Ignite**: Sequenced outreach and warm-intro orchestration that converts to partner meetings.
 4. **Sell**: Objection handling for the 20 questions partners actually ask ("Why won't Google build this?", "Why now?", "What's the moat?").
