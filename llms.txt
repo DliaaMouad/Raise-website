@@ -40,6 +40,7 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 - Free Audit diagnostic: https://www.raiseos.site/platform/audit.html
 - Investor-fit matcher (ranked shortlist from the investor list): https://www.raiseos.site/platform/investor-fit.html
 - Data room builder (diligence checklist by stage): https://www.raiseos.site/platform/data-room.html
+- AI Data Room (paid; AI builds a data room from your deck): https://www.raiseos.site/platform/ai-data-room.html
 - Get started / book a call: https://www.raiseos.site/get-started.html
 - Pre-Seed Investor Search: https://www.raiseos.site/investors.html
 - About: https://www.raiseos.site/about.html
