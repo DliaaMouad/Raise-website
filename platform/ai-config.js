@@ -10,7 +10,7 @@
 var AI_DATA_ROOM_CONFIG = {
   supabaseUrl: "https://gppuoulloxykfefmgrsn.supabase.co",
   supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwcHVvdWxsb3h5a2ZlZm1ncnNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyNzUxMzksImV4cCI6MjEwNzg1MTEzOX0.9Ge9ogwpY1V8PmmKjLwERR_jg2IWFmGB-M5bkxkPATQ",
-  price: "[FILL IN: price for the AI Data Room]",
+  price: "£149",
   functions: {
     build: "/functions/v1/build-data-room",
     get: "/functions/v1/get-data-room",
