@@ -38,7 +38,6 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 
 - Homepage: https://www.raiseos.site/index.html
 - Free Audit diagnostic: https://www.raiseos.site/platform/audit.html
-- Investor-fit matcher (ranked shortlist from the investor list): https://www.raiseos.site/platform/investor-fit.html
 - Get started / book a call: https://www.raiseos.site/get-started.html
 - Pre-Seed Investor Search: https://www.raiseos.site/investors.html
 - About: https://www.raiseos.site/about.html
