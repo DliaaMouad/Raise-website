@@ -35,3 +35,27 @@
     link.addEventListener('click', closeMenu);
   });
 })();
+
+/* Tools dropdown: click toggles, closes on Escape / outside click. */
+(function () {
+  var toggle = document.querySelector('.pill-tools-toggle');
+  var wrap = document.querySelector('.pill-tools');
+  if (!toggle || !wrap) return;
+  function closeTools() {
+    wrap.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (wrap.classList.contains('open')) { closeTools(); } else {
+      wrap.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.pill-tools')) closeTools();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeTools();
+  });
+})();
