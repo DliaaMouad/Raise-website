@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Free Audit: How Investor-Ready Is Your Deck? | Raise</title>
-<meta name="description" content="Free 10-question diagnostic. Score your deck across the 10 investor-readiness dimensions, find your top 3 leaks, and get the fixes.">
+<title>Free Audit: Paste Your Deck, Get Your Score | Raise</title>
+<meta name="description" content="Free deck rater. Paste your deck text, get a score across the 10 investor-readiness dimensions, your top 3 leaks, and the fixes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,15 +22,10 @@
   a { color: #111215; }
   .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5a7a1e; margin: 0 0 12px; }
   .lead { font-size: 18px; color: #333; margin: 0 0 32px; }
-  .audit-q { background: #fff; border: 1px solid #e6e6e0; border-radius: 16px; padding: 20px; margin: 0 0 16px; }
-  .audit-q legend { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 17px; padding: 0 6px; }
-  .audit-q-text { margin: 8px 0 14px; color: #333; }
-  .audit-opt { display: flex; gap: 10px; align-items: baseline; padding: 8px 10px; border-radius: 10px; cursor: pointer; }
-  .audit-opt:hover { background: #F3F3ED; }
-  .audit-opt input { accent-color: #111215; flex-shrink: 0; }
-  .audit-opt strong { white-space: nowrap; }
-  .audit-opt span { color: #555; font-size: 14px; }
-  .audit-progress { font-weight: 600; margin: 20px 0 10px; }
+  textarea#deck-text { width: 100%; padding: 14px; border: 1px solid #e6e6e0; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; resize: vertical; }
+  .word-count { font-weight: 600; margin: 8px 0 0; }
+  .deck-error { color: #b00020; min-height: 20px; font-size: 14px; }
+  .privacy-inline { font-size: 13px; color: #555; margin: 8px 0 16px; }
   .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; }
   .btn-dark { background: #111215; color: #fff; }
   .btn-lime { background: #B9FF66; color: #111215; }
@@ -39,7 +34,8 @@
   .score-big { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 48px; font-weight: 800; margin: 0; }
   .band { font-size: 18px; font-weight: 600; margin: 4px 0 20px; }
   .leak-card { background: #F3F3ED; border-radius: 12px; padding: 16px; margin: 0 0 12px; }
-  .leak-card p { margin: 0; color: #333; }
+  .leak-card p { margin: 0 0 6px; color: #333; }
+  .leak-card p:last-child { margin-bottom: 0; }
   .gate { background: #111215; color: #fff; border-radius: 16px; padding: 28px; margin: 24px 0 0; }
   .gate h2 { color: #fff; }
   .gate p { color: #ddd; }
@@ -52,7 +48,8 @@
   .fix-row { border-bottom: 1px solid #eee; padding: 14px 0; }
   .fix-row:last-child { border-bottom: 0; }
   .fix-head { font-weight: 700; margin: 0 0 4px; }
-  .fix-row p { margin: 0; color: #333; }
+  .fix-row p { margin: 0 0 4px; color: #333; }
+  .fix-row p:last-child { margin-bottom: 0; }
   .ctas { margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .retake { background: none; border: 0; cursor: pointer; text-decoration: underline; font-size: 15px; color: #555; padding: 0; }
   .foot-note { font-size: 13px; color: #666; margin-top: 32px; }
@@ -84,14 +81,16 @@
 <script src="/header.js" defer></script>
 
 <main class="wrap">
-  <p class="eyebrow">Free diagnostic &middot; 30-day pilot</p>
+  <p class="eyebrow">Free deck rater &middot; 30-day pilot</p>
   <h1>How investor-ready is your deck?</h1>
-  <p class="lead">Answer 10 questions, one per investor-readiness dimension. Get your score, your top 3 leaks, and the fixes that close them.</p>
+  <p class="lead">Paste your deck text below. Get your score, your top 3 leaks, and the fixes that close them.</p>
 
-  <p>Be honest. Score where your deck is today, not where you plan it to be.</p>
-  <div id="audit-questions"></div>
-  <p class="audit-progress" id="audit-progress">0 of 10 answered</p>
-  <button class="btn btn-dark" id="audit-submit" type="button" disabled>See my score</button>
+  <label for="deck-text">Paste your deck text, slide by slide.</label>
+  <textarea id="deck-text" rows="14" placeholder="Paste your deck text here..."></textarea>
+  <p class="word-count" id="deck-words">0 words (minimum 50)</p>
+  <p class="deck-error" id="deck-error" role="alert"></p>
+  <p class="privacy-inline">Your deck text is analyzed in your browser. It is never sent, stored, or shared.</p>
+  <button class="btn btn-dark" id="audit-analyze" type="button">Analyze my deck</button>
 
   <section class="results" id="audit-results" hidden>
     <h2>Your result</h2>
@@ -109,12 +108,12 @@
       <input id="gate-email" type="email" name="email" autocomplete="email" required placeholder="you@startup.com">
       <label>
         <input id="gate-consent" type="checkbox" name="consent" required>
-        I agree to Raise storing my answers and email to generate my report and improve the diagnostic. I can request deletion at any time.
+        I agree to Raise storing my scores and email to generate my report and improve the diagnostic. I can request deletion at any time.
       </label>
       <p class="gate-error" id="gate-error" role="alert"></p>
       <button class="btn btn-lime" id="gate-submit" type="submit">Unlock the full report</button>
     </form>
-    <p class="privacy-note">Your answers are stored in Supabase. Your email is used only for your report and follow-up. See the <a href="/privacy.html">Privacy Policy</a>.</p>
+    <p class="privacy-note">Your scores are stored in Supabase. Your email is used only for your report and follow-up. See the <a href="/privacy.html">Privacy Policy</a>.</p>
   </section>
 
   <section class="results" id="audit-report" hidden>
@@ -129,7 +128,7 @@
     <button class="retake" id="audit-retake" type="button">Retake the Audit</button>
   </div>
 
-  <p class="foot-note">The Audit is a 30-day pilot. Scores are self-assessed, not a guarantee of funding outcomes.</p>
+  <p class="foot-note">The Audit is a 30-day pilot. Scores are an automated estimate from the checks shown, not a guarantee of funding outcomes.</p>
 </main>
 
 <script src="audit-config.js"></script>

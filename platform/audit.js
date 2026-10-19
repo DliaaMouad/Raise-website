@@ -1,14 +1,18 @@
-/* Audit page logic: renders questions from AUDIT_CONFIG, scores, leaks,
-   email gate, Supabase storage, Kit subscribe, Plausible funnel events.
-   The email gate only appears when Supabase is configured. Until then the
-   full report shows directly and no email is requested. */
+/* Audit page logic (deck rater): analyzes pasted deck text in the browser
+   with the transparent checks in AUDIT_CONFIG, scores each dimension,
+   shows leaks and fixes, gates the full report behind email + consent.
+   The deck text never leaves the browser and is never stored. Only scores,
+   leaks, and email (if provided) are stored. The email gate only appears
+   when Supabase is configured. Until then the full report shows directly
+   and no email is requested. */
 (function () {
   var cfg = window.AUDIT_CONFIG;
   if (!cfg) return;
 
-  var questionsEl = document.getElementById("audit-questions");
-  var progressEl = document.getElementById("audit-progress");
-  var submitBtn = document.getElementById("audit-submit");
+  var deckText = document.getElementById("deck-text");
+  var deckWords = document.getElementById("deck-words");
+  var deckError = document.getElementById("deck-error");
+  var analyzeBtn = document.getElementById("audit-analyze");
   var resultsEl = document.getElementById("audit-results");
   var scoreEl = document.getElementById("audit-score");
   var bandEl = document.getElementById("audit-band");
@@ -50,67 +54,41 @@
       utm_source: p.get("utm_source") || null,
       utm_medium: p.get("utm_medium") || null,
       utm_campaign: p.get("utm_campaign") || null,
-      source: "audit-page"
+      source: "audit-paste"
     };
   }
 
-  /* Render one card per dimension, driven by the config. */
-  cfg.dimensions.forEach(function (dim, idx) {
-    var card = document.createElement("fieldset");
-    card.className = "audit-q";
-    var legend = document.createElement("legend");
-    legend.textContent = (idx + 1) + ". " + dim.name + ": " + dim.definition;
-    card.appendChild(legend);
-    var q = document.createElement("p");
-    q.className = "audit-q-text";
-    q.textContent = dim.question;
-    card.appendChild(q);
-    cfg.scale.forEach(function (opt) {
-      var label = document.createElement("label");
-      label.className = "audit-opt";
-      var input = document.createElement("input");
-      input.type = "radio";
-      input.name = dim.key;
-      input.value = String(opt.value);
-      input.required = true;
-      input.addEventListener("change", onAnswer);
-      label.appendChild(input);
-      var strong = document.createElement("strong");
-      strong.textContent = opt.value + " " + opt.label;
-      label.appendChild(strong);
-      var span = document.createElement("span");
-      span.textContent = opt.desc;
-      label.appendChild(span);
-      card.appendChild(label);
-    });
-    questionsEl.appendChild(card);
-  });
-
-  function answeredCount() {
-    var count = 0;
-    cfg.dimensions.forEach(function (dim) {
-      if (document.querySelector('input[name="' + dim.key + '"]:checked')) count += 1;
-    });
-    return count;
+  function wordsOf(text) {
+    var trimmed = text.trim();
+    if (!trimmed) return [];
+    return trimmed.split(/\s+/);
   }
 
-  function onAnswer() {
-    if (!started) {
-      started = true;
-      track("Audit Started");
+  function runCheck(check, text, words) {
+    if (check.test === "wordCountMax") return words.length <= check.max;
+    if (check.test === "earlyMention") {
+      var head = words.slice(0, Math.max(1, Math.floor(words.length * check.fraction))).join(" ");
+      return check.anyOf.some(function (p) { return new RegExp(p, "i").test(head); });
     }
-    var n = answeredCount();
-    progressEl.textContent = n + " of 10 answered";
-    submitBtn.disabled = n < 10;
+    if (check.test === "sectionCount") {
+      var found = 0;
+      check.anyOf.forEach(function (p) { if (new RegExp(p, "i").test(text)) found += 1; });
+      return found >= check.min;
+    }
+    if (check.test === "hasNumber") return /[$£%]/.test(text) && /\d/.test(text);
+    return check.anyOf.some(function (p) { return new RegExp(p, "i").test(text); });
   }
 
-  function readAnswers() {
-    var answers = {};
-    cfg.dimensions.forEach(function (dim) {
-      var checked = document.querySelector('input[name="' + dim.key + '"]:checked');
-      answers[dim.key] = checked ? parseInt(checked.value, 10) : null;
+  function analyze(text) {
+    var words = wordsOf(text);
+    return cfg.dimensions.map(function (dim, idx) {
+      var passed = [];
+      var failed = [];
+      dim.checks.forEach(function (check) {
+        if (runCheck(check, text, words)) { passed.push(check); } else { failed.push(check); }
+      });
+      return { dim: dim, idx: idx, score: 1 + passed.length, passed: passed, failed: failed };
     });
-    return answers;
   }
 
   function bandFor(total) {
@@ -120,42 +98,60 @@
     return cfg.bands[cfg.bands.length - 1];
   }
 
-  function sortedByWeakness(answers) {
-    return cfg.dimensions.map(function (dim, idx) {
-      return { dim: dim, idx: idx, score: answers[dim.key] };
-    }).sort(function (a, b) {
+  function sortedByWeakness(results) {
+    return results.slice().sort(function (a, b) {
       if (a.score !== b.score) return a.score - b.score;
       return a.idx - b.idx;
     });
   }
 
-  function renderLeaks(answers) {
+  function scaleLabel(score) {
+    for (var i = 0; i < cfg.scale.length; i++) {
+      if (cfg.scale[i].value === score) return cfg.scale[i].label;
+    }
+    return "";
+  }
+
+  function renderLeaks(results) {
     leaksEl.innerHTML = "";
-    sortedByWeakness(answers).slice(0, 3).forEach(function (item, i) {
+    sortedByWeakness(results).slice(0, 3).forEach(function (item, i) {
       var card = document.createElement("article");
       card.className = "leak-card";
       var h = document.createElement("h3");
-      h.textContent = "Leak " + (i + 1) + ": " + item.dim.name + " (" + item.score + "/5)";
+      h.textContent = "Leak " + (i + 1) + ": " + item.dim.name + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
       card.appendChild(h);
       var p = document.createElement("p");
       p.textContent = item.dim.leak;
       card.appendChild(p);
+      var missing = document.createElement("p");
+      missing.textContent = "Missing: " + item.failed.map(function (c) { return c.label; }).join("; ");
+      card.appendChild(missing);
       leaksEl.appendChild(card);
     });
   }
 
-  function renderReport(answers) {
+  function renderReport(results) {
     fixesEl.innerHTML = "";
-    sortedByWeakness(answers).forEach(function (item) {
+    sortedByWeakness(results).forEach(function (item) {
       var row = document.createElement("div");
       row.className = "fix-row";
       var head = document.createElement("p");
       head.className = "fix-head";
-      head.textContent = item.dim.name + " (" + item.score + "/5)";
+      head.textContent = item.dim.name + " (" + item.score + "/5 " + scaleLabel(item.score) + ")";
       row.appendChild(head);
-      var p = document.createElement("p");
-      p.textContent = item.dim.fix;
-      row.appendChild(p);
+      if (item.passed.length) {
+        var found = document.createElement("p");
+        found.textContent = "Found: " + item.passed.map(function (c) { return c.label; }).join("; ");
+        row.appendChild(found);
+      }
+      if (item.failed.length) {
+        var missing = document.createElement("p");
+        missing.textContent = "Missing: " + item.failed.map(function (c) { return c.label; }).join("; ");
+        row.appendChild(missing);
+      }
+      var fix = document.createElement("p");
+      fix.textContent = "Fix: " + item.dim.fix;
+      row.appendChild(fix);
       fixesEl.appendChild(row);
     });
   }
@@ -197,17 +193,37 @@
     }).catch(function () { /* ignore */ });
   }
 
-  submitBtn.addEventListener("click", function () {
-    var answers = readAnswers();
+  deckText.addEventListener("input", function () {
+    var n = wordsOf(deckText.value).length;
+    deckWords.textContent = n + " words (minimum " + cfg.minWords + ")";
+    if (!started) {
+      started = true;
+      track("Audit Started");
+    }
+  });
+
+  analyzeBtn.addEventListener("click", function () {
+    var text = deckText.value;
+    var n = wordsOf(text).length;
+    if (n < cfg.minWords) {
+      deckError.textContent = "Paste at least " + cfg.minWords + " words of deck text (currently " + n + ").";
+      return;
+    }
+    deckError.textContent = "";
+    var results = analyze(text);
+    var answers = {};
     var total = 0;
-    cfg.dimensions.forEach(function (dim) { total += answers[dim.key]; });
+    results.forEach(function (item) {
+      answers[item.dim.key] = item.score;
+      total += item.score;
+    });
     var band = bandFor(total);
-    var leaks = sortedByWeakness(answers).slice(0, 3).map(function (item) { return item.dim.key; });
+    var leaks = sortedByWeakness(results).slice(0, 3).map(function (item) { return item.dim.key; });
 
     scoreEl.textContent = total + " / 50";
     bandEl.textContent = band.label + ": " + band.description;
-    renderLeaks(answers);
-    renderReport(answers);
+    renderLeaks(results);
+    renderReport(results);
     resultsEl.hidden = false;
     ctasEl.hidden = false;
     track("Audit Completed");
@@ -254,15 +270,15 @@
   });
 
   retakeBtn.addEventListener("click", function () {
-    document.querySelectorAll('input[type="radio"]').forEach(function (r) { r.checked = false; });
+    deckText.value = "";
+    deckWords.textContent = "0 words (minimum " + cfg.minWords + ")";
+    deckError.textContent = "";
     started = false;
-    progressEl.textContent = "0 of 10 answered";
-    submitBtn.disabled = true;
     resultsEl.hidden = true;
     gateEl.hidden = true;
     reportEl.hidden = true;
     ctasEl.hidden = true;
-    document.getElementById("audit-questions").scrollIntoView({ behavior: "smooth", block: "start" });
+    deckText.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   /* CTAs: real Cal.com link; Stripe link when configured, else the apply form. */
