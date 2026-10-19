@@ -63,3 +63,21 @@ drop policy if exists "Public insert only" on public.score_results;
 create policy "Public insert only"
   on public.score_results for insert to anon with check (true);
 -- No SELECT policy for anon: results are readable only via service_role / dashboard.
+
+-- AI Data Room: one row per generated data room.
+-- The front-end never reads this table directly: only the Edge Functions
+-- (service_role) read/write it. No public policies are created on purpose.
+-- paid=false until verify-payment confirms the Stripe checkout session.
+create table if not exists public.data_rooms (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  email text not null,
+  token text not null unique,
+  stage text not null,
+  answers jsonb not null default '{}'::jsonb,
+  deck_summary text,
+  content jsonb not null default '{}'::jsonb,
+  paid boolean not null default false,
+  stripe_session_id text
+);
+alter table public.data_rooms enable row level security;
