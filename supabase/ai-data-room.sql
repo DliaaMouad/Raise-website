@@ -6,7 +6,7 @@
 -- service_role key, which bypasses RLS. No public policies are created.
 
 -- One row per generated data room. paid=false until verify-payment confirms
--- the Stripe checkout session.
+-- the Paddle transaction.
 create table if not exists public.data_rooms (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
@@ -17,7 +17,7 @@ create table if not exists public.data_rooms (
   deck_summary text,
   content jsonb not null default '{}'::jsonb,
   paid boolean not null default false,
-  stripe_session_id text
+  paddle_transaction_id text
 );
 
 -- Index for the "recover by email" lookup in verify-payment
@@ -25,6 +25,9 @@ create table if not exists public.data_rooms (
 -- constraint's own index, so it needs no extra index.
 create index if not exists data_rooms_email_created_idx
   on public.data_rooms (email, created_at desc);
+
+-- Paddle transaction id (added for installs created before the Paddle switch).
+alter table public.data_rooms add column if not exists paddle_transaction_id text;
 
 -- Lock the table down: RLS on, no public policies.
 alter table public.data_rooms enable row level security;

@@ -1,7 +1,7 @@
 /* AI Data Room: founder uploads a deck PDF + answers questions. The deck text
    and answers go to the build-data-room Edge Function (server-side), which
    calls the LLM, stores the data room, and returns a preview. The preview is
-   free. The full room (documents) unlocks after Stripe payment, verified
+   free. The full room (documents) unlocks after Paddle payment, verified
    server-side by verify-payment. The founder's access link carries a token;
    get-data-room returns the preview always and the docs only when paid.
    The deck text IS sent to the AI (unlike the Audit). It is stored with the
@@ -12,6 +12,7 @@
   if (!cfg || !roomCfg) return;
 
   var TOKEN_KEY = "raiseos_ai_room_token";
+  var TXN_KEY = "raiseos_ai_paddle_txn";
   var MAX_BYTES = 10 * 1024 * 1024;
 
   var form = document.getElementById("ai-form");
@@ -169,14 +170,7 @@
     renderChecklist(previewList, room.preview.checklist || []);
     var link = window.location.origin + window.location.pathname + "?room=" + room.token;
     accessLinkEl.textContent = link;
-    if (isPlaceholder(cfg.stripePaymentLink)) {
-      unlockBtn.style.display = "none";
-      unlockNote.textContent = "Payment is not connected yet.";
-    } else {
-      unlockBtn.style.display = "";
-      unlockBtn.href = cfg.stripePaymentLink;
-      unlockNote.textContent = isPlaceholder(cfg.price) ? "" : "One-time payment of " + cfg.price + ".";
-    }
+    unlockNote.textContent = isPlaceholder(cfg.price) ? "" : "One-time payment of " + cfg.price + ".";
     stepPreview.hidden = false;
     stepPreview.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -209,6 +203,10 @@
 
   function loadToken() {
     try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; }
+  }
+
+  function loadTxn() {
+    try { return localStorage.getItem(TXN_KEY) || ""; } catch (e) { return ""; }
   }
 
   function extractPdfText(file) {
@@ -345,6 +343,19 @@
     } else { done(); }
   });
 
+  unlockBtn.addEventListener("click", function () {
+    if (!currentToken) return;
+    unlockNote.textContent = "Starting checkout...";
+    apiCall("createCheckout", { token: currentToken })
+      .then(function (data) {
+        try { localStorage.setItem(TXN_KEY, data.transactionId); } catch (e) {}
+        window.location.href = data.checkoutUrl;
+      })
+      .catch(function (err) {
+        unlockNote.textContent = err.message || "Could not start checkout.";
+      });
+  });
+
   function roomToMarkdown(room) {
     var lines = ["# Data room", "", room.preview.companySnapshot || "", ""];
     (room.docs || []).forEach(function (doc) {
@@ -374,19 +385,20 @@
     window.print();
   });
 
-  /* On load: returning with a room token, or back from Stripe after payment. */
+  /* On load: returning with a room token, or back from Paddle after payment. */
   var params = new URLSearchParams(window.location.search);
   var paidParam = params.get("paid");
-  var sessionId = params.get("session_id");
+  var txnParam = params.get("_ptxn");
   var roomParam = params.get("room");
-  if (paidParam === "1" && sessionId) {
+  if (paidParam === "1") {
     var token = loadToken() || roomParam || "";
+    var txnId = txnParam || loadTxn() || "";
     stepBuild.scrollIntoView({ behavior: "smooth", block: "start" });
-    if (!token) {
+    if (!token || !txnId) {
       aiError.textContent = "Payment received. Open the access link you saved to unlock your room.";
     } else {
       aiError.textContent = "Verifying your payment...";
-      apiCall("verify", { token: token, sessionId: sessionId })
+      apiCall("verify", { token: token, transactionId: txnId })
         .then(function (res) {
           if (!res.paid) {
             aiError.textContent = "Payment not confirmed yet. If you just paid, wait a moment and refresh.";
