@@ -1,6 +1,6 @@
 /* Audit (deck rater) scoring config.
    Each dimension has 4 transparent checks. A check passes when any of its
-   patterns matches the pasted deck text (case-insensitive), or when its
+   patterns matches the deck text (case-insensitive), or when its
    special test passes. Score per dimension = 1 + checks passed (1 to 5).
    Tune here: checks, scale, bands, leak lines, fix lines, service links.
    Service values marked [FILL IN] are placeholders until connected. */

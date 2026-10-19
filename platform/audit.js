@@ -1,15 +1,16 @@
-/* Audit page logic (deck rater): analyzes pasted deck text in the browser
-   with the transparent checks in AUDIT_CONFIG, scores each dimension,
-   shows leaks and fixes, gates the full report behind email + consent.
-   The deck text never leaves the browser and is never stored. Only scores,
-   leaks, and email (if provided) are stored. The email gate only appears
-   when Supabase is configured. Until then the full report shows directly
-   and no email is requested. */
+/* Audit page logic (deck rater): reads an uploaded PDF deck in the browser
+   with pdf.js, analyzes the extracted text with the transparent checks in
+   AUDIT_CONFIG, scores each dimension, shows leaks and fixes, gates the
+   full report behind email + consent. The PDF and the extracted text never
+   leave the browser and are never stored. Only scores, leaks, and email
+   (if provided) are stored. The email gate only appears when Supabase is
+   configured. Until then the full report shows directly and no email is
+   requested. */
 (function () {
   var cfg = window.AUDIT_CONFIG;
   if (!cfg) return;
 
-  var deckText = document.getElementById("deck-text");
+  var deckFile = document.getElementById("deck-file");
   var deckWords = document.getElementById("deck-words");
   var deckError = document.getElementById("deck-error");
   var analyzeBtn = document.getElementById("audit-analyze");
@@ -25,6 +26,13 @@
   var ctasEl = document.getElementById("audit-ctas");
   var retakeBtn = document.getElementById("audit-retake");
   var started = false;
+  var extractedText = "";
+  var MAX_BYTES = 10 * 1024 * 1024;
+
+  if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+  }
 
   function track(name) {
     if (window.plausible) {
@@ -54,7 +62,7 @@
       utm_source: p.get("utm_source") || null,
       utm_medium: p.get("utm_medium") || null,
       utm_campaign: p.get("utm_campaign") || null,
-      source: "audit-paste"
+      source: "audit-pdf"
     };
   }
 
@@ -193,24 +201,80 @@
     }).catch(function () { /* ignore */ });
   }
 
-  deckText.addEventListener("input", function () {
-    var n = wordsOf(deckText.value).length;
-    deckWords.textContent = n + " words (minimum " + cfg.minWords + ")";
+  function extractPdfText(file) {
+    return file.arrayBuffer().then(function (buffer) {
+      return window.pdfjsLib.getDocument({ data: buffer }).promise;
+    }).then(function (pdf) {
+      var pages = [];
+      for (var i = 1; i <= pdf.numPages; i++) { pages.push(pdf.getPage(i)); }
+      return Promise.all(pages).then(function (pageObjs) {
+        return Promise.all(pageObjs.map(function (page) { return page.getTextContent(); }));
+      }).then(function (contents) {
+        return contents.map(function (content) {
+          return content.items.map(function (item) { return item.str; }).join(" ");
+        }).join("\n\n");
+      });
+    });
+  }
+
+  deckFile.addEventListener("change", function () {
+    var file = deckFile.files && deckFile.files[0];
+    extractedText = "";
+    resultsEl.hidden = true;
+    gateEl.hidden = true;
+    reportEl.hidden = true;
+    ctasEl.hidden = true;
+    if (!file) {
+      deckWords.textContent = "No file selected";
+      return;
+    }
     if (!started) {
       started = true;
       track("Audit Started");
     }
-  });
-
-  analyzeBtn.addEventListener("click", function () {
-    var text = deckText.value;
-    var n = wordsOf(text).length;
-    if (n < cfg.minWords) {
-      deckError.textContent = "Paste at least " + cfg.minWords + " words of deck text (currently " + n + ").";
+    if (file.type !== "application/pdf" && !/\.pdf$/i.test(file.name)) {
+      deckError.textContent = "Please upload a PDF file.";
+      deckWords.textContent = "No file selected";
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      deckError.textContent = "PDF is larger than 10MB. Please use a smaller file.";
+      deckWords.textContent = "No file selected";
+      return;
+    }
+    if (!window.pdfjsLib) {
+      deckError.textContent = "PDF reader failed to load. Check your connection and try again.";
       return;
     }
     deckError.textContent = "";
-    var results = analyze(text);
+    deckWords.textContent = "Reading " + file.name + "...";
+    extractPdfText(file).then(function (text) {
+      extractedText = text;
+      var n = wordsOf(text).length;
+      deckWords.textContent = file.name + ": " + n + " words";
+      if (n === 0) {
+        deckError.textContent = "No extractable text found in this PDF. It may be a scanned image. Export a text-based PDF from your slides tool and try again.";
+        extractedText = "";
+      }
+    }).catch(function () {
+      deckError.textContent = "Could not read this PDF. Please try another file.";
+      deckWords.textContent = "No file selected";
+      extractedText = "";
+    });
+  });
+
+  analyzeBtn.addEventListener("click", function () {
+    if (!extractedText) {
+      deckError.textContent = "Upload a PDF deck first.";
+      return;
+    }
+    var n = wordsOf(extractedText).length;
+    if (n < cfg.minWords) {
+      deckError.textContent = "This PDF has only " + n + " words of text. Upload a deck with at least " + cfg.minWords + " words.";
+      return;
+    }
+    deckError.textContent = "";
+    var results = analyze(extractedText);
     var answers = {};
     var total = 0;
     results.forEach(function (item) {
@@ -270,15 +334,16 @@
   });
 
   retakeBtn.addEventListener("click", function () {
-    deckText.value = "";
-    deckWords.textContent = "0 words (minimum " + cfg.minWords + ")";
+    deckFile.value = "";
+    extractedText = "";
+    deckWords.textContent = "No file selected";
     deckError.textContent = "";
     started = false;
     resultsEl.hidden = true;
     gateEl.hidden = true;
     reportEl.hidden = true;
     ctasEl.hidden = true;
-    deckText.scrollIntoView({ behavior: "smooth", block: "start" });
+    deckFile.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   /* CTAs: real Cal.com link; Stripe link when configured, else the apply form. */

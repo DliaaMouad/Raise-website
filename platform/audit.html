@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Free Audit: Paste Your Deck, Get Your Score | Raise</title>
-<meta name="description" content="Free deck rater. Paste your deck text, get a score across the 10 investor-readiness dimensions, your top 3 leaks, and the fixes.">
+<title>Free Audit: Upload Your Deck PDF, Get Your Score | Raise</title>
+<meta name="description" content="Free deck rater. Upload your deck as a PDF, get a score across the 10 investor-readiness dimensions, your top 3 leaks, and the fixes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/header.css">
 <script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: 'Inter', sans-serif; background: #F5F5F0; color: #111215; line-height: 1.65; }
@@ -22,7 +23,7 @@
   a { color: #111215; }
   .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5a7a1e; margin: 0 0 12px; }
   .lead { font-size: 18px; color: #333; margin: 0 0 32px; }
-  textarea#deck-text { width: 100%; padding: 14px; border: 1px solid #e6e6e0; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; resize: vertical; }
+  input#deck-file { display: block; margin: 10px 0; font-family: 'Inter', sans-serif; font-size: 15px; }
   .word-count { font-weight: 600; margin: 8px 0 0; }
   .deck-error { color: #b00020; min-height: 20px; font-size: 14px; }
   .privacy-inline { font-size: 13px; color: #555; margin: 8px 0 16px; }
@@ -83,13 +84,13 @@
 <main class="wrap">
   <p class="eyebrow">Free deck rater &middot; 30-day pilot</p>
   <h1>How investor-ready is your deck?</h1>
-  <p class="lead">Paste your deck text below. Get your score, your top 3 leaks, and the fixes that close them.</p>
+  <p class="lead">Upload your deck as a PDF. Get your score, your top 3 leaks, and the fixes that close them.</p>
 
-  <label for="deck-text">Paste your deck text, slide by slide.</label>
-  <textarea id="deck-text" rows="14" placeholder="Paste your deck text here..."></textarea>
-  <p class="word-count" id="deck-words">0 words (minimum 50)</p>
+  <label for="deck-file">Upload your deck as a PDF.</label>
+  <input id="deck-file" type="file" accept="application/pdf,.pdf">
+  <p class="word-count" id="deck-words">No file selected</p>
   <p class="deck-error" id="deck-error" role="alert"></p>
-  <p class="privacy-inline">Your deck text is analyzed in your browser. It is never sent, stored, or shared.</p>
+  <p class="privacy-inline">Your PDF is read in your browser. It is never uploaded, stored, or shared.</p>
   <button class="btn btn-dark" id="audit-analyze" type="button">Analyze my deck</button>
 
   <section class="results" id="audit-results" hidden>
