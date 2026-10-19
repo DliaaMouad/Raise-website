@@ -102,6 +102,16 @@ a.tool-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; 
 .section-lime { background: var(--lime); color: var(--ink); }
 .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
   color: #5d8a1e; margin-bottom: 16px; }
+/* Hero eyebrow: black pill with green dot, matching the GET STARTED WITH RAISE badge. */
+.hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #000000; color: #ffffff;
+  border-radius: 999px; padding: 10px 20px;
+}
+.hero .eyebrow-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #A2F543; flex-shrink: 0;
+}
 .eyebrow-light { color: var(--lime); }
 h1 { font-size: clamp(40px, 5.5vw, 62px); line-height: 1.08; letter-spacing: -1.5px; font-weight: 700; }
 h2 { font-size: clamp(30px, 4vw, 44px); line-height: 1.15; letter-spacing: -1px; font-weight: 700; margin-bottom: 20px; }
