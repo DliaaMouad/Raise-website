@@ -8,11 +8,11 @@ Raise OS (https://www.raiseos.site/) is a pitch deck consulting and fundraising 
 
 The five phases:
 
-1. **Readiness** — Diagnose your deck before investors do: narrative, unit economics, and the 10 investor-readiness dimensions, then list the exact fixes.
-2. **Aim** — Target 50 thesis-fit investors for your sector, stage, and geography. Volume is not a strategy.
-3. **Ignite** — Sequenced outreach and warm-intro orchestration that converts to partner meetings.
-4. **Sell** — Objection handling for the 20 questions partners actually ask ("Why won't Google build this?", "Why now?", "What's the moat?").
-5. **Execute** — Weekly investor updates and FOMO sprints that compound momentum until the round closes oversubscribed.
+1. **Readiness**: Diagnose your deck before investors do: narrative, unit economics, and the 10 investor-readiness dimensions, then list the exact fixes. Try the free Audit diagnostic at https://www.raiseos.site/platform/audit.html.
+2. **Aim**: Target 50 thesis-fit investors for your sector, stage, and geography. Volume is not a strategy.
+3. **Ignite**: Sequenced outreach and warm-intro orchestration that converts to partner meetings.
+4. **Sell**: Objection handling for the 20 questions partners actually ask ("Why won't Google build this?", "Why now?", "What's the moat?").
+5. **Execute**: Weekly investor updates and FOMO sprints that compound momentum until the round closes oversubscribed.
 
 ## Who it is for
 
@@ -24,19 +24,20 @@ Pre-seed, Seed, and Series A founders raising £250k–£5M, primarily in B2B Sa
 - $120M+ raised by founders using the system (self-reported)
 - 70+ founders worked with directly (self-reported)
 - 94% of founders secure 2x+ more investor follow-up meetings after a rebuild (post-rebuild founder surveys, self-reported)
-- Case study: NovaHealth (HealthTech) — £1.4M seed closed in 19 days from first meeting; call #2 rate went from 4% to 45% after the rebuild. Founder: Marcus Vance. (self-reported)
+- Case study: NovaHealth (HealthTech): £1.4M seed closed in 19 days from first meeting; call #2 rate went from 4% to 45% after the rebuild. Founder: Marcus Vance. (self-reported)
 
 ## Services and pricing
 
 - **Deck Audit** (price and turnaround to be confirmed): partner-lens teardown, live audit call, slide scorecard.
-- **Deck Rebuild Sprint — £1,500** (14 days): full narrative and slide rewrite, visual redesign, pitch script and FAQ, unlimited revisions.
-- **1:1 Capital Raise Advisory — £3,500** (30 days): everything in the rebuild plus a 50+ investor target list, financial model review, and warm-intro orchestration.
+- **Deck Rebuild Sprint: £1,500** (14 days): full narrative and slide rewrite, visual redesign, pitch script and FAQ, unlimited revisions.
+- **1:1 Capital Raise Advisory: £3,500** (30 days): everything in the rebuild plus a 50+ investor target list, financial model review, and warm-intro orchestration.
 - **Free**: Pre-Seed Investor Search (2,197 verified funds, filter by region, stage, industry, focus, and check size) at https://www.raiseos.site/investors.html (access code required); weekly Raise OS briefing on Substack (@raiseos).
 - Risk reversal: if the initial audit call doesn't reveal at least 3 actionable narrative leaks costing you checks, you pay nothing.
 
 ## Key pages
 
 - Homepage: https://www.raiseos.site/index.html
+- Free Audit diagnostic: https://www.raiseos.site/platform/audit.html
 - Get started / book a call: https://www.raiseos.site/get-started.html
 - Pre-Seed Investor Search: https://www.raiseos.site/investors.html
 - About: https://www.raiseos.site/about.html
