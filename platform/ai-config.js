@@ -8,7 +8,7 @@
    OPENAI_API_KEY, STRIPE_SECRET_KEY, SUPABASE_SERVICE_ROLE_KEY. */
 var AI_DATA_ROOM_CONFIG = {
   supabaseUrl: "https://gppuoulloxykfefmgrsn.supabase.co",
-  supabaseAnonKey: "[FILL IN: Supabase anon key]",
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdwcHVvdWxsb3h5a2ZlZm1ncnNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIyNzUxMzksImV4cCI6MjEwNzg1MTEzOX0.9Ge9ogwpY1V8PmmKjLwERR_jg2IWFmGB-M5bkxkPATQ",
   stripePaymentLink: "[FILL IN: Stripe Payment Link for the AI Data Room]",
   price: "[FILL IN: price for the AI Data Room]",
   functions: {
