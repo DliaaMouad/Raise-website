@@ -21,10 +21,10 @@ var AUDIT_CONFIG = {
     { value: 5, label: "Investor-ready", desc: "Would survive a partner meeting." }
   ],
   bands: [
-    { min: 42, max: 50, label: "Investor-ready", description: "Minor polish, then pitch." },
-    { min: 32, max: 41, label: "Strong with leaks", description: "Fix the top 3 leaks, then pitch." },
-    { min: 22, max: 31, label: "Needs work", description: "Do not pitch yet. Fix the leaks first." },
-    { min: 10, max: 21, label: "Not ready", description: "Rebuild the narrative first." }
+    { min: 80, max: 100, label: "Investor-ready", description: "Minor polish, then pitch." },
+    { min: 55, max: 79, label: "Strong with leaks", description: "Fix the top 3 leaks, then pitch." },
+    { min: 30, max: 54, label: "Needs work", description: "Do not pitch yet. Fix the leaks first." },
+    { min: 0, max: 29, label: "Not ready", description: "Rebuild the narrative first." }
   ],
   dimensions: [
     {

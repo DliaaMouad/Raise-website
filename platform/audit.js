@@ -333,12 +333,13 @@
       answers[item.dim.key] = item.score;
       total += item.score;
     });
-    var band = bandFor(total);
+    var total100 = Math.floor((total - 10) * 2.5);
+    var band = bandFor(total100);
     var leaks = sortedByWeakness(results).slice(0, 3).map(function (item) { return item.dim.key; });
 
-    scoreEl.textContent = total + " / 50";
+    scoreEl.textContent = total100 + " / 100";
     if (ring) {
-      ring.setAttribute("stroke-dashoffset", String(RING_C * (1 - total / 50)));
+      ring.setAttribute("stroke-dashoffset", String(RING_C * (1 - total100 / 100)));
     }
     bandEl.textContent = band.label + ": " + band.description;
     renderLeaks(results);
@@ -347,7 +348,7 @@
     ctasEl.hidden = false;
     track("Audit Completed");
     window.__auditAnswers = answers;
-    window.__auditTotal = total;
+    window.__auditTotal = total100;
     window.__auditLeaks = leaks;
 
     if (supabaseConfigured()) {
