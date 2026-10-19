@@ -34,26 +34,6 @@
 }
 
 
-/* Tools dropdown (desktop nav). */
-.pill-tools { position: relative; }
-.pill-tools-toggle {
-  font-family: 'Inter', sans-serif; background: none; border: 0; cursor: pointer;
-  font-size: 14px; font-weight: 600; padding: 8px 14px; border-radius: 999px; color: #111215;
-}
-.pill-tools-toggle:hover { background: #F3F3ED; }
-.tools-chevron { font-size: 11px; }
-.tools-dropdown {
-  display: none; position: absolute; top: calc(100% + 8px); left: 0; z-index: 60;
-  background: #ffffff; border-radius: 20px; box-shadow: 0 12px 32px rgba(17,18,21,0.14);
-  padding: 8px; min-width: 300px;
-}
-.pill-tools:hover .tools-dropdown, .pill-tools.open .tools-dropdown { display: block; }
-.tool-item { display: block; padding: 12px 14px; border-radius: 14px; text-decoration: none; color: #111215; }
-.tool-item:hover { background: #F3F3ED; }
-.tool-item[aria-current="page"] { background: #F3F3ED; }
-.tool-item strong { display: block; font-size: 14px; font-weight: 700; }
-.tool-item span { display: block; font-size: 12.5px; color: #666; margin-top: 2px; }
-
 /* Mobile menu: hamburger button (visible below 640px) + dropdown panel. */
 .pill-hamburger {
   display: none; background: none; border: 0; cursor: pointer;
@@ -79,10 +59,5 @@
   }
   .pill-mobile-menu.open a:hover { background: #F3F3ED; }
   .pill-mobile-menu.open .pill-cta { background: #B9FF66; text-align: center; }
-  .pill-mobile-menu.open .mobile-tools-label {
-    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase; color: #888;
-    padding: 10px 14px 2px;
-  }
 
 }
