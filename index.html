@@ -96,6 +96,24 @@
   .anatomy .slide-line{color:var(--muted);font-size:15px;}
   .anatomy .closer{margin-top:18px;font-weight:700;}
 
+  /* LOGO STRIP */
+  .logos{border-bottom:1px solid var(--line);padding:34px 0 26px;}
+  .logos-row{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+    gap:18px 44px;max-width:1020px;margin:0 auto;
+  }
+  .logos-row .wm{
+    color:#8f9196;font-weight:800;letter-spacing:-.01em;white-space:nowrap;
+    font-size:19px;line-height:1;
+  }
+  .logos-row .wm.light{font-weight:600;}
+  .logos-row .wm.spaced{letter-spacing:.22em;font-size:16px;}
+  .logos-row .wm.serif{font-family:Georgia,"Times New Roman",serif;font-weight:700;}
+  .logos-caption{
+    text-align:center;color:var(--muted);font-size:12.5px;margin-top:20px;
+    max-width:760px;margin-left:auto;margin-right:auto;
+  }
+
   /* SECTIONS */
   section{padding:72px 0;}
   .divider{border-top:1px solid var(--line);}
@@ -294,6 +312,21 @@
     </div>
   </div>
 </header>
+
+<div class="logos">
+  <div class="wrap">
+    <div class="logos-row" aria-label="Venture firms referenced">
+      <span class="wm">Y Combinator</span>
+      <span class="wm">Accel</span>
+      <span class="wm spaced">SEQUOIA</span>
+      <span class="wm">a16z</span>
+      <span class="wm serif">Founders Fund</span>
+      <span class="wm light">Benchmark</span>
+      <span class="wm light">Lightspeed</span>
+    </div>
+    <p class="logos-caption">Firm names are shown for reference only. Raise is not affiliated with, endorsed by, or partnered with any of these firms.</p>
+  </div>
+</div>
 
 <section class="divider" id="problem">
   <div class="wrap">
