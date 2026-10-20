@@ -191,6 +191,44 @@
   .ladder-note p{color:var(--muted);font-size:16px;margin-bottom:16px;}
   .ladder-intro{max-width:760px;color:var(--muted);font-size:18px;margin-top:16px;}
 
+  /* HOW IT WORKS DIAGRAM */
+  .os-section{background:var(--dark);color:#fff;}
+  .os-title{color:var(--lime);text-align:center;}
+  .os-sub{text-align:center;color:#c9ccd1;font-size:18px;max-width:720px;margin:16px auto 0;}
+  .os-stage{position:relative;height:620px;max-width:1100px;margin:30px auto 0;}
+  .os-lines{position:absolute;inset:0;width:100%;height:100%;}
+  .os-hub{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+    background:#17191c;border:1.5px solid var(--lime);border-radius:18px;
+    padding:28px 30px;text-align:center;width:290px;
+    box-shadow:0 0 0 6px rgba(162,245,67,.06),0 18px 40px rgba(0,0,0,.45);
+  }
+  .os-hub .os-badge{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:var(--lime);color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.12em;
+    padding:4px 14px;border-radius:999px;white-space:nowrap;
+  }
+  .os-hub h3{font-size:23px;letter-spacing:-.01em;line-height:1.2;}
+  .os-hub p{color:#9ea1a8;font-size:12.5px;letter-spacing:.14em;margin-top:8px;font-weight:700;}
+  .os-node{
+    position:absolute;transform:translate(-50%,-50%);z-index:2;width:238px;
+    background:#1b1d20;border:1px solid #2e3036;border-radius:14px;padding:15px 17px;
+  }
+  .os-node .n{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:21px;height:21px;border-radius:50%;border:1.5px solid var(--lime);
+    color:var(--lime);font-size:11.5px;font-weight:800;margin-right:8px;vertical-align:2px;
+  }
+  .os-node h4{display:inline;font-size:15.5px;font-weight:700;}
+  .os-node p{color:#9ea1a8;font-size:13.5px;margin-top:5px;}
+  @media (max-width:900px){
+    .os-stage{height:auto;display:flex;flex-direction:column;gap:14px;align-items:stretch;}
+    .os-lines{display:none;}
+    .os-hub{position:relative;left:auto;top:auto;transform:none;width:100%;order:-1;}
+    .os-hub .os-badge{top:-11px;}
+    .os-node{position:relative;left:auto !important;top:auto !important;transform:none;width:100%;}
+  }
+
   /* FOOTER */
   footer{background:var(--dark);color:#f2f2f0;padding:64px 0 36px;margin-top:0;}
   footer .logo{color:#fff;}
@@ -374,6 +412,59 @@
       <div class="block">
         <h3>The handoff</h3>
         <p>The deck, targets, objection matrix, and data room are yours when we finish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="os-section">
+  <div class="wrap">
+    <h2 class="os-title">Here&rsquo;s how it works</h2>
+    <p class="os-sub">You bring the company and the numbers. Raise turns them into one system: the story, the targets, and the answers, built in order and run with you.</p>
+    <div class="os-stage">
+      <svg class="os-lines" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
+        <g stroke="#3a3d42" stroke-width="1" vector-effect="non-scaling-stroke">
+          <line x1="500" y1="310" x2="500" y2="60"/>
+          <line x1="500" y1="310" x2="845" y2="80"/>
+          <line x1="500" y1="310" x2="872" y2="310"/>
+          <line x1="500" y1="310" x2="748" y2="540"/>
+          <line x1="500" y1="310" x2="252" y2="540"/>
+          <line x1="500" y1="310" x2="128" y2="310"/>
+          <line x1="500" y1="310" x2="155" y2="80"/>
+        </g>
+      </svg>
+      <div class="os-hub">
+        <span class="os-badge">ONE SYSTEM</span>
+        <h3>The Raise Operating System</h3>
+        <p>FIVE STAGES &middot; START TO CLOSE</p>
+      </div>
+      <div class="os-node" style="left:50%;top:9%;">
+        <span class="n">1</span><h4>Diagnose</h4>
+        <p>Fatal leaks found before partners do</p>
+      </div>
+      <div class="os-node" style="left:85%;top:12%;">
+        <span class="n">2</span><h4>Rebuild</h4>
+        <p>A story partners can repeat</p>
+      </div>
+      <div class="os-node" style="left:88%;top:50%;">
+        <span class="n">3</span><h4>Target</h4>
+        <p>50 thesis-fit partners, not volume</p>
+      </div>
+      <div class="os-node" style="left:75%;top:87%;">
+        <span class="n">4</span><h4>Simulate</h4>
+        <p>The 20 hardest questions, rehearsed</p>
+      </div>
+      <div class="os-node" style="left:25%;top:87%;">
+        <span class="n">5</span><h4>Execute</h4>
+        <p>Parallel meetings, competitive tension</p>
+      </div>
+      <div class="os-node" style="left:12%;top:50%;">
+        <span class="n">6</span><h4>The Handoff</h4>
+        <p>Every asset built is yours to keep</p>
+      </div>
+      <div class="os-node" style="left:15%;top:12%;">
+        <span class="n">7</span><h4>The Founder Call</h4>
+        <p>Fifteen minutes with Mouad, where it starts</p>
       </div>
     </div>
   </div>
