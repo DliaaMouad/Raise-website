@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<title>Investor CRM | Raise</title>
+<meta name="description" content="The Raise Investor CRM is in development: track investor outreach and conversations, log meeting notes, and protect follow-up momentum during your pre-seed or seed raise.">
+<link rel="canonical" href="https://www.raiseos.site/investor-crm.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/header.css">
+<script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.tagged-events.js"></script>
+<style>
+  :root{--bg:#FAF9F6;--ink:#1D1D1F;--muted:#5c5c60;--lime:#a2f543;--line:#e5e3dd;--card:#ffffff;--dark:#111215;--green:#1E7543;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Plus Jakarta Sans','Inter',sans-serif;letter-spacing:-0.02em;}
+  a{color:inherit;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+  main{padding:56px 0 84px;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:0.14em;color:var(--green);margin-bottom:14px;}
+  h1{font-size:clamp(34px,5vw,50px);line-height:1.1;font-weight:800;margin-bottom:18px;}
+  .lead{font-size:19px;color:var(--muted);max-width:730px;}
+  .btn{display:inline-block;background:var(--lime);color:var(--ink);font-weight:700;font-size:16px;text-decoration:none;padding:13px 28px;border-radius:999px;border:1px solid var(--ink);transition:transform .15s ease, box-shadow .15s ease;}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(29,29,31,.14);}
+  .btn.ghost{background:transparent;}
+  section.block{margin-top:60px;}
+  h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;line-height:1.2;margin-bottom:14px;}
+  .section-sub{color:var(--muted);font-size:17px;max-width:720px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:26px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 8px 22px rgba(29,29,31,.05);}
+  .card .stage-num{font-size:13px;font-weight:800;letter-spacing:0.1em;color:var(--green);display:block;margin-bottom:8px;}
+  .card h3{font-size:17px;margin-bottom:8px;}
+  .card p{color:var(--muted);font-size:15.5px;}
+  ul.ticks{list-style:none;margin-top:10px;}
+  ul.ticks li{padding:10px 0 10px 28px;position:relative;border-top:1px solid var(--line);font-size:16px;}
+  ul.ticks li:first-child{border-top:none;}
+  ul.ticks li::before{content:"\2713";position:absolute;left:2px;color:var(--green);font-weight:800;}
+  .keep-line{margin-top:18px;font-size:16px;}
+  .chip{display:inline-block;background:#F3F1EC;border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:999px;margin-bottom:16px;}
+  .schematic{display:flex;gap:12px;flex-wrap:wrap;align-items:stretch;margin-top:26px;}
+  .schematic .box{flex:1;min-width:170px;border:1.5px dashed #b9b6ad;border-radius:14px;padding:20px;background:#fff;}
+  .schematic .box h3{font-size:16px;margin-bottom:6px;}
+  .schematic .box p{color:var(--muted);font-size:14.5px;}
+  .schematic .arrow{align-self:center;font-weight:800;color:var(--green);font-size:20px;}
+  .schematic-caption{color:var(--muted);font-size:13.5px;margin-top:14px;}
+  .cta-band{background:var(--dark);color:#fff;border-radius:22px;padding:40px;text-align:center;margin-top:64px;}
+  .cta-band h2{color:#fff;}
+  .cta-band p{color:#c9ccd1;font-size:17px;max-width:600px;margin:0 auto 26px;}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:30px;}
+  .cta-band .cta-row{justify-content:center;margin-top:0;}
+  .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:30px;align-items:stretch;}
+  .tier{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 24px rgba(29,29,31,.05);display:flex;flex-direction:column;position:relative;}
+  .tier.featured{border:2px solid var(--ink);}
+  .tier .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--lime);border:1px solid var(--ink);border-radius:999px;font-size:12px;font-weight:700;padding:4px 14px;white-space:nowrap;}
+  .tier h3{font-size:14px;letter-spacing:0.12em;margin-bottom:10px;}
+  .tier .promise{font-size:20px;font-weight:800;letter-spacing:-0.01em;line-height:1.25;margin-bottom:14px;font-family:'Plus Jakarta Sans','Inter',sans-serif;}
+  .tier .meta{font-size:14.5px;color:var(--muted);margin-top:14px;}
+  .tier .btn{margin-top:auto;text-align:center;}
+  .tier .spacer{flex:1;min-height:18px;}
+  .compare{margin-top:44px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(29,29,31,.05);}
+  .compare table{width:100%;border-collapse:collapse;font-size:15px;}
+  .compare th,.compare td{padding:13px 18px;text-align:center;border-top:1px solid var(--line);}
+  .compare th{border-top:none;font-size:14px;letter-spacing:0.06em;background:#f3f1ec;}
+  .compare th:first-child,.compare td:first-child{text-align:left;font-weight:600;}
+  .compare .yes{color:var(--green);font-weight:800;}
+  .compare .no{color:#c9c6bf;}
+  footer{background:var(--dark);color:#f2f2f0;padding:52px 0 32px;}
+  .foot-logo{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.02em;text-decoration:none;color:#fff;}
+  .foot-logo span{color:var(--green);}
+  .foot-links{display:flex;flex-wrap:wrap;gap:12px 26px;margin:22px 0 28px;}
+  .foot-links a{color:#f2f2f0;text-decoration:none;font-size:15px;}
+  .foot-links a:hover{color:var(--lime);}
+  .foot-meta{border-top:1px solid #2c2e33;padding-top:20px;color:#b9bbc0;font-size:14px;}
+  @media (max-width:640px){ .cta-band{padding:30px 22px;} .compare th,.compare td{padding:10px 10px;font-size:13.5px;} }
+</style>
+</head>
+<body>
+<header class="pill-header">
+  <nav class="pill-nav" aria-label="Primary">
+    <a href="/" class="pill-logo" aria-label="Raise home">Raise<span class="pill-logo-dot">.</span></a>
+    <div class="pill-links">
+      <div class="tools-menu">
+        <button class="tools-btn" id="tools-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tools-panel">Tools <span class="tools-chev" aria-hidden="true">&#9662;</span></button>
+        <div class="tools-panel" id="tools-panel" role="menu" hidden>
+          <div class="tools-panel-head">
+            <div>
+              <p class="tools-panel-title">Your fundraising toolkit</p>
+              <p class="tools-panel-sub">The tools to prepare, organize, and execute your raise.</p>
+            </div>
+            <button class="tools-close" id="tools-close" type="button" aria-label="Close tools menu">&times;</button>
+          </div>
+          <a class="tool-item plausible-event-name=Deck+Rater+Start" href="/platform/audit.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Deck Rater</span><span class="tool-desc">Assess your pitch and identify narrative gaps</span></span>
+            <span class="tool-tag">Free entry point</span>
+          </a>
+          <a class="tool-item" href="/deck-audit.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Deck Audit</span><span class="tool-desc">Get a more detailed review and actionable fixes</span></span>
+            <span class="tool-tag">Assessment</span>
+          </a>
+          <a class="tool-item" href="/investors.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Investor Finder</span><span class="tool-desc">Build a targeted investor list</span></span>
+            <span class="tool-tag">Discovery</span>
+          </a>
+          <a class="tool-item" href="/investor-crm.html" role="menuitem" aria-current="page">
+            <span class="tool-main"><span class="tool-name">Investor CRM</span><span class="tool-desc">Track outreach and investor conversations</span></span>
+            <span class="tool-tag soon">Coming soon</span>
+          </a>
+          <a class="tool-item" href="/fundraising-calculator.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Fundraising Calculator</span><span class="tool-desc">Model runway, dilution, and funding scenarios</span></span>
+            <span class="tool-tag soon">Coming soon</span>
+          </a>
+        </div>
+      </div>
+      <a href="/about.html">About</a>
+    </div>
+    <button class="pill-hamburger" id="pill-hamburger" type="button" aria-expanded="false" aria-controls="pill-mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <a class="pill-cta plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+  </nav>
+  <div class="pill-mobile-menu" id="pill-mobile-menu">
+      <a href="/platform/audit.html" class="plausible-event-name=Deck+Rater+Start">Deck Rater</a>
+      <a href="/deck-audit.html">Deck Audit</a>
+      <a href="/investors.html">Investor Finder</a>
+      <a href="/investor-crm.html">Investor CRM (Coming soon)</a>
+      <a href="/fundraising-calculator.html">Fundraising Calculator (Coming soon)</a>
+      <a href="/#services">Advisory</a>
+      <a href="/#system">Methodology</a>
+      <a href="/about.html">About</a>
+      <a class="pill-cta plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+  </div>
+</header>
+<script src="/header.js" defer></script>
+<main>
+  <div class="wrap">
+    <span class="chip">COMING SOON &middot; IN DEVELOPMENT</span>
+    <p class="eyebrow">TOOLS &middot; INVESTOR CRM</p>
+    <h1>Every investor conversation, in one place.</h1>
+    <p class="lead">The Investor CRM is in development. It will give founders, especially founders raising solo, a single place to track outreach and investor conversations: who you contacted, what they said, and exactly what happens next.</p>
+
+    <section class="block">
+      <h2>What it will do</h2>
+      <div class="cards">
+        <div class="card"><h3>Track outreach</h3><p>Every investor, every touch, every reply, logged against your target list instead of scattered across inboxes and spreadsheets.</p></div>
+        <div class="card"><h3>Manage conversations</h3><p>Meeting notes, partner feedback, and the agreed next step for each thread, kept where you can find them before the next call.</p></div>
+        <div class="card"><h3>Protect momentum</h3><p>Follow-up prompts so a warm conversation never quietly goes cold while you are busy building the company.</p></div>
+      </div>
+      <div class="schematic" aria-hidden="true">
+        <div class="box"><h3>Target list</h3><p>Your thesis-fit investors, in one pipeline.</p></div>
+        <div class="arrow">&rarr;</div>
+        <div class="box"><h3>Outreach log</h3><p>Touches, replies, and meetings recorded.</p></div>
+        <div class="arrow">&rarr;</div>
+        <div class="box"><h3>Next steps</h3><p>Every thread has an owner and a next action.</p></div>
+      </div>
+      <p class="schematic-caption">Schematic of the planned workflow. The Investor CRM is in development and is not yet available; this page describes what it will do, not a finished product.</p>
+    </section>
+
+    <div class="cta-band">
+      <h2>Raising before it ships?</h2>
+      <p>Your round cannot wait for a tool. Book a call and we will run the process with you now, or get a free read on your deck in the meantime.</p>
+      <div class="cta-row">
+        <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+        <a class="btn ghost plausible-event-name=Deck+Rater+Start" href="/platform/audit.html" style="color:#fff;border-color:#fff;">Try the free Deck Rater</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <a class="foot-logo" href="/">Raise<span>.</span></a>
+    <div class="foot-links">
+      <a href="/platform/audit.html">Deck Rater</a>
+      <a href="/deck-audit.html">Deck Audit</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/investors.html">Investor Finder</a>
+      <a href="/about.html">About</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+    <p class="foot-meta">&copy; 2026 Raise. All rights reserved. 100% Confidential.</p>
+  </div>
+</footer>
+</body>
+</html>
