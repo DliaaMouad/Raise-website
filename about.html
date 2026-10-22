@@ -498,7 +498,7 @@ body {
 a:focus-visible, button:focus-visible {
  outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; 
 }</style>
-  <script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.js"></script>
+  <script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.tagged-events.js"></script>
 </head>
 <body>
 
@@ -506,22 +506,53 @@ a:focus-visible, button:focus-visible {
   <nav class="pill-nav" aria-label="Primary">
     <a href="/" class="pill-logo" aria-label="Raise home">Raise<span class="pill-logo-dot">.</span></a>
     <div class="pill-links">
-      <a href="/platform/audit.html">Audit</a>
-      <a href="/#services">Advisory</a>
-      <a href="/#system">Methodology</a>
-      <a href="/investors.html">Investors</a>
-      <a href="#top" aria-current="page">About Us</a>
+      <div class="tools-menu">
+        <button class="tools-btn" id="tools-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tools-panel">Tools <span class="tools-chev" aria-hidden="true">&#9662;</span></button>
+        <div class="tools-panel" id="tools-panel" role="menu" hidden>
+          <div class="tools-panel-head">
+            <div>
+              <p class="tools-panel-title">Your fundraising toolkit</p>
+              <p class="tools-panel-sub">The tools to prepare, organize, and execute your raise.</p>
+            </div>
+            <button class="tools-close" id="tools-close" type="button" aria-label="Close tools menu">&times;</button>
+          </div>
+          <a class="tool-item plausible-event-name=Deck+Rater+Start" href="/platform/audit.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Deck Rater</span><span class="tool-desc">Assess your pitch and identify narrative gaps</span></span>
+            <span class="tool-tag">Free entry point</span>
+          </a>
+          <a class="tool-item" href="/deck-audit.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Deck Audit</span><span class="tool-desc">Get a more detailed review and actionable fixes</span></span>
+            <span class="tool-tag">Assessment</span>
+          </a>
+          <a class="tool-item" href="/investors.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Investor Finder</span><span class="tool-desc">Build a targeted investor list</span></span>
+            <span class="tool-tag">Discovery</span>
+          </a>
+          <a class="tool-item" href="/investor-crm.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Investor CRM</span><span class="tool-desc">Track outreach and investor conversations</span></span>
+            <span class="tool-tag soon">Coming soon</span>
+          </a>
+          <a class="tool-item" href="/fundraising-calculator.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Fundraising Calculator</span><span class="tool-desc">Model runway, dilution, and funding scenarios</span></span>
+            <span class="tool-tag soon">Coming soon</span>
+          </a>
+        </div>
+      </div>
+      <a href="#top" aria-current="page">About</a>
     </div>
     <button class="pill-hamburger" id="pill-hamburger" type="button" aria-expanded="false" aria-controls="pill-mobile-menu" aria-label="Open menu"><span></span><span></span><span></span></button>
-    <a class="pill-cta" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+    <a class="pill-cta plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
   </nav>
   <div class="pill-mobile-menu" id="pill-mobile-menu">
-      <a href="/platform/audit.html">Audit</a>
+      <a href="/platform/audit.html" class="plausible-event-name=Deck+Rater+Start">Deck Rater</a>
+      <a href="/deck-audit.html">Deck Audit</a>
+      <a href="/investors.html">Investor Finder</a>
+      <a href="/investor-crm.html">Investor CRM (Coming soon)</a>
+      <a href="/fundraising-calculator.html">Fundraising Calculator (Coming soon)</a>
       <a href="/#services">Advisory</a>
       <a href="/#system">Methodology</a>
-      <a href="/investors.html">Investors</a>
-      <a href="#top" aria-current="page">About Us</a>
-      <a class="pill-cta" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+      <a href="#top" aria-current="page">About</a>
+      <a class="pill-cta plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
   </div>
 </header>
 <script src="header.js" defer></script>
@@ -720,7 +751,7 @@ a:focus-visible, button:focus-visible {
           <li><a href="/">Home</a></li>
           <li><a href="/#services">Advisory</a></li>
           <li><a href="/#system">Methodology</a></li>
-          <li><a href="/about.html">About Us</a></li>
+          <li><a href="/about.html">About</a></li>
         </ul>
       </nav>
       <nav class="footer-col" aria-label="Legal">
