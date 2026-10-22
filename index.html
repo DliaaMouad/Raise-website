@@ -243,6 +243,73 @@
     .os-node{position:relative;left:auto !important;top:auto !important;transform:none;width:100%;}
   }
 
+  /* TOOLS MEGA-MENU */
+  .tools-menu{position:relative;display:inline-block;}
+  .tools-btn{
+    background:none;border:0;cursor:pointer;font:inherit;
+    font-size:15px;font-weight:500;color:var(--ink);
+    padding:6px 2px;display:inline-flex;align-items:center;gap:6px;
+  }
+  .tools-btn:hover{text-decoration:underline;text-underline-offset:4px;}
+  .tools-chev{font-size:10px;line-height:1;}
+  .tools-panel{
+    position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);
+    width:540px;max-width:94vw;z-index:80;background:#fff;border:1px solid var(--line);
+    border-radius:20px;box-shadow:0 24px 60px rgba(29,29,31,.16);padding:18px;text-align:left;
+  }
+  .tools-panel[hidden]{display:none;}
+  .tools-panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:2px 6px 12px;}
+  .tools-panel-title{font-size:16px;font-weight:800;letter-spacing:-.01em;}
+  .tools-panel-sub{font-size:13.5px;color:var(--muted);margin-top:3px;}
+  .tools-close{background:none;border:0;cursor:pointer;font-size:22px;line-height:1;color:var(--muted);padding:2px 6px;border-radius:8px;flex:0 0 auto;}
+  .tools-close:hover{color:var(--ink);background:#F3F1EC;}
+  .tool-item{display:flex;align-items:center;justify-content:space-between;gap:16px;text-decoration:none;padding:11px 12px;border-radius:14px;}
+  .tool-item:hover{background:#F7F6F1;text-decoration:none;}
+  .tool-main{display:flex;flex-direction:column;gap:1px;min-width:0;}
+  .tool-name{font-size:15px;font-weight:700;}
+  .tool-desc{font-size:13.5px;color:var(--muted);font-weight:400;}
+  .tool-tag{flex:0 0 auto;font-size:11px;font-weight:700;background:var(--lime);color:var(--ink);border:1px solid var(--ink);padding:3px 10px;border-radius:999px;white-space:nowrap;}
+  .tool-tag.soon{background:#F3F1EC;border-color:var(--line);color:var(--muted);}
+  .hero .alt-link{font-weight:600;text-decoration:underline;text-underline-offset:4px;margin-left:18px;white-space:nowrap;}
+  @media (max-width:640px){ .hero .alt-link{display:inline-block;margin:14px 0 0;} }
+
+  /* DECK RATER */
+  .rater-card{background:var(--dark);color:#fff;border-radius:22px;padding:44px;box-shadow:0 18px 44px rgba(29,29,31,.16);}
+  .rater-card .section-eyebrow{color:var(--lime);}
+  .rater-card h2{color:#fff;}
+  .rater-sub{color:#c9ccd1;font-size:18px;max-width:720px;margin-top:14px;}
+  .rater-dims{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 6px;}
+  .rater-dims span{border:1px solid #3a3d42;border-radius:999px;padding:6px 14px;font-size:14px;color:#e8e9ea;}
+  .rater-note{color:#9ea1a8;font-size:14.5px;max-width:740px;margin:18px 0 26px;}
+  @media (max-width:640px){ .rater-card{padding:32px 24px;} }
+
+  /* FOUNDER */
+  .founder-grid{display:grid;grid-template-columns:320px 1fr;gap:44px;align-items:center;}
+  .founder-grid img{width:100%;border-radius:20px;border:1px solid var(--line);display:block;}
+  .founder-grid p{color:var(--muted);font-size:17px;margin-top:16px;}
+  .founder-grid p strong{color:var(--ink);}
+  .founder-actions{margin-top:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  .founder-actions a.more{font-weight:600;text-decoration:underline;text-underline-offset:4px;}
+  @media (max-width:800px){ .founder-grid{grid-template-columns:1fr;} .founder-grid img{max-width:320px;} }
+
+  /* RESOURCES */
+  .block a.res-link{font-weight:700;text-decoration:underline;text-underline-offset:4px;display:inline-block;margin-top:12px;}
+
+  /* FAQ */
+  .faq-list{margin-top:36px;display:flex;flex-direction:column;gap:12px;}
+  .faq-list details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;box-shadow:0 6px 18px rgba(29,29,31,.04);}
+  .faq-list summary{font-weight:700;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;}
+  .faq-list summary::-webkit-details-marker{display:none;}
+  .faq-list summary::after{content:"+";font-weight:800;color:#1E7543;flex:0 0 auto;}
+  .faq-list details[open ] summary::after{content:"\2212";}
+  .faq-list details p{color:var(--muted);font-size:16px;margin-top:12px;}
+  .faq-list details a{font-weight:600;}
+
+  /* FINAL CTA */
+  .final-cta{background:var(--dark);color:#fff;text-align:center;}
+  .final-cta h2{color:#fff;}
+  .final-cta p{color:#c9ccd1;font-size:18px;max-width:640px;margin:16px auto 30px;}
+
   /* FOOTER */
   footer{background:var(--dark);color:#f2f2f0;padding:64px 0 36px;margin-top:0;}
   footer .logo{color:#fff;}
@@ -267,7 +334,7 @@
     .nav-links{justify-content:center;}
   }
 </style>
-<script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.js"></script>
+<script defer data-domain="www.raiseos.site" src="https://plausible.io/js/script.tagged-events.js"></script>
 </head>
 <body>
 
@@ -275,12 +342,40 @@
   <div class="nav-inner">
     <a class="logo" href="#top">Raise<span>.</span></a>
     <div class="nav-links">
-      <a href="/platform/audit.html">Audit</a>
-      <a href="#services">Advisory</a>
-      <a href="#system">Methodology</a>
-      <a href="https://raiseos.site/investors.html">Investors</a>
-      <a href="https://raiseos.site/about.html">About Us</a>
-      <a class="btn small" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+      <div class="tools-menu">
+        <button class="tools-btn" id="tools-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="tools-panel">Tools <span class="tools-chev" aria-hidden="true">&#9662;</span></button>
+        <div class="tools-panel" id="tools-panel" role="menu" hidden>
+          <div class="tools-panel-head">
+            <div>
+              <p class="tools-panel-title">Your fundraising toolkit</p>
+              <p class="tools-panel-sub">The tools to prepare, organize, and execute your raise.</p>
+            </div>
+            <button class="tools-close" id="tools-close" type="button" aria-label="Close tools menu">&times;</button>
+          </div>
+          <a class="tool-item plausible-event-name=Deck+Rater+Start" href="/platform/audit.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Deck Rater</span><span class="tool-desc">Assess your pitch and identify narrative gaps</span></span>
+            <span class="tool-tag">Free entry point</span>
+          </a>
+          <a class="tool-item" href="/deck-audit.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Deck Audit</span><span class="tool-desc">Get a more detailed review and actionable fixes</span></span>
+            <span class="tool-tag">Assessment</span>
+          </a>
+          <a class="tool-item" href="/investors.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Investor Finder</span><span class="tool-desc">Build a targeted investor list</span></span>
+            <span class="tool-tag">Discovery</span>
+          </a>
+          <a class="tool-item" href="/investor-crm.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Investor CRM</span><span class="tool-desc">Track outreach and investor conversations</span></span>
+            <span class="tool-tag soon">Coming soon</span>
+          </a>
+          <a class="tool-item" href="/fundraising-calculator.html" role="menuitem">
+            <span class="tool-main"><span class="tool-name">Fundraising Calculator</span><span class="tool-desc">Model runway, dilution, and funding scenarios</span></span>
+            <span class="tool-tag soon">Coming soon</span>
+          </a>
+        </div>
+      </div>
+      <a href="/about.html">About</a>
+      <a class="btn small plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
     </div>
   </div>
 </nav>
@@ -288,9 +383,10 @@
 <header class="hero" id="top">
   <div class="wrap">
     <span class="eyebrow"><span class="dot">&#9679;</span>&nbsp; FUNDRAISING ADVISORY FOR PRE-SEED &amp; SEED FOUNDERS</span>
-    <h1>From investor-ready to signed term sheet.</h1>
-    <p class="sub">Still getting 'let's stay in touch'? The problem is rarely your company. It's the narrative. Raise pairs partner-level advisory with narrative positioning and partner preparation to turn polite passes into competitive term sheets.</p>
-    <a class="btn" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+    <h1>We turn zero fundraising structure into a signed term sheet.</h1>
+    <p class="sub">Turn your pitch into a clear investment narrative, identify the right investors, and execute your raise with a system.</p>
+    <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+    <a class="alt-link plausible-event-name=Deck+Rater+Start" href="/platform/audit.html">Try the free Deck Rater</a>
     <p class="micro">Direct call with Mouad. 100% confidential. No pitch, no obligation.</p>
 
     <div class="anatomy">
@@ -395,26 +491,43 @@
 
 <section class="divider" id="problem">
   <div class="wrap">
-    <h2>Today vs. with Raise</h2>
-    <div class="contrast">
-      <div class="col">
-        <h3>TODAY</h3>
-        <ul>
-          <li>You pitch before the story can survive scrutiny.</li>
-          <li>You send volume, not fit.</li>
-          <li>You hear 'stay in touch' and don't know why.</li>
-          <li>Meetings drift across six months and momentum dies.</li>
-        </ul>
+    <p class="section-eyebrow">THE PROBLEM</p>
+    <h2>A good business is not enough.</h2>
+    <p class="system-intro">Most founders we work with are building alone: no co-founder to pressure-test the story, no team to run the process. The company can be strong and the raise still stalls, for three reasons.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="stage-num">01</span>
+        <h3>Unclear narrative</h3>
+        <p>Your deck explains what you built, not why it deserves investment. Partners leave the meeting unable to repeat your story, so the story dies in the room you are not in.</p>
+        <p class="keep"><strong>With Raise:</strong> we sharpen the investment case until a partner can retell it in one sentence.</p>
       </div>
-      <div class="col raise">
-        <h3>WITH RAISE</h3>
-        <ul>
-          <li>Partners can repeat your story in one sentence.</li>
-          <li>You approach 50 thesis-fit check writers.</li>
-          <li>You rehearse the 20 hardest questions.</li>
-          <li>You run parallel meetings and build competitive tension.</li>
-        </ul>
+      <div class="step">
+        <span class="stage-num">02</span>
+        <h3>Weak investor fit</h3>
+        <p>You pitch whoever replies, including investors who never write pre-seed or seed checks in your sector. Volume feels like progress and burns your best weeks.</p>
+        <p class="keep"><strong>With Raise:</strong> you approach a targeted list of investors who fit your stage, sector, and round size.</p>
       </div>
+      <div class="step">
+        <span class="stage-num">03</span>
+        <h3>Unstructured outreach</h3>
+        <p>Meetings happen one at a time, months apart, with no follow-up system. Momentum dies between calls and the round quietly goes cold.</p>
+        <p class="keep"><strong>With Raise:</strong> you run a sequenced process: parallel meetings, tracked next steps, and competitive tension.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="deck-rater" class="divider">
+  <div class="wrap">
+    <div class="rater-card">
+      <p class="section-eyebrow">FREE TOOL &middot; DECK RATER</p>
+      <h2>Rate your deck before an investor does.</h2>
+      <p class="rater-sub">Upload your deck PDF and the Deck Rater scores it across the 10 dimensions investors judge, using 40 transparent checks grounded in Sequoia's published pitch framework and YC's application criteria. You get a score out of 100, your top 3 leaks, and the fix for each one.</p>
+      <div class="rater-dims">
+        <span>Team</span><span>Problem</span><span>Solution &amp; Product</span><span>Market</span><span>Traction</span><span>Business model</span><span>Go-to-market</span><span>Competition</span><span>Financials / Ask</span><span>Why Now</span>
+      </div>
+      <p class="rater-note">Honest mechanics: this is a rule-based assessment, not a black box. It runs entirely in your browser, so your deck never leaves your device and nothing is uploaded or stored. It is the same diagnostic lens we use at the start of every engagement, and if you are raising solo, it is the fastest second opinion your deck can get.</p>
+      <a class="btn plausible-event-name=Deck+Rater+Start" href="/platform/audit.html">Rate My Deck</a>
     </div>
   </div>
 </section>
@@ -486,7 +599,7 @@
       </div>
     </div>
     <div class="system-cta">
-      <a class="btn" href="https://cal.com/mouad-dliaa/15min">Book a Strategy Call</a>
+      <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Strategy Call</a>
     </div>
   </div>
 </section>
@@ -594,7 +707,7 @@
         <p class="lbl">YOUR COMMITMENT</p>
         <p class="meta">Send your deck and numbers; join one walkthrough call.</p>
         <div class="spacer"></div>
-        <a class="btn" href="https://cal.com/mouad-dliaa/15min">Book a call for pricing</a>
+        <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a call for pricing</a>
       </div>
 
       <div class="tier featured">
@@ -619,7 +732,7 @@
         <p class="lbl">YOUR COMMITMENT</p>
         <p class="meta">A few focused hours each week, honest access to your numbers, fast decisions on feedback.</p>
         <div class="spacer"></div>
-        <a class="btn" href="https://cal.com/mouad-dliaa/15min">Book a call for pricing</a>
+        <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a call for pricing</a>
       </div>
 
       <div class="tier">
@@ -642,7 +755,7 @@
         <p class="lbl">YOUR COMMITMENT</p>
         <p class="meta">Active founder involvement through the whole round; availability for partner meetings.</p>
         <div class="spacer"></div>
-        <a class="btn" href="https://cal.com/mouad-dliaa/15min">Apply for 1:1 advisory</a>
+        <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Apply for 1:1 advisory</a>
       </div>
     </div>
 
@@ -661,8 +774,105 @@
 
     <div class="ladder-note">
       <p>Not sure which fits? A 15-minute call answers that before you commit to anything.</p>
-      <a class="btn" href="https://cal.com/mouad-dliaa/15min">Schedule a 15-Min Call</a>
+      <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Schedule a 15-Min Call</a>
     </div>
+  </div>
+</section>
+
+<section id="founder" class="divider">
+  <div class="wrap">
+    <div class="founder-grid">
+      <img src="https://raiseos.site/assets/mouad-dliaa.png" alt="Portrait of Mouad Dliaa, founder of Raise">
+      <div>
+        <p class="section-eyebrow">THE FOUNDER</p>
+        <h2>Why Raise exists</h2>
+        <p>Raise is led by <strong>Mouad Dliaa</strong>. The belief behind it is simple: strong startups often struggle to raise, not because the business is weak, but because the investment story fails to land.</p>
+        <p>Founders respond by polishing the deck: better design, tighter slides, prettier charts, while the case for investing stays fuzzy and the polish hides it. Raise works in the opposite order. Diagnose the story first, strengthen the investment case, then execute a structured raise aimed at the right investors.</p>
+        <p>If you are building alone, this is who Raise was built for: a partner-level second brain for your raise, working directly with you from the first diagnostic to the signed term sheet.</p>
+        <div class="founder-actions">
+          <a class="btn small plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
+          <a class="more" href="/about.html">More about Raise</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resources" class="divider">
+  <div class="wrap">
+    <p class="section-eyebrow">RESOURCES</p>
+    <h2>Learn from real decks and real data.</h2>
+    <div class="blocks">
+      <div class="block">
+        <h3>Deck teardown: Moritz</h3>
+        <p>Moritz raised a $9M seed round with a 12-slide deck. The teardown breaks down, slide by slide, what made it work.</p>
+        <a class="res-link" href="https://startupfundraising.com/library/articles/moritz-pitch-deck-teardown">Read the teardown</a>
+      </div>
+      <div class="block">
+        <h3>Deck teardown: Keeper</h3>
+        <p>Keeper raised $4M at pre-seed. Its deck is a lesson in proof, market framing, and knowing which slides carry the round.</p>
+        <a class="res-link" href="https://startupfundraising.com/library/articles/keeper-pitch-deck-teardown">Read the teardown</a>
+      </div>
+      <div class="block">
+        <h3>Investor Finder</h3>
+        <p>Search 2,197 researched investors by stage, sector, region, and check size. Free to use with an access code.</p>
+        <a class="res-link" href="/investors.html">Find investors</a>
+      </div>
+      <div class="block">
+        <h3>Deck Rater</h3>
+        <p>Score your deck against 40 investor-readiness checks, free, in your browser. Your deck never leaves your device.</p>
+        <a class="res-link plausible-event-name=Deck+Rater+Start" href="/platform/audit.html">Rate my deck</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="divider">
+  <div class="wrap">
+    <p class="section-eyebrow">QUESTIONS</p>
+    <h2>Before you ask.</h2>
+    <div class="faq-list">
+      <details>
+        <summary>What is Raise?</summary>
+        <p>Raise is a fundraising advisory and toolkit for pre-seed and seed founders. We sharpen your investment story, rebuild your deck, target the right investors, and execute a structured raise with you, from first diagnostic to signed term sheet.</p>
+      </details>
+      <details>
+        <summary>Who is Raise for?</summary>
+        <p>Pre-seed and seed founders, and solo founders especially. If you are raising without a co-founder or a finance team to run the process, Raise acts as your fundraising partner: the system, the second pair of eyes, and the rehearsal room.</p>
+      </details>
+      <details>
+        <summary>What happens on the first call?</summary>
+        <p>A direct 15-minute call with Mouad. It is 100% confidential, with no pitch and no obligation. We look at where your raise stands, what is weakening it, and whether Raise is the right help for it.</p>
+      </details>
+      <details>
+        <summary>What is the Deck Rater?</summary>
+        <p>A free tool that scores your deck across 10 investor-readiness dimensions using 40 transparent checks grounded in Sequoia's published pitch framework and YC's application criteria. You get a score out of 100, your top 3 leaks, and the fix for each one. Try it <a class="plausible-event-name=Deck+Rater+Start" href="/platform/audit.html">here</a>.</p>
+      </details>
+      <details>
+        <summary>Is my deck uploaded or stored anywhere?</summary>
+        <p>No. The Deck Rater is a rule-based assessment that runs entirely in your browser. Your deck file never leaves your device, and nothing is uploaded or stored.</p>
+      </details>
+      <details>
+        <summary>How long does the Program take?</summary>
+        <p>About 3 weeks from audit to an investor-ready deck, a 50-partner target matrix, and rehearsed objection answers. The Audit tier takes about 1 week, and 1:1 Advisory runs from first meeting through close.</p>
+      </details>
+      <details>
+        <summary>How does the investor database work?</summary>
+        <p>The Investor Finder lists 2,197 researched investors, searchable and filterable by stage, sector, region, and check size. It is free to use behind an access code. Open it <a href="/investors.html">here</a>.</p>
+      </details>
+      <details>
+        <summary>How much does Raise cost?</summary>
+        <p>Each engagement is scoped to your round and the level of support you need, so pricing is covered on your call, after we understand where your raise stands. There is no obligation attached to asking.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Make your next investor conversation count.</h2>
+    <p>Find out what is weakening your fundraising story and what to improve next.</p>
+    <a class="btn plausible-event-name=Book+a+Call" href="https://cal.com/mouad-dliaa/15min">Book a Call</a>
   </div>
 </section>
 
@@ -673,6 +883,9 @@
     <div class="foot-links">
       <a href="#services">Advisory</a>
       <a href="#system">Methodology</a>
+      <a href="/platform/audit.html">Deck Rater</a>
+      <a href="/deck-audit.html">Deck Audit</a>
+      <a href="/pricing.html">Pricing</a>
       <a href="https://raiseos.site/about.html">About</a>
       <a href="https://cal.com/mouad-dliaa/15min">Contact</a>
       <a href="https://raiseos.site/privacy">Privacy</a>
@@ -685,5 +898,6 @@
   </div>
 </footer>
 
+<script src="/header.js" defer></script>
 </body>
 </html>
