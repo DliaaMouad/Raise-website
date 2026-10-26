@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Fundraising Calculator | Raise</title>
-<meta name="description" content="The Raise Fundraising Calculator is in development: model runway, dilution, and funding scenarios before you set the ask for your pre-seed or seed round.">
+<meta name="description" content="Model runway, dilution, and funding scenarios before you set the ask for your pre-seed or seed round. Free, runs in your browser, no signup.">
 <link rel="canonical" href="https://www.raiseos.site/fundraising-calculator.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,50 +24,52 @@
   .eyebrow{font-size:12px;font-weight:700;letter-spacing:0.14em;color:var(--green);margin-bottom:14px;}
   h1{font-size:clamp(34px,5vw,50px);line-height:1.1;font-weight:800;margin-bottom:18px;}
   .lead{font-size:19px;color:var(--muted);max-width:730px;}
-  .btn{display:inline-block;background:var(--lime);color:var(--ink);font-weight:700;font-size:16px;text-decoration:none;padding:13px 28px;border-radius:999px;border:1px solid var(--ink);transition:transform .15s ease, box-shadow .15s ease;}
+  .btn{display:inline-block;background:var(--lime);color:var(--ink);font-weight:700;font-size:16px;text-decoration:none;padding:13px 28px;border-radius:999px;border:1px solid var(--ink);transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;}
   .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(29,29,31,.14);}
   .btn.ghost{background:transparent;}
+  .chip{display:inline-block;background:#F3F1EC;border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:999px;margin-bottom:16px;}
   section.block{margin-top:60px;}
   h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;line-height:1.2;margin-bottom:14px;}
   .section-sub{color:var(--muted);font-size:17px;max-width:720px;}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:26px;}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 8px 22px rgba(29,29,31,.05);}
-  .card .stage-num{font-size:13px;font-weight:800;letter-spacing:0.1em;color:var(--green);display:block;margin-bottom:8px;}
-  .card h3{font-size:17px;margin-bottom:8px;}
-  .card p{color:var(--muted);font-size:15.5px;}
-  ul.ticks{list-style:none;margin-top:10px;}
-  ul.ticks li{padding:10px 0 10px 28px;position:relative;border-top:1px solid var(--line);font-size:16px;}
-  ul.ticks li:first-child{border-top:none;}
-  ul.ticks li::before{content:"\2713";position:absolute;left:2px;color:var(--green);font-weight:800;}
-  .keep-line{margin-top:18px;font-size:16px;}
-  .chip{display:inline-block;background:#F3F1EC;border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:999px;margin-bottom:16px;}
-  .schematic{display:flex;gap:12px;flex-wrap:wrap;align-items:stretch;margin-top:26px;}
-  .schematic .box{flex:1;min-width:170px;border:1.5px dashed #b9b6ad;border-radius:14px;padding:20px;background:#fff;}
-  .schematic .box h3{font-size:16px;margin-bottom:6px;}
-  .schematic .box p{color:var(--muted);font-size:14.5px;}
-  .schematic .arrow{align-self:center;font-weight:800;color:var(--green);font-size:20px;}
-  .schematic-caption{color:var(--muted);font-size:13.5px;margin-top:14px;}
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px;align-items:start;}
+  @media (max-width:760px){.calc{grid-template-columns:1fr;}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 24px rgba(29,29,31,.05);}
+  .panel h2{font-size:20px;margin-bottom:6px;}
+  .panel .hint{color:var(--muted);font-size:14.5px;margin-bottom:20px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-weight:700;font-size:14.5px;margin-bottom:6px;}
+  .field .note{color:var(--muted);font-size:13.5px;margin-top:4px;}
+  .field input,.field select{width:100%;padding:11px 14px;font-size:16px;font-family:inherit;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(162,245,67,.45);}
+  .form-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
+  .btn.small{padding:10px 20px;font-size:14.5px;}
+  .btn.quiet{background:#fff;}
+  .raise-big{font-size:clamp(36px,5vw,48px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;font-family:'Plus Jakarta Sans','Inter',sans-serif;}
+  .raise-sub{color:var(--muted);font-size:15.5px;margin-top:6px;}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .stat{border-top:1px solid var(--line);padding-top:12px;}
+  .stat .k{font-size:12.5px;font-weight:700;letter-spacing:0.08em;color:var(--muted);}
+  .stat .v{font-size:21px;font-weight:800;margin-top:2px;font-family:'Plus Jakarta Sans','Inter',sans-serif;}
+  .stat .v span{font-weight:500;font-size:14px;color:var(--muted);}
+  .warn{margin-top:22px;background:#FFF8E1;border:1px solid #E8C87A;border-radius:12px;padding:14px 16px;font-size:15px;}
+  .warn strong{display:block;margin-bottom:2px;}
+  .note-box{margin-top:22px;background:#F3F1EC;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:15px;color:var(--muted);}
+  .scen{margin-top:26px;}
+  .scen h3{font-size:16px;margin-bottom:10px;}
+  .scen table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  .scen th,.scen td{padding:10px 12px;text-align:right;border-top:1px solid var(--line);}
+  .scen th{font-size:12.5px;letter-spacing:0.06em;background:#f3f1ec;text-align:right;}
+  .scen th:first-child,.scen td:first-child{text-align:left;}
+  .scen tr.hl td{font-weight:800;background:#F7FDEB;}
+  .formulas{list-style:none;margin-top:10px;}
+  .formulas li{padding:12px 0;border-top:1px solid var(--line);font-size:16px;}
+  .formulas li:first-child{border-top:none;}
+  .formulas code{font-family:inherit;background:#F3F1EC;padding:2px 8px;border-radius:6px;font-size:14.5px;}
   .cta-band{background:var(--dark);color:#fff;border-radius:22px;padding:40px;text-align:center;margin-top:64px;}
   .cta-band h2{color:#fff;}
   .cta-band p{color:#c9ccd1;font-size:17px;max-width:600px;margin:0 auto 26px;}
   .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:30px;}
   .cta-band .cta-row{justify-content:center;margin-top:0;}
-  .tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:30px;align-items:stretch;}
-  .tier{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 24px rgba(29,29,31,.05);display:flex;flex-direction:column;position:relative;}
-  .tier.featured{border:2px solid var(--ink);}
-  .tier .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--lime);border:1px solid var(--ink);border-radius:999px;font-size:12px;font-weight:700;padding:4px 14px;white-space:nowrap;}
-  .tier h3{font-size:14px;letter-spacing:0.12em;margin-bottom:10px;}
-  .tier .promise{font-size:20px;font-weight:800;letter-spacing:-0.01em;line-height:1.25;margin-bottom:14px;font-family:'Plus Jakarta Sans','Inter',sans-serif;}
-  .tier .meta{font-size:14.5px;color:var(--muted);margin-top:14px;}
-  .tier .btn{margin-top:auto;text-align:center;}
-  .tier .spacer{flex:1;min-height:18px;}
-  .compare{margin-top:44px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(29,29,31,.05);}
-  .compare table{width:100%;border-collapse:collapse;font-size:15px;}
-  .compare th,.compare td{padding:13px 18px;text-align:center;border-top:1px solid var(--line);}
-  .compare th{border-top:none;font-size:14px;letter-spacing:0.06em;background:#f3f1ec;}
-  .compare th:first-child,.compare td:first-child{text-align:left;font-weight:600;}
-  .compare .yes{color:var(--green);font-weight:800;}
-  .compare .no{color:#c9c6bf;}
   footer{background:var(--dark);color:#f2f2f0;padding:52px 0 32px;}
   .foot-logo{font-family:'Plus Jakarta Sans','Inter',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.02em;text-decoration:none;color:#fff;}
   .foot-logo span{color:var(--green);}
@@ -75,7 +77,7 @@
   .foot-links a{color:#f2f2f0;text-decoration:none;font-size:15px;}
   .foot-links a:hover{color:var(--lime);}
   .foot-meta{border-top:1px solid #2c2e33;padding-top:20px;color:#b9bbc0;font-size:14px;}
-  @media (max-width:640px){ .cta-band{padding:30px 22px;} .compare th,.compare td{padding:10px 10px;font-size:13.5px;} }
+  @media (max-width:640px){ .cta-band{padding:30px 22px;} .scen th,.scen td{padding:8px 8px;font-size:13px;} }
 </style>
 </head>
 <body>
@@ -111,7 +113,7 @@
           </a>
           <a class="tool-item" href="/fundraising-calculator.html" role="menuitem" aria-current="page">
             <span class="tool-main"><span class="tool-name">Fundraising Calculator</span><span class="tool-desc">Model runway, dilution, and funding scenarios</span></span>
-            <span class="tool-tag soon">Coming soon</span>
+            <span class="tool-tag">Free</span>
           </a>
         </div>
       </div>
@@ -125,7 +127,7 @@
       <a href="/deck-audit.html">Deck Audit</a>
       <a href="/investors.html">Investor Finder</a>
       <a href="/investor-crm.html">Investor CRM (Coming soon)</a>
-      <a href="/fundraising-calculator.html">Fundraising Calculator (Coming soon)</a>
+      <a href="/fundraising-calculator.html">Fundraising Calculator</a>
       <a href="/#services">Advisory</a>
       <a href="/#system">Methodology</a>
       <a href="/about.html">About</a>
@@ -135,26 +137,104 @@
 <script src="/header.js" defer></script>
 <main>
   <div class="wrap">
-    <span class="chip">COMING SOON &middot; IN DEVELOPMENT</span>
+    <span class="chip">FREE TOOL &middot; RUNS IN YOUR BROWSER</span>
     <p class="eyebrow">TOOLS &middot; FUNDRAISING CALCULATOR</p>
     <h1>Model the round before you raise it.</h1>
-    <p class="lead">The Fundraising Calculator is in development. It will help you model runway, dilution, and funding scenarios before you set your ask, so the number you pitch is the number your plan actually needs.</p>
+    <p class="lead">Enter your numbers and see the raise your plan actually needs, the runway it buys, and what it costs in ownership. Your numbers never leave your browser. Nothing is stored, nothing is sent anywhere.</p>
+
+    <div class="calc">
+      <section class="panel" aria-label="Your numbers">
+        <h2>Your numbers</h2>
+        <p class="hint">Fill in what you know. Optional fields can stay blank.</p>
+        <div class="field">
+          <label for="calc-currency">Currency</label>
+          <select id="calc-currency">
+            <option value="$" selected>US Dollar ($)</option>
+            <option value="£">British Pound (£)</option>
+            <option value="€">Euro (€)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="calc-cash">Cash in bank</label>
+          <input id="calc-cash" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 150000">
+        </div>
+        <div class="field">
+          <label for="calc-burn">Monthly net burn</label>
+          <input id="calc-burn" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 25000">
+          <p class="note">What you spend minus what you earn, per month.</p>
+        </div>
+        <div class="field">
+          <label for="calc-avgburn">Average monthly burn during the raise period (optional)</label>
+          <input id="calc-avgburn" type="number" min="0" step="any" inputmode="decimal" placeholder="Same as net burn">
+          <p class="note">Use a higher number if you plan to hire. Leave blank to use your current net burn.</p>
+        </div>
+        <div class="field">
+          <label for="calc-target">Target runway after the raise (months)</label>
+          <input id="calc-target" type="number" min="1" max="60" step="1" value="18">
+          <p class="note">Most pre-seed and seed rounds fund 12 to 24 months.</p>
+        </div>
+        <div class="field">
+          <label for="calc-buffer">Buffer for the unexpected (%)</label>
+          <input id="calc-buffer" type="number" min="0" max="100" step="any" value="10">
+          <p class="note">Extra cushion on top of the plan. Set to 0 to skip it.</p>
+        </div>
+        <div class="field">
+          <label for="calc-valuation">Pre-money valuation (optional)</label>
+          <input id="calc-valuation" type="number" min="0" step="any" inputmode="decimal" placeholder="e.g. 6000000">
+          <p class="note">Leave blank to skip dilution. This is your input, not a prediction.</p>
+        </div>
+        <div class="field">
+          <label for="calc-pool">Option pool for new hires (%)</label>
+          <input id="calc-pool" type="number" min="0" max="50" step="any" value="10">
+          <p class="note">Shares set aside for future hires, as a share of the company after the round.</p>
+        </div>
+        <div class="field">
+          <label for="calc-milestone">Months to your next milestone (optional)</label>
+          <input id="calc-milestone" type="number" min="0" step="1" placeholder="e.g. 18">
+          <p class="note">The next fundraise, profitability, or the metric your round must reach.</p>
+        </div>
+        <div class="form-row">
+          <button class="btn small quiet" id="calc-example" type="button">Use example numbers</button>
+          <button class="btn small quiet" id="calc-reset" type="button">Reset</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Results" aria-live="polite">
+        <h2>Your round</h2>
+        <p class="hint" id="calc-status">Enter your monthly net burn to see results.</p>
+        <div id="calc-results" hidden>
+          <div class="raise-big" id="calc-raise">-</div>
+          <p class="raise-sub" id="calc-raise-sub"></p>
+          <div class="stats">
+            <div class="stat"><div class="k">RUNWAY TODAY</div><div class="v" id="calc-current-runway">-</div></div>
+            <div class="stat"><div class="k">RUNWAY AFTER THE RAISE</div><div class="v" id="calc-runway-after">-</div></div>
+            <div class="stat"><div class="k">INVESTOR OWNERSHIP</div><div class="v" id="calc-investor">-</div></div>
+            <div class="stat"><div class="k">FOUNDER OWNERSHIP AFTER</div><div class="v" id="calc-founder">-</div></div>
+          </div>
+          <div class="warn" id="calc-warning" hidden></div>
+          <div class="note-box" id="calc-milestone-line" hidden></div>
+          <div class="scen" id="calc-scenarios" hidden>
+            <h3>Compare raise sizes</h3>
+            <table>
+              <thead><tr><th>Raise</th><th>Runway after</th><th id="calc-scen-dil-head">Investor ownership</th></tr></thead>
+              <tbody id="calc-scen-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <section class="block">
-      <h2>What it will do</h2>
-      <div class="cards">
-        <div class="card"><h3>Runway scenarios</h3><p>See how long each raise size lasts under different burn and hiring assumptions, before you commit to a number.</p></div>
-        <div class="card"><h3>Dilution modeling</h3><p>Understand what a round costs you in ownership at different valuations, and what it means for the rounds after.</p></div>
-        <div class="card"><h3>Funding scenarios</h3><p>Compare raising more now against raising less, and what each path demands from the business to reach the next milestone.</p></div>
-      </div>
-      <div class="schematic" aria-hidden="true">
-        <div class="box"><h3>Your numbers</h3><p>Burn, cash, and the milestone you are funding to.</p></div>
-        <div class="arrow">&rarr;</div>
-        <div class="box"><h3>Scenarios</h3><p>Raise sizes and valuations, side by side.</p></div>
-        <div class="arrow">&rarr;</div>
-        <div class="box"><h3>Runway and dilution</h3><p>Months of runway and ownership cost per path.</p></div>
-      </div>
-      <p class="schematic-caption">Schematic of the planned workflow. The Fundraising Calculator is in development and is not yet available; this page describes what it will do, not a finished product.</p>
+      <h2>How this is calculated</h2>
+      <p class="section-sub">Every number on this page comes from these formulas. Nothing else is assumed.</p>
+      <ul class="formulas">
+        <li><code>Current runway = cash in bank / monthly net burn</code></li>
+        <li><code>Raise needed = (average monthly burn x target months x (1 + buffer)) - cash in bank</code>, never below zero</li>
+        <li><code>Runway after the raise = (cash in bank + raise) / average monthly burn</code></li>
+        <li><code>Investor ownership = raise / (pre-money valuation + raise)</code></li>
+        <li><code>Founder ownership after = (1 - investor ownership) x (1 - option pool)</code></li>
+      </ul>
+      <p class="section-sub" style="margin-top:18px;">This is a planning estimate, not financial advice. It models flat average burn, not revenue growth, and it cannot tell you what valuation you will get. Use it to set the ask, then test the plan with your accountant or lawyer before you sign anything.</p>
     </section>
 
     <div class="cta-band">
@@ -182,5 +262,193 @@
     <p class="foot-meta">&copy; 2026 Raise. All rights reserved. 100% Confidential.</p>
   </div>
 </footer>
+<script>
+function calcCalculate(input) {
+  var fields = ["cash", "burn", "avgBurn", "target", "buffer", "valuation", "pool", "milestone"];
+  for (var i = 0; i < fields.length; i++) {
+    var v = input[fields[i]];
+    if (v !== null && v !== undefined && (!isFinite(v) || v < 0)) {
+      return { state: "error", message: "Enter 0 or more for every number." };
+    }
+  }
+  if (input.target <= 0) {
+    return { state: "error", message: "Target runway must be more than 0 months." };
+  }
+  if (input.avgBurnEntered && input.avgBurn <= 0) {
+    return { state: "error", message: "Average burn must be more than 0." };
+  }
+  if (input.pool >= 100) {
+    return { state: "error", message: "Option pool must be below 100%." };
+  }
+  if (input.burn === null || input.burn === undefined) {
+    return { state: "prompt" };
+  }
+  if (input.burn === 0) {
+    return { state: "noburn" };
+  }
+  var avg = (input.avgBurn !== null && input.avgBurn !== undefined) ? input.avgBurn : input.burn;
+  var cash = input.cash || 0;
+  var currentRunway = cash / input.burn;
+  var base = avg * input.target;
+  var raise = Math.round(Math.max(0, base * (1 + input.buffer / 100) - cash));
+  var runwayAfter = (cash + raise) / avg;
+  var hasValuation = input.valuation !== null && input.valuation !== undefined && input.valuation > 0;
+  var investorPct = hasValuation ? (raise === 0 ? 0 : raise / (input.valuation + raise) * 100) : null;
+  var founderPct = investorPct !== null ? (1 - investorPct / 100) * (1 - input.pool / 100) * 100 : null;
+  var scenarios = [0.75, 1, 1.25].map(function (f) {
+    var r = Math.round(raise * f);
+    return {
+      factor: f,
+      raise: r,
+      runway: (cash + r) / avg,
+      investorPct: hasValuation ? (r === 0 ? 0 : r / (input.valuation + r) * 100) : null
+    };
+  });
+  var milestone = null;
+  if (input.milestone !== null && input.milestone !== undefined) {
+    var gap = runwayAfter - input.milestone;
+    milestone = { gap: gap, shortfall: gap < 0 ? Math.round((-gap) * avg) : 0 };
+  }
+  return {
+    state: "ok", cash: cash, avg: avg, currentRunway: currentRunway,
+    raise: raise, runwayAfter: runwayAfter, investorPct: investorPct,
+    founderPct: founderPct, scenarios: scenarios, milestone: milestone,
+    target: input.target, buffer: input.buffer
+  };
+}
+if (typeof document !== "undefined") {
+  var $ = function (id) { return document.getElementById(id); };
+  var group = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+  function money(n) { return $("calc-currency").value + group.format(Math.round(n)); }
+  function months(n) { return n.toFixed(1) + " months"; }
+  function pct(n) { return n.toFixed(1) + "%"; }
+  function num(id, def) {
+    var raw = $(id).value;
+    if (raw === "" || raw === null) return def;
+    var v = parseFloat(raw);
+    return isFinite(v) ? v : NaN;
+  }
+  function readInputs() {
+    var avgRaw = $("calc-avgburn").value;
+    var inputs = {
+      cash: num("calc-cash", 0),
+      burn: num("calc-burn", null),
+      avgBurn: avgRaw === "" ? null : parseFloat(avgRaw),
+      avgBurnEntered: avgRaw !== "",
+      target: num("calc-target", 18),
+      buffer: num("calc-buffer", 10),
+      valuation: num("calc-valuation", null),
+      pool: num("calc-pool", 10),
+      milestone: num("calc-milestone", null)
+    };
+    var keys = Object.keys(inputs);
+    for (var i = 0; i < keys.length; i++) {
+      var v = inputs[keys[i]];
+      if (typeof v === "number" && !isFinite(v)) return { badNumber: true };
+    }
+    if (inputs.avgBurn !== null && !isFinite(inputs.avgBurn)) return { badNumber: true };
+    return inputs;
+  }
+  function render() {
+    var inputs = readInputs();
+    var status = $("calc-status");
+    var results = $("calc-results");
+    if (inputs.badNumber) {
+      status.textContent = "Enter numbers only.";
+      results.hidden = true;
+      return;
+    }
+    var r = calcCalculate(inputs);
+    if (r.state === "error") {
+      status.textContent = r.message;
+      results.hidden = true;
+      return;
+    }
+    if (r.state === "prompt") {
+      status.textContent = "Enter your monthly net burn to see results.";
+      results.hidden = true;
+      return;
+    }
+    if (r.state === "noburn") {
+      status.textContent = "You are not burning cash, so runway is not your constraint.";
+      results.hidden = true;
+      return;
+    }
+    status.textContent = "Based on the numbers above. Change any number to update.";
+    results.hidden = false;
+    $("calc-raise").textContent = money(r.raise);
+    $("calc-raise-sub").textContent = r.raise === 0
+      ? "You already hold enough cash for your target runway."
+      : "To fund " + r.target + " months at " + money(r.avg) + " per month, after your " + money(r.cash) + " cash and " + r.buffer + "% buffer.";
+    $("calc-current-runway").textContent = months(r.currentRunway);
+    $("calc-runway-after").textContent = months(r.runwayAfter);
+    $("calc-investor").innerHTML = r.investorPct === null ? "<span>Enter a valuation</span>" : pct(r.investorPct);
+    $("calc-founder").innerHTML = r.founderPct === null ? "<span>Enter a valuation</span>" : pct(r.founderPct);
+    var warn = $("calc-warning");
+    if (r.currentRunway < 6) {
+      warn.hidden = false;
+      warn.innerHTML = "<strong>Start the raise now.</strong> With under 6 months of runway, you are raising against a deadline. A fundraise usually takes months, so start while you still have leverage.";
+    } else {
+      warn.hidden = true;
+    }
+    var line = $("calc-milestone-line");
+    if (r.milestone) {
+      line.hidden = false;
+      line.textContent = r.milestone.gap >= 0
+        ? "Your raise covers your milestone with " + r.milestone.gap.toFixed(1) + " months to spare."
+        : "Your raise falls " + (-r.milestone.gap).toFixed(1) + " months short of your milestone. You would need about " + money(r.milestone.shortfall) + " more to reach it.";
+    } else {
+      line.hidden = true;
+    }
+    var scen = $("calc-scenarios");
+    if (r.raise > 0) {
+      scen.hidden = false;
+      var body = $("calc-scen-body");
+      body.innerHTML = "";
+      r.scenarios.forEach(function (s) {
+        var tr = document.createElement("tr");
+        if (s.factor === 1) tr.className = "hl";
+        var label = s.factor === 1 ? "Recommended" : (s.factor < 1 ? "Lean (" + Math.round(s.factor * 100) + "%)" : "Ambitious (" + Math.round(s.factor * 100) + "%)");
+        var td0 = document.createElement("td"); td0.textContent = label;
+        var td1 = document.createElement("td"); td1.textContent = money(s.raise);
+        var td2 = document.createElement("td"); td2.textContent = months(s.runway);
+        var td3 = document.createElement("td"); td3.textContent = s.investorPct === null ? "-" : pct(s.investorPct);
+        tr.appendChild(td0); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+        body.appendChild(tr);
+      });
+    } else {
+      scen.hidden = true;
+    }
+  }
+  ["calc-currency", "calc-cash", "calc-burn", "calc-avgburn", "calc-target",
+   "calc-buffer", "calc-valuation", "calc-pool", "calc-milestone"].forEach(function (id) {
+    $(id).addEventListener("input", render);
+    $(id).addEventListener("change", render);
+  });
+  $("calc-example").addEventListener("click", function () {
+    $("calc-cash").value = 150000;
+    $("calc-burn").value = 25000;
+    $("calc-avgburn").value = "";
+    $("calc-target").value = 18;
+    $("calc-buffer").value = 10;
+    $("calc-valuation").value = 6000000;
+    $("calc-pool").value = 10;
+    $("calc-milestone").value = 18;
+    render();
+  });
+  $("calc-reset").addEventListener("click", function () {
+    $("calc-cash").value = "";
+    $("calc-burn").value = "";
+    $("calc-avgburn").value = "";
+    $("calc-target").value = 18;
+    $("calc-buffer").value = 10;
+    $("calc-valuation").value = "";
+    $("calc-pool").value = 10;
+    $("calc-milestone").value = "";
+    render();
+  });
+  render();
+}
+</script>
 </body>
 </html>
