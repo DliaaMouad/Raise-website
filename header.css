@@ -2,32 +2,32 @@
 .pill-header { position: sticky; top: 16px; z-index: 50; padding: 0 16px; }
 .pill-nav {
   max-width: 1080px; margin: 0 auto; background: #ffffff;
-  border-radius: 999px; box-shadow: 0 8px 28px rgba(17, 18, 21, 0.10);
+  border-radius: 999px; box-shadow: 0 8px 28px rgba(9, 43, 32, 0.10);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 12px 12px 12px 24px;
 }
 .pill-logo {
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
   font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
-  text-decoration: none; color: #111215;
+  text-decoration: none; color: #1C2924;
 }
-.pill-logo-dot { color: #1e7543; }
+.pill-logo-dot { color: #187A5A; }
 .pill-links { display: flex; align-items: center; gap: 4px; }
 .pill-links a {
   font-family: 'Inter', sans-serif;
   text-decoration: none; font-size: 14px; font-weight: 600;
-  padding: 8px 14px; border-radius: 999px; color: #111215;
+  padding: 8px 14px; border-radius: 999px; color: #1C2924;
 }
-.pill-links a:hover { background: #F3F3ED; }
-.pill-links a[aria-current="page"] { background: #F3F3ED; }
+.pill-links a:hover { background: #F3F3F1; }
+.pill-links a[aria-current="page"] { background: #F3F3F1; }
 .pill-cta {
   font-family: 'Inter', sans-serif;
   display: inline-flex; align-items: center; justify-content: center;
-  background: #a2f543; color: #1d1d1f; font-weight: 700; font-size: 14px;
-  padding: 10px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+  background: #C8F0A0; color: #1C2924; font-weight: 700; font-size: 14px;
+  padding: 10px 20px; border-radius: 999px; border: 1px solid #092B20; text-decoration: none; white-space: nowrap;
 }
 .pill-cta:hover { filter: brightness(0.96); }
-.pill-header a:focus-visible { outline: 3px solid #111215; outline-offset: 3px; border-radius: 6px; }
+.pill-header a:focus-visible { outline: 3px solid #1C2924; outline-offset: 3px; border-radius: 6px; }
 @media (max-width: 640px) {
   .pill-links { display: none; }
   .pill-nav { padding: 10px 10px 10px 20px; }
@@ -40,7 +40,7 @@
   padding: 8px; border-radius: 999px;
 }
 .pill-hamburger span {
-  display: block; width: 22px; height: 2px; background: #111215;
+  display: block; width: 22px; height: 2px; background: #1C2924;
   margin: 3px 0; border-radius: 2px;
 }
 .pill-mobile-menu { display: none; }
@@ -49,16 +49,16 @@
   .pill-mobile-menu.open {
     display: flex; flex-direction: column; gap: 4px;
     background: #ffffff; border-radius: 24px;
-    box-shadow: 0 8px 28px rgba(17, 18, 21, 0.10);
+    box-shadow: 0 8px 28px rgba(9, 43, 32, 0.10);
     padding: 12px; margin-top: 8px;
   }
   .pill-mobile-menu.open a {
     font-family: 'Inter', sans-serif; text-decoration: none;
-    font-size: 15px; font-weight: 600; color: #111215;
+    font-size: 15px; font-weight: 600; color: #1C2924;
     padding: 10px 14px; border-radius: 999px;
   }
-  .pill-mobile-menu.open a:hover { background: #F3F3ED; }
-  .pill-mobile-menu.open .pill-cta { background: #a2f543; text-align: center; }
+  .pill-mobile-menu.open a:hover { background: #F3F3F1; }
+  .pill-mobile-menu.open .pill-cta { background: #C8F0A0; text-align: center; }
 
 }
 
@@ -66,16 +66,16 @@
 .tools-menu { position: relative; display: inline-block; }
 .tools-btn {
   font-family: 'Inter', sans-serif; background: none; border: 0; cursor: pointer;
-  font-size: 14px; font-weight: 600; color: #111215;
+  font-size: 14px; font-weight: 600; color: #1C2924;
   padding: 8px 14px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px;
 }
-.tools-btn:hover { background: #F3F3ED; }
+.tools-btn:hover { background: #F3F3F1; }
 .tools-btn .tools-chev { font-size: 10px; line-height: 1; }
 .tools-panel {
   position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%);
   width: 540px; max-width: 94vw; z-index: 80;
-  background: #ffffff; border: 1px solid #e5e3dd; border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(17, 18, 21, 0.16);
+  background: #ffffff; border: 1px solid #D6D6CE; border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(9, 43, 32, 0.16);
   padding: 18px; text-align: left;
 }
 .tools-panel[hidden] { display: none; }
@@ -85,30 +85,30 @@
 }
 .tools-panel-title {
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-  font-size: 16px; font-weight: 800; letter-spacing: -0.01em; color: #1d1d1f; margin: 0;
+  font-size: 16px; font-weight: 800; letter-spacing: -0.01em; color: #1C2924; margin: 0;
 }
-.tools-panel-sub { font-size: 13.5px; color: #5c5c60; margin: 3px 0 0; }
+.tools-panel-sub { font-size: 13.5px; color: #5A6B62; margin: 3px 0 0; }
 .tools-close {
   background: none; border: 0; cursor: pointer; font-size: 22px; line-height: 1;
-  color: #5c5c60; padding: 2px 6px; border-radius: 8px; flex: 0 0 auto;
+  color: #5A6B62; padding: 2px 6px; border-radius: 8px; flex: 0 0 auto;
 }
-.tools-close:hover { color: #1d1d1f; background: #F3F3ED; }
+.tools-close:hover { color: #1C2924; background: #F3F3F1; }
 .tool-item {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  text-decoration: none; padding: 11px 12px; border-radius: 14px; color: #1d1d1f;
+  text-decoration: none; padding: 11px 12px; border-radius: 14px; color: #1C2924;
 }
-.tool-item:hover { background: #F7F6F1; }
+.tool-item:hover { background: #F3F3F1; }
 .pill-links a.tool-item { padding: 11px 12px; }
 .tool-main { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .tool-name { font-size: 15px; font-weight: 700; }
-.tool-desc { font-size: 13.5px; font-weight: 400; color: #5c5c60; }
+.tool-desc { font-size: 13.5px; font-weight: 400; color: #5A6B62; }
 .tool-tag {
   flex: 0 0 auto; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
-  background: #a2f543; color: #1d1d1f; border: 1px solid #1d1d1f;
+  background: #C8F0A0; color: #1C2924; border: 1px solid #1C2924;
   padding: 3px 10px; border-radius: 999px; white-space: nowrap;
 }
-.tool-tag.soon { background: #F3F1EC; border-color: #e5e3dd; color: #5c5c60; }
-.tool-item[aria-current="page"] { background: #F3F3ED; }
+.tool-tag.soon { background: #F3F3F1; border-color: #D6D6CE; color: #5A6B62; }
+.tool-item[aria-current="page"] { background: #F3F3F1; }
 @media (max-width: 640px) {
   .tools-panel { width: 94vw; }
 }
