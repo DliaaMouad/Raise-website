@@ -34,44 +34,44 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="header.css">
   <style>
-    #auth-gate { position: fixed; inset: 0; z-index: 500; background: #FEFFF5; display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
-    .auth-card { background: #fff; border: 1px solid #D6D6CE; border-radius: 22px; padding: 40px 38px 32px; width: 100%; max-width: 440px; box-shadow: 0 24px 60px rgba(0,0,0,.10); text-align: center; }
+    #auth-gate { position: fixed; inset: 0; z-index: 500; background: #F8F8F4; display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
+    .auth-card { background: #fff; border: 1px solid #E2E2DC; border-radius: 22px; padding: 40px 38px 32px; width: 100%; max-width: 440px; box-shadow: 0 24px 60px rgba(0,0,0,.10); text-align: center; }
     .auth-card h2 { font-size: 26px; font-weight: 900; letter-spacing: -0.8px; margin: 16px 0 8px; line-height: 1.2; }
-    .auth-card h2 em { font-style: normal; background: #C8F0A0; padding: 0 8px; border-radius: 6px; }
-    .auth-card > p { color: #5A6B62; font-size: 14.5px; line-height: 1.6; margin: 0 0 20px; }
-    .auth-tabs { display: flex; background: #F3F3F1; border-radius: 100px; padding: 4px; margin-bottom: 18px; }
-    .auth-tab { flex: 1; border: none; background: none; font-family: inherit; font-weight: 800; font-size: 14px; padding: 10px; border-radius: 100px; cursor: pointer; color: #5A6B62; }
-    .auth-tab.sel { background: #092B20; color: #fff; }
-    .auth-card input { width: 100%; font-family: inherit; font-size: 15px; padding: 13px 18px; border: 1px solid #D6D6CE; border-radius: 12px; margin-bottom: 12px; outline: none; box-sizing: border-box; }
-    .auth-card input:focus { border-color: #C8F0A0; box-shadow: 0 0 0 3px rgba(200,240,160,.25); }
+    .auth-card h2 em { font-style: normal; background: #B9FF66; padding: 0 8px; border-radius: 6px; }
+    .auth-card > p { color: #585A61; font-size: 14.5px; line-height: 1.6; margin: 0 0 20px; }
+    .auth-tabs { display: flex; background: #F1F1EC; border-radius: 100px; padding: 4px; margin-bottom: 18px; }
+    .auth-tab { flex: 1; border: none; background: none; font-family: inherit; font-weight: 800; font-size: 14px; padding: 10px; border-radius: 100px; cursor: pointer; color: #585A61; }
+    .auth-tab.sel { background: #111110; color: #fff; }
+    .auth-card input { width: 100%; font-family: inherit; font-size: 15px; padding: 13px 18px; border: 1px solid #E2E2DC; border-radius: 12px; margin-bottom: 12px; outline: none; box-sizing: border-box; }
+    .auth-card input:focus { border-color: #B9FF66; box-shadow: 0 0 0 3px rgba(185,255,102,.25); }
     .auth-err { color: #B3261E; font-size: 13.5px; font-weight: 600; min-height: 20px; margin: 12px 0 0; }
-    .auth-fine { font-size: 12.5px; color: #7A8A80; margin: 14px 0 0; }
+    .auth-fine { font-size: 12.5px; color: #848792; margin: 14px 0 0; }
     #app-content { display: none; }
     #nav-auth-area { display: none; align-items: center; gap: 10px; }
-    #nav-user { font-size: 13px; color: #5A6B62; max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .btn-ghost { background: #fff; color: #1C2924; border: 1px solid #D6D6CE; }
+    #nav-user { font-size: 13px; color: #585A61; max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-ghost { background: #fff; color: #111110; border: 1px solid #E2E2DC; }
 
   </style>
   <style>body {
- background: #FEFFF5; color: #1C2924; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; 
+ background: #F8F8F4; color: #111110; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; 
 }
 .pipe-logo {
- font-weight: 900; font-size: 20px; letter-spacing: -0.5px; text-decoration: none; color: #1C2924; 
+ font-weight: 900; font-size: 20px; letter-spacing: -0.5px; text-decoration: none; color: #111110; 
 }
 .pipe-logo span {
- color: #187A5A; 
+ color: #7ac700; 
 }
 .btn {
  display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-weight: 800; font-size: 14px; padding: 11px 20px; border-radius: 100px; border: none; cursor: pointer; text-decoration: none; 
 }
 .btn-lime {
- background: #C8F0A0; color: #1C2924; 
+ background: #B9FF66; color: #111110; 
 }
 .btn-lime:hover {
- transform: translateY(-1px); box-shadow: 0 8px 20px rgba(200,240,160,.45); 
+ transform: translateY(-1px); box-shadow: 0 8px 20px rgba(185,255,102,.45); 
 }
 .btn-dark {
- background: #092B20; color: #fff; 
+ background: #111110; color: #fff; 
 }
 .btn-sm {
  padding: 8px 16px; font-size: 13px; 
@@ -83,10 +83,10 @@
  font-size: clamp(30px, 4.5vw, 52px); font-weight: 900; letter-spacing: -1.5px; margin: 0 0 10px; line-height: 1.05; 
 }
 .inv-hero h1 em {
- font-style: normal; background: #C8F0A0; padding: 0 10px; border-radius: 8px; 
+ font-style: normal; background: #B9FF66; padding: 0 10px; border-radius: 8px; 
 }
 .inv-hero p {
- color: #5A6B62; font-size: 16px; max-width: 620px; margin: 0 auto; line-height: 1.6; 
+ color: #585A61; font-size: 16px; max-width: 620px; margin: 0 auto; line-height: 1.6; 
 }
 .inv-counts {
  display: flex; gap: 26px; justify-content: center; margin-top: 20px; flex-wrap: wrap; 
@@ -98,19 +98,19 @@
  font-size: 24px; font-weight: 900; display: block; 
 }
 .inv-counts span {
- font-size: 12px; color: #5A6B62; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; 
+ font-size: 12px; color: #6B6B6B; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; 
 }
 .inv-filters {
- max-width: 1200px; margin: 26px auto 0; padding: 0 24px; position: sticky; top: 66px; z-index: 100; background: rgba(254,255,245,.96); backdrop-filter: blur(10px); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid #D6D6CE; 
+ max-width: 1200px; margin: 26px auto 0; padding: 0 24px; position: sticky; top: 66px; z-index: 100; background: rgba(248,248,244,.96); backdrop-filter: blur(10px); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid #E2E2DC; 
 }
 .inv-search {
- width: 100%; padding: 13px 20px; border: 1px solid #D6D6CE; border-radius: 100px; font-family: inherit; font-size: 15px; background: #fff; outline: none; margin-bottom: 12px; 
+ width: 100%; padding: 13px 20px; border: 1px solid #E2E2DC; border-radius: 100px; font-family: inherit; font-size: 15px; background: #fff; outline: none; margin-bottom: 12px; 
 }
 .inv-search:focus {
- border-color: #C8F0A0; box-shadow: 0 0 0 3px rgba(200,240,160,.25); 
+ border-color: #B9FF66; box-shadow: 0 0 0 3px rgba(185,255,102,.25); 
 }
 .inv-result-count {
- margin-left: auto; font-size: 13px; color: #5A6B62; font-weight: 600; 
+ margin-left: auto; font-size: 13px; color: #6B6B6B; font-weight: 600; 
 }
 .search-row {
  display: flex; gap: 10px; align-items: stretch; margin-bottom: 12px; 
@@ -119,16 +119,16 @@
  margin-bottom: 0; flex: 1; 
 }
 .filter-btn {
- font-family: inherit; font-size: 14px; font-weight: 800; padding: 0 20px; border-radius: 100px; border: 1.5px solid #1C2924; background: #fff; color: #1C2924; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; 
+ font-family: inherit; font-size: 14px; font-weight: 800; padding: 0 20px; border-radius: 100px; border: 1.5px solid #111110; background: #fff; color: #111110; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; 
 }
 .filter-btn:hover {
- background: #C8F0A0; border-color: #C8F0A0; 
+ background: #B9FF66; border-color: #B9FF66; 
 }
 .filter-btn.open {
- background: #092B20; color: #fff; 
+ background: #111110; color: #fff; 
 }
 .filter-badge {
- background: #C8F0A0; color: #1C2924; font-size: 11px; font-weight: 900; min-width: 20px; height: 20px; border-radius: 100px; display: none; align-items: center; justify-content: center; padding: 0 5px; 
+ background: #B9FF66; color: #111110; font-size: 11px; font-weight: 900; min-width: 20px; height: 20px; border-radius: 100px; display: none; align-items: center; justify-content: center; padding: 0 5px; 
 }
 .filter-btn.open .filter-badge {
  background: #fff; 
@@ -137,7 +137,7 @@
  display: inline-flex; 
 }
 .filter-panel {
- display: none; background: #fff; border: 1px solid #D6D6CE; border-radius: 16px; padding: 20px 22px 16px; margin-bottom: 12px; 
+ display: none; background: #fff; border: 1px solid #E2E2DC; border-radius: 16px; padding: 20px 22px 16px; margin-bottom: 12px; 
 }
 .filter-panel.open {
  display: block; 
@@ -146,25 +146,25 @@
  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px 24px; 
 }
 .filter-group h4 {
- margin: 0 0 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; color: #5A6B62; 
+ margin: 0 0 10px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; color: #6B6B6B; 
 }
 .filter-opt {
- display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: #1C2924; padding: 4px 0; cursor: pointer; 
+ display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: #111110; padding: 4px 0; cursor: pointer; 
 }
 .filter-opt input {
- accent-color: #1C2924; width: 16px; height: 16px; cursor: pointer; 
+ accent-color: #111110; width: 16px; height: 16px; cursor: pointer; 
 }
 .filter-note {
- font-size: 11.5px; color: #5A6B62; margin-top: 6px; line-height: 1.5; 
+ font-size: 11.5px; color: #6B6B6B; margin-top: 6px; line-height: 1.5; 
 }
 .filter-actions {
- display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px solid #D6D6CE; 
+ display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 14px; border-top: 1px solid #E2E2DC; 
 }
 .filter-clear {
- font-family: inherit; font-size: 13px; font-weight: 700; color: #1C2924; background: none; border: none; cursor: pointer; text-decoration: underline; 
+ font-family: inherit; font-size: 13px; font-weight: 700; color: #111110; background: none; border: none; cursor: pointer; text-decoration: underline; 
 }
 .filter-done {
- font-family: inherit; font-size: 13px; font-weight: 800; padding: 8px 20px; border-radius: 100px; border: none; background: #092B20; color: #fff; cursor: pointer; 
+ font-family: inherit; font-size: 13px; font-weight: 800; padding: 8px 20px; border-radius: 100px; border: none; background: #111110; color: #fff; cursor: pointer; 
 }
 .active-pills {
  display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; 
@@ -173,7 +173,7 @@
  display: none; 
 }
 .pill {
- display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; background: #092B20; color: #fff; padding: 6px 10px 6px 12px; border-radius: 100px; 
+ display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; background: #111110; color: #fff; padding: 6px 10px 6px 12px; border-radius: 100px; 
 }
 .pill button {
  background: none; border: none; color: #fff; font-size: 14px; line-height: 1; cursor: pointer; padding: 0; 
@@ -182,7 +182,7 @@
  max-width: 1200px; margin: 24px auto 30px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; 
 }
 .inv-card {
- background: #fff; border: 1px solid #D6D6CE; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s; 
+ background: #fff; border: 1px solid #E2E2DC; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s; 
 }
 .inv-card:hover {
  box-shadow: 0 12px 30px rgba(0,0,0,.08); transform: translateY(-2px); 
@@ -197,70 +197,70 @@
  font-size: 16px; vertical-align: middle; 
 }
 .inv-region {
- font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; background: rgba(200,240,160,.4); color: #1C2924; padding: 4px 10px; border-radius: 100px; white-space: nowrap; 
+ font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; background: rgba(185,255,102,.4); color: #111110; padding: 4px 10px; border-radius: 100px; white-space: nowrap; 
 }
 .inv-hq {
- font-size: 13px; color: #5A6B62; margin-bottom: 10px; 
+ font-size: 13px; color: #6B6B6B; margin-bottom: 10px; 
 }
 .inv-check {
- font-size: 14px; font-weight: 800; color: #187A5A; margin-bottom: 10px; 
+ font-size: 14px; font-weight: 800; color: #2d7a00; margin-bottom: 10px; 
 }
 .inv-focus {
- font-size: 13.5px; color: #4A5D52; line-height: 1.55; margin: 0 0 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; 
+ font-size: 13.5px; color: #3a3b3e; line-height: 1.55; margin: 0 0 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; 
 }
 .inv-card details {
  margin-bottom: 14px; font-size: 13px; 
 }
 .inv-card summary {
- cursor: pointer; font-weight: 700; color: #1C2924; font-size: 13px; 
+ cursor: pointer; font-weight: 700; color: #111110; font-size: 13px; 
 }
 .inv-evidence {
- margin: 8px 0 0; padding: 10px 14px; background: #FEFFF5; border-left: 3px solid #C8F0A0; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #5A6B62; line-height: 1.55; font-style: italic; 
+ margin: 8px 0 0; padding: 10px 14px; background: #F8F8F4; border-left: 3px solid #B9FF66; border-radius: 0 8px 8px 0; font-size: 12.5px; color: #585A61; line-height: 1.55; font-style: italic; 
 }
 .inv-pitch {
- font-size: 12.5px; color: #5A6B62; margin: 8px 0 0; 
+ font-size: 12.5px; color: #585A61; margin: 8px 0 0; 
 }
 .inv-pitch strong {
- color: #1C2924; 
+ color: #111110; 
 }
 .inv-card-actions {
  display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; align-items: center; 
 }
 .inv-link {
- font-size: 13px; font-weight: 700; color: #1C2924; text-decoration: none; border-bottom: 2px solid #C8F0A0; 
+ font-size: 13px; font-weight: 700; color: #111110; text-decoration: none; border-bottom: 2px solid #B9FF66; 
 }
 .inv-link:hover {
- background: #C8F0A0; 
+ background: #B9FF66; 
 }
 .add-pipe-btn {
- margin-left: auto; font-size: 12.5px; font-weight: 800; padding: 8px 15px; border-radius: 100px; border: 1.5px solid #1C2924; background: #fff; cursor: pointer; font-family: inherit; 
+ margin-left: auto; font-size: 12.5px; font-weight: 800; padding: 8px 15px; border-radius: 100px; border: 1.5px solid #111110; background: #fff; cursor: pointer; font-family: inherit; 
 }
 .add-pipe-btn:hover {
- background: #C8F0A0; border-color: #C8F0A0; 
+ background: #B9FF66; border-color: #B9FF66; 
 }
 .add-pipe-btn.added {
- background: #EFF7E4; border-color: #187A5A; color: #187A5A; cursor: default; 
+ background: #EAFCE0; border-color: #2d7a00; color: #2d7a00; cursor: default; 
 }
 .inv-cta {
  max-width: 1200px; margin: 10px auto 70px; padding: 0 24px; 
 }
 .inv-cta-inner {
- background: #092B20; color: #fff; border-radius: 20px; padding: 40px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; 
+ background: #111110; color: #fff; border-radius: 20px; padding: 40px 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; 
 }
 .inv-cta-inner h2 {
  margin: 0 0 8px; font-size: 24px; font-weight: 900; letter-spacing: -0.5px; 
 }
 .inv-cta-inner p {
- margin: 0; color: #A8BFB2; font-size: 14.5px; max-width: 520px; line-height: 1.6; 
+ margin: 0; color: #A3A6B4; font-size: 14.5px; max-width: 520px; line-height: 1.6; 
 }
 .toast {
- position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: #092B20; color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 100px; opacity: 0; transition: all .25s; z-index: 2000; pointer-events: none; max-width: 90vw; text-align: center; 
+ position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: #111110; color: #fff; font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 100px; opacity: 0; transition: all .25s; z-index: 2000; pointer-events: none; max-width: 90vw; text-align: center; 
 }
 .toast.show {
  opacity: 1; transform: translateX(-50%) translateY(0); 
 }
 .no-results {
- text-align: center; padding: 50px 20px; color: #5A6B62; grid-column: 1 / -1; 
+ text-align: center; padding: 50px 20px; color: #6B6B6B; grid-column: 1 / -1; 
 }
 @media (max-width: 700px) {
 
@@ -327,11 +327,11 @@
   <div id="auth-gate">
     <div class="auth-card">
       <a href="index.html" class="pipe-logo">Raise<span>.</span></a>
-      <h2>Search <em>2197</em> verified investors</h2>
+      <h2>Unlock <em>2197</em> verified investors</h2>
       <p>Enter your access code to search 2197 pre-seed and seed VCs, angels, and accelerators across 6 regions. Filter by type, stage, region and industry, build your target list of 50.</p>
       <form id="code-form">
         <input id="access-code" placeholder="Access code" required autocomplete="off" autocapitalize="characters" spellcheck="false">
-        <button class="btn btn-lime" type="submit" style="width:100%; justify-content:center;">Get access</button>
+        <button class="btn btn-lime" type="submit" style="width:100%; justify-content:center;">Unlock access</button>
       </form>
       <p class="auth-err" id="auth-err"></p>
       <p class="auth-fine">No code yet? Message Mouad to get one.</p>
@@ -421,7 +421,7 @@
     <div class="inv-cta-inner">
       <div>
         <h2>Found your 50? Make your deck worthy of them.</h2>
-        <p>Every investor on this list sees hundreds of decks a year. Structure before outreach: fix what is killing your deck before you send a single email.</p>
+        <p>Every investor on this list sees hundreds of decks a year. Work with Raise to fix what is killing your deck before you send a single email.</p>
       </div>
       <a href="https://cal.com/mouad-dliaa/15min" class="btn btn-lime">Book a Call</a>
     </div>
@@ -475,7 +475,7 @@ var ACCESS_CODE = 'Raise100';
     appEl.style.display = 'block';
     loadDataScripts().then(initApp).catch(function() {
       document.getElementById('inv-grid').innerHTML =
-        '<div class="no-results"><h3 style="color:#1C2924;">Could not load investor data.</h3><p>Please refresh the page.</p></div>';
+        '<div class="no-results"><h3 style="color:#111110;">Could not load investor data.</h3><p>Please refresh the page.</p></div>';
     });
   }
 
@@ -638,7 +638,7 @@ var ACCESS_CODE = 'Raise100';
     document.getElementById('inv-count').textContent = filtered.length + ' of ' + INVESTORS.length;
     var grid = document.getElementById('inv-grid');
     if (!filtered.length) {
-      grid.innerHTML = '<div class="no-results"><h3 style="color:#1C2924;">No investors match.</h3><p>Try a broader search or clear some filters.</p></div>';
+      grid.innerHTML = '<div class="no-results"><h3 style="color:#111110;">No investors match.</h3><p>Try a broader search or clear some filters.</p></div>';
       return;
     }
     grid.innerHTML = filtered.map(function(inv) {
@@ -649,7 +649,7 @@ var ACCESS_CODE = 'Raise100';
       return '<div class="inv-card">' +
         '<div class="inv-card-top"><h3>' + esc(inv.fund) + (isHot ? ' <span class="hot-badge" title="Actively investing: verified 2025/2026 deal or new fund">🔥</span>' : '') + '</h3>' +
         '<span style="display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;">' +
-        (inv.stage ? '<span class="inv-region" style="background:#092B20;color:#fff;">' + esc(inv.stage) + '</span>' : '') +
+        (inv.stage ? '<span class="inv-region" style="background:#111110;color:#fff;">' + esc(inv.stage) + '</span>' : '') +
         '<span class="inv-region">' + esc(inv.region) + '</span></span></div>' +
         '<div class="inv-hq">' + esc(inv.hq) + '</div>' +
         (inv.check ? '<div class="inv-check">' + esc(inv.check) + '</div>' : '') +
