@@ -134,6 +134,14 @@
       var p = document.createElement("p");
       p.textContent = item.dim.leak;
       card.appendChild(p);
+      var fix = document.createElement("p");
+      fix.textContent = "Fix: " + item.dim.fix;
+      card.appendChild(fix);
+      var stage = document.createElement("p");
+      stage.className = "tags-label";
+      // every Rater dimension is a deck/narrative issue, so it is fixed in Rebuild
+      stage.textContent = "Fixed in Stage 3: Rebuild";
+      card.appendChild(stage);
       var missingLabel = document.createElement("p");
       missingLabel.className = "tags-label";
       missingLabel.textContent = "Missing";
@@ -346,6 +354,7 @@
       ring.setAttribute("stroke-dashoffset", String(RING_C * (1 - total100 / 100)));
     }
     bandEl.textContent = band.label + ": " + band.description;
+    setBridge(total100);
     renderLeaks(results);
     renderReport(results);
     resultsEl.hidden = false;
@@ -378,7 +387,7 @@
     gateError.textContent = "";
     var submit = document.getElementById("gate-submit");
     submit.disabled = true;
-    submit.textContent = "Unlocking...";
+    submit.textContent = "Sending...";
     saveResult(email, consent, window.__auditAnswers, window.__auditTotal, window.__auditLeaks)
       .then(function () { return subscribeKit(email); })
       .then(function () {
@@ -389,7 +398,7 @@
       .catch(function () {
         gateError.textContent = "Could not save. Please try again.";
         submit.disabled = false;
-        submit.textContent = "Unlock the full report";
+        submit.textContent = "Email me every fix";
       });
   });
 
@@ -406,6 +415,29 @@
     deckFile.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  /* Bridge: one primary CTA per score band (bands from audit-config.js). */
+  function setBridge(total) {
+    var audit = document.getElementById("cta-audit");
+    var call = document.getElementById("cta-call");
+    var next = document.getElementById("band-next");
+    var auditFirst = total >= 30 && total < 80;
+    audit.style.display = auditFirst ? "" : "none";
+    call.className = auditFirst ? "text-link" : "btn btn-lime";
+    if (total >= 80) {
+      next.textContent = "Your deck isn't the risk now. Your process is.";
+      call.textContent = "Talk to Mouad about your process (15 min)";
+    } else if (total >= 55) {
+      next.textContent = "Apply the three fixes and rescore, or get the line-by-line read before you pitch.";
+      call.textContent = "Not sure? Talk to Mouad for 15 minutes";
+    } else if (total >= 30) {
+      next.textContent = "Don't pitch yet. Fix the leaks first.";
+      call.textContent = "Not sure? Talk to Mouad for 15 minutes";
+    } else {
+      next.textContent = "Rebuild the story first. That is the Program.";
+      call.textContent = "Book a 15-min call to scope a rebuild";
+    }
+  }
+
   /* CTAs: real Cal.com link; Stripe link when configured, else the apply form. */
   var callCta = document.getElementById("cta-call");
   if (callCta) {
@@ -419,7 +451,7 @@
       auditCta.textContent = "Buy the Deck Audit";
     } else {
       auditCta.href = "/get-started.html#apply-form";
-      auditCta.textContent = "Apply for the Deck Audit";
+      auditCta.textContent = "Get the line-by-line Audit";
     }
   }
 })();

@@ -81,6 +81,13 @@
   .how p { color: #333; }
   .fix-row p:last-child { margin-bottom: 0; }
   .ctas { margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .bridge { margin: 32px 0 0; }
+  .bridge .stages { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 16px; padding: 0; }
+  .bridge .stages li { border: 1px solid #e6e6e0; border-radius: 999px; padding: 4px 12px; font-size: 13px; color: #8a8a85; }
+  .bridge .stages li.checked { border-color: #111215; background: #B9FF66; color: #111215; font-weight: 700; }
+  .bridge .band-next { font-weight: 700; }
+  .diy { margin: 8px 0 0; font-weight: 600; }
+  .text-link { color: #111215; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
   .retake { background: none; border: 0; cursor: pointer; text-decoration: underline; font-size: 15px; color: #555; padding: 0; }
   .foot-note { font-size: 13px; color: #666; margin-top: 32px; }
   @media (max-width: 560px) {
@@ -185,11 +192,12 @@
     </div>
     <h3>Your top 3 leaks</h3>
     <div id="audit-leaks"></div>
+    <p class="diy">You can fix these three yourself today. The fix is in each card above.</p>
   </section>
 
   <section class="gate" id="audit-gate" hidden>
-    <h2>Unlock the full report</h2>
-    <p>Enter your email to unlock the fix for every dimension, weakest first.</p>
+    <h2>Get every fix, weakest first</h2>
+    <p>Enter your email and we will show the fix for all 10 dimensions, weakest first.</p>
     <form id="gate-form" novalidate>
       <label for="gate-email">Email address</label>
       <input id="gate-email" type="email" name="email" autocomplete="email" required placeholder="you@startup.com">
@@ -198,7 +206,7 @@
         I agree to Raise storing my scores and email to generate my report and improve the diagnostic. I can request deletion at any time.
       </label>
       <p class="gate-error" id="gate-error" role="alert"></p>
-      <button class="btn btn-lime" id="gate-submit" type="submit">Unlock the full report</button>
+      <button class="btn btn-lime" id="gate-submit" type="submit">Email me every fix</button>
     </form>
     <p class="privacy-note">Your scores are stored in Supabase. Your email is used only for your report and follow-up. See the <a href="/privacy.html">Privacy Policy</a>.</p>
   </section>
@@ -208,12 +216,19 @@
     <div id="audit-fixes"></div>
   </section>
 
-  <div class="ctas" id="audit-ctas" hidden>
-    <h2 style="width:100%;">Fix it with Raise</h2>
-    <a class="btn btn-dark" id="cta-call" href="https://cal.com/mouad-dliaa/15min">Book a 15-minute call</a>
-    <a class="btn btn-lime" id="cta-audit" href="/get-started.html#apply-form">Apply for the Deck Audit</a>
-    <button class="retake" id="audit-retake" type="button">Retake the Audit</button>
-  </div>
+  <section class="bridge" id="audit-ctas" hidden>
+    <h2>Your score checks one stage of seven.</h2>
+    <ol class="stages" aria-label="The seven stages of the Raise Operating System">
+      <li>1 Founder Call</li><li class="checked">2 Diagnose <small>(deck only)</small></li><li>3 Rebuild</li><li>4 Target</li><li>5 Simulate</li><li>6 Execute</li><li>7 Handoff</li>
+    </ol>
+    <p>The Deck Rater checks whether your deck answers the 40 questions investors ask. It can't check whether those answers hold up when a partner pushes back, whether you're pitching investors who write checks at your stage, or whether your meetings are lined up to create urgency. Those are stages 3 to 6 of the Raise Operating System. If you want Mouad to read your deck line by line before you pitch, the next step is the Audit: about one week, one walkthrough call, and the annotated audit is yours to keep. Raise has audited and rebuilt 200+ decks.</p>
+    <p class="band-next" id="band-next"></p>
+    <div class="ctas">
+      <a class="btn btn-lime" id="cta-audit" href="/get-started.html#apply-form">Get the line-by-line Audit</a>
+      <a class="text-link" id="cta-call" href="https://cal.com/mouad-dliaa/15min">Not sure? Talk to Mouad for 15 minutes</a>
+      <button class="retake" id="audit-retake" type="button">Rescore my deck</button>
+    </div>
+  </section>
 
   <section class="how">
     <h2>How the rating works</h2>
